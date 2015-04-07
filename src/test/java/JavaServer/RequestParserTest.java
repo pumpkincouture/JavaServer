@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class RequestParserTest {
-    RequestParser requestParser;
+    private RequestParser requestParser;
 
     @Test
     public void getFirstCharacterOfRequestString() {

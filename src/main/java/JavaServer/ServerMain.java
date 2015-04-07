@@ -19,6 +19,7 @@ public class ServerMain {
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
             RequestParser requestParser = new RequestParser(in.readLine());
+            Request request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getMethod());
         }
     }
 }
