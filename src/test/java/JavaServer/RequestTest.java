@@ -31,4 +31,13 @@ public class RequestTest {
 
         assertEquals("HTTP/1.0", request.getHTTP());
     }
+
+    @Test
+    public void returnsEmptyStringAsHTTPVersion() {
+        requestParser = new RequestParser("GET /path/to/file/index.html");
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHTTPVersion());
+
+        assertEquals("", request.getHTTP());
+
+    }
 }

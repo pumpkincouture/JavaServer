@@ -71,4 +71,11 @@ public class RequestParserTest {
 
         assertEquals("HTTP/1.0", requestParser.getHTTPVersion());
     }
+
+    @Test
+    public void returnHTMLVersionAsEmptyStringIfNotIncludedInRequest() {
+        requestParser = new RequestParser("GET /localhost:5000/index/form");
+
+        assertEquals("", requestParser.getHTTPVersion());
+    }
 }

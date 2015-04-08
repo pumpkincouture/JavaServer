@@ -18,6 +18,9 @@ public class RequestParser {
     }
 
     public String getHTTPVersion() {
-        return splitRequest[2];
+        if (!splitRequest[splitRequest.length - 1].contains("HTTP")) {
+            return "";
+        }
+        return splitRequest[splitRequest.length - 1];
     }
 }
