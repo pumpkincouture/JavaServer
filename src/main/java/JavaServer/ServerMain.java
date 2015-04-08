@@ -22,6 +22,14 @@ public class ServerMain {
 
                 RequestParser requestParser = new RequestParser(in.readLine());
                 Request request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHTTPVersion());
+                ResponseCodeBuilder responseCodeSender = new ResponseCodeBuilder(request);
+
+                out.flush();
+                out.write(responseCodeSender.returnResponseCode());
+                out.write("\r\n");
+                out.flush();
+
+//                System.out.println(responseCodeSender.returnResponseCode());
 
                 in.close();
             }
