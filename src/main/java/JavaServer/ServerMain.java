@@ -21,11 +21,8 @@ public class ServerMain {
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
                 RequestParser requestParser = new RequestParser(in.readLine());
-                Request request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getMethod());
+                Request request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHTTPVersion());
 
-                System.out.println(request.getMethod() + " this is the method");
-                System.out.println(request.getHTTP() + " this is the http version");
-                System.out.println(request.getPath() + " this is the path");
                 in.close();
             }
 
