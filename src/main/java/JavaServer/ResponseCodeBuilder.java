@@ -1,25 +1,14 @@
 package JavaServer;
 
-import java.util.Hashtable;
-
 public class ResponseCodeBuilder {
     private Request request;
-    private Hashtable<String, String> headers;
+    private HTTPHeaders headers;
     private StatusCodes statusCodes;
 
     public ResponseCodeBuilder(Request request) {
         this.request = request;
         statusCodes = new StatusCodes();
-    }
-
-    public Hashtable<String, String> getHeaders() {
-        headers = new Hashtable<String, String>();
-        headers.put("Allow", "GET,HEAD,POST,OPTIONS,PUT");
-        headers.put("Accept", "text/plain");
-        headers.put("Host", "http://localhost:5000/");
-        headers.put("Accept-Ranges", "bytes");
-
-        return headers;
+        headers = new HTTPHeaders();
     }
 
 

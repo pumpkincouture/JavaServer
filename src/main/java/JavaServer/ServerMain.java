@@ -29,7 +29,7 @@ public class ServerMain {
                 out.write("\r\n");
                 out.flush();
 
-//                System.out.println(responseCodeSender.returnResponseCode());
+                System.out.println(responseCodeSender.returnResponseCode());
 
                 in.close();
             }

@@ -30,7 +30,6 @@ public class ResponseCodeBuilderTest {
         responseCodeSender = new ResponseCodeBuilder(request);
 
         assertEquals("HTTP/1.1 404 Not Found", responseCodeSender.returnResponseCode());
-
     }
 
     @Test
@@ -55,15 +54,5 @@ public class ResponseCodeBuilderTest {
         responseCodeSender = new ResponseCodeBuilder(request);
 
         assertEquals("HTTP/1.1 405 Method Not Allowed", responseCodeSender.returnResponseCode());
-
-    }
-
-    @Test
-    public void returnsHeadersTable() {
-        request = new Request("POST", "/text-file.txt", "HTTP/1.1");
-        responseCodeSender = new ResponseCodeBuilder(request);
-
-        assertEquals("GET,HEAD,POST,OPTIONS,PUT", responseCodeSender.getHeaders().get("Allow"));
-
     }
 }
