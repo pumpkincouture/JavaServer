@@ -1,5 +1,6 @@
 package JavaServer;
 
+import JavaServer.RequestHandlers.RequestParser;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

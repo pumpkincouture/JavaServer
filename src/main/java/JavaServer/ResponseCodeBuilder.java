@@ -1,5 +1,9 @@
 package JavaServer;
 
+import JavaServer.RequestHandlers.Request;
+import JavaServer.ResponseHandlers.HTTPHeaders;
+import JavaServer.ResponseHandlers.StatusCodes;
+
 public class ResponseCodeBuilder {
     private Request request;
     private HTTPHeaders headers;

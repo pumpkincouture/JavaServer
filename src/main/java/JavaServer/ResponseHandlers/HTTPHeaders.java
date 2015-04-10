@@ -1,4 +1,4 @@
-package JavaServer;
+package JavaServer.ResponseHandlers;
 
 import java.util.Hashtable;
 

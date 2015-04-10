@@ -1,5 +1,6 @@
 package JavaServer;
 
+import JavaServer.ResponseHandlers.StatusCodes;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

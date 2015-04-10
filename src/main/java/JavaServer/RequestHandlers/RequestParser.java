@@ -1,4 +1,4 @@
-package JavaServer;
+package JavaServer.RequestHandlers;
 
 public class RequestParser {
     String request;
