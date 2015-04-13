@@ -2,7 +2,7 @@ package JavaServer;
 
 import JavaServer.RequestHandlers.Request;
 import JavaServer.RequestHandlers.RequestParser;
-import JavaServer.ResponseHandlers.HandlerFactory;
+import JavaServer.MethodHandlers.HandlerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;

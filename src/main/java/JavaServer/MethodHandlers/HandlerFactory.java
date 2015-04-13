@@ -1,6 +1,7 @@
-package JavaServer.ResponseHandlers;
+package JavaServer.MethodHandlers;
 
 import JavaServer.RequestHandlers.Request;
+import JavaServer.ResponseHandlers.*;
 
 public class HandlerFactory {
     private Request request;

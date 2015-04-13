@@ -1,5 +1,6 @@
-package JavaServer.ResponseHandlers;
+package JavaServer.MethodHandlers;
 
+import JavaServer.MethodHandlers.HandlerFactory;
 import JavaServer.RequestHandlers.Request;
 import JavaServer.RequestHandlers.RequestParser;
 import org.junit.Test;

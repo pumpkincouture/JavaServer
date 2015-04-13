@@ -1,4 +1,4 @@
-package JavaServer.ResponseHandlers;
+package JavaServer.MethodHandlers;
 
 import JavaServer.RequestHandlers.Request;
 

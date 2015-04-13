@@ -1,6 +1,7 @@
-package JavaServer.ResponseHandlers;
+package JavaServer.MethodHandlers;
 
 import JavaServer.RequestHandlers.Request;
+import JavaServer.ResponseHandlers.ResponseCodeBuilder;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -29,8 +30,10 @@ public class PutHandler implements RequestHandler {
     private void updateData(String data) throws IOException {
         File file = new File("public/postData.txt");
 
-        FileWriter writer = new FileWriter(file, false);
-        writer.write(data);
-        writer.close();
+        if (data != null) {
+            FileWriter writer = new FileWriter(file, false);
+            writer.write(data);
+            writer.close();
+        }
     }
 }

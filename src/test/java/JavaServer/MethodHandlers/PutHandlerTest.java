@@ -1,7 +1,8 @@
-package JavaServer.ResponseHandlers;
+package JavaServer.MethodHandlers;
 
 import JavaServer.RequestHandlers.Request;
 import JavaServer.RequestHandlers.RequestParser;
+import JavaServer.ResponseHandlers.ResponseCodeBuilder;
 import org.junit.Test;
 
 import java.io.*;

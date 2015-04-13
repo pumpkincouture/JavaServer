@@ -1,6 +1,7 @@
-package JavaServer.ResponseHandlers;
+package JavaServer.MethodHandlers;
 
 import JavaServer.RequestHandlers.Request;
+import JavaServer.ResponseHandlers.ResponseCodeBuilder;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

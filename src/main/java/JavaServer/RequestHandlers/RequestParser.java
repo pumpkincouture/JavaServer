@@ -42,6 +42,6 @@ public class RequestParser {
     }
 
     private String blankLine() {
-        return "\n";
+        return "\\n";
     }
 }
