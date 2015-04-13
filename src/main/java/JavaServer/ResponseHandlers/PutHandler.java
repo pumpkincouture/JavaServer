@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class PutHandler implements RequestHandler {
     private ResponseCodeBuilder responseCodeBuilder;
+
     public PutHandler(ResponseCodeBuilder responseCodeBuilder) {
         this.responseCodeBuilder = responseCodeBuilder;
     }
@@ -15,9 +16,13 @@ public class PutHandler implements RequestHandler {
     @Override
     public String handle(Request request) {
         if (request.getPath().equals("/form")) {
+            try {
+                updateData(request.getData());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return responseCodeBuilder.createValidResponse();
         }
-
         return  responseCodeBuilder.returnFourOhFour();
     }
 
