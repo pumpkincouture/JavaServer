@@ -12,6 +12,9 @@ public class OptionsHandler implements RequestHandler {
 
     @Override
     public String handle(Request request) {
-        return responseCodeBuilder.createValidResponse();
+        if (request.getPath().equals("/method_options")) {
+            return responseCodeBuilder.createValidResponse();
+        }
+        return responseCodeBuilder.returnFourOhFour();
     }
 }
