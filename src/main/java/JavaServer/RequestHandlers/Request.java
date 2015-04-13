@@ -1,25 +1,23 @@
 package JavaServer.RequestHandlers;
 
-public class Request {
-    String method;
-    String path;
-    String HTTPVersion;
+import java.util.HashMap;
 
-    public Request(String method, String path, String HTTPVersion) {
-        this.method = method;
-        this.path = path;
-        this.HTTPVersion = HTTPVersion;
+public class Request {
+    private HashMap<String, String> requestAttributes;
+
+    public Request(HashMap<String, String> requestAttributes) {
+        this.requestAttributes = requestAttributes;
     }
 
     public String getMethod() {
-        return method;
+        return requestAttributes.get("requestMethod");
     }
 
     public String getPath() {
-        return path;
+        return requestAttributes.get("path");
     }
 
-    public String getHTTP() {
-        return HTTPVersion;
+    public String getData() {
+        return requestAttributes.get("data");
     }
 }

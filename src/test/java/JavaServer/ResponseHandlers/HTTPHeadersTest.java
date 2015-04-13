@@ -1,6 +1,5 @@
-package JavaServer;
+package JavaServer.ResponseHandlers;
 
-import JavaServer.ResponseHandlers.HTTPHeaders;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

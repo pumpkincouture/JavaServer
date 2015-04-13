@@ -7,11 +7,8 @@ public class StatusCodes {
 
     public Hashtable<String, String> getCodes() {
         codes = new Hashtable<String, String>();
-        codes = new Hashtable<String, String>();
-        codes.put("302", "Moved Temporarily");
-        codes.put("405", "Method Not Allowed");
-        codes.put("200", "OK");
-        codes.put("404", "Not Found");
+        codes.put("200", "HTTP/1.1 200 OK");
+        codes.put("404", "HTTP/1.1 404 Not Found");
 
         return codes;
     }

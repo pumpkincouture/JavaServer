@@ -4,24 +4,33 @@ import JavaServer.RequestHandlers.Request;
 
 public class HandlerFactory {
     private Request request;
+    private ResponseCodeBuilder responseCodeBuilder;
 
     public HandlerFactory(Request request) {
         this.request = request;
+        responseCodeBuilder = new ResponseCodeBuilder(request);
     }
 
-    public String createMethodHandler() {
+    public RequestHandler createMethodHandler() {
         String requestMethod = request.getMethod();
 
         switch (requestMethod) {
             case "GET":
-                return "GetMethodHandler";
+                RequestHandler gethandler = new GetHandler(responseCodeBuilder);
+                return gethandler;
             case "POST":
-                return "PostMethodHandler";
-
+                RequestHandler postHandler = new PostHandler(responseCodeBuilder);
+                return postHandler;
             case "PUT":
-                return "PutMethodHandler";
+                RequestHandler putHandler = new PutHandler(responseCodeBuilder);
+                return putHandler;
+            case "OPTIONS":
+                RequestHandler optionsHandler = new OptionsHandler(responseCodeBuilder);
+                return optionsHandler;
+
         }
-        return "";
+        RequestHandler gethandler = new GetHandler(responseCodeBuilder);
+        return gethandler;
     }
 
 }

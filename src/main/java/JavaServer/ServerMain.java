@@ -2,6 +2,7 @@ package JavaServer;
 
 import JavaServer.RequestHandlers.Request;
 import JavaServer.RequestHandlers.RequestParser;
+import JavaServer.ResponseHandlers.HandlerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,15 +25,12 @@ public class ServerMain {
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
                 RequestParser requestParser = new RequestParser(in.readLine());
-                Request request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHTTPVersion());
-                ResponseCodeBuilder responseCodeSender = new ResponseCodeBuilder(request);
+                Request request = new Request(requestParser.getAllRequestAttributes());
+                HandlerFactory handlerFactory = new HandlerFactory(request);
 
                 out.flush();
-                out.write(responseCodeSender.returnResponseCode());
-                out.write("\r\n");
+                out.write(handlerFactory.createMethodHandler().handle(request));
                 out.flush();
-
-                System.out.println(responseCodeSender.returnResponseCode());
 
                 in.close();
             }

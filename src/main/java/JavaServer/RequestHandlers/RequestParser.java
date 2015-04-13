@@ -1,5 +1,7 @@
 package JavaServer.RequestHandlers;
 
+import java.util.HashMap;
+
 public class RequestParser {
     String request;
     String[] splitRequest;
@@ -9,18 +11,37 @@ public class RequestParser {
         splitRequest = request.split(" ", 3);
     }
 
-    public String getMethod() {
+    public HashMap<String, String> getAllRequestAttributes() {
+        HashMap<String, String> requestAttributes = new HashMap<String, String>();
+
+        requestAttributes.put("requestMethod", getMethod());
+        requestAttributes.put("path", getPath());
+        requestAttributes.put("data", getPostedData());
+
+        return requestAttributes;
+    }
+
+    private String getMethod() {
         return splitRequest[0];
     }
 
-    public String getPath() {
+    private String getPath() {
         return splitRequest[1];
     }
 
-    public String getHTTPVersion() {
-        if (!splitRequest[splitRequest.length - 1].contains("HTTP")) {
-            return "";
+    private String getPostedData() {
+        String data = null;
+
+        String[] lines = request.split(blankLine());
+
+        if (lines.length > 1) {
+            data = lines[lines.length - 1];
         }
-        return splitRequest[splitRequest.length - 1];
+
+        return data;
+    }
+
+    private String blankLine() {
+        return "\\r?\\n";
     }
 }
