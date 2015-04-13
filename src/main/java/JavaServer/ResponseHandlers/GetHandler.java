@@ -2,9 +2,6 @@ package JavaServer.ResponseHandlers;
 
 import JavaServer.RequestHandlers.Request;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 public class GetHandler implements RequestHandler {
     private ResponseCodeBuilder responseCodeBuilder;
 
@@ -14,8 +11,6 @@ public class GetHandler implements RequestHandler {
 
     @Override
     public String handle(Request request) {
-        Path path = Paths.get("../cob_spec/public" + request.getPath());
-
        return getResponse(request);
     }
 

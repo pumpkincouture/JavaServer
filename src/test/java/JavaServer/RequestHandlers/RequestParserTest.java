@@ -56,15 +56,23 @@ public class RequestParserTest {
         assertEquals("/redirect", requestParser.getAllRequestAttributes().get("path"));
     }
 
-
     @Test
-    public void getPostedDataFromRequest() {
+    public void getPostedDataFromLongRequest() {
         requestParser = new RequestParser("GET /localhost:5000/index/form\n"+
                                           "Content-Type : application/x-www-form-url-encoded\n"+
+                                          "Host : https://sylwiaolak.com\n"+
                                           "Content-Length: 43\n"+
                                           "\n"+
                                           "data=example");
 
         assertEquals("data=example", requestParser.getAllRequestAttributes().get("data"));
+    }
+
+    @Test
+    public void getPostedDataFromShortRequest() {
+        requestParser = new RequestParser("GET /localhost:5000/index/form\n"+
+                                          "name=sylwia");
+
+        assertEquals("name=sylwia", requestParser.getAllRequestAttributes().get("data"));
     }
 }

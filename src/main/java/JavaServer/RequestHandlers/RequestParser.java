@@ -12,7 +12,7 @@ public class RequestParser {
     }
 
     public HashMap<String, String> getAllRequestAttributes() {
-        HashMap<String, String> requestAttributes = new HashMap<String, String>();
+        HashMap<String, String> requestAttributes = new HashMap();
 
         requestAttributes.put("requestMethod", getMethod());
         requestAttributes.put("path", getPath());
@@ -42,6 +42,6 @@ public class RequestParser {
     }
 
     private String blankLine() {
-        return "\\r?\\n";
+        return "\n";
     }
 }
