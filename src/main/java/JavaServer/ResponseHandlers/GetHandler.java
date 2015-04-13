@@ -18,7 +18,6 @@ public class GetHandler implements RequestHandler {
         if (request.getPath().equals("/")) {
             return responseCodeBuilder.createValidResponse();
         }
-
         return responseCodeBuilder.returnFourOhFour();
     }
 }
