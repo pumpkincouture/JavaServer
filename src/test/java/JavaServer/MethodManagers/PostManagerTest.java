@@ -2,7 +2,6 @@ package JavaServer.MethodManagers;
 
 import JavaServer.RequestManagers.Request;
 import JavaServer.RequestManagers.RequestParser;
-import JavaServer.ResponseManagers.ResponseCodeBuilder;
 import org.junit.Test;
 
 import java.io.*;
@@ -14,7 +13,6 @@ public class PostManagerTest {
     private Request request;
     private RequestParser requestParser;
     private RequestManager requestHandler;
-    private ResponseCodeBuilder responseCodeBuilder;
 
     private String getDataFromFile() throws FileNotFoundException {
         String data = null;
@@ -36,7 +34,6 @@ public class PostManagerTest {
                                           "first_name=sam\n");
 
         request = new Request(requestParser.getAllRequestAttributes());
-        responseCodeBuilder = new ResponseCodeBuilder(request);
         requestHandler= new PostManager();
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
@@ -49,7 +46,6 @@ public class PostManagerTest {
                                           "last_name=smith\n");
 
         request = new Request(requestParser.getAllRequestAttributes());
-        responseCodeBuilder = new ResponseCodeBuilder(request);
         requestHandler= new PostManager();
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
@@ -61,7 +57,6 @@ public class PostManagerTest {
         requestParser = new RequestParser("POST / HTTP/1.1");
 
         request = new Request(requestParser.getAllRequestAttributes());
-        responseCodeBuilder = new ResponseCodeBuilder(request);
         requestHandler= new PostManager();
 
         assertEquals("HTTP/1.1 404 Not Found", requestHandler.manage(request));
