@@ -1,8 +1,8 @@
 package JavaServer;
 
-import JavaServer.RequestHandlers.Request;
-import JavaServer.RequestHandlers.RequestParser;
-import JavaServer.MethodHandlers.ManagerFactory;
+import JavaServer.RequestManagers.Request;
+import JavaServer.RequestManagers.RequestParser;
+import JavaServer.MethodManagers.ManagerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,14 +26,11 @@ public class ServerMain {
 
                 RequestParser requestParser = new RequestParser(in.readLine());
                 Request request = new Request(requestParser.getAllRequestAttributes());
-                ManagerFactory handlerFactory = new ManagerFactory(request);
+                ManagerFactory managerFactory = new ManagerFactory(request);
 
-                while (in.readLine() != null) {
-                    System.out.println(in.readLine());
-                }
 
                 out.flush();
-                out.write(handlerFactory.createMethodHandler().handle(request));
+                out.write(managerFactory.createMethodHandler().manage(request));
                 out.flush();
 
                 in.close();
