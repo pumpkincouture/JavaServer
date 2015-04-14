@@ -2,7 +2,7 @@ package JavaServer;
 
 import JavaServer.RequestHandlers.Request;
 import JavaServer.RequestHandlers.RequestParser;
-import JavaServer.MethodHandlers.HandlerFactory;
+import JavaServer.MethodHandlers.ManagerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,7 +26,11 @@ public class ServerMain {
 
                 RequestParser requestParser = new RequestParser(in.readLine());
                 Request request = new Request(requestParser.getAllRequestAttributes());
-                HandlerFactory handlerFactory = new HandlerFactory(request);
+                ManagerFactory handlerFactory = new ManagerFactory(request);
+
+                while (in.readLine() != null) {
+                    System.out.println(in.readLine());
+                }
 
                 out.flush();
                 out.write(handlerFactory.createMethodHandler().handle(request));
@@ -34,11 +38,14 @@ public class ServerMain {
 
                 in.close();
             }
-
         }
         catch (Exception err) {
                 System.out.println(err);
                 err.printStackTrace();
+        }
+
+        finally {
+            System.out.println("You're in the finally block");
         }
     }
 }

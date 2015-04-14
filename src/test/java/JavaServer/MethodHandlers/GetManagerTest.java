@@ -7,10 +7,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class GetHandlerTest {
+public class GetManagerTest {
     private Request request;
     private RequestParser requestParser;
-    private RequestHandler requestHandler;
+    private RequestManager requestHandler;
     private ResponseCodeBuilder responseCodeBuilder;
 
     @Test
@@ -18,7 +18,7 @@ public class GetHandlerTest {
         requestParser = new RequestParser("GET / HTTP/1.1");
         request = new Request(requestParser.getAllRequestAttributes());
         responseCodeBuilder = new ResponseCodeBuilder(request);
-        requestHandler = new GetHandler(responseCodeBuilder);
+        requestHandler = new GetManager(responseCodeBuilder);
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.handle(request));
     }
@@ -28,7 +28,7 @@ public class GetHandlerTest {
         requestParser = new RequestParser("GET /whatever HTTP/1.1");
         request = new Request(requestParser.getAllRequestAttributes());
         responseCodeBuilder = new ResponseCodeBuilder(request);
-        requestHandler = new GetHandler(responseCodeBuilder);
+        requestHandler = new GetManager(responseCodeBuilder);
 
         assertEquals("HTTP/1.1 404 Not Found", requestHandler.handle(request));
     }

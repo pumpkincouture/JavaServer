@@ -7,10 +7,10 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
-public class PostHandler implements RequestHandler {
+public class PostManager extends RequestManager {
     private ResponseCodeBuilder responseCodeBuilder;
 
-    public PostHandler(ResponseCodeBuilder responseCodeBuilder) {
+    public PostManager(ResponseCodeBuilder responseCodeBuilder) {
         this.responseCodeBuilder = responseCodeBuilder;
     }
 

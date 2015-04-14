@@ -3,20 +3,16 @@ package JavaServer.MethodHandlers;
 import JavaServer.RequestHandlers.Request;
 import JavaServer.ResponseHandlers.ResponseCodeBuilder;
 
-public class GetHandler implements RequestHandler {
+public class OptionsManager extends RequestManager {
     private ResponseCodeBuilder responseCodeBuilder;
 
-    public GetHandler(ResponseCodeBuilder responseCodeBuilder) {
+    public OptionsManager(ResponseCodeBuilder responseCodeBuilder) {
         this.responseCodeBuilder = responseCodeBuilder;
     }
 
     @Override
     public String handle(Request request) {
-       return getResponse(request);
-    }
-
-    private String getResponse(Request request) {
-        if (request.getPath().equals("/")) {
+        if (request.getPath().equals("/method_options")) {
             return responseCodeBuilder.createValidResponse();
         }
         return responseCodeBuilder.returnFourOhFour();

@@ -7,10 +7,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class PutHandler implements RequestHandler {
+public class PutManager extends RequestManager {
     private ResponseCodeBuilder responseCodeBuilder;
 
-    public PutHandler(ResponseCodeBuilder responseCodeBuilder) {
+    public PutManager(ResponseCodeBuilder responseCodeBuilder) {
         this.responseCodeBuilder = responseCodeBuilder;
     }
 
