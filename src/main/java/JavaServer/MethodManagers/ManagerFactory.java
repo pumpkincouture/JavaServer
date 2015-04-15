@@ -1,21 +1,17 @@
 package JavaServer.MethodManagers;
 
-import JavaServer.RequestManagers.Request;
-
 public class ManagerFactory {
-    private Request request;
+    private String requestMethod;
     private static final String GET_METHOD = "GET";
     private static final String POST_METHOD = "POST";
     private static final String PUT_METHOD = "PUT";
     private static final String OPTIONS_METHOD = "OPTIONS";
 
-    public ManagerFactory(Request request) {
-        this.request = request;
+    public ManagerFactory(String requestMethod) {
+        this.requestMethod = requestMethod;
     }
 
     public RequestManager createMethodHandler() {
-        String requestMethod = request.getMethod();
-
         switch (requestMethod) {
             case GET_METHOD:
                 RequestManager gethandler = new GetManager();

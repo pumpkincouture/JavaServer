@@ -11,7 +11,7 @@ public class RequestTest {
     @Test
     public void returnsMethodForRequest() {
         requestParser = new RequestParser("GET /path/to/file/index.html HTTP/1.0");
-        request = new Request(requestParser.getAllRequestAttributes());
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
         assertEquals("GET", request.getMethod());
     }
@@ -19,7 +19,7 @@ public class RequestTest {
     @Test
     public void returnsPathToResource() {
         requestParser = new RequestParser("GET /path/to/file/index.html HTTP/1.0");
-        request = new Request(requestParser.getAllRequestAttributes());
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
         assertEquals("/path/to/file/index.html", request.getPath());
     }
@@ -28,8 +28,8 @@ public class RequestTest {
     public void returnsDataFromRequest() {
         requestParser = new RequestParser("GET /path/to/file/index.html HTTP/1.0\n" +
                                           "data=hello");
-        request = new Request(requestParser.getAllRequestAttributes());
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
-        assertEquals("data=hello", request.getData());
+        assertEquals("hello", request.getData().get("data"));
     }
 }

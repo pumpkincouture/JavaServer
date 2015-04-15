@@ -3,21 +3,31 @@ package JavaServer.RequestManagers;
 import java.util.HashMap;
 
 public class Request {
-    private HashMap<String, String> requestAttributes;
+    private String requestMethod;
+    private String path;
+    private HashMap<String, String> headers;
+    private HashMap<String, String> data;
 
-    public Request(HashMap<String, String> requestAttributes) {
-        this.requestAttributes = requestAttributes;
+    public Request(String requestMethod, String path, HashMap<String, String> headers, HashMap<String, String> data) {
+        this.requestMethod = requestMethod;
+        this.path = path;
+        this.headers = headers;
+        this.data = data;
     }
 
     public String getMethod() {
-        return requestAttributes.get("requestMethod");
+        return requestMethod;
     }
 
     public String getPath() {
-        return requestAttributes.get("path");
+        return path;
     }
 
-    public String getData() {
-        return requestAttributes.get("data");
+    public HashMap<String, String> getHeaders() {
+        return headers;
+    }
+
+    public HashMap<String, String> getData() {
+        return data;
     }
 }

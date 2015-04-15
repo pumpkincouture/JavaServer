@@ -14,7 +14,7 @@ public class OptionsManagerTest {
     @Test
     public void returns200ResponseIfRequestPathValid() {
         requestParser = new RequestParser("OPTIONS /method_options HTTP/1.1");
-        request = new Request(requestParser.getAllRequestAttributes());
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         requestHandler= new OptionsManager();
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
@@ -23,7 +23,7 @@ public class OptionsManagerTest {
     @Test
     public void returns404IfPathNotValid() {
         requestParser = new RequestParser("OPTIONS / HTTP/1.1");
-        request = new Request(requestParser.getAllRequestAttributes());
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         requestHandler= new OptionsManager();
 
         assertEquals("HTTP/1.1 404 Not Found", requestHandler.manage(request));

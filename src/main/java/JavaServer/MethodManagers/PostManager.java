@@ -4,6 +4,7 @@ import JavaServer.RequestManagers.Request;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 
 public class PostManager extends RequestManager {
     private static final String FORM_PATH = "/form";
@@ -16,16 +17,23 @@ public class PostManager extends RequestManager {
         return getCorrectResponse(request.getPath(), FORM_PATH);
     }
 
-    private void saveData(String data) {
-        PrintWriter writer = null;
+    private void saveData(HashMap<String, String> data) {
+        for (int i = 0; i < data.size(); i++) {
+            System.out.println(i);
+        }
+
+
+            PrintWriter writer = null;
 
         try {
             writer = new PrintWriter(PATH_TO_FILE, ENCODING);
         } catch (FileNotFoundException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
-        writer.println(data);
+        for (int i = 0; i < data.size(); i++) {
+            System.out.println(i);
+            writer.write(i);
+        }
         writer.close();
     }
 }

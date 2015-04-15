@@ -5,6 +5,7 @@ import JavaServer.RequestManagers.Request;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class PutManager extends RequestManager {
     private static final String FORM_PATH = "/form";
@@ -21,12 +22,14 @@ public class PutManager extends RequestManager {
         return getCorrectResponse(request.getPath(), FORM_PATH);
     }
 
-    private void updateData(String data) throws IOException {
+    private void updateData(HashMap<String, String> data) throws IOException {
         File file = new File(PATH_TO_FILE);
 
-        if (data != null) {
+        if (data.size() > 0) {
             FileWriter writer = new FileWriter(file, false);
-            writer.write(data);
+            for (int i = 0; i < data.size(); i++) {
+                writer.write(i);
+            }
             writer.close();
         }
     }

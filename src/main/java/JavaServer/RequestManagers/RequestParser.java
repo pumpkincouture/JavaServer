@@ -1,48 +1,71 @@
 package JavaServer.RequestManagers;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class RequestParser {
-    static final int METHOD = 0;
-    static final int PATH = 1;
+    static final int FIRST_ELEMENT = 0;
+    static final int SECOND_ELEMENT = 1;
+    static final int ELEMENTS_IN_REQUEST_LINE = 3;
     static final String LINE_BREAK = "\\n";
+    static final String EMPTY_SPACE = " ";
+    static final String COLON = ": ";
+    static final String AFTER_COLON = ":\\s";
+    static final String EQUALS = "=";
 
     String request;
+    String[] splitFirstLine;
     String[] splitRequest;
 
     public RequestParser(String request) {
         this.request = request;
-        splitRequest = request.split(" ", 3);
+        splitFirstLine = request.split(EMPTY_SPACE , ELEMENTS_IN_REQUEST_LINE);
+        splitRequest = request.split((blankLine()));
     }
 
-    public HashMap<String, String> getAllRequestAttributes() {
-        HashMap<String, String> requestAttributes = new HashMap();
+   public String getMethod() {
+       return findMethod();
+   }
 
-        requestAttributes.put("requestMethod", getMethod());
-        requestAttributes.put("path", getPath());
-        requestAttributes.put("data", getPostedData());
-
-        return requestAttributes;
+    public String getPath() {
+        return findPath();
     }
 
-    private String getMethod() {
-        return splitRequest[METHOD];
+    public HashMap<String, String> getHeaders() {
+        return createHeadersTable(getHeaderStrings(COLON), AFTER_COLON);
     }
 
-    private String getPath() {
-        return splitRequest[PATH];
+    public HashMap<String, String> getData() {
+        return createHeadersTable(getHeaderStrings(EQUALS), EQUALS);
     }
 
-    private String getPostedData() {
-        String data = null;
+    private String findMethod() {
+        return splitFirstLine[FIRST_ELEMENT];
+    }
 
-        String[] lines = request.split(blankLine());
+    private String findPath() {
+        return splitFirstLine[SECOND_ELEMENT];
+    }
 
-        if (lines.length > 1) {
-            data = lines[lines.length - 1];
+    private List<String> getHeaderStrings(String splitType) {
+        List<String> headersStrings = new ArrayList<>();
+        for (String string : splitRequest) {
+            if (string.contains(splitType)) {
+                headersStrings.add(string);
+            }
+        }
+        return headersStrings;
+    }
+
+    private HashMap<String, String> createHeadersTable(List<String> headerStrings, String splitOn) {
+        LinkedHashMap<String, String> headers = new LinkedHashMap<>();
+
+        for (String string : headerStrings) {
+            String[] splitHeaders = string.split(splitOn);
+
+            headers.put(splitHeaders[FIRST_ELEMENT], splitHeaders[SECOND_ELEMENT]);
         }
 
-        return data;
+        return headers;
     }
 
     private String blankLine() {

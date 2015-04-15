@@ -28,8 +28,8 @@ public class ConnectionManager {
             }
 
             RequestParser requestParser = new RequestParser(requestString);
-            Request request = new Request(requestParser.getAllRequestAttributes());
-            ManagerFactory managerFactory = new ManagerFactory(request);
+            Request request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
+            ManagerFactory managerFactory = new ManagerFactory(request.getMethod());
 
             out.flush();
             out.write(managerFactory.createMethodHandler().manage(request));

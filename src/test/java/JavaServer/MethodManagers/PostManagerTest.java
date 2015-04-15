@@ -32,8 +32,8 @@ public class PostManagerTest {
     public void returns200ResponseIfRequestPathValidAndChecksIfDataWasWrittenToFile() throws FileNotFoundException {
         requestParser = new RequestParser("POST /form HTTP/1.1\n"+
                                           "first_name=sam\n");
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
-        request = new Request(requestParser.getAllRequestAttributes());
         requestHandler= new PostManager();
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
@@ -45,7 +45,7 @@ public class PostManagerTest {
         requestParser = new RequestParser("POST /form HTTP/1.1\n"+
                                           "last_name=smith\n");
 
-        request = new Request(requestParser.getAllRequestAttributes());
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         requestHandler= new PostManager();
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
@@ -56,7 +56,7 @@ public class PostManagerTest {
     public void returns404ResponseIfPathIsNotRecognized() throws FileNotFoundException {
         requestParser = new RequestParser("POST / HTTP/1.1");
 
-        request = new Request(requestParser.getAllRequestAttributes());
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         requestHandler= new PostManager();
 
         assertEquals("HTTP/1.1 404 Not Found", requestHandler.manage(request));

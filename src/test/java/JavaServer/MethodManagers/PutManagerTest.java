@@ -31,8 +31,7 @@ public class PutManagerTest {
     public void returns200ResponseIfRequestValidAndChecksIfDataWasWrittenToFile() throws FileNotFoundException {
         requestParser = new RequestParser("PUT /form HTTP/1.1\n"+
                                           "first_name=hello\n");
-
-        request = new Request(requestParser.getAllRequestAttributes());
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         requestHandler= new PutManager();
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
@@ -43,8 +42,7 @@ public class PutManagerTest {
     public void returns200ResponseIfRequestValidAndUpdatesFileData() throws FileNotFoundException {
         requestParser = new RequestParser("PUT /form HTTP/1.1\n"+
                                           "last_name=whatever\n");
-
-        request = new Request(requestParser.getAllRequestAttributes());
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         requestHandler= new PutManager();
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
@@ -55,7 +53,7 @@ public class PutManagerTest {
     public void returns404ResponseIfPathIsNotRecognized() throws FileNotFoundException {
         requestParser = new RequestParser("PUT / HTTP/1.1");
 
-        request = new Request(requestParser.getAllRequestAttributes());
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         requestHandler= new PutManager();
 
         assertEquals("HTTP/1.1 404 Not Found", requestHandler.manage(request));

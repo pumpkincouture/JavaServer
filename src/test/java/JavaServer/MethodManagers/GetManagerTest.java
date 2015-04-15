@@ -14,7 +14,8 @@ public class GetManagerTest {
     @Test
     public void returns200ResponseIfRequestValid() {
         requestParser = new RequestParser("GET / HTTP/1.1");
-        request = new Request(requestParser.getAllRequestAttributes());
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
+
         requestHandler = new GetManager();
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
@@ -23,7 +24,8 @@ public class GetManagerTest {
     @Test
     public void returns404ResponseIfInvalidPath() {
         requestParser = new RequestParser("GET /whatever HTTP/1.1");
-        request = new Request(requestParser.getAllRequestAttributes());
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
+
         requestHandler = new GetManager();
 
         assertEquals("HTTP/1.1 404 Not Found", requestHandler.manage(request));
