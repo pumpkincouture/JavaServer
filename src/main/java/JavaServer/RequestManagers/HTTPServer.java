@@ -20,8 +20,8 @@ public class HTTPServer {
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            ConnectionManager serverRouter = new ConnectionManager(out, in, clientSocket);
-            serverRouter.executeRequest();
+            ConnectionManager connectionManager = new ConnectionManager(out, in, clientSocket);
+            connectionManager.executeRequest();
         }
     }
 }
