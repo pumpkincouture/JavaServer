@@ -10,5 +10,6 @@ public class ServerMain {
 
         ServerSocket serverSocket = new ServerSocket(5000);
         HTTPServer server = new HTTPServer(serverSocket);
+        server.run();
     }
 }

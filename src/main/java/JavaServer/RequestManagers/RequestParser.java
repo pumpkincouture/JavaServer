@@ -3,6 +3,10 @@ package JavaServer.RequestManagers;
 import java.util.HashMap;
 
 public class RequestParser {
+    static final int METHOD = 0;
+    static final int PATH = 1;
+    static final String LINE_BREAK = "\\n";
+
     String request;
     String[] splitRequest;
 
@@ -22,11 +26,11 @@ public class RequestParser {
     }
 
     private String getMethod() {
-        return splitRequest[0];
+        return splitRequest[METHOD];
     }
 
     private String getPath() {
-        return splitRequest[1];
+        return splitRequest[PATH];
     }
 
     private String getPostedData() {
@@ -42,6 +46,6 @@ public class RequestParser {
     }
 
     private String blankLine() {
-        return "\\n";
+        return LINE_BREAK;
     }
 }
