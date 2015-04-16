@@ -57,25 +57,37 @@ public class RequestParserTest {
     }
 
     @Test
-    public void getPostedDataFromLongRequest() {
-        requestParser = new RequestParser("GET /form\n"+
-                                          "Content-Type: application/x-www-form-url-encoded\n"+
-                                          "Host: https://sylwiaolak.com\n"+
-                                          "Content-Length: 43\n"+
-                                          "\n"+
-                                          "data=example");
-
-        assertEquals("example", requestParser.getData().get("data"));
-    }
-
-    @Test
-    public void getPostedDataFromShortRequest() {
+    public void parseAndStoreMoreThanOnePostParam() {
         requestParser = new RequestParser("GET /form\n"+
                                           "\n"+
                                           "first_name=sylwia\n"+
-                                          "last_name=olak");
+                                          "last_name=olak\n"+
+                                          "age=26");
 
+        assertEquals("sylwia", requestParser.getData().get("first_name"));
         assertEquals("olak", requestParser.getData().get("last_name"));
+        assertEquals("26", requestParser.getData().get("age"));
+    }
+
+    @Test
+    public void returnsNullIfThereAreNoValuesInHeadersHashMap() {
+        requestParser = new RequestParser("GET /form\n"+
+                                          "\n"+
+                                          "first_name=sylwia\n"+
+                                          "last_name=olak\n"+
+                                          "age=26");
+
+        assertEquals(null, requestParser.getHeaders().get("Content-Type"));
+    }
+
+    @Test
+    public void returnsNullIfThereAreNoValuesInParamsHashMap() {
+        requestParser = new RequestParser("GET /form\n"+
+                                          "Content-Type: application/x-www-form-url-encoded\n"+
+                                          "Host: https://sylwiaolak.com\n"+
+                                          "\n");
+
+        assertEquals(null, requestParser.getData().get("last_name"));
     }
 
     @Test
@@ -85,6 +97,7 @@ public class RequestParserTest {
                                           "Host: https://sylwiaolak.com\n"+
                                           "\n"+
                                           "data=example");
+
         assertEquals("application/x-www-form-url-encoded", requestParser.getHeaders().get("Content-Type"));
     }
 
@@ -95,6 +108,7 @@ public class RequestParserTest {
                                           "Host: https://sylwiaolak.com\n"+
                                           "\n"+
                                           "data=example");
+
         assertEquals("https://sylwiaolak.com", requestParser.getHeaders().get("Host"));
     }
 }

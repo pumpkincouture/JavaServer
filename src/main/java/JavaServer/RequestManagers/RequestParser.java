@@ -10,7 +10,7 @@ public class RequestParser {
     static final String EMPTY_SPACE = " ";
     static final String COLON = ": ";
     static final String AFTER_COLON = ":\\s";
-    static final String EQUALS = "=";
+    static final String EQUAL_SIGN = "=";
 
     String request;
     String[] splitFirstLine;
@@ -31,11 +31,11 @@ public class RequestParser {
     }
 
     public HashMap<String, String> getHeaders() {
-        return createHeadersTable(getHeaderStrings(COLON), AFTER_COLON);
+        return createTable(getMatchingStrings(COLON), AFTER_COLON);
     }
 
     public HashMap<String, String> getData() {
-        return createHeadersTable(getHeaderStrings(EQUALS), EQUALS);
+        return createTable(getMatchingStrings(EQUAL_SIGN), EQUAL_SIGN);
     }
 
     private String findMethod() {
@@ -46,26 +46,26 @@ public class RequestParser {
         return splitFirstLine[SECOND_ELEMENT];
     }
 
-    private List<String> getHeaderStrings(String splitType) {
-        List<String> headersStrings = new ArrayList<>();
+    private List<String> getMatchingStrings(String stringToMatch) {
+        List<String> stringsList = new ArrayList<>();
         for (String string : splitRequest) {
-            if (string.contains(splitType)) {
-                headersStrings.add(string);
+            if (string.contains(stringToMatch)) {
+                stringsList.add(string);
             }
         }
-        return headersStrings;
+        return stringsList;
     }
 
-    private HashMap<String, String> createHeadersTable(List<String> headerStrings, String splitOn) {
-        LinkedHashMap<String, String> headers = new LinkedHashMap<>();
+    private HashMap<String, String> createTable(List<String> listOfStrings, String stringToSplitOn) {
+        HashMap<String, String> table = new LinkedHashMap<>();
 
-        for (String string : headerStrings) {
-            String[] splitHeaders = string.split(splitOn);
+        for (String string : listOfStrings) {
+            String[] splitHeaders = string.split(stringToSplitOn);
 
-            headers.put(splitHeaders[FIRST_ELEMENT], splitHeaders[SECOND_ELEMENT]);
+            table.put(splitHeaders[FIRST_ELEMENT], splitHeaders[SECOND_ELEMENT]);
         }
 
-        return headers;
+        return table;
     }
 
     private String blankLine() {
