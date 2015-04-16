@@ -1,6 +1,7 @@
 package JavaServer.RequestManagers;
 
-import JavaServer.MethodManagers.ManagerFactory;
+import JavaServer.ResponseManagers.MethodManagers.ManagerFactory;
+import JavaServer.ResponseManagers.ResponseCodeBuilder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,9 +31,16 @@ public class ConnectionManager {
             RequestParser requestParser = new RequestParser(requestString);
             Request request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
             ManagerFactory managerFactory = new ManagerFactory(request.getMethod());
+            ResponseCodeBuilder responseCodeBuilder = new ResponseCodeBuilder(managerFactory.createMethodManager());
+
+            System.out.println(request.getMethod());
+            System.out.println("Method pinged is above");
+
+            System.out.println(responseCodeBuilder.getResponseHeaders(request));
+            System.out.println("Response is above");
 
             out.flush();
-            out.write(managerFactory.createMethodHandler().manage(request));
+            out.write(responseCodeBuilder.getResponseHeaders(request));
             out.flush();
 
             in.close();

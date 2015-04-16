@@ -1,4 +1,4 @@
-package JavaServer.MethodManagers;
+package JavaServer.ResponseManagers.MethodManagers;
 
 import JavaServer.RequestManagers.Request;
 
@@ -14,12 +14,22 @@ public class PutManager extends RequestManager {
 
     @Override
     public String manage(Request request) {
-        try {
-            updateData(request.getData());
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (request.getPath().equals(FORM_PATH) || (request.getPath().equals("/method_options"))) {
+            return getCodes().get("200");
+        } else {
+            return getCodes().get("404");
         }
-        return getCorrectResponse(request.getPath(), FORM_PATH);
+//        try {
+//            updateData(request.getData());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return getCorrectResponse(request.getPath(), FORM_PATH);
+    }
+
+    @Override
+    public String getCorrectHeaders() {
+        return getHeaders().get("options");
     }
 
     private void updateData(HashMap<String, String> data) throws IOException {

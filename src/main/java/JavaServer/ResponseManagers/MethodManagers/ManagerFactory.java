@@ -1,4 +1,4 @@
-package JavaServer.MethodManagers;
+package JavaServer.ResponseManagers.MethodManagers;
 
 public class ManagerFactory {
     private String requestMethod;
@@ -11,7 +11,7 @@ public class ManagerFactory {
         this.requestMethod = requestMethod;
     }
 
-    public RequestManager createMethodHandler() {
+    public RequestManager createMethodManager() {
         switch (requestMethod) {
             case GET_METHOD:
                 RequestManager gethandler = new GetManager();

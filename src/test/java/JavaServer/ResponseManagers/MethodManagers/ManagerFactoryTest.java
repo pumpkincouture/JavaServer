@@ -1,4 +1,4 @@
-package JavaServer.MethodManagers;
+package JavaServer.ResponseManagers.MethodManagers;
 
 import org.junit.Test;
 
@@ -12,27 +12,27 @@ public class ManagerFactoryTest {
     public void returnsGetHandlerIfRequestMethodIsGet() {
         methodFactory = new ManagerFactory("GET");
 
-        assertTrue(methodFactory.createMethodHandler() instanceof GetManager);
+        assertTrue(methodFactory.createMethodManager() instanceof GetManager);
     }
 
     @Test
     public void returnsPostHandlerIfRequestMethodIsPost() {
         methodFactory = new ManagerFactory("POST");
 
-        assertTrue(methodFactory.createMethodHandler() instanceof PostManager);
+        assertTrue(methodFactory.createMethodManager() instanceof PostManager);
     }
 
     @Test
     public void returnsPutHandlerIfRequestMethodIsPut() {
         methodFactory = new ManagerFactory("PUT");
 
-        assertTrue(methodFactory.createMethodHandler() instanceof PutManager);
+        assertTrue(methodFactory.createMethodManager() instanceof PutManager);
     }
 
     @Test
     public void returnsOptionsHandlerIfRequestMethodIsOptions() {
         methodFactory = new ManagerFactory("OPTIONS");
 
-        assertTrue(methodFactory.createMethodHandler() instanceof OptionsManager);
+        assertTrue(methodFactory.createMethodManager() instanceof OptionsManager);
     }
 }

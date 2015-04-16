@@ -1,4 +1,4 @@
-package JavaServer.MethodManagers;
+package JavaServer.ResponseManagers.MethodManagers;
 
 import JavaServer.RequestManagers.Request;
 import JavaServer.RequestManagers.RequestParser;
@@ -8,7 +8,8 @@ import java.io.*;
 
 import static org.junit.Assert.assertEquals;
 
-public class PutManagerTest {
+public class PostManagerTest {
+
     private Request request;
     private RequestParser requestParser;
     private RequestManager requestHandler;
@@ -28,35 +29,36 @@ public class PutManagerTest {
     }
 
     @Test
-    public void returns200ResponseIfRequestValidAndChecksIfDataWasWrittenToFile() throws FileNotFoundException {
-        requestParser = new RequestParser("PUT /form HTTP/1.1\n"+
-                                          "first_name=hello\n");
+    public void returns200ResponseIfRequestPathValidAndChecksIfDataWasWrittenToFile() throws FileNotFoundException {
+        requestParser = new RequestParser("POST /form HTTP/1.1\n"+
+                                          "first_name=sam\n");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        requestHandler= new PutManager();
+
+        requestHandler= new PostManager();
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
-        assertEquals("first_name=hello", getDataFromFile());
+        assertEquals("first_name=sam", getDataFromFile());
     }
 
     @Test
     public void returns200ResponseIfRequestValidAndUpdatesFileData() throws FileNotFoundException {
-        requestParser = new RequestParser("PUT /form HTTP/1.1\n"+
-                                          "last_name=whatever\n");
+        requestParser = new RequestParser("POST /form HTTP/1.1\n"+
+                                          "last_name=smith\n");
+
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        requestHandler= new PutManager();
+        requestHandler= new PostManager();
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
-        assertEquals("last_name=whatever", getDataFromFile());
+        assertEquals("last_name=smith", getDataFromFile());
     }
 
     @Test
     public void returns404ResponseIfPathIsNotRecognized() throws FileNotFoundException {
-        requestParser = new RequestParser("PUT / HTTP/1.1");
+        requestParser = new RequestParser("POST / HTTP/1.1");
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        requestHandler= new PutManager();
+        requestHandler= new PostManager();
 
         assertEquals("HTTP/1.1 404 Not Found", requestHandler.manage(request));
     }
 }
-

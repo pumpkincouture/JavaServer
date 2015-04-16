@@ -1,4 +1,4 @@
-package JavaServer.MethodManagers;
+package JavaServer.ResponseManagers.MethodManagers;
 
 import JavaServer.RequestManagers.Request;
 
@@ -8,5 +8,10 @@ public class OptionsManager extends RequestManager {
     @Override
     public String manage(Request request) {
         return getCorrectResponse(request.getPath(), OPTIONS_PATH);
+    }
+
+    @Override
+    public String getCorrectHeaders() {
+        return getHeaders().get("options");
     }
 }

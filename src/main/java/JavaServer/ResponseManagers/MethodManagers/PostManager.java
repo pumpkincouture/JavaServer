@@ -1,6 +1,7 @@
-package JavaServer.MethodManagers;
+package JavaServer.ResponseManagers.MethodManagers;
 
 import JavaServer.RequestManagers.Request;
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -13,16 +14,24 @@ public class PostManager extends RequestManager {
 
     @Override
     public String manage(Request request) {
-        saveData(request.getData());
-        return getCorrectResponse(request.getPath(), FORM_PATH);
+        if (request.getPath().equals(FORM_PATH) || (request.getPath().equals("/method_options"))) {
+            return getCodes().get("200");
+        } else {
+            return getCodes().get("404");
+        }
+//        saveData(request.getData());
+//        return getCorrectResponse(request.getPath(), FORM_PATH);
+    }
+
+    @Override
+    public String getCorrectHeaders() {
+        return getHeaders().get("options");
     }
 
     private void saveData(HashMap<String, String> data) {
         for (int i = 0; i < data.size(); i++) {
             System.out.println(i);
         }
-
-
             PrintWriter writer = null;
 
         try {
@@ -31,7 +40,6 @@ public class PostManager extends RequestManager {
             e.printStackTrace();
         }
         for (int i = 0; i < data.size(); i++) {
-            System.out.println(i);
             writer.write(i);
         }
         writer.close();

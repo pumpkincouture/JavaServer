@@ -1,4 +1,4 @@
-package JavaServer.MethodManagers;
+package JavaServer.ResponseManagers.MethodManagers;
 
 import JavaServer.RequestManagers.Request;
 
@@ -7,6 +7,8 @@ import java.util.Hashtable;
 public abstract class RequestManager {
 
     public abstract String manage(Request request);
+
+    public abstract String getCorrectHeaders();
 
     public String getCorrectResponse(String path, String validPath) {
         if (isPathValid(path, validPath)) {
@@ -30,10 +32,10 @@ public abstract class RequestManager {
 
     public Hashtable<String, String> getHeaders() {
         Hashtable<String, String> headers = new Hashtable<>();
-        headers.put("Allow", "GET,HEAD,POST,OPTIONS,PUT");
-        headers.put("Accept", "text/plain");
-        headers.put("Host", "http://localhost:5000/");
-        headers.put("Accept-Ranges", "bytes");
+        headers.put("options", "Allow: GET,HEAD,POST,OPTIONS,PUT");
+        headers.put("Accept:", "text/plain");
+        headers.put("Host:", "http://localhost:5000/");
+        headers.put("Accept-Ranges:", "bytes");
 
         return headers;
     }
