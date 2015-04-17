@@ -13,40 +13,15 @@ public class PutManagerTest {
     private RequestParser requestParser;
     private RequestManager requestHandler;
 
-    private String getDataFromFile() throws FileNotFoundException {
-        String data = null;
-        FileInputStream file = new FileInputStream("public/postData.txt");
-        BufferedReader textReader = new BufferedReader(new InputStreamReader(file));
-
-        try {
-            data = textReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return data;
-    }
 
     @Test
-    public void returns200ResponseIfRequestValidAndChecksIfDataWasWrittenToFile() throws FileNotFoundException {
-        requestParser = new RequestParser("PUT /form HTTP/1.1\n"+
-                                          "first_name=hello\n");
+    public void returns200ResponseIfPathIsRecognized() throws FileNotFoundException {
+        requestParser = new RequestParser("PUT /form HTTP/1.1");
+
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         requestHandler= new PutManager();
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
-        assertEquals("first_name=hello", getDataFromFile());
-    }
-
-    @Test
-    public void returns200ResponseIfRequestValidAndUpdatesFileData() throws FileNotFoundException {
-        requestParser = new RequestParser("PUT /form HTTP/1.1\n"+
-                                          "last_name=whatever\n");
-        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        requestHandler= new PutManager();
-
-        assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
-        assertEquals("last_name=whatever", getDataFromFile());
     }
 
     @Test
@@ -57,6 +32,16 @@ public class PutManagerTest {
         requestHandler= new PutManager();
 
         assertEquals("HTTP/1.1 404 Not Found", requestHandler.manage(request));
+    }
+
+    @Test
+    public void returns405ResponseIfMethodNotAllowed() throws FileNotFoundException {
+        requestParser = new RequestParser("PUT /file1 HTTP/1.1");
+
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
+        requestHandler= new PutManager();
+
+        assertEquals("HTTP/1.1 405 Method Not Allowed", requestHandler.manage(request));
     }
 }
 

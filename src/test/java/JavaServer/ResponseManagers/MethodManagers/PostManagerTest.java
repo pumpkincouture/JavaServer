@@ -24,7 +24,6 @@ public class PostManagerTest {
         assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
     }
 
-
     @Test
     public void returns404ResponseIfPathIsNotRecognized() throws FileNotFoundException {
         requestParser = new RequestParser("POST / HTTP/1.1");
