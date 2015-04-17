@@ -16,9 +16,11 @@ public class PostManager extends RequestManager {
     public String manage(Request request) {
         if (request.getPath().equals(FORM_PATH) || (request.getPath().equals("/method_options"))) {
             return getCodes().get("200");
-        } else {
-            return getCodes().get("404");
+        } else if (request.getPath().equals("/text-file.txt")) {
+            return getCodes().get("405");
+//            return getCodes().get("404");
         }
+        return getCodes().get("404");
 //        saveData(request.getData());
 //        return getCorrectResponse(request.getPath(), FORM_PATH);
     }

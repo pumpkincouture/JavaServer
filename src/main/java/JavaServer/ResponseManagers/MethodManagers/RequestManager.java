@@ -26,7 +26,7 @@ public abstract class RequestManager {
         Hashtable<String, String> codes = new Hashtable<>();
         codes.put("200", "HTTP/1.1 200 OK");
         codes.put("404", "HTTP/1.1 404 Not Found");
-
+        codes.put("405", "HTTP/1.1 405 Method Not Allowed");
         return codes;
     }
 
