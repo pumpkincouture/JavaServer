@@ -1,8 +1,8 @@
-package JavaServer.ResponseManagers.MethodManagers;
+package JavaServer.ResponseManagers.methods;
 
 import JavaServer.RequestManagers.Request;
 
-public class PutManager extends RequestManager {
+public class PutResponse extends Response {
     private static final String FORM_PATH = "/form";
     public static final String METHOD_OPTIONS = "/method_options";
     public static final String FILE_PATH = "/file1";

@@ -1,4 +1,4 @@
-package JavaServer.ResponseManagers.MethodManagers;
+package JavaServer.ResponseManagers.methods;
 
 import JavaServer.RequestManagers.Request;
 import JavaServer.RequestManagers.RequestParser;
@@ -6,17 +6,17 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class GetManagerTest {
+public class GetResponseTest {
     private Request request;
     private RequestParser requestParser;
-    private RequestManager requestHandler;
+    private Response requestHandler;
 
     @Test
     public void returns200ResponseIfRequestValid() {
         requestParser = new RequestParser("GET / HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
-        requestHandler = new GetManager();
+        requestHandler = new GetResponse();
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
     }
@@ -26,7 +26,7 @@ public class GetManagerTest {
         requestParser = new RequestParser("GET /whatever HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
-        requestHandler = new GetManager();
+        requestHandler = new GetResponse();
 
         assertEquals("HTTP/1.1 404 Not Found", requestHandler.manage(request));
     }
@@ -36,7 +36,7 @@ public class GetManagerTest {
         requestParser = new RequestParser("GET /redirect HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
-        requestHandler = new GetManager();
+        requestHandler = new GetResponse();
 
         assertEquals("HTTP/1.1 302 Found", requestHandler.manage(request));
     }
@@ -46,7 +46,7 @@ public class GetManagerTest {
         requestParser = new RequestParser("GET /redirect HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
-        requestHandler = new GetManager();
+        requestHandler = new GetResponse();
 
         assertEquals("Location: http://localhost:5000/", requestHandler.getCorrectHeaders(request));
     }
@@ -56,7 +56,7 @@ public class GetManagerTest {
         requestParser = new RequestParser("GET / HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
-        requestHandler = new GetManager();
+        requestHandler = new GetResponse();
 
         assertEquals("Allow: GET,HEAD,POST,OPTIONS,PUT", requestHandler.getCorrectHeaders(request));
     }

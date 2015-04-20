@@ -1,13 +1,13 @@
 package JavaServer.ResponseManagers;
 
 import JavaServer.RequestManagers.Request;
-import JavaServer.ResponseManagers.MethodManagers.RequestManager;
+import JavaServer.ResponseManagers.methods.Response;
 
-public class ResponseCodeBuilder {
-    private RequestManager requestManager;
+public class ResponseBuilder {
+    private Response requestManager;
     private static final String CARRIAGE_RETURN =  "\r\n";
 
-    public ResponseCodeBuilder(RequestManager requestManager) {
+    public ResponseBuilder(Response requestManager) {
         this.requestManager = requestManager;
     }
 

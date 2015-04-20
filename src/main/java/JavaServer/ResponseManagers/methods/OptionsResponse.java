@@ -1,8 +1,8 @@
-package JavaServer.ResponseManagers.MethodManagers;
+package JavaServer.ResponseManagers.methods;
 
 import JavaServer.RequestManagers.Request;
 
-public class OptionsManager extends RequestManager {
+public class OptionsResponse extends Response {
     private static final String OPTIONS_PATH = "/method_options";
 
     @Override

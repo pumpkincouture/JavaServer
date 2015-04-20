@@ -2,16 +2,16 @@ package JavaServer.ResponseManagers;
 
 import JavaServer.RequestManagers.Request;
 import JavaServer.RequestManagers.RequestParser;
-import JavaServer.ResponseManagers.MethodManagers.ManagerFactory;
+import JavaServer.ResponseManagers.methods.ResponseFactory;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class ResponseCodeBuilderTest {
+public class ResponseBuilderTest {
     private Request request;
     private RequestParser requestParser;
-    private ResponseCodeBuilder responseCodeBuilder;
-    private ManagerFactory managerFactory;
+    private ResponseBuilder responseCodeBuilder;
+    private ResponseFactory managerFactory;
 
     @Test
     public void parseAndStoreMoreThanOnePostParam() {
@@ -23,9 +23,9 @@ public class ResponseCodeBuilderTest {
                                           "last_name=olak\n"+
                                           "age=26");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        managerFactory = new ManagerFactory(request.getMethod());
+        managerFactory = new ResponseFactory(request.getMethod());
 
-        responseCodeBuilder = new ResponseCodeBuilder(managerFactory.createMethodManager());
+        responseCodeBuilder = new ResponseBuilder(managerFactory.createMethodManager());
 
         assertEquals("HTTP/1.1 404 Not Found\r\n" + "Allow: GET,HEAD,POST,OPTIONS,PUT\r\n", responseCodeBuilder.getResponseHeaders(request));
     }

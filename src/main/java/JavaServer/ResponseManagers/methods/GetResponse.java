@@ -1,8 +1,8 @@
-package JavaServer.ResponseManagers.MethodManagers;
+package JavaServer.ResponseManagers.methods;
 
 import JavaServer.RequestManagers.Request;
 
-public class GetManager extends RequestManager {
+public class GetResponse extends Response {
     private static final String SIMPLE_PATH = "/";
     private static final String METHOD_OPTIONS = "/method_options";
     public static final String REDIRECT = "/redirect";
