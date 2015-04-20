@@ -4,22 +4,17 @@ import JavaServer.RequestManagers.Request;
 
 public class PutManager extends RequestManager {
     private static final String FORM_PATH = "/form";
+    public static final String METHOD_OPTIONS = "/method_options";
+    public static final String FILE_PATH = "/file1";
 
     @Override
     public String manage(Request request) {
-        if (request.getPath().equals(FORM_PATH) || (request.getPath().equals("/method_options"))) {
+        if (request.getPath().equals(FORM_PATH) || (request.getPath().equals(METHOD_OPTIONS))) {
             return getCodes().get("200");
-        } else if (request.getPath().equals("/file1")) {
+        } else if (request.getPath().equals(FILE_PATH)) {
             return getCodes().get("405");
-//            return getCodes().get("404");
         }
         return getCodes().get("404");
-//        try {
-//            updateData(request.getData());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return getCorrectResponse(request.getPath(), FORM_PATH);
     }
 
     @Override

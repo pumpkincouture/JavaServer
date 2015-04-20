@@ -4,25 +4,24 @@ import JavaServer.RequestManagers.Request;
 
 public class GetManager extends RequestManager {
     private static final String SIMPLE_PATH = "/";
+    private static final String METHOD_OPTIONS = "/method_options";
+    public static final String REDIRECT = "/redirect";
 
     @Override
     public String manage(Request request) {
-        if (request.getPath().equals("/") || (request.getPath().equals("/method_options"))) {
+        if (request.getPath().equals(SIMPLE_PATH) || (request.getPath().equals(METHOD_OPTIONS))) {
             return getCodes().get("200");
-        } else if (request.getPath().equals("/redirect")) {
+        } else if (request.getPath().equals(REDIRECT)) {
             return getCodes().get("302");
         }
         else {
             return getCodes().get("404");
         }
-
-//        return getCodes().get("404");
-//        return getCorrectResponse(request.getPath(), SIMPLE_PATH) || getCorrectResponse(request.getPath(), "/method_options");
     }
 
     @Override
     public String getCorrectHeaders(Request request) {
-        if (request.getPath().equals("/redirect")) {
+        if (request.getPath().equals(REDIRECT)) {
             return getHeaders().get("location");
         } else {
             return getHeaders().get("options");
