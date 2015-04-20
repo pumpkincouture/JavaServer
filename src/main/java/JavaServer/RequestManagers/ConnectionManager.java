@@ -33,12 +33,6 @@ public class ConnectionManager {
             ManagerFactory managerFactory = new ManagerFactory(request.getMethod());
             ResponseCodeBuilder responseCodeBuilder = new ResponseCodeBuilder(managerFactory.createMethodManager());
 
-            System.out.println(request.getMethod());
-            System.out.println("Method pinged is above");
-
-            System.out.println(responseCodeBuilder.getResponseHeaders(request));
-            System.out.println("Response is above");
-
             out.flush();
             out.write(responseCodeBuilder.getResponseHeaders(request));
             out.flush();

@@ -9,7 +9,10 @@ public class GetManager extends RequestManager {
     public String manage(Request request) {
         if (request.getPath().equals("/") || (request.getPath().equals("/method_options"))) {
             return getCodes().get("200");
-        } else {
+        } else if (request.getPath().equals("/redirect")) {
+            return getCodes().get("302");
+        }
+        else {
             return getCodes().get("404");
         }
 
@@ -18,7 +21,11 @@ public class GetManager extends RequestManager {
     }
 
     @Override
-    public String getCorrectHeaders() {
-        return getHeaders().get("options");
+    public String getCorrectHeaders(Request request) {
+        if (request.getPath().equals("/redirect")) {
+            return getHeaders().get("location");
+        } else {
+            return getHeaders().get("options");
+        }
     }
 }

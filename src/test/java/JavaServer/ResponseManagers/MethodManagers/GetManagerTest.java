@@ -30,4 +30,34 @@ public class GetManagerTest {
 
         assertEquals("HTTP/1.1 404 Not Found", requestHandler.manage(request));
     }
+
+    @Test
+    public void returns302IfPathIsRedirect() {
+        requestParser = new RequestParser("GET /redirect HTTP/1.1");
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
+
+        requestHandler = new GetManager();
+
+        assertEquals("HTTP/1.1 302 Found", requestHandler.manage(request));
+    }
+
+    @Test
+    public void returnLocationHeaderIfRequestIsForRedirect() {
+        requestParser = new RequestParser("GET /redirect HTTP/1.1");
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
+
+        requestHandler = new GetManager();
+
+        assertEquals("Location: http://localhost:5000/", requestHandler.getCorrectHeaders(request));
+    }
+
+    @Test
+    public void returnOptionsHeaderIfRequestIsNotForRedirect() {
+        requestParser = new RequestParser("GET / HTTP/1.1");
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
+
+        requestHandler = new GetManager();
+
+        assertEquals("Allow: GET,HEAD,POST,OPTIONS,PUT", requestHandler.getCorrectHeaders(request));
+    }
 }

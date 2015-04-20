@@ -23,7 +23,7 @@ public class PutManager extends RequestManager {
     }
 
     @Override
-    public String getCorrectHeaders() {
+    public String getCorrectHeaders(Request request) {
         return getHeaders().get("options");
     }
 }

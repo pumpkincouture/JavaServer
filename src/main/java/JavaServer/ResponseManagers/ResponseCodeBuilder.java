@@ -15,7 +15,7 @@ public class ResponseCodeBuilder {
         String responseString = "";
 
         responseString += requestManager.manage(request) + CARRIAGE_RETURN;
-        responseString += requestManager.getCorrectHeaders() + CARRIAGE_RETURN;
+        responseString += requestManager.getCorrectHeaders(request) + CARRIAGE_RETURN;
         return responseString;
     }
 
