@@ -23,8 +23,10 @@ public class GetResponse extends Response {
     public String getCorrectHeaders(Request request) {
         if (request.getPath().equals(REDIRECT)) {
             return getHeaders().get("location");
-        } else {
+        } else if (request.getPath().equals(METHOD_OPTIONS)) {
             return getHeaders().get("options");
+        } else {
+            return "";
         }
     }
 }

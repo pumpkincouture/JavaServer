@@ -14,7 +14,7 @@ public class ResponseBuilderTest {
     private ResponseFactory managerFactory;
 
     @Test
-    public void parseAndStoreMoreThanOnePostParam() {
+    public void parseAndStoreMoreThanOnePostParamAndReturnResponseWithNoHeaders() {
         requestParser = new RequestParser("GET /form\n"+
                                           "Content-Type: application/x-www-form-url-encoded\n"+
                                           "Host: https://sylwiaolak.com\n"+
@@ -27,6 +27,6 @@ public class ResponseBuilderTest {
 
         responseCodeBuilder = new ResponseBuilder(managerFactory.createMethodManager());
 
-        assertEquals("HTTP/1.1 404 Not Found\r\n" + "Allow: GET,HEAD,POST,OPTIONS,PUT\r\n", responseCodeBuilder.getResponseHeaders(request));
+        assertEquals("HTTP/1.1 404 Not Found\r\n" + "\r\n", responseCodeBuilder.getResponseHeaders(request));
     }
 }

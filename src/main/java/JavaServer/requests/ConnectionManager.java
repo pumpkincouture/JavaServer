@@ -1,8 +1,5 @@
 package JavaServer.requests;
 
-import JavaServer.responses.methods.ResponseFactory;
-import JavaServer.responses.ResponseBuilder;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,16 +25,11 @@ public class ConnectionManager {
                 requestString += in.readLine();
             }
 
-
-
-
-            RequestParser requestParser = new RequestParser(requestString);
-            Request request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-            ResponseFactory responseFactory = new ResponseFactory(request.getMethod());
-            ResponseBuilder responseCodeBuilder = new ResponseBuilder(responseFactory.createMethodManager());
+            Router router = new Router(requestString);
+            router.createHandlers();
 
             out.flush();
-            out.write(responseCodeBuilder.getResponseHeaders(request));
+            out.write(router.getResponse());
             out.flush();
 
             in.close();

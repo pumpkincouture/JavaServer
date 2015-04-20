@@ -52,12 +52,12 @@ public class GetResponseTest {
     }
 
     @Test
-    public void returnOptionsHeaderIfRequestIsNotForRedirect() {
+    public void returnsBlankLineAsHeaderIfPathIsNotForMethodOptions() {
         requestParser = new RequestParser("GET / HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
         requestHandler = new GetResponse();
 
-        assertEquals("Allow: GET,HEAD,POST,OPTIONS,PUT", requestHandler.getCorrectHeaders(request));
+        assertEquals("", requestHandler.getCorrectHeaders(request));
     }
 }

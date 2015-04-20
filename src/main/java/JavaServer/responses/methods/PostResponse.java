@@ -19,6 +19,9 @@ public class PostResponse extends Response {
 
     @Override
     public String getCorrectHeaders(Request request) {
-        return getHeaders().get("options");
+        if (request.getPath().equals(METHOD_OPTIONS)) {
+            return getHeaders().get("options");
+        }
+        return "";
     }
 }
