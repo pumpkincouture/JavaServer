@@ -1,4 +1,4 @@
-package JavaServer.RequestManagers;
+package JavaServer.requests;
 
 import org.junit.Test;
 

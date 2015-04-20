@@ -1,7 +1,7 @@
-package JavaServer.ResponseManagers;
+package JavaServer.responses;
 
-import JavaServer.RequestManagers.Request;
-import JavaServer.ResponseManagers.methods.Response;
+import JavaServer.requests.Request;
+import JavaServer.responses.methods.Response;
 
 public class ResponseBuilder {
     private Response requestManager;

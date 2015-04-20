@@ -1,6 +1,6 @@
-package JavaServer.ResponseManagers.methods;
+package JavaServer.responses.methods;
 
-import JavaServer.RequestManagers.Request;
+import JavaServer.requests.Request;
 
 public class GetResponse extends Response {
     private static final String SIMPLE_PATH = "/";

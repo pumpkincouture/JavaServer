@@ -1,17 +1,17 @@
-package JavaServer.ResponseManagers.methods;
+package JavaServer.responses.methods;
 
-import JavaServer.RequestManagers.Request;
+import JavaServer.requests.Request;
 
-public class PostResponse extends Response {
+public class PutResponse extends Response {
     private static final String FORM_PATH = "/form";
     public static final String METHOD_OPTIONS = "/method_options";
-    public static final String TEXT_FILE = "/text-file.txt";
+    public static final String FILE_PATH = "/file1";
 
     @Override
     public String manage(Request request) {
         if (request.getPath().equals(FORM_PATH) || (request.getPath().equals(METHOD_OPTIONS))) {
             return getCodes().get("200");
-        } else if (request.getPath().equals(TEXT_FILE)) {
+        } else if (request.getPath().equals(FILE_PATH)) {
             return getCodes().get("405");
         }
         return getCodes().get("404");

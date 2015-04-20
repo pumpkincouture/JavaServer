@@ -1,4 +1,4 @@
-package JavaServer.ResponseManagers.methods;
+package JavaServer.responses.methods;
 
 import org.junit.Test;
 

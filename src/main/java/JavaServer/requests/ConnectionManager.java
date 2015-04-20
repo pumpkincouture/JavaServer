@@ -1,7 +1,7 @@
-package JavaServer.RequestManagers;
+package JavaServer.requests;
 
-import JavaServer.ResponseManagers.methods.ResponseFactory;
-import JavaServer.ResponseManagers.ResponseBuilder;
+import JavaServer.responses.methods.ResponseFactory;
+import JavaServer.responses.ResponseBuilder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,10 +30,11 @@ public class ConnectionManager {
 
 
 
+
             RequestParser requestParser = new RequestParser(requestString);
             Request request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-            ResponseFactory managerFactory = new ResponseFactory(request.getMethod());
-            ResponseBuilder responseCodeBuilder = new ResponseBuilder(managerFactory.createMethodManager());
+            ResponseFactory responseFactory = new ResponseFactory(request.getMethod());
+            ResponseBuilder responseCodeBuilder = new ResponseBuilder(responseFactory.createMethodManager());
 
             out.flush();
             out.write(responseCodeBuilder.getResponseHeaders(request));

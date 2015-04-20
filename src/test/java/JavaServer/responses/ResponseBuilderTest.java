@@ -1,8 +1,8 @@
-package JavaServer.ResponseManagers;
+package JavaServer.responses;
 
-import JavaServer.RequestManagers.Request;
-import JavaServer.RequestManagers.RequestParser;
-import JavaServer.ResponseManagers.methods.ResponseFactory;
+import JavaServer.requests.Request;
+import JavaServer.requests.RequestParser;
+import JavaServer.responses.methods.ResponseFactory;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -1,7 +1,7 @@
-package JavaServer.ResponseManagers.methods;
+package JavaServer.responses.methods;
 
-import JavaServer.RequestManagers.Request;
-import JavaServer.RequestManagers.RequestParser;
+import JavaServer.requests.Request;
+import JavaServer.requests.RequestParser;
 import org.junit.Test;
 
 import java.io.*;

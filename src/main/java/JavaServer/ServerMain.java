@@ -1,5 +1,5 @@
 package JavaServer;
-import JavaServer.RequestManagers.HTTPServer;
+import JavaServer.requests.HTTPServer;
 
 import java.io.IOException;
 import java.net.ServerSocket;
