@@ -6,9 +6,11 @@ import static org.junit.Assert.assertEquals;
 
 public class RouterTest {
     private Router router;
+    private String directory;
 
     private void createRouter(String request) {
-        router = new Router(request);
+        directory = "/Users/test/code/JavaServer/public";
+        router = new Router(request, directory);
         router.createHandlers();
     }
 

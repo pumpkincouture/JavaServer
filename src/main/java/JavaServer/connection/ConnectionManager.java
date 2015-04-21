@@ -1,4 +1,6 @@
-package JavaServer.requests;
+package JavaServer.connection;
+
+import JavaServer.requests.Router;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,11 +11,13 @@ public class ConnectionManager {
     private PrintWriter out;
     private BufferedReader in;
     private Socket socket;
+    private String directory;
 
-    public ConnectionManager(PrintWriter out, BufferedReader in, Socket socket) {
+    public ConnectionManager(PrintWriter out, BufferedReader in, Socket socket, String directory) {
         this.out = out;
         this.in = in;
         this.socket = socket;
+        this.directory = directory;
     }
 
     public void executeRequest() throws IOException {
@@ -25,7 +29,7 @@ public class ConnectionManager {
                 requestString += in.readLine();
             }
 
-            Router router = new Router(requestString);
+            Router router = new Router(requestString, directory);
             router.createHandlers();
 
             System.out.println(router.getResponse());

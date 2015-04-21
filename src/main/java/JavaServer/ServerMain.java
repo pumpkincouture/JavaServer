@@ -1,6 +1,6 @@
 package JavaServer;
 import JavaServer.configuration.ServerConfiguration;
-import JavaServer.requests.HTTPServer;
+import JavaServer.runner.HTTPServer;
 
 import java.io.File;
 import java.io.IOException;

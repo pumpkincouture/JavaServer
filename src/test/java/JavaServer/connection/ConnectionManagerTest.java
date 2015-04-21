@@ -1,5 +1,6 @@
-package JavaServer.requests;
+package JavaServer.connection;
 
+import JavaServer.connection.ConnectionManager;
 import org.junit.Test;
 
 import java.io.BufferedReader;
