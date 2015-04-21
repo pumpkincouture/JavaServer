@@ -1,4 +1,4 @@
-package JavaServer.configurations;
+package JavaServer.configuration;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +14,7 @@ public class ServerConfiguration {
         String portCommand = "-p";
 
         if (convertArgs().contains(portCommand)) {
-            return Integer.valueOf(convertArgs().indexOf(portCommand) + 1);
+            return Integer.valueOf(convertArgs().get(convertArgs().indexOf(portCommand) + 1));
         }
         return 5000;
     }
@@ -29,7 +29,7 @@ public class ServerConfiguration {
     }
 
     private List<String> convertArgs() {
-        return Arrays.asList(requestArgs);
+        List<String> argsList = Arrays.asList(requestArgs);
+        return argsList;
     }
-
 }

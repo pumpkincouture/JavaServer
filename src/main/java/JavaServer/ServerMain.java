@@ -1,5 +1,5 @@
 package JavaServer;
-import JavaServer.configurations.ServerConfiguration;
+import JavaServer.configuration.ServerConfiguration;
 import JavaServer.requests.HTTPServer;
 
 import java.io.File;
