@@ -24,4 +24,8 @@ public class Router {
     public String getResponse() {
         return responseBuilder.getResponseHeaders(request);
     }
+
+    public String getBody() {
+        return responseBuilder.getBody(request);
+    }
 }

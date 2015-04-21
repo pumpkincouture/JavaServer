@@ -32,6 +32,7 @@ public class ConnectionManager {
 
             out.flush();
             out.write(router.getResponse());
+            out.write(router.getBody());
             out.flush();
 
             in.close();

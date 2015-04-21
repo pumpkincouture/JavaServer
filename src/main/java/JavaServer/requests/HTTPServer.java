@@ -9,9 +9,11 @@ import java.net.Socket;
 
 public class HTTPServer {
     private ServerSocket serverSocket;
+    private String directory;
 
-    public HTTPServer(ServerSocket serverSocket) {
+    public HTTPServer(ServerSocket serverSocket, String directory) {
         this.serverSocket = serverSocket;
+        this.directory = directory;
     }
 
     public void run() throws IOException {

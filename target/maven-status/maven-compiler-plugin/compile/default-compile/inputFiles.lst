@@ -1,3 +1,15 @@
-/Users/test/code/JavaServer/src/main/java/JavaServer/Request.java
-/Users/test/code/JavaServer/src/main/java/JavaServer/RequestParser.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/responses/methods/Response.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/responses/methods/PostResponse.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/responses/methods/GetResponse.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/requests/ConnectionManager.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/requests/Request.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/ServerMain.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/requests/RouteValidator.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/requests/HTTPServer.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/responses/methods/OptionsResponse.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/responses/ResponseBuilder.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/requests/RequestParser.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/responses/methods/PutResponse.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/configurations/ServerConfiguration.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/requests/Router.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/responses/methods/ResponseFactory.java

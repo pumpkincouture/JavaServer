@@ -23,12 +23,4 @@ public class ResponseBuilder {
     public String getBody(Request request) {
         return requestManager.getCorrectBody(request);
     }
-
-    public String getDirectory() {
-
-        String directoryCommand = "-d";
-        return System.getProperty("user.dir") + "/cob_spec/public";
-    }
-
-
 }
