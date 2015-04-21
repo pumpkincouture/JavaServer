@@ -21,7 +21,7 @@ public class PutResponseTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         requestHandler= new PutResponse();
 
-        assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
+        assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus(request));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class PutResponseTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         requestHandler= new PutResponse();
 
-        assertEquals("HTTP/1.1 404 Not Found", requestHandler.manage(request));
+        assertEquals("HTTP/1.1 404 Not Found", requestHandler.getCorrectStatus(request));
     }
 
     @Test
@@ -41,7 +41,7 @@ public class PutResponseTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         requestHandler= new PutResponse();
 
-        assertEquals("HTTP/1.1 405 Method Not Allowed", requestHandler.manage(request));
+        assertEquals("HTTP/1.1 405 Method Not Allowed", requestHandler.getCorrectStatus(request));
     }
 }
 

@@ -28,6 +28,8 @@ public class ConnectionManager {
             Router router = new Router(requestString);
             router.createHandlers();
 
+            System.out.println(router.getResponse());
+
             out.flush();
             out.write(router.getResponse());
             out.flush();

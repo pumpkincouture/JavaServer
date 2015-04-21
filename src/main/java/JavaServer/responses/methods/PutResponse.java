@@ -8,7 +8,7 @@ public class PutResponse extends Response {
     public static final String FILE_PATH = "/file1";
 
     @Override
-    public String manage(Request request) {
+    public String getCorrectStatus(Request request) {
         if (request.getPath().equals(FORM_PATH) || (request.getPath().equals(METHOD_OPTIONS))) {
             return getCodes().get("200");
         } else if (request.getPath().equals(FILE_PATH)) {
@@ -22,6 +22,11 @@ public class PutResponse extends Response {
         if (request.getPath().equals(METHOD_OPTIONS)) {
             return getHeaders().get("options");
         }
+        return "";
+    }
+
+    @Override
+    public String getCorrectBody(Request request) {
         return "";
     }
 }

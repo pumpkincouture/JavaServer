@@ -18,7 +18,7 @@ public class GetResponseTest {
 
         requestHandler = new GetResponse();
 
-        assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
+        assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus(request));
     }
 
     @Test
@@ -28,7 +28,7 @@ public class GetResponseTest {
 
         requestHandler = new GetResponse();
 
-        assertEquals("HTTP/1.1 404 Not Found", requestHandler.manage(request));
+        assertEquals("HTTP/1.1 404 Not Found", requestHandler.getCorrectStatus(request));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class GetResponseTest {
 
         requestHandler = new GetResponse();
 
-        assertEquals("HTTP/1.1 302 Found", requestHandler.manage(request));
+        assertEquals("HTTP/1.1 302 Found", requestHandler.getCorrectStatus(request));
     }
 
     @Test

@@ -17,8 +17,8 @@ public class Router {
     public void createHandlers() {
         requestParser = new RequestParser(requestString);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        responseFactory = new ResponseFactory(request.getMethod());
-        responseBuilder = new ResponseBuilder(responseFactory.createMethodManager());
+        responseFactory = new ResponseFactory(request);
+        responseBuilder = new ResponseBuilder(responseFactory.createResponse());
     }
 
     public String getResponse() {

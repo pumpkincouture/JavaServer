@@ -8,7 +8,7 @@ public class GetResponse extends Response {
     public static final String REDIRECT = "/redirect";
 
     @Override
-    public String manage(Request request) {
+    public String getCorrectStatus(Request request) {
         if (request.getPath().equals(SIMPLE_PATH) || (request.getPath().equals(METHOD_OPTIONS))) {
             return getCodes().get("200");
         } else if (request.getPath().equals(REDIRECT)) {
@@ -29,4 +29,15 @@ public class GetResponse extends Response {
             return "";
         }
     }
+
+    @Override
+    public String getCorrectBody(Request request) {
+        if (request.getPath().equals(SIMPLE_PATH)) {
+            return getHeaders().get("content");
+        }
+        return "";
+    }
+
+
+
 }

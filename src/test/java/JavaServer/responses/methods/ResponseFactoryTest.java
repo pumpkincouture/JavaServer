@@ -1,38 +1,48 @@
 package JavaServer.responses.methods;
 
+import JavaServer.requests.Request;
 import org.junit.Test;
+
+import java.util.HashMap;
 
 import static org.junit.Assert.assertTrue;
 
 public class ResponseFactoryTest {
     private ResponseFactory methodFactory;
+    private Request request;
 
+
+    private Request createRequest(String method, String path) {
+        request = new Request(method, path, new HashMap<>(), new HashMap<>());
+
+        return request;
+    }
 
     @Test
     public void returnsGetHandlerIfRequestMethodIsGet() {
-        methodFactory = new ResponseFactory("GET");
+        methodFactory = new ResponseFactory(createRequest("GET", "/"));
 
-        assertTrue(methodFactory.createMethodManager() instanceof GetResponse);
+        assertTrue(methodFactory.createResponse() instanceof GetResponse);
     }
 
     @Test
     public void returnsPostHandlerIfRequestMethodIsPost() {
-        methodFactory = new ResponseFactory("POST");
+        methodFactory = new ResponseFactory(createRequest("POST", "/"));
 
-        assertTrue(methodFactory.createMethodManager() instanceof PostResponse);
+        assertTrue(methodFactory.createResponse() instanceof PostResponse);
     }
 
     @Test
     public void returnsPutHandlerIfRequestMethodIsPut() {
-        methodFactory = new ResponseFactory("PUT");
+        methodFactory = new ResponseFactory(createRequest("PUT", "/"));
 
-        assertTrue(methodFactory.createMethodManager() instanceof PutResponse);
+        assertTrue(methodFactory.createResponse() instanceof PutResponse);
     }
 
     @Test
     public void returnsOptionsHandlerIfRequestMethodIsOptions() {
-        methodFactory = new ResponseFactory("OPTIONS");
+        methodFactory = new ResponseFactory(createRequest("OPTIONS", "/"));
 
-        assertTrue(methodFactory.createMethodManager() instanceof OptionsResponse);
+        assertTrue(methodFactory.createResponse() instanceof OptionsResponse);
     }
 }

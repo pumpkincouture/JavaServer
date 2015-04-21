@@ -1,18 +1,20 @@
 package JavaServer.responses.methods;
 
+import JavaServer.requests.Request;
+
 public class ResponseFactory {
-    private String requestMethod;
+    private Request request;
     private static final String GET_METHOD = "GET";
     private static final String POST_METHOD = "POST";
     private static final String PUT_METHOD = "PUT";
     private static final String OPTIONS_METHOD = "OPTIONS";
 
-    public ResponseFactory(String requestMethod) {
-        this.requestMethod = requestMethod;
+    public ResponseFactory(Request request) {
+        this.request = request;
     }
 
-    public Response createMethodManager() {
-        switch (requestMethod) {
+    public Response createResponse() {
+        switch (request.getMethod()) {
             case GET_METHOD:
                 Response gethandler = new GetResponse();
                 return gethandler;

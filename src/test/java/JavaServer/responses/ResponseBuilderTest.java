@@ -23,10 +23,10 @@ public class ResponseBuilderTest {
                                           "last_name=olak\n"+
                                           "age=26");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        managerFactory = new ResponseFactory(request.getMethod());
+        managerFactory = new ResponseFactory(request);
 
-        responseCodeBuilder = new ResponseBuilder(managerFactory.createMethodManager());
+        responseCodeBuilder = new ResponseBuilder(managerFactory.createResponse());
 
-        assertEquals("HTTP/1.1 404 Not Found\r\n" + "\r\n", responseCodeBuilder.getResponseHeaders(request));
+        assertEquals("HTTP/1.1 404 Not Found\n" + "\n" + "\r\n", responseCodeBuilder.getResponseHeaders(request));
     }
 }

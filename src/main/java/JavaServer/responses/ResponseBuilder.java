@@ -6,6 +6,7 @@ import JavaServer.responses.methods.Response;
 public class ResponseBuilder {
     private Response requestManager;
     private static final String CARRIAGE_RETURN =  "\r\n";
+    private static final String BLANK_LINE = "\n";
 
     public ResponseBuilder(Response requestManager) {
         this.requestManager = requestManager;
@@ -14,9 +15,9 @@ public class ResponseBuilder {
     public String getResponseHeaders(Request request) {
         String responseString = "";
 
-        responseString += requestManager.manage(request) + CARRIAGE_RETURN;
-        responseString += requestManager.getCorrectHeaders(request) + CARRIAGE_RETURN;
+        responseString += requestManager.getCorrectStatus(request) + BLANK_LINE;
+        responseString += requestManager.getCorrectHeaders(request) + BLANK_LINE;
+        responseString += requestManager.getCorrectBody(request) + CARRIAGE_RETURN;
         return responseString;
     }
-
 }

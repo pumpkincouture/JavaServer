@@ -17,7 +17,7 @@ public class OptionsResponseTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         requestHandler= new OptionsResponse();
 
-        assertEquals("HTTP/1.1 200 OK", requestHandler.manage(request));
+        assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus(request));
     }
 
     @Test
@@ -26,6 +26,6 @@ public class OptionsResponseTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         requestHandler= new OptionsResponse();
 
-        assertEquals("HTTP/1.1 404 Not Found", requestHandler.manage(request));
+        assertEquals("HTTP/1.1 404 Not Found", requestHandler.getCorrectStatus(request));
     }
 }
