@@ -25,19 +25,14 @@ public class GetResponse extends Response {
             return getHeaders().get("location");
         } else if (request.getPath().equals(METHOD_OPTIONS)) {
             return getHeaders().get("options");
-        } else {
-            return "";
-        }
-    }
-
-    @Override
-    public String getCorrectBody(Request request) {
-        if (request.getPath().equals(SIMPLE_PATH)) {
+        } else if (request.getPath().equals(SIMPLE_PATH)) {
             return getHeaders().get("content");
         }
         return "";
     }
 
-
-
+    @Override
+    public String getCorrectBody(Request request) {
+        return "";
+    }
 }

@@ -16,8 +16,19 @@ public class ResponseBuilder {
         String responseString = "";
 
         responseString += requestManager.getCorrectStatus(request) + BLANK_LINE;
-        responseString += requestManager.getCorrectHeaders(request) + BLANK_LINE;
-        responseString += requestManager.getCorrectBody(request) + CARRIAGE_RETURN;
+        responseString += requestManager.getCorrectHeaders(request) + CARRIAGE_RETURN;
         return responseString;
     }
+
+    public String getBody(Request request) {
+        return requestManager.getCorrectBody(request);
+    }
+
+    public String getDirectory() {
+
+        String directoryCommand = "-d";
+        return System.getProperty("user.dir") + "/cob_spec/public";
+    }
+
+
 }

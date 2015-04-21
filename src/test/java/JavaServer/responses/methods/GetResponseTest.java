@@ -52,12 +52,12 @@ public class GetResponseTest {
     }
 
     @Test
-    public void returnsBlankLineAsHeaderIfPathIsNotForMethodOptions() {
+    public void returnsContentTypeAsHeaderIfPathIsNotForMethodOptions() {
         requestParser = new RequestParser("GET / HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
         requestHandler = new GetResponse();
 
-        assertEquals("", requestHandler.getCorrectHeaders(request));
+        assertEquals("Content-Type: text/html", requestHandler.getCorrectHeaders(request));
     }
 }

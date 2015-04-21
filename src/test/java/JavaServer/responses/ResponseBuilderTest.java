@@ -27,6 +27,6 @@ public class ResponseBuilderTest {
 
         responseCodeBuilder = new ResponseBuilder(managerFactory.createResponse());
 
-        assertEquals("HTTP/1.1 404 Not Found\n" + "\n" + "\r\n", responseCodeBuilder.getResponseHeaders(request));
+        assertEquals("HTTP/1.1 404 Not Found\n" + "\r\n", responseCodeBuilder.getResponseHeaders(request));
     }
 }
