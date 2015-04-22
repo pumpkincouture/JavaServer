@@ -1,6 +1,4 @@
-package JavaServer.connection;
-
-import org.junit.Test;
+package JavaServer.connections;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

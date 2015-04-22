@@ -1,4 +1,4 @@
-package JavaServer.connection;
+package JavaServer.connections;
 
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 

@@ -1,6 +1,6 @@
 package JavaServer.runner;
 
-import JavaServer.connection.ConnectionManager;
+import JavaServer.connections.ConnectionManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
