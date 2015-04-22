@@ -3,20 +3,24 @@ package JavaServer.responses.methods;
 import JavaServer.requests.Request;
 
 public class OptionsResponse extends Response {
-    private static final String OPTIONS_PATH = "/method_options";
+    private PathValidator pathValidator;
+
+    public OptionsResponse() {
+        pathValidator = new OptionsPathValidator();
+    }
 
     @Override
     public String getCorrectStatus(Request request) {
-        return getCorrectResponse(request.getPath(), OPTIONS_PATH);
+        return pathValidator.returnCorrectStatus(request.getPath());
     }
 
     @Override
     public String getCorrectHeaders(Request request) {
-        return getHeaders().get("options");
+        return pathValidator.returnCorrectHeader(request.getPath());
     }
 
     @Override
     public String getCorrectBody(Request request) {
-        return "";
+        return pathValidator.returnCorrectBody();
     }
 }

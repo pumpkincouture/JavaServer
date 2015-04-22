@@ -47,7 +47,7 @@ public class ConnectionManager {
         }
 
         catch (Error err) {
-            System.out.println("this is an error message");
+            System.out.println("Something went wrong!");
         }
     }
 }

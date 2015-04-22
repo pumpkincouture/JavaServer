@@ -42,7 +42,22 @@ public class FileManagerTest {
         fileManager = new FileManager(path);
 
         assertEquals("/Users/test/code/JavaServer", fileManager.getMainDirectory());
+    }
 
+    @Test
+    public void returnsHTMLinksForFilesInDirectory() {
+        path = new File("/Users/test/code/JavaServer/public/");
+        fileManager = new FileManager(path);
+
+        assertEquals("<a href='/file1'>file1</a>\r\n" +
+                     "<a href='/file2'>file2</a>\r\n" +
+                     "<a href='/image.gif'>image.gif</a>\r\n" +
+                     "<a href='/image.jpeg'>image.jpeg</a>\r\n" +
+                     "<a href='/image.png'>image.png</a>\r\n" +
+                     "<a href='/partial_content.txt'>partial_content.txt</a>\r\n" +
+                     "<a href='/patch-content.txt'>patch-content.txt</a>\r\n" +
+                     "<a href='/text-file.txt'>text-file.txt</a>\r\n",
+                     fileManager.getDirectoryLinks());
 
     }
 

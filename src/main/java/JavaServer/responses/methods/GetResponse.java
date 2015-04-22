@@ -4,45 +4,33 @@ import JavaServer.requests.Request;
 import JavaServer.responses.FileManager;
 
 public class GetResponse extends Response {
-    private static final String SIMPLE_PATH = "/";
-    private static final String METHOD_OPTIONS = "/method_options";
-    public static final String REDIRECT = "/redirect";
     private FileManager fileManager;
+    private PathValidator pathValidator;
+    public static final String EMPTY_STRING = "";
 
     public GetResponse(FileManager fileManager) {
         this.fileManager = fileManager;
+        pathValidator = new GetPathValidator();
     }
 
     @Override
     public String getCorrectStatus(Request request) {
-        if (request.getPath().equals(SIMPLE_PATH) || (request.getPath().equals(METHOD_OPTIONS)) || request.getPath().equals("/file1")) {
-            return getCodes().get("200");
-        } else if (request.getPath().equals(REDIRECT)) {
-            return getCodes().get("302");
-        }
-        else {
-            return getCodes().get("404");
-        }
+        return pathValidator.returnCorrectStatus(request.getPath());
     }
 
     @Override
     public String getCorrectHeaders(Request request) {
-        if (request.getPath().equals(REDIRECT)) {
-            return getHeaders().get("location");
-        } else if (request.getPath().equals(METHOD_OPTIONS)) {
-            return getHeaders().get("options");
-        }
-        return "";
+       return pathValidator.returnCorrectHeader(request.getPath());
     }
 
     @Override
     public String getCorrectBody(Request request) {
-        if (fileManager.doesFileExist() && request.getPath().equals("/")) {
+        if (fileManager.doesFileExist() && pathValidator.correctMethodForBodyContents(request.getPath())) {
             return fileManager.getDirectoryLinks();
-        } else if (request.getPath().equals("/file1")) {
+        } else if (pathValidator.doesPathEqualFile(request.getPath())) {
             return fileManager.getFileContents();
         }
-        return "";
+        return EMPTY_STRING;
     }
 
 }
