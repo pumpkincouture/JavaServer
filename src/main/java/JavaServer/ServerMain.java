@@ -12,13 +12,6 @@ public class ServerMain {
         ServerConfiguration serverConfiguration = new ServerConfiguration(args);
         ServerSocket serverSocket = new ServerSocket(serverConfiguration.getPortNumber());
 
-//        System.out.println(serverConfiguration.getDirectory());
-
-//        List<String> results = new ArrayList<>();
-//
-//        File[] files = new File(serverConfiguration.getDirectory()).listFiles();
-
-
         HTTPServer server = new HTTPServer(serverSocket, serverConfiguration.getDirectory());
         server.run();
     }

@@ -20,4 +20,26 @@ public class FileManager {
     public String getMainDirectory() {
         return filePath.getParentFile().getAbsolutePath();
     }
+
+    public String getDirectoryLinks() {
+        String[] fileList = filePath.list();
+
+        String link = "";
+
+        link += "<html>" + "\r\n";
+        link += "<body>" + "\r\n";
+
+        for (String line : fileList) {
+            link += "<a href='/"+ line + "'" + ">" + line + "</a>" + "\r\n";
+        }
+
+        link += "</body>" + "\r\n";
+        link += "</html";
+        return link;
+    }
+
+    public void getFileContents() {
+
+
+    }
 }

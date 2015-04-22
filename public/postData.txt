@@ -1,9 +1,0 @@
-<html>
-<body>
-<a href= "/public/file1.txt">file1</a>
-<a href= "/public/file2.txt">file2</a>
-<a href= "/public/image.gif">image.gif</a>
-<a href= "/public/image.png">image.png</a>
-<a href= "/public/text-file.txt">text-file.txt</a>
-</body>
-</html>

@@ -31,8 +31,6 @@ public class GetResponse extends Response {
             return getHeaders().get("location");
         } else if (request.getPath().equals(METHOD_OPTIONS)) {
             return getHeaders().get("options");
-        } else if (request.getPath().equals(SIMPLE_PATH)) {
-            return getHeaders().get("content");
         }
         return "";
     }
@@ -40,21 +38,11 @@ public class GetResponse extends Response {
     @Override
     public String getCorrectBody(Request request) {
         if (fileManager.doesFileExist() && request.getPath().equals("/")) {
-            return getListing();
+            return fileManager.getDirectoryLinks();
+        } else if (request.getPath().equals("/file1")) {
+            fileManager.getFileContents();
         }
         return "";
     }
 
-    private String getListing() {
-        String links = "";
-
-        links += "<a href='/"+ "file1'" + ">" + "file1" + "</a>" + "\r\n";
-        links += "<a href='/"+ "file2'" + ">" + "file2" + "</a>" + "\r\n";
-        links += "<a href='/"+ "image.gif'" + ">" + "image.gif" + "</a>" + "\r\n";
-        links += "<a href='/"+ "image.jpeg'" + ">" + "image.jpeg" + "</a>" + "\r\n";
-        links += "<a href='/"+ "image.png'" + ">" + "image.png" + "</a>" + "\r\n";
-        links += "<a href='/"+ "text-file.txt'" + ">" + "text-file.txt" + "</a>" + "\r\n";
-
-        return links;
-    }
 }
