@@ -41,18 +41,6 @@ public class GetResponseTest {
     }
 
     @Test
-    public void returns302IfPathIsRedirect() {
-        requestParser = new RequestParser("GET /redirect HTTP/1.1");
-        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileManager = new FileManager(path);
-
-        requestHandler = new GetResponse(fileManager);
-
-        assertEquals("HTTP/1.1 302 Found", requestHandler.getCorrectStatus(request));
-    }
-
-    @Test
     public void returnLocationHeaderIfRequestIsForRedirect() {
         requestParser = new RequestParser("GET /redirect HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());

@@ -6,8 +6,9 @@ public class GetPathValidator extends PathValidator {
     public String returnCorrectStatus(String requestPath) {
         if (isValidPath(requestPath, "directory") || isValidPath(requestPath, "options") || isValidPath(requestPath, "file_1")) {
             return getCodes().get("200");
-        } else if (isValidPath(requestPath, "redirect")) {
-            return getCodes().get("302");
+//        } else if (isValidPath(requestPath, "redirect")) {
+//            return getCodes().get("302");
+//        }
         }
         else {
             return getCodes().get("404");
