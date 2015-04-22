@@ -23,8 +23,8 @@ public class Router {
     public void createHandlers() {
         requestParser = new RequestParser(requestString);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        responseFactory = new ResponseFactory(request);
         fileManager = new FileManager(new File(directory + request.getPath()));
+        responseFactory = new ResponseFactory(request, fileManager);
         responseBuilder = new ResponseBuilder(responseFactory.createResponse());
     }
 

@@ -33,6 +33,7 @@ public class ConnectionManager {
             router.createHandlers();
 
             System.out.println(router.getResponse());
+            System.out.println(router.getBody());
 
             out.flush();
             out.write(router.getResponse());

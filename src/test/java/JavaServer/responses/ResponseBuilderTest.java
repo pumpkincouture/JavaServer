@@ -5,6 +5,8 @@ import JavaServer.requests.RequestParser;
 import JavaServer.responses.methods.ResponseFactory;
 import org.junit.Test;
 
+import java.io.File;
+
 import static org.junit.Assert.assertEquals;
 
 public class ResponseBuilderTest {
@@ -12,6 +14,8 @@ public class ResponseBuilderTest {
     private RequestParser requestParser;
     private ResponseBuilder responseCodeBuilder;
     private ResponseFactory managerFactory;
+    private File path;
+    private FileManager fileManager;
 
     @Test
     public void parseAndStoreMoreThanOnePostParamAndReturnResponseWithNoHeaders() {
@@ -23,7 +27,9 @@ public class ResponseBuilderTest {
                                           "last_name=olak\n"+
                                           "age=26");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        managerFactory = new ResponseFactory(request);
+        path = new File("/Users/test/code/JavaServer/public/image.gif");
+        fileManager = new FileManager(path);
+        managerFactory = new ResponseFactory(request, fileManager);
 
         responseCodeBuilder = new ResponseBuilder(managerFactory.createResponse());
 

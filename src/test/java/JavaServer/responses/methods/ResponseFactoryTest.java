@@ -1,8 +1,10 @@
 package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
+import JavaServer.responses.FileManager;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertTrue;
@@ -10,6 +12,8 @@ import static org.junit.Assert.assertTrue;
 public class ResponseFactoryTest {
     private ResponseFactory methodFactory;
     private Request request;
+    private FileManager fileManager;
+    private File path;
 
 
     private Request createRequest(String method, String path) {
@@ -20,28 +24,36 @@ public class ResponseFactoryTest {
 
     @Test
     public void returnsGetHandlerIfRequestMethodIsGet() {
-        methodFactory = new ResponseFactory(createRequest("GET", "/"));
+        path = new File("/Users/test/code/JavaServer/public/image.gif");
+        fileManager = new FileManager(path);
+        methodFactory = new ResponseFactory(createRequest("GET", "/"), fileManager);
 
         assertTrue(methodFactory.createResponse() instanceof GetResponse);
     }
 
     @Test
     public void returnsPostHandlerIfRequestMethodIsPost() {
-        methodFactory = new ResponseFactory(createRequest("POST", "/"));
+        path = new File("/Users/test/code/JavaServer/public/image.gif");
+        fileManager = new FileManager(path);
+        methodFactory = new ResponseFactory(createRequest("POST", "/"), fileManager);
 
         assertTrue(methodFactory.createResponse() instanceof PostResponse);
     }
 
     @Test
     public void returnsPutHandlerIfRequestMethodIsPut() {
-        methodFactory = new ResponseFactory(createRequest("PUT", "/"));
+        path = new File("/Users/test/code/JavaServer/public/image.gif");
+        fileManager = new FileManager(path);
+        methodFactory = new ResponseFactory(createRequest("PUT", "/"), fileManager);
 
         assertTrue(methodFactory.createResponse() instanceof PutResponse);
     }
 
     @Test
     public void returnsOptionsHandlerIfRequestMethodIsOptions() {
-        methodFactory = new ResponseFactory(createRequest("OPTIONS", "/"));
+        path = new File("/Users/test/code/JavaServer/public/image.gif");
+        fileManager = new FileManager(path);
+        methodFactory = new ResponseFactory(createRequest("OPTIONS", "/"), fileManager);
 
         assertTrue(methodFactory.createResponse() instanceof OptionsResponse);
     }
