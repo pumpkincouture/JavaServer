@@ -2,6 +2,8 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.responses.FileManager;
+import JavaServer.responses.methods.validators.GetPathValidator;
+import JavaServer.responses.methods.validators.PathValidator;
 
 public class GetResponse extends Response {
     private FileManager fileManager;

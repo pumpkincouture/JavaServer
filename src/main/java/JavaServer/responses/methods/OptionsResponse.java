@@ -1,6 +1,8 @@
 package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
+import JavaServer.responses.methods.validators.OptionsPathValidator;
+import JavaServer.responses.methods.validators.PathValidator;
 
 public class OptionsResponse extends Response {
     private PathValidator pathValidator;

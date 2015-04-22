@@ -1,8 +1,8 @@
-package JavaServer.responses.methods;
+package JavaServer.responses.methods.validators;
 
 import java.util.Hashtable;
 
-abstract class PathValidator {
+public abstract class PathValidator {
 
     public abstract String returnCorrectStatus(String requestPath);
 

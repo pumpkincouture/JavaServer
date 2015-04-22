@@ -1,6 +1,8 @@
-package JavaServer.responses.methods;
+package JavaServer.responses.methods.validators;
 
-public class OptionsPathValidator extends PathValidator{
+import JavaServer.responses.methods.validators.PathValidator;
+
+public class OptionsPathValidator extends PathValidator {
     private static final String OPTIONS_PATH = "/method_options";
     public static final String EMPTY_STRING = "";
 

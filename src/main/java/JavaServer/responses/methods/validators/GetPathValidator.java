@@ -1,4 +1,4 @@
-package JavaServer.responses.methods;
+package JavaServer.responses.methods.validators;
 
 public class GetPathValidator extends PathValidator {
     private static final String DIRECTORY = "/";
