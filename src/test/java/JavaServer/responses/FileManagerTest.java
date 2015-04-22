@@ -29,22 +29,6 @@ public class FileManagerTest {
     }
 
     @Test
-    public void returnsDirectoryListingForFile() {
-        path = new File("/Users/test/code/JavaServer/public/best_doge.gif");
-        fileManager = new FileManager(path);
-
-        assertEquals("/Users/test/code/JavaServer/public/best_doge.gif", fileManager.getDirectoryListing());
-    }
-
-    @Test
-    public void getsDirectoryInfoForPath() {
-        path = new File("/Users/test/code/JavaServer/public/");
-        fileManager = new FileManager(path);
-
-        assertEquals("/Users/test/code/JavaServer", fileManager.getMainDirectory());
-    }
-
-    @Test
     public void returnsHTMLinksForFilesInDirectory() {
         path = new File("/Users/test/code/JavaServer/public/");
         fileManager = new FileManager(path);
@@ -62,7 +46,7 @@ public class FileManagerTest {
 
     @Test
     public void returnsStringArrayWithAllFilesInDirectory() {
-        path = new File("/Users/test/code/JavaServer/public/");
+        path = new File("/Users/test/code/JavaServer/public/text-file.txt");
         fileManager = new FileManager(path);
 
         int lastIndex = fileManager.getDirectoryFiles().size() - 1;
@@ -74,14 +58,14 @@ public class FileManagerTest {
 
     @Test
     public void convertsFilesIntoPaths() {
-        path = new File("/Users/test/code/JavaServer/public/");
+        path = new File("/Users/test/code/JavaServer/public/image.gif");
         fileManager = new FileManager(path);
         fileManager.convertFilesToPaths();
 
-        int lastIndex = fileManager.getAllPathsToFiles().size() - 1;
+        int lastIndex = fileManager.convertFilesToPaths().size() - 1;
 
-        assertEquals("/file1", fileManager.getAllPathsToFiles().get(0));
-        assertEquals("/text-file.txt", fileManager.getAllPathsToFiles().get(lastIndex));
-        assertTrue(fileManager.getAllPathsToFiles().contains("/file1"));
+        assertEquals("/file1", fileManager.convertFilesToPaths().get(0));
+        assertEquals("/text-file.txt", fileManager.convertFilesToPaths().get(lastIndex));
+        assertTrue(fileManager.convertFilesToPaths().contains("/file1"));
     }
 }

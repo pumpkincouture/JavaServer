@@ -14,9 +14,9 @@ public class PostPathValidator extends PathValidator {
 
     @Override
     public String returnCorrectHeader(String requestPath) {
-        if (isValidPath(requestPath, "options")) {
-            return getHeaders().get("options");
-        }
+//        if (isValidPath(requestPath, "options")) {
+//            return getHeaders().get("options");
+//        }
         return emptyString();
     }
 

@@ -53,7 +53,7 @@ public class ResponseFactoryTest {
     public void returnsOptionsHandlerIfRequestMethodIsOptions() {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         fileManager = new FileManager(path);
-        methodFactory = new ResponseFactory(createRequest("OPTIONS", "/"), fileManager);
+        methodFactory = new ResponseFactory(createRequest("OPTIONS", "/method_options"), fileManager);
 
         assertTrue(methodFactory.createResponse() instanceof OptionsResponse);
     }

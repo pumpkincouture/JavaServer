@@ -7,7 +7,6 @@ import java.util.List;
 
 public class FileManager {
     private File filePath;
-    List<String> paths;
 
     public FileManager(File filePath) {
         this.filePath = filePath;
@@ -15,14 +14,6 @@ public class FileManager {
 
     public boolean doesFileExist() {
         return filePath.exists();
-    }
-
-    public String getDirectoryListing() {
-        return filePath.getAbsolutePath();
-    }
-
-    public String getMainDirectory() {
-        return filePath.getParentFile().getAbsolutePath();
     }
 
     public String getDirectoryLinks() {
@@ -37,22 +28,20 @@ public class FileManager {
         return link;
     }
 
-    public void convertFilesToPaths() {
-        paths = new ArrayList<>();
+    public List<String> convertFilesToPaths() {
+        List<String> paths = new ArrayList<>();
 
         for (String file : getDirectoryFiles()) {
             paths.add("/" + file);
         }
-    }
 
-    public List<String> getAllPathsToFiles() {
         return paths;
     }
 
     public List<String> getDirectoryFiles() {
         List<String> directoryFiles;
 
-        String[] filesList = filePath.list();
+        String[] filesList = getMainDirectory().list();
 
         directoryFiles = Arrays.asList(filesList);
 
@@ -76,5 +65,9 @@ public class FileManager {
         }
 
         return fileContent;
+    }
+
+    private File getMainDirectory() {
+        return filePath.getParentFile();
     }
 }
