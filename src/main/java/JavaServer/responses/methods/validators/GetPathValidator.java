@@ -7,10 +7,10 @@ public class GetPathValidator extends PathValidator {
         if (isValidPath(requestPath, "directory") || isValidPath(requestPath, "options") || isValidPath(requestPath, "file_1")) {
             return getCodes().get("200");
         }
-        else {
-            return getCodes().get("404");
+//        else {
+//            return getCodes().get("404");
+        return "";
         }
-    }
 
     @Override
     public String returnCorrectHeader(String requestPath) {
