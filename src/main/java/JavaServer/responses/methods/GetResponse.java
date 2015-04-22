@@ -15,7 +15,7 @@ public class GetResponse extends Response {
 
     @Override
     public String getCorrectStatus(Request request) {
-        if (request.getPath().equals(SIMPLE_PATH) || (request.getPath().equals(METHOD_OPTIONS))) {
+        if (request.getPath().equals(SIMPLE_PATH) || (request.getPath().equals(METHOD_OPTIONS)) || request.getPath().equals("/file1")) {
             return getCodes().get("200");
         } else if (request.getPath().equals(REDIRECT)) {
             return getCodes().get("302");
@@ -40,7 +40,7 @@ public class GetResponse extends Response {
         if (fileManager.doesFileExist() && request.getPath().equals("/")) {
             return fileManager.getDirectoryLinks();
         } else if (request.getPath().equals("/file1")) {
-            fileManager.getFileContents();
+            return fileManager.getFileContents();
         }
         return "";
     }

@@ -2,6 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 
+import java.io.IOException;
 import java.util.Hashtable;
 
 public abstract class Response {
@@ -10,7 +11,7 @@ public abstract class Response {
 
     public abstract String getCorrectHeaders(Request request);
 
-    public abstract String getCorrectBody(Request request);
+    public abstract String getCorrectBody(Request request) throws IOException;
 
     public String getCorrectResponse(String path, String validPath) {
         if (isPathValid(path, validPath)) {

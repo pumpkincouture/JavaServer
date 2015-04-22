@@ -3,6 +3,8 @@ package JavaServer.responses;
 import JavaServer.requests.Request;
 import JavaServer.responses.methods.Response;
 
+import java.io.IOException;
+
 public class ResponseBuilder {
     private Response requestManager;
     private static final String CARRIAGE_RETURN =  "\r\n";
@@ -20,7 +22,7 @@ public class ResponseBuilder {
         return responseString;
     }
 
-    public String getBody(Request request) {
+    public String getBody(Request request) throws IOException {
         return requestManager.getCorrectBody(request);
     }
 }

@@ -29,7 +29,7 @@ public class ConnectionManager {
                 requestString += in.readLine();
             }
 
-            Router router = new Router(requestString, directory);
+            Router router = new Router(requestString, directory, in);
             router.createHandlers();
 
             System.out.println(router.getResponse());

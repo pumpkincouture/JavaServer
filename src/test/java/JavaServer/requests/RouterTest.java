@@ -2,15 +2,29 @@ package JavaServer.requests;
 
 import org.junit.Test;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+
 import static org.junit.Assert.assertEquals;
 
 public class RouterTest {
     private Router router;
     private String directory;
 
-    private void createRouter(String request) {
+    private BufferedReader createFakeInput(String input) throws UnsupportedEncodingException {
+        InputStream mockInputStream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(mockInputStream));
+        return reader;
+    }
+
+    private void createRouter(String request)  {
         directory = "/Users/test/code/JavaServer/public";
-        router = new Router(request, directory);
+        try {
+            router = new Router(request, directory, createFakeInput(request));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         router.createHandlers();
     }
 
@@ -18,7 +32,7 @@ public class RouterTest {
     public void returnsAResponseCodeOf200IfMethodIsGetAndPathIsValidWithNoHeaders() {
         createRouter("GET / HTTP/1.1");
 
-        assertEquals("HTTP/1.1 200 OK\n" +  "Content-Type: text/html\r\n", router.getResponse());
+        assertEquals("HTTP/1.1 200 OK\n" + "\r\n", router.getResponse());
     }
 
     @Test

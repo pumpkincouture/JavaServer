@@ -26,20 +26,29 @@ public class FileManager {
 
         String link = "";
 
-        link += "<html>" + "\r\n";
-        link += "<body>" + "\r\n";
-
         for (String line : fileList) {
             link += "<a href='/"+ line + "'" + ">" + line + "</a>" + "\r\n";
         }
 
-        link += "</body>" + "\r\n";
-        link += "</html";
         return link;
     }
 
-    public void getFileContents() {
+    public String getFileContents()  {
+        String fileContent = "";
+        try {
 
+            BufferedReader br = new BufferedReader(new FileReader(filePath.toString()));
 
+            String endOfLines = null;
+
+            while ((endOfLines = br.readLine()) != null) {
+                fileContent += endOfLines + "\r\n";
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return fileContent;
     }
 }

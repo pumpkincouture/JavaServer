@@ -65,7 +65,7 @@ public class GetResponseTest {
     }
 
     @Test
-    public void returnsContentTypeAsHeaderIfPathIsNotForMethodOptions() {
+    public void returnsBlankHeaderIfPathIsNotForMethodOptions() {
         requestParser = new RequestParser("GET / HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/image.gif");
@@ -73,6 +73,6 @@ public class GetResponseTest {
 
         requestHandler = new GetResponse(fileManager);
 
-        assertEquals("Content-Type: text/html", requestHandler.getCorrectHeaders(request));
+        assertEquals("", requestHandler.getCorrectHeaders(request));
     }
 }
