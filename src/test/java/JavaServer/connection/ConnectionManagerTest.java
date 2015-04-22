@@ -1,6 +1,5 @@
 package JavaServer.connection;
 
-import JavaServer.connection.ConnectionManager;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -15,6 +14,7 @@ public class ConnectionManagerTest {
 
     @Test
     public void sendValidRequestAndExpectAValidResponse() {
+
 
 
 

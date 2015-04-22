@@ -1,14 +1,10 @@
 package JavaServer.responses.methods.validators;
 
-import JavaServer.responses.methods.validators.PathValidator;
-
 public class OptionsPathValidator extends PathValidator {
-    private static final String OPTIONS_PATH = "/method_options";
-    public static final String EMPTY_STRING = "";
 
     @Override
     public String returnCorrectStatus(String requestPath) {
-        if (requestPath.equals(OPTIONS_PATH)) {
+        if (isValidPath(requestPath, "options")) {
             return getCodes().get("200");
         }
         return getCodes().get("404");
@@ -21,7 +17,7 @@ public class OptionsPathValidator extends PathValidator {
 
     @Override
     public String returnCorrectBody() {
-        return EMPTY_STRING;
+        return emptyString();
     }
 
     @Override

@@ -1,17 +1,12 @@
 package JavaServer.responses.methods.validators;
 
 public class GetPathValidator extends PathValidator {
-    private static final String DIRECTORY = "/";
-    private static final String METHOD_OPTIONS = "/method_options";
-    public static final String REDIRECT = "/redirect";
-    public static final String FILE_1 = "/file1";
-    public static final String EMPTY_STRING = "";
 
     @Override
     public String returnCorrectStatus(String requestPath) {
-        if (requestPath.equals(DIRECTORY) || (requestPath.equals(METHOD_OPTIONS)) || requestPath.equals(FILE_1)) {
+        if (isValidPath(requestPath, "directory") || isValidPath(requestPath, "options") || isValidPath(requestPath, "file_1")) {
             return getCodes().get("200");
-        } else if (requestPath.equals(REDIRECT)) {
+        } else if (isValidPath(requestPath, "redirect")) {
             return getCodes().get("302");
         }
         else {
@@ -21,12 +16,12 @@ public class GetPathValidator extends PathValidator {
 
     @Override
     public String returnCorrectHeader(String requestPath) {
-        if (requestPath.equals(REDIRECT)) {
+        if (isValidPath(requestPath, "redirect")) {
             return getHeaders().get("location");
-        } else if (requestPath.equals(METHOD_OPTIONS)) {
+        } else if (isValidPath(requestPath, "options")) {
             return getHeaders().get("options");
         }
-        return EMPTY_STRING;
+        return emptyString();
     }
 
     @Override
@@ -36,11 +31,11 @@ public class GetPathValidator extends PathValidator {
 
     @Override
     public boolean correctMethodForBodyContents(String requestPath) {
-        return requestPath.equals(DIRECTORY);
+        return requestPath.equals(getAvailablePaths().get("directory"));
     }
 
     @Override
     public boolean doesPathEqualFile(String requestPath) {
-        return requestPath.equals(FILE_1);
+        return requestPath.equals(getAvailablePaths().get("file_1"));
     }
 }

@@ -14,6 +14,26 @@ public abstract class PathValidator {
 
     public abstract boolean doesPathEqualFile(String requestPath);
 
+    public Hashtable<String, String> getAvailablePaths() {
+        Hashtable<String, String> validPaths = new Hashtable<>();
+        validPaths.put("directory", "/");
+        validPaths.put("options", "/method_options");
+        validPaths.put("redirect", "/redirect");
+        validPaths.put("file_1", "/file1");
+        validPaths.put("form", "/form");
+        validPaths.put("text_file", "/text-file.txt");
+
+        return validPaths;
+    }
+
+    public String emptyString() {
+        return "";
+    }
+
+    public boolean isValidPath(String requestPath, String key) {
+        return requestPath.equals(getAvailablePaths().get(key));
+    }
+
     public Hashtable<String, String> getCodes() {
         Hashtable<String, String> codes = new Hashtable<>();
         codes.put("200", "HTTP/1.1 200 OK");
