@@ -29,18 +29,6 @@ public class GetResponseTest {
     }
 
     @Test
-    public void returnLocationHeaderIfRequestIsForRedirect() {
-        requestParser = new RequestParser("GET /redirect HTTP/1.1");
-        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileManager = new FileManager(path);
-
-        requestHandler = new GetResponse(fileManager);
-
-        assertEquals("Location: http://localhost:5000/", requestHandler.getCorrectHeaders(request));
-    }
-
-    @Test
     public void returnsBlankHeaderIfPathIsNotForMethodOptions() {
         requestParser = new RequestParser("GET / HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());

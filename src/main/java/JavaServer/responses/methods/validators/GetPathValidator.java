@@ -7,8 +7,6 @@ public class GetPathValidator extends PathValidator {
         if (isValidPath(requestPath, "directory") || isValidPath(requestPath, "options") || isValidPath(requestPath, "file_1")) {
             return getCodes().get("200");
         }
-//        else {
-//            return getCodes().get("404");
         return "";
         }
 
@@ -17,9 +15,6 @@ public class GetPathValidator extends PathValidator {
         if (isValidPath(requestPath, "redirect")) {
             return getHeaders().get("location");
         }
-//        } else if (isValidPath(requestPath, "options")) {
-//            return getHeaders().get("options");
-//        }
         return emptyString();
     }
 

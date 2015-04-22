@@ -27,7 +27,7 @@ public class ResponseFactory {
             return fourOhFourResponse;
         }
         else if (isRedirectPath()) {
-            Response notFoundResponse = new NotFoundResponse();
+            Response notFoundResponse = new RedirectResponse();
             return notFoundResponse;
         }
         else if (isOptionsPath()) {

@@ -4,7 +4,7 @@ import JavaServer.requests.Request;
 
 import java.io.IOException;
 
-public class NotFoundResponse extends Response {
+public class RedirectResponse extends Response {
 
     @Override
     public String getCorrectStatus(Request request) {

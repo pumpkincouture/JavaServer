@@ -17,12 +17,12 @@ public class GetResponse extends Response {
 
     @Override
     public String getCorrectStatus(Request request) {
-        return pathValidator.returnCorrectStatus(request.getPath());
+        return getCodes().get("200");
     }
 
     @Override
     public String getCorrectHeaders(Request request) {
-       return pathValidator.returnCorrectHeader(request.getPath());
+       return "";
     }
 
     @Override

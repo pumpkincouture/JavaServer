@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class NotFoundResponseTest {
+public class RedirectResponseTest {
     private Request request;
     private RequestParser requestParser;
     private Response requestHandler;
@@ -16,7 +16,7 @@ public class NotFoundResponseTest {
         requestParser = new RequestParser("GET /redirect HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
-        requestHandler = new NotFoundResponse();
+        requestHandler = new RedirectResponse();
 
         assertEquals("HTTP/1.1 302 Found", requestHandler.getCorrectStatus(request));
     }
