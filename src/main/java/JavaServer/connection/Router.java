@@ -1,5 +1,7 @@
-package JavaServer.requests;
+package JavaServer.connection;
 
+import JavaServer.requests.Request;
+import JavaServer.requests.RequestParser;
 import JavaServer.responses.FileManager;
 import JavaServer.responses.ResponseBuilder;
 import JavaServer.responses.methods.ResponseFactory;

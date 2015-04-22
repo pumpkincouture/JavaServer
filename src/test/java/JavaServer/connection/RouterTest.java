@@ -1,5 +1,6 @@
-package JavaServer.requests;
+package JavaServer.connection;
 
+import JavaServer.connection.Router;
 import org.junit.Test;
 
 import java.io.*;

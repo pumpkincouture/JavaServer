@@ -1,7 +1,5 @@
 package JavaServer.connection;
 
-import JavaServer.requests.Router;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
