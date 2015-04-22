@@ -2,22 +2,20 @@ package JavaServer.connection;
 
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 import static org.junit.Assert.assertEquals;
 
 public class ConnectionManagerTest {
-    private ConnectionManager serverRouter;
+    private ConnectionManager connectionManager;
     private PrintWriter out;
     private BufferedReader in;
 
-    @Test
-    public void sendValidRequestAndExpectAValidResponse() {
+    private BufferedReader createFakeInput(String input) throws UnsupportedEncodingException {
+        InputStream mockInputStream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
 
-
-
-
-//        assertEquals();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(mockInputStream));
+        return reader;
     }
 }
