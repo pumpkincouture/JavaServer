@@ -41,25 +41,6 @@ public class ResponseFactory {
     }
 
     private boolean isRedirectPath() {
-        return request.getMethod().equals((GET_METHOD)) && request.getPath().equals("/redirect");
+        return request.getPath().equals("/redirect");
     }
-//    public Response createResponse() {
-//        switch (request.getMethod()) {
-//            case GET_METHOD:
-//                Response gethandler = new GetResponse(fileManager);
-//                return gethandler;
-//            case POST_METHOD:
-//                Response postHandler = new PostResponse();
-//                return postHandler;
-//            case PUT_METHOD:
-//                Response putHandler = new PutResponse();
-//                return putHandler;
-//            case OPTIONS_METHOD:
-//                Response optionsHandler = new OptionsResponse();
-//                return optionsHandler;
-//        }
-//        Response gethandler = new GetResponse(fileManager);
-//        return gethandler;
-//    }
-
 }
