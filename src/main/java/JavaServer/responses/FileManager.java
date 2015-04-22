@@ -1,11 +1,13 @@
 package JavaServer.responses;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class FileManager {
     private File filePath;
+    List<String> paths;
 
     public FileManager(File filePath) {
         this.filePath = filePath;
@@ -33,6 +35,18 @@ public class FileManager {
         }
 
         return link;
+    }
+
+    public void convertFilesToPaths() {
+        paths = new ArrayList<>();
+
+        for (String file : getDirectoryFiles()) {
+            paths.add("/" + file);
+        }
+    }
+
+    public List<String> getAllPathsToFiles() {
+        return paths;
     }
 
     public List<String> getDirectoryFiles() {

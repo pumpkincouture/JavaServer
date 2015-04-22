@@ -69,5 +69,19 @@ public class FileManagerTest {
 
         assertEquals("file1", fileManager.getDirectoryFiles().get(0));
         assertEquals("text-file.txt", fileManager.getDirectoryFiles().get(lastIndex));
+        assertTrue(fileManager.getDirectoryFiles().contains("file1"));
+    }
+
+    @Test
+    public void convertsFilesIntoPaths() {
+        path = new File("/Users/test/code/JavaServer/public/");
+        fileManager = new FileManager(path);
+        fileManager.convertFilesToPaths();
+
+        int lastIndex = fileManager.getAllPathsToFiles().size() - 1;
+
+        assertEquals("/file1", fileManager.getAllPathsToFiles().get(0));
+        assertEquals("/text-file.txt", fileManager.getAllPathsToFiles().get(lastIndex));
+        assertTrue(fileManager.getAllPathsToFiles().contains("/file1"));
     }
 }
