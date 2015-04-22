@@ -3,6 +3,7 @@ package JavaServer.responses;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -58,8 +59,16 @@ public class FileManagerTest {
                      "<a href='/patch-content.txt'>patch-content.txt</a>\r\n" +
                      "<a href='/text-file.txt'>text-file.txt</a>\r\n",
                      fileManager.getDirectoryLinks());
-
     }
 
+    @Test
+    public void returnsStringArrayWithAllFilesInDirectory() {
+        path = new File("/Users/test/code/JavaServer/public/");
+        fileManager = new FileManager(path);
 
+        int lastIndex = fileManager.getDirectoryFiles().size() - 1;
+
+        assertEquals("file1", fileManager.getDirectoryFiles().get(0));
+        assertEquals("text-file.txt", fileManager.getDirectoryFiles().get(lastIndex));
+    }
 }

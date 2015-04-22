@@ -1,6 +1,8 @@
 package JavaServer.responses;
 
 import java.io.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class FileManager {
     private File filePath;
@@ -31,6 +33,16 @@ public class FileManager {
         }
 
         return link;
+    }
+
+    public List<String> getDirectoryFiles() {
+        List<String> directoryFiles;
+
+        String[] filesList = filePath.list();
+
+        directoryFiles = Arrays.asList(filesList);
+
+        return directoryFiles;
     }
 
     public String getFileContents()  {

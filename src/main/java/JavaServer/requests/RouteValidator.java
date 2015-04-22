@@ -41,6 +41,7 @@ public class RouteValidator {
         validPaths.add("/form");
         validPaths.add("/text-file.txt");
         validPaths.add("/file1");
+        validPaths.add("/file2");
 
         return validPaths;
     }

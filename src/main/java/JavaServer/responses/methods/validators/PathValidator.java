@@ -20,6 +20,7 @@ public abstract class PathValidator {
         validPaths.put("options", "/method_options");
         validPaths.put("redirect", "/redirect");
         validPaths.put("file_1", "/file1");
+        validPaths.put("file_2", "/file2");
         validPaths.put("form", "/form");
         validPaths.put("text_file", "/text-file.txt");
 

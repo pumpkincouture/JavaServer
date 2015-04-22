@@ -29,7 +29,7 @@ public class GetResponse extends Response {
     public String getCorrectBody(Request request) {
         if (fileManager.doesFileExist() && pathValidator.correctMethodForBodyContents(request.getPath())) {
             return fileManager.getDirectoryLinks();
-        } else if (pathValidator.doesPathEqualFile(request.getPath())) {
+        } else if (pathValidator.doesPathEqualFile(request.getPath()) || pathValidator.isValidPath(request.getPath(), "file_2")) {
             return fileManager.getFileContents();
         }
         return EMPTY_STRING;
