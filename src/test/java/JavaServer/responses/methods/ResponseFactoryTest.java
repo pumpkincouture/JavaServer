@@ -24,7 +24,7 @@ public class ResponseFactoryTest {
 
     @Test
     public void returnsGetHandlerIfRequestMethodIsGet() {
-        path = new File("/Users/test/code/JavaServer/public/image.gif");
+        path = new File("/Users/test/code/JavaServer/public/image.txt");
         fileManager = new FileManager(path);
         methodFactory = new ResponseFactory(createRequest("GET", "/"), fileManager);
 

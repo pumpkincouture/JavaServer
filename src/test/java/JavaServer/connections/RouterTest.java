@@ -78,6 +78,13 @@ public class RouterTest {
     }
 
     @Test
+    public void returns404IfFileDoesNotExist() {
+        createRouter("GET /octopus.jpg HTTP/1.1");
+
+        assertEquals("HTTP/1.1 404 Not Found\n" +  "\r\n", router.getResponse());
+    }
+
+    @Test
     public void returns405IfMethodIsPutButPathIsInvalid() {
         createRouter("PUT /file1 HTTP/1.1");
 

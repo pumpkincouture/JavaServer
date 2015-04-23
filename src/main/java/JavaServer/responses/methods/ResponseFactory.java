@@ -35,6 +35,20 @@ public class ResponseFactory {
             return optionsHandler;
         }
         else if (request.getMethod().equals(GET_METHOD)) {
+            if (isDirectory()) {
+                if (fileManager.isFileImage()) {
+                    //this should handle image sending - make a subclass
+                    Response fourOhFourResponse = new FourOhFourResponse();
+                    return fourOhFourResponse;
+                } else if (!fileManager.isFileImage()) {
+                    Response gethandler = new GetResponse(fileManager);
+                    return gethandler;
+                }
+            }
+            if (fileManager.doesFileExist()) {
+                Response contentHandler = new ContentResponse(fileManager);
+                return contentHandler;
+            }
             Response gethandler = new GetResponse(fileManager);
             return gethandler;
         }
@@ -45,8 +59,8 @@ public class ResponseFactory {
             Response putHandler = new PutResponse();
             return putHandler;
         }
-        Response gethandler = new GetResponse(fileManager);
-        return gethandler;
+        Response fourOhFourResponse = new FourOhFourResponse();
+        return fourOhFourResponse;
     }
 
     private boolean isRedirectPath() {
@@ -55,6 +69,10 @@ public class ResponseFactory {
 
     private boolean isOptionsPath() {
         return request.getPath().equals("/method_options");
+    }
+
+    private boolean isDirectory() {
+        return request.getPath().equals("/");
     }
 
     private boolean isInvalidPath() {

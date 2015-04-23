@@ -68,4 +68,37 @@ public class FileManagerTest {
         assertEquals("/text-file.txt", fileManager.convertFilesToPaths().get(lastIndex));
         assertTrue(fileManager.convertFilesToPaths().contains("/file1"));
     }
+
+    @Test
+    public void returnsTrueIfFileIsImage() {
+        path = new File("/Users/test/code/JavaServer/public/image.gif");
+        fileManager = new FileManager(path);
+
+        assertTrue(fileManager.isFileImage());
+    }
+
+    @Test
+    public void returnsFalseIfFileIsNotImage() {
+        path = new File("/Users/test/code/JavaServer/public/image.txt");
+        fileManager = new FileManager(path);
+
+        assertFalse(fileManager.isFileImage());
+    }
+
+    @Test
+    public void returnsFalseIfThereIsNoSpecifiedFilePath() {
+        path = new File("/Users/test/code/JavaServer/public/");
+        fileManager = new FileManager(path);
+
+        assertFalse(fileManager.isFileImage());
+    }
+
+    @Test
+    public void returnsFalseIfPathIsNotAFileNorIsItAnImage() {
+        path = new File("/Users/test/code/JavaServer/public/method_options");
+        fileManager = new FileManager(path);
+
+        assertFalse(fileManager.isFileImage());
+        assertFalse(fileManager.doesFileExist());
+    }
 }

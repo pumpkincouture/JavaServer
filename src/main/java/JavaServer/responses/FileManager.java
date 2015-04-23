@@ -1,5 +1,6 @@
 package JavaServer.responses;
 
+import javax.activation.MimetypesFileTypeMap;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +15,10 @@ public class FileManager {
 
     public boolean doesFileExist() {
         return filePath.exists();
+    }
+
+    public File getFilePath() {
+        return filePath;
     }
 
     public String getDirectoryLinks() {
@@ -65,6 +70,15 @@ public class FileManager {
         }
 
         return fileContent;
+    }
+
+    public boolean isFileImage() {
+        String mimetype = new MimetypesFileTypeMap().getContentType(filePath);
+        String type = mimetype.split("/")[0];
+        if (type.equals("image")) {
+            return true;
+        }
+        return false;
     }
 
     private File getMainDirectory() {
