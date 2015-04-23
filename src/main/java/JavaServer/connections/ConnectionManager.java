@@ -21,13 +21,13 @@ public class ConnectionManager {
     public void executeRequest() throws IOException {
 
         try {
-            String requestString = "";
+            String requestLines = "";
 
-            while (requestString.length() == 0) {
-                requestString += in.readLine();
-            }
+            do {
+                requestLines += (char) in.read();
+            } while (in.ready());
 
-            Router router = new Router(requestString, directory, in);
+            Router router = new Router(requestLines, directory, in);
             router.createHandlers();
 
             out.flush();

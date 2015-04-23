@@ -3,6 +3,8 @@ package JavaServer.responses.methods;
 import JavaServer.requests.Request;
 import JavaServer.responses.FileManager;
 
+import java.util.Map;
+
 public class GetResponse extends Response {
     private FileManager fileManager;
     public static final String EMPTY_STRING = "";
@@ -25,6 +27,9 @@ public class GetResponse extends Response {
     public String getCorrectBody(Request request) {
         if (fileManager.doesFileExist()) {
             return fileManager.getDirectoryLinks();
+        } else if (request.getPath().equals("/form")) {
+            System.out.println(getRequestData());
+            return getRequestData();
         }
         return EMPTY_STRING;
     }

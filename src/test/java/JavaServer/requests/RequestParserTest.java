@@ -58,7 +58,7 @@ public class RequestParserTest {
 
     @Test
     public void parseAndStoreMoreThanOnePostParam() {
-        requestParser = new RequestParser("GET /form HTTP/1.1\n"+
+        requestParser = new RequestParser("POST /form HTTP/1.1\n"+
                                           "\n"+
                                           "first_name=sylwia\n"+
                                           "last_name=olak\n"+
@@ -72,18 +72,14 @@ public class RequestParserTest {
 
     @Test
     public void returnsNullIfThereAreNoValuesInHeadersHashMap() {
-        requestParser = new RequestParser("GET /form HTTP/1.1\n"+
-                                          "\n"+
-                                          "first_name=sylwia\n"+
-                                          "last_name=olak\n"+
-                                          "age=26");
+        requestParser = new RequestParser("GET /form HTTP/1.1");
 
         assertEquals(null, requestParser.getHeaders().get("Content-Type"));
     }
 
     @Test
     public void returnsNullIfThereAreNoValuesInParamsHashMap() {
-        requestParser = new RequestParser("GET /form HTTP/1.1\n"+
+        requestParser = new RequestParser("POST /form HTTP/1.1\n"+
                                           "Content-Type: application/x-www-form-url-encoded\n"+
                                           "Host: https://sylwiaolak.com\n"+
                                           "\n");
@@ -93,7 +89,7 @@ public class RequestParserTest {
 
     @Test
     public void getContentTypeFromHeadersList() {
-        requestParser = new RequestParser("GET /form HTTP/1.1\n"+
+        requestParser = new RequestParser("POST /form HTTP/1.1\n"+
                                           "Content-Type: application/x-www-form-url-encoded\n"+
                                           "Host: https://sylwiaolak.com\n"+
                                           "\n"+
@@ -104,7 +100,7 @@ public class RequestParserTest {
 
     @Test
     public void getHostFromHeadersList() {
-        requestParser = new RequestParser("GET /form HTTP/1.1\n"+
+        requestParser = new RequestParser("POST /form HTTP/1.1\n"+
                                           "Content-Type: application/x-www-form-url-encoded\n"+
                                           "Host: https://sylwiaolak.com\n"+
                                           "\n"+

@@ -23,7 +23,7 @@ public class ResponseFactoryTest {
     }
 
     @Test
-    public void returnsGetHandlerIfRequestMethodIsGet() {
+    public void returnsGetHandlerIfRequestMethodIsGetAndIsADirectoryPath() {
         path = new File("/Users/test/code/JavaServer/public/");
         fileManager = new FileManager(path);
         methodFactory = new ResponseFactory(createRequest("GET", "/"), fileManager);

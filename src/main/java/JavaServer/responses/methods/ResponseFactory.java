@@ -40,7 +40,7 @@ public class ResponseFactory {
                     //this should handle image sending - make a subclass
                     Response fourOhFourResponse = new FourOhFourResponse();
                     return fourOhFourResponse;
-                } else if (!fileManager.isFileImage()) {
+                } else {
                     Response gethandler = new GetResponse(fileManager);
                     return gethandler;
                 }
@@ -59,6 +59,7 @@ public class ResponseFactory {
             Response putHandler = new PutResponse();
             return putHandler;
         }
+//        System.out.println("if i'm down here i haven't created the above");
         Response fourOhFourResponse = new FourOhFourResponse();
         return fourOhFourResponse;
     }

@@ -113,12 +113,13 @@ public class RouterTest {
     }
 
     @Test
-    public void returns200AndHandlesDataParamsIfRequestForPostMethod() {
+    public void returns200AndHandlesDataParamsIfRequestForPostMethod() throws IOException {
         createRouter("POST /form HTTP/1.1\n"+
                      "\n"+
                      "My=Data");
 
         assertEquals("HTTP/1.1 200 OK\n" + "\r\n", router.getResponse());
+        assertEquals("", router.getBody());
     }
 
     @Test

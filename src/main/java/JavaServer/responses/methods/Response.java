@@ -4,8 +4,34 @@ import JavaServer.requests.Request;
 
 import java.io.IOException;
 import java.util.Hashtable;
+import java.util.Map;
 
 public abstract class Response {
+
+    private String requestDataString = "";
+    private Map<String, String> requestData;
+
+    public void updateRequestData(Map<String, String> updatedData) {
+        this.requestDataString = turnDataIntoString(updatedData);
+    }
+
+    public String getRequestData() {
+        return requestDataString;
+    }
+
+    public void resetData() {
+        requestDataString = "";
+    }
+
+    private String turnDataIntoString(Map<String, String> updatedData) {
+        String dataString = "";
+
+        for (Map.Entry<String, String> entry : updatedData.entrySet()) {
+            dataString += entry.getKey() + "=" + entry.getValue();
+        }
+        return dataString;
+    }
+
 
     public abstract String getCorrectStatus(Request request);
 
