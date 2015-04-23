@@ -18,7 +18,7 @@ public class GetResponse extends Response {
 
     @Override
     public String getCorrectHeaders(Request request) {
-       return "";
+       return EMPTY_STRING;
     }
 
     @Override

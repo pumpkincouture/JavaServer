@@ -24,7 +24,7 @@ public class ResponseFactoryTest {
 
     @Test
     public void returnsGetHandlerIfRequestMethodIsGet() {
-        path = new File("/Users/test/code/JavaServer/public/image.txt");
+        path = new File("/Users/test/code/JavaServer/public/");
         fileManager = new FileManager(path);
         methodFactory = new ResponseFactory(createRequest("GET", "/"), fileManager);
 
@@ -33,7 +33,7 @@ public class ResponseFactoryTest {
 
     @Test
     public void returnsPostHandlerIfRequestMethodIsPost() {
-        path = new File("/Users/test/code/JavaServer/public/image.gif");
+        path = new File("/Users/test/code/JavaServer/public/");
         fileManager = new FileManager(path);
         methodFactory = new ResponseFactory(createRequest("POST", "/"), fileManager);
 
@@ -42,7 +42,7 @@ public class ResponseFactoryTest {
 
     @Test
     public void returnsPutHandlerIfRequestMethodIsPut() {
-        path = new File("/Users/test/code/JavaServer/public/image.gif");
+        path = new File("/Users/test/code/JavaServer/public/");
         fileManager = new FileManager(path);
         methodFactory = new ResponseFactory(createRequest("PUT", "/"), fileManager);
 
@@ -51,7 +51,7 @@ public class ResponseFactoryTest {
 
     @Test
     public void returnsOptionsHandlerIfRequestMethodIsOptions() {
-        path = new File("/Users/test/code/JavaServer/public/image.gif");
+        path = new File("/Users/test/code/JavaServer/public/method_options");
         fileManager = new FileManager(path);
         methodFactory = new ResponseFactory(createRequest("OPTIONS", "/method_options"), fileManager);
 

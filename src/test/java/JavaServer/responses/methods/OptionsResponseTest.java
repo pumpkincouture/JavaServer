@@ -19,13 +19,4 @@ public class OptionsResponseTest {
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus(request));
     }
-
-    @Test
-    public void returns404IfPathNotValid() {
-        requestParser = new RequestParser("OPTIONS / HTTP/1.1");
-        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        requestHandler= new OptionsResponse();
-
-        assertEquals("HTTP/1.1 404 Not Found", requestHandler.getCorrectStatus(request));
-    }
 }

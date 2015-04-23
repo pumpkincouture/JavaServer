@@ -43,6 +43,13 @@ public class RouterTest {
     }
 
     @Test
+    public void returnsAResponseCodeOf404IfThisOptionsPathIsNotValid() {
+        createRouter("OPTIONS / HTTP/1.1");
+
+        assertEquals("HTTP/1.1 404 Not Found\n" + "\r\n", router.getResponse());
+    }
+
+    @Test
     public void returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsGet() {
         createRouter("GET /method_options HTTP/1.1");
 
@@ -121,6 +128,5 @@ public class RouterTest {
                      "My=Data");
 
         assertEquals("HTTP/1.1 200 OK\n" + "\r\n", router.getResponse());
-
     }
 }
