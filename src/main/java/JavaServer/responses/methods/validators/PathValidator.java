@@ -10,10 +10,6 @@ public abstract class PathValidator {
 
     public abstract String returnCorrectBody();
 
-    public abstract boolean correctMethodForBodyContents(String requestPath);
-
-    public abstract boolean doesPathEqualFile(String requestPath);
-
     public Hashtable<String, String> getAvailablePaths() {
         Hashtable<String, String> validPaths = new Hashtable<>();
         validPaths.put("directory", "/");

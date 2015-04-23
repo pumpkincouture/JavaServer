@@ -1,28 +1,26 @@
 package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
-import JavaServer.responses.methods.validators.PathValidator;
-import JavaServer.responses.methods.validators.PutPathValidator;
 
 public class PutResponse extends Response {
-    private PathValidator pathValidator;
-
-    public PutResponse() {
-        pathValidator = new PutPathValidator();
-    }
 
     @Override
     public String getCorrectStatus(Request request) {
-        return pathValidator.returnCorrectStatus(request.getPath());
+        if (request.getPath().equals("/form")) {
+            return getCodes().get("200");
+        } else if (request.getPath().equals("/file1")) {
+            return getCodes().get("405");
+        }
+        return getCodes().get("404");
     }
 
     @Override
     public String getCorrectHeaders(Request request) {
-        return pathValidator.returnCorrectHeader(request.getPath());
+        return "";
     }
 
     @Override
     public String getCorrectBody(Request request) {
-        return pathValidator.returnCorrectBody();
+        return "";
     }
 }
