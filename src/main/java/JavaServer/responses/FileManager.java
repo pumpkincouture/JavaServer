@@ -1,6 +1,5 @@
 package JavaServer.responses;
 
-import javax.activation.MimetypesFileTypeMap;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,19 +16,16 @@ public class FileManager {
         return filePath.exists();
     }
 
-    public File getFilePath() {
-        return filePath;
-    }
-
     public String getDirectoryLinks() {
         String[] fileList = filePath.list();
 
         String link = "";
 
         for (String line : fileList) {
-            link += "<a href='/"+ line + "'" + ">" + line + "</a>" + "\r\n";
+            link += "<a href='/"+ line + "'" + ">" + line + "</a>" +
+                    "</br>" +
+                    "\r\n";
         }
-
         return link;
     }
 

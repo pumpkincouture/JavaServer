@@ -33,14 +33,14 @@ public class FileManagerTest {
         path = new File("/Users/test/code/JavaServer/public/");
         fileManager = new FileManager(path);
 
-        assertEquals("<a href='/file1'>file1</a>\r\n" +
-                     "<a href='/file2'>file2</a>\r\n" +
-                     "<a href='/image.gif'>image.gif</a>\r\n" +
-                     "<a href='/image.jpeg'>image.jpeg</a>\r\n" +
-                     "<a href='/image.png'>image.png</a>\r\n" +
-                     "<a href='/partial_content.txt'>partial_content.txt</a>\r\n" +
-                     "<a href='/patch-content.txt'>patch-content.txt</a>\r\n" +
-                     "<a href='/text-file.txt'>text-file.txt</a>\r\n",
+        assertEquals("<a href='/file1'>file1</a></br>\r\n" +
+                     "<a href='/file2'>file2</a></br>\r\n" +
+                     "<a href='/image.gif'>image.gif</a></br>\r\n" +
+                     "<a href='/image.jpeg'>image.jpeg</a></br>\r\n" +
+                     "<a href='/image.png'>image.png</a></br>\r\n" +
+                     "<a href='/partial_content.txt'>partial_content.txt</a></br>\r\n" +
+                     "<a href='/patch-content.txt'>patch-content.txt</a></br>\r\n" +
+                     "<a href='/text-file.txt'>text-file.txt</a></br>\r\n",
                      fileManager.getDirectoryLinks());
     }
 
