@@ -2,19 +2,18 @@ package JavaServer.connections;
 
 import JavaServer.responses.DataManager;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
+import java.nio.charset.Charset;
 
 public class ConnectionManager {
-    private PrintWriter out;
+    private DataOutputStream out;
     private BufferedReader in;
     private Socket socket;
     private String directory;
     private DataManager dataManager;
 
-    public ConnectionManager(PrintWriter out, BufferedReader in, Socket socket, String directory, DataManager dataManager) {
+    public ConnectionManager(BufferedReader in, Socket socket, String directory, DataManager dataManager, DataOutputStream out) {
         this.out = out;
         this.in = in;
         this.socket = socket;
@@ -34,10 +33,13 @@ public class ConnectionManager {
             Router router = new Router(requestLines, directory, in, dataManager);
             router.createHandlers();
 
+            byte[] bytes = router.getResponse().getBytes(Charset.forName("UTF-8"));
+
+
             out.flush();
-            out.write(router.getResponse());
+            out.writeBytes(router.getResponse());
             out.flush();
-            out.write(router.getBody());
+            out.writeBytes(router.getBody());
             out.flush();
 
             in.close();

@@ -3,10 +3,7 @@ package JavaServer.runner;
 import JavaServer.connections.ConnectionManager;
 import JavaServer.responses.DataManager;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -24,10 +21,10 @@ public class HTTPServer {
     public void run() throws IOException {
         while (true) {
             Socket clientSocket = serverSocket.accept();
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            ConnectionManager connectionManager = new ConnectionManager(out, in, clientSocket, directory, dataManager);
+            ConnectionManager connectionManager = new ConnectionManager(in, clientSocket, directory, dataManager, out);
             connectionManager.executeRequest();
         }
     }
