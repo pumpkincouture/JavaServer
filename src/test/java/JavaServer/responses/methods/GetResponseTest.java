@@ -2,6 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
+import JavaServer.responses.DataManager;
 import JavaServer.responses.FileManager;
 import org.junit.Test;
 
@@ -15,6 +16,7 @@ public class GetResponseTest {
     private Response requestHandler;
     private FileManager fileManager;
     private File path;
+    private DataManager dataManager;
 
     @Test
     public void returns200ResponseIfRequestValid() {
@@ -22,8 +24,9 @@ public class GetResponseTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         fileManager = new FileManager(path);
+        dataManager = new DataManager();
 
-        requestHandler = new GetResponse(fileManager);
+        requestHandler = new GetResponse(fileManager, dataManager);
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus(request));
     }
@@ -34,8 +37,9 @@ public class GetResponseTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         fileManager = new FileManager(path);
+        dataManager = new DataManager();
 
-        requestHandler = new GetResponse(fileManager);
+        requestHandler = new GetResponse(fileManager, dataManager);
 
         assertEquals("", requestHandler.getCorrectHeaders(request));
     }

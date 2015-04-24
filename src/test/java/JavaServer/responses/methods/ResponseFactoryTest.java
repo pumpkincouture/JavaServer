@@ -1,6 +1,7 @@
 package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
+import JavaServer.responses.DataManager;
 import JavaServer.responses.FileManager;
 import org.junit.Test;
 
@@ -14,6 +15,7 @@ public class ResponseFactoryTest {
     private Request request;
     private FileManager fileManager;
     private File path;
+    private DataManager dataManager;
 
 
     private Request createRequest(String method, String path) {
@@ -26,7 +28,8 @@ public class ResponseFactoryTest {
     public void returnsGetHandlerIfRequestMethodIsGetAndIsADirectoryPath() {
         path = new File("/Users/test/code/JavaServer/public/");
         fileManager = new FileManager(path);
-        methodFactory = new ResponseFactory(createRequest("GET", "/"), fileManager);
+        dataManager = new DataManager();
+        methodFactory = new ResponseFactory(createRequest("GET", "/"), fileManager, dataManager);
 
         assertTrue(methodFactory.createResponse() instanceof GetResponse);
     }
@@ -35,7 +38,8 @@ public class ResponseFactoryTest {
     public void returnsPostHandlerIfRequestMethodIsPost() {
         path = new File("/Users/test/code/JavaServer/public/");
         fileManager = new FileManager(path);
-        methodFactory = new ResponseFactory(createRequest("POST", "/"), fileManager);
+        dataManager = new DataManager();
+        methodFactory = new ResponseFactory(createRequest("POST", "/"), fileManager, dataManager);
 
         assertTrue(methodFactory.createResponse() instanceof PostResponse);
     }
@@ -44,7 +48,8 @@ public class ResponseFactoryTest {
     public void returnsPutHandlerIfRequestMethodIsPut() {
         path = new File("/Users/test/code/JavaServer/public/");
         fileManager = new FileManager(path);
-        methodFactory = new ResponseFactory(createRequest("PUT", "/"), fileManager);
+        dataManager = new DataManager();
+        methodFactory = new ResponseFactory(createRequest("PUT", "/"), fileManager, dataManager);
 
         assertTrue(methodFactory.createResponse() instanceof PutResponse);
     }
@@ -53,7 +58,8 @@ public class ResponseFactoryTest {
     public void returnsOptionsHandlerIfRequestMethodIsOptions() {
         path = new File("/Users/test/code/JavaServer/public/method_options");
         fileManager = new FileManager(path);
-        methodFactory = new ResponseFactory(createRequest("OPTIONS", "/method_options"), fileManager);
+        dataManager = new DataManager();
+        methodFactory = new ResponseFactory(createRequest("OPTIONS", "/method_options"), fileManager, dataManager);
 
         assertTrue(methodFactory.createResponse() instanceof OptionsResponse);
     }

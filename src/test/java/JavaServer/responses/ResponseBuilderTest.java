@@ -16,6 +16,7 @@ public class ResponseBuilderTest {
     private ResponseFactory managerFactory;
     private File path;
     private FileManager fileManager;
+    private DataManager dataManager;
 
     @Test
     public void parseAndStoreMoreThanOnePostParamAndReturnResponseWithNoHeaders() {
@@ -29,7 +30,8 @@ public class ResponseBuilderTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         fileManager = new FileManager(path);
-        managerFactory = new ResponseFactory(request, fileManager);
+        dataManager = new DataManager();
+        managerFactory = new ResponseFactory(request, fileManager, dataManager);
 
         responseCodeBuilder = new ResponseBuilder(managerFactory.createResponse());
 

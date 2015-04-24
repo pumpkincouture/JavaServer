@@ -2,6 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
+import JavaServer.responses.DataManager;
 import org.junit.Test;
 
 import java.io.*;
@@ -12,6 +13,7 @@ public class PutResponseTest {
     private Request request;
     private RequestParser requestParser;
     private Response requestHandler;
+    private DataManager dataManager;
 
 
     @Test
@@ -19,7 +21,8 @@ public class PutResponseTest {
         requestParser = new RequestParser("PUT /form HTTP/1.1");
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        requestHandler= new PutResponse();
+        dataManager = new DataManager();
+        requestHandler= new PutResponse(dataManager);
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus(request));
     }
@@ -29,7 +32,8 @@ public class PutResponseTest {
         requestParser = new RequestParser("PUT / HTTP/1.1");
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        requestHandler= new PutResponse();
+        dataManager = new DataManager();
+        requestHandler= new PutResponse(dataManager);
 
         assertEquals("HTTP/1.1 404 Not Found", requestHandler.getCorrectStatus(request));
     }
@@ -39,7 +43,8 @@ public class PutResponseTest {
         requestParser = new RequestParser("PUT /file1 HTTP/1.1");
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        requestHandler= new PutResponse();
+        dataManager = new DataManager();
+        requestHandler= new PutResponse(dataManager);
 
         assertEquals("HTTP/1.1 405 Method Not Allowed", requestHandler.getCorrectStatus(request));
     }

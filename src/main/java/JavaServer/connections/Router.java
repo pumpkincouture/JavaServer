@@ -2,6 +2,7 @@ package JavaServer.connections;
 
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
+import JavaServer.responses.DataManager;
 import JavaServer.responses.FileManager;
 import JavaServer.responses.ResponseBuilder;
 import JavaServer.responses.methods.ResponseFactory;
@@ -19,18 +20,20 @@ public class Router {
     private ResponseFactory responseFactory;
     private FileManager fileManager;
     private BufferedReader in;
+    private DataManager dataManager;
 
-    public Router(String requestString, String directory, BufferedReader in) {
+    public Router(String requestString, String directory, BufferedReader in, DataManager dataManager) {
         this.requestString = requestString;
         this.directory = directory;
         this.in = in;
+        this.dataManager = dataManager;
     }
 
     public void createHandlers() {
         requestParser = new RequestParser(requestString);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         fileManager = new FileManager(new File(directory + request.getPath()));
-        responseFactory = new ResponseFactory(request, fileManager);
+        responseFactory = new ResponseFactory(request, fileManager, dataManager);
         responseBuilder = new ResponseBuilder(responseFactory.createResponse());
     }
 

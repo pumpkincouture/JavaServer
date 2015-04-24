@@ -1,6 +1,7 @@
 package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
+import JavaServer.responses.DataManager;
 import JavaServer.responses.FileManager;
 
 import java.util.ArrayList;
@@ -9,14 +10,17 @@ import java.util.List;
 public class ResponseFactory {
     private Request request;
     private FileManager fileManager;
+    private DataManager dataManager;
     private static final String GET_METHOD = "GET";
     private static final String POST_METHOD = "POST";
     private static final String PUT_METHOD = "PUT";
+    private static final String DELETE_METHOD = "DELETE";
     private List<String> allValidPaths = new ArrayList<>();
 
-    public ResponseFactory(Request request, FileManager fileManager) {
+    public ResponseFactory(Request request, FileManager fileManager, DataManager dataManager) {
         this.request = request;
         this.fileManager = fileManager;
+        this.dataManager = dataManager;
         allValidPaths = fileManager.convertFilesToPaths();
     }
 
@@ -41,7 +45,7 @@ public class ResponseFactory {
                     Response fourOhFourResponse = new FourOhFourResponse();
                     return fourOhFourResponse;
                 } else {
-                    Response gethandler = new GetResponse(fileManager);
+                    Response gethandler = new GetResponse(fileManager, dataManager);
                     return gethandler;
                 }
             }
@@ -49,17 +53,18 @@ public class ResponseFactory {
                 Response contentHandler = new ContentResponse(fileManager);
                 return contentHandler;
             }
-            Response gethandler = new GetResponse(fileManager);
+            Response gethandler = new GetResponse(fileManager, dataManager);
             return gethandler;
         }
         else if (request.getMethod().equals(POST_METHOD)) {
-            Response postHandler = new PostResponse();
+            Response postHandler = new PostResponse(dataManager);
             return postHandler;
         } else if (request.getMethod().equals(PUT_METHOD)) {
-            Response putHandler = new PutResponse();
+            Response putHandler = new PutResponse(dataManager);
             return putHandler;
+        } else if (request.getMethod().equals(DELETE_METHOD)) {
+            return new DeleteResponse(dataManager);
         }
-//        System.out.println("if i'm down here i haven't created the above");
         Response fourOhFourResponse = new FourOhFourResponse();
         return fourOhFourResponse;
     }

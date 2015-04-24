@@ -1,16 +1,17 @@
 package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
+import JavaServer.responses.DataManager;
 import JavaServer.responses.FileManager;
-
-import java.util.Map;
 
 public class GetResponse extends Response {
     private FileManager fileManager;
+    private DataManager dataManager;
     public static final String EMPTY_STRING = "";
 
-    public GetResponse(FileManager fileManager) {
+    public GetResponse(FileManager fileManager, DataManager dataManager) {
         this.fileManager = fileManager;
+        this.dataManager = dataManager;
     }
 
     @Override
@@ -28,8 +29,7 @@ public class GetResponse extends Response {
         if (fileManager.doesFileExist()) {
             return fileManager.getDirectoryLinks();
         } else if (request.getPath().equals("/form")) {
-            System.out.println(getRequestData());
-            return getRequestData();
+            return dataManager.getRequestData();
         }
         return EMPTY_STRING;
     }

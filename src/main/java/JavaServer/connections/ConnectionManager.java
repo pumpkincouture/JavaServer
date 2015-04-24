@@ -1,5 +1,7 @@
 package JavaServer.connections;
 
+import JavaServer.responses.DataManager;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,12 +12,14 @@ public class ConnectionManager {
     private BufferedReader in;
     private Socket socket;
     private String directory;
+    private DataManager dataManager;
 
-    public ConnectionManager(PrintWriter out, BufferedReader in, Socket socket, String directory) {
+    public ConnectionManager(PrintWriter out, BufferedReader in, Socket socket, String directory, DataManager dataManager) {
         this.out = out;
         this.in = in;
         this.socket = socket;
         this.directory = directory;
+        this.dataManager = dataManager;
     }
 
     public void executeRequest() throws IOException {
@@ -27,7 +31,7 @@ public class ConnectionManager {
                 requestLines += (char) in.read();
             } while (in.ready());
 
-            Router router = new Router(requestLines, directory, in);
+            Router router = new Router(requestLines, directory, in, dataManager);
             router.createHandlers();
 
             out.flush();
