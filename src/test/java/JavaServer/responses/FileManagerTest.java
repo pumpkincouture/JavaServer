@@ -70,8 +70,32 @@ public class FileManagerTest {
     }
 
     @Test
-    public void returnsTrueIfFileIsImage() {
+    public void returnsTrueIfFileIsGIF() {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
+        fileManager = new FileManager(path);
+
+        assertTrue(fileManager.isFileImage());
+    }
+
+    @Test
+    public void returnsTrueIfFileIsPNG() {
+        path = new File("/Users/test/code/JavaServer/public/image.png");
+        fileManager = new FileManager(path);
+
+        assertTrue(fileManager.isFileImage());
+    }
+
+    @Test
+    public void returnsTrueIfFileIsJPEG() {
+        path = new File("/Users/test/code/JavaServer/public/image.jpeg");
+        fileManager = new FileManager(path);
+
+        assertTrue(fileManager.isFileImage());
+    }
+
+    @Test
+    public void returnsTrueIfFileIsJPG() {
+        path = new File("/Users/test/code/JavaServer/public/image.jpg");
         fileManager = new FileManager(path);
 
         assertTrue(fileManager.isFileImage());

@@ -73,9 +73,9 @@ public class FileManager {
     }
 
     public boolean isFileImage() {
-        String mimetype = new MimetypesFileTypeMap().getContentType(filePath);
-        String type = mimetype.split("/")[0];
-        if (type.equals("image")) {
+        String fileExtension = getFileExtension(filePath);
+
+        if (validImageExtensions().contains(fileExtension)) {
             return true;
         }
         return false;
@@ -83,5 +83,24 @@ public class FileManager {
 
     private File getMainDirectory() {
         return filePath.getParentFile();
+    }
+
+    private List<String> validImageExtensions() {
+        List<String> imageExtensions = new ArrayList<>();
+
+        imageExtensions.add("jpeg");
+        imageExtensions.add("jpg");
+        imageExtensions.add("gif");
+        imageExtensions.add("png");
+
+        return imageExtensions;
+    }
+
+    private String getFileExtension(File filepath) {
+        String fileName = filepath.getName();
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
+            return fileName.substring(fileName.lastIndexOf(".") + 1);
+        }
+        return "";
     }
 }

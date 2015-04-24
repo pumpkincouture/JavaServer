@@ -29,12 +29,4 @@ public class RouteValidatorTest {
 
         assertFalse(routeValidator.isMethodValid());
     }
-
-    @Test
-    public void returnsTrueIfPathIsValid() {
-        routeValidator= new RouteValidator(createRequest("GET", "/whatever"));
-
-        assertFalse(routeValidator.isPathValid());
-
-    }
 }

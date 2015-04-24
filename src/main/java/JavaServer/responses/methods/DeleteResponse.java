@@ -3,8 +3,6 @@ package JavaServer.responses.methods;
 import JavaServer.requests.Request;
 import JavaServer.responses.DataManager;
 
-import java.io.IOException;
-
 public class DeleteResponse extends Response {
     private DataManager dataManager;
 

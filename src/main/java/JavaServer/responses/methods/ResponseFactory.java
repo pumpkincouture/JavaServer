@@ -1,11 +1,9 @@
 package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
+import JavaServer.requests.RouteValidator;
 import JavaServer.responses.DataManager;
 import JavaServer.responses.FileManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ResponseFactory {
     private Request request;
@@ -15,80 +13,50 @@ public class ResponseFactory {
     private static final String POST_METHOD = "POST";
     private static final String PUT_METHOD = "PUT";
     private static final String DELETE_METHOD = "DELETE";
-    private List<String> allValidPaths = new ArrayList<>();
+    private RouteValidator routeValidator;
 
     public ResponseFactory(Request request, FileManager fileManager, DataManager dataManager) {
         this.request = request;
         this.fileManager = fileManager;
         this.dataManager = dataManager;
-        allValidPaths = fileManager.convertFilesToPaths();
+        this.routeValidator = new RouteValidator(request);
     }
 
     public Response createResponse() {
-        getValidPaths();
-        if  (isInvalidPath()) {
-            Response fourOhFourResponse = new FourOhFourResponse();
-            return fourOhFourResponse;
+        routeValidator.addMethodsToValidPaths(fileManager.convertFilesToPaths());
+        if  (routeValidator.isInvalidPath()) {
+            return new FourOhFourResponse();
         }
-        else if (isRedirectPath()) {
-            Response notFoundResponse = new RedirectResponse();
-            return notFoundResponse;
+        else if (routeValidator.isRedirectPath()) {
+            return new RedirectResponse();
         }
-        else if (isOptionsPath()) {
-            Response optionsHandler = new OptionsResponse();
-            return optionsHandler;
+        else if (routeValidator.isOptionsPath()) {
+            return new OptionsResponse();
         }
         else if (request.getMethod().equals(GET_METHOD)) {
-            if (isDirectory()) {
+            if (routeValidator.isDirectory()) {
                 if (fileManager.isFileImage()) {
                     //this should handle image sending - make a subclass
-                    Response fourOhFourResponse = new FourOhFourResponse();
-                    return fourOhFourResponse;
+                    return new ImageResponse();
                 } else {
-                    Response gethandler = new GetResponse(fileManager, dataManager);
-                    return gethandler;
+                    return new GetResponse(fileManager, dataManager);
                 }
             }
-            if (fileManager.doesFileExist()) {
-                Response contentHandler = new ContentResponse(fileManager);
-                return contentHandler;
+            if (fileManager.doesFileExist() && fileManager.isFileImage()) {
+                return new ImageResponse();
             }
-            Response gethandler = new GetResponse(fileManager, dataManager);
-            return gethandler;
+            else if (fileManager.doesFileExist() && !fileManager.isFileImage()) {
+                    return new ContentResponse(fileManager);
+                }
+            return new GetResponse(fileManager, dataManager);
         }
         else if (request.getMethod().equals(POST_METHOD)) {
-            Response postHandler = new PostResponse(dataManager);
-            return postHandler;
+            return new PostResponse(dataManager);
         } else if (request.getMethod().equals(PUT_METHOD)) {
-            Response putHandler = new PutResponse(dataManager);
-            return putHandler;
+            return new PutResponse(dataManager);
         } else if (request.getMethod().equals(DELETE_METHOD)) {
             return new DeleteResponse(dataManager);
         }
-        Response fourOhFourResponse = new FourOhFourResponse();
-        return fourOhFourResponse;
-    }
-
-    private boolean isRedirectPath() {
-        return request.getPath().equals("/redirect");
-    }
-
-    private boolean isOptionsPath() {
-        return request.getPath().equals("/method_options");
-    }
-
-    private boolean isDirectory() {
-        return request.getPath().equals("/");
-    }
-
-    private boolean isInvalidPath() {
-        return request.getMethod().equals(GET_METHOD) && !allValidPaths.contains(request.getPath());
-    }
-
-    private void getValidPaths() {
-        allValidPaths.add("/");
-        allValidPaths.add("/method_options");
-        allValidPaths.add("/redirect");
-        allValidPaths.add("/form");
+        return new FourOhFourResponse();
     }
 }
