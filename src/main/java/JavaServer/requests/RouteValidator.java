@@ -6,7 +6,6 @@ import java.util.List;
 public class RouteValidator {
     private Request request;
     private List<String> validMethods;
-    private static final String GET_METHOD = "GET";
     private List<String> allValidPaths = new ArrayList<>();
 
     public RouteValidator(Request request) {

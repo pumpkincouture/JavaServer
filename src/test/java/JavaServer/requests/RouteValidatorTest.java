@@ -16,6 +16,7 @@ public class RouteValidatorTest {
 
         return request;
     }
+
     @Test
     public void returnsTrueIfMethodIsValid() {
         routeValidator= new RouteValidator(createRequest("GET", "/"));
@@ -28,5 +29,19 @@ public class RouteValidatorTest {
         routeValidator= new RouteValidator(createRequest("GERUND", "/"));
 
         assertFalse(routeValidator.isMethodValid());
+    }
+
+    @Test
+    public void returnsTrueIfPathIsForRedirectionButMethodIsInvalid() {
+        routeValidator= new RouteValidator(createRequest("GERUND", "/redirect"));
+
+        assertTrue(routeValidator.isInvalidPath());
+    }
+
+    @Test
+    public void returnsTrueIfMethodIsValidButPathIsInvalid() {
+        routeValidator= new RouteValidator(createRequest("GET", "/get_unicorns"));
+
+        assertTrue(routeValidator.isInvalidPath());
     }
 }
