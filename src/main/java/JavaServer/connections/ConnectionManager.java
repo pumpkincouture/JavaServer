@@ -1,5 +1,6 @@
 package JavaServer.connections;
 
+import JavaServer.requests.Logger;
 import JavaServer.responses.DataManager;
 
 import java.io.*;
@@ -12,13 +13,15 @@ public class ConnectionManager {
     private Socket socket;
     private String directory;
     private DataManager dataManager;
+    private Logger logger;
 
-    public ConnectionManager(BufferedReader in, Socket socket, String directory, DataManager dataManager, DataOutputStream out) {
+    public ConnectionManager(BufferedReader in, Socket socket, String directory, DataManager dataManager, DataOutputStream out, Logger logger) {
         this.out = out;
         this.in = in;
         this.socket = socket;
         this.directory = directory;
         this.dataManager = dataManager;
+        this.logger = logger;
     }
 
     public void executeRequest() throws IOException {
@@ -30,11 +33,8 @@ public class ConnectionManager {
                 requestLines += (char) in.read();
             } while (in.ready());
 
-            Router router = new Router(requestLines, directory, out, dataManager);
+            Router router = new Router(requestLines, directory, out, dataManager, logger);
             router.createHandlers();
-
-            byte[] bytes = router.getResponse().getBytes(Charset.forName("UTF-8"));
-
 
             out.flush();
             out.writeBytes(router.getResponse());

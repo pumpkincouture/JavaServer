@@ -26,7 +26,7 @@ public class RequestParser {
 //       System.out.println(request + " the request string");
 //       System.out.println(splitFirstLine.length + " the length of the request string");
        //cannot split the string right away - move splitfirstline to a method that can handle
-       System.out.println(findMethod() + " the found method");
+//       System.out.println(findMethod() + " the found method");
        return findMethod();
    }
 

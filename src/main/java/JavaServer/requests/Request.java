@@ -31,4 +31,8 @@ public class Request {
     public Map<String, String> getData() {
         return data;
     }
+
+    public String getRequestLine() {
+        return "" + requestMethod + " " + path + " " + "HTTP/1.1";
+    }
 }

@@ -1,5 +1,6 @@
 package JavaServer;
 import JavaServer.configuration.ServerConfiguration;
+import JavaServer.requests.Logger;
 import JavaServer.responses.DataManager;
 import JavaServer.runner.HTTPServer;
 
@@ -13,8 +14,9 @@ public class ServerMain {
         ServerConfiguration serverConfiguration = new ServerConfiguration(args);
         ServerSocket serverSocket = new ServerSocket(serverConfiguration.getPortNumber());
         DataManager dataManager = new DataManager();
+        Logger logger = new Logger();
 
-        HTTPServer server = new HTTPServer(serverSocket, serverConfiguration.getDirectory(), dataManager);
+        HTTPServer server = new HTTPServer(serverSocket, serverConfiguration.getDirectory(), dataManager, logger);
         server.run();
     }
 }
