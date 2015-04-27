@@ -5,7 +5,6 @@ import JavaServer.responses.DataManager;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.Charset;
 
 public class ConnectionManager {
     private DataOutputStream out;
