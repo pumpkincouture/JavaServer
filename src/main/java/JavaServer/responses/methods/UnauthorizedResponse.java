@@ -13,7 +13,7 @@ public class UnauthorizedResponse extends Response{
 
     @Override
     public String getCorrectHeaders(Request request) {
-        return "";
+        return EMPTY_STRING;
     }
 
     @Override

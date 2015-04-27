@@ -7,7 +7,6 @@ import JavaServer.responses.FileManager;
 public class GetResponse extends Response {
     private FileManager fileManager;
     private DataManager dataManager;
-    public static final String EMPTY_STRING = "";
 
     public GetResponse(FileManager fileManager, DataManager dataManager) {
         this.fileManager = fileManager;

@@ -16,6 +16,6 @@ public class OptionsResponse extends Response {
 
     @Override
     public String getCorrectBody(Request request) {
-        return "";
+        return EMPTY_STRING;
     }
 }

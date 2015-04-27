@@ -18,6 +18,6 @@ public class RedirectResponse extends Response {
 
     @Override
     public String getCorrectBody(Request request) throws IOException {
-        return "";
+        return EMPTY_STRING;
     }
 }

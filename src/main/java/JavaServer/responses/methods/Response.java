@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Hashtable;
 
 public abstract class Response {
+    public static final String EMPTY_STRING = "";
 
     public abstract String getCorrectStatus(Request request);
 
