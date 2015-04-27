@@ -37,7 +37,7 @@ public class Router {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         logger.logRequest(request.getRequestLine());
         fileManager = new FileManager(new File(directory + request.getPath()), out);
-        responseFactory = new ResponseFactory(request, fileManager, dataManager);
+        responseFactory = new ResponseFactory(request, fileManager, dataManager, logger);
         responseBuilder = new ResponseBuilder(responseFactory.createResponse());
     }
 

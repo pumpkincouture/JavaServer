@@ -1,5 +1,6 @@
 package JavaServer.responses.methods;
 
+import JavaServer.requests.Logger;
 import JavaServer.requests.Request;
 import JavaServer.requests.RouteValidator;
 import JavaServer.responses.DataManager;
@@ -13,13 +14,16 @@ public class ResponseFactory {
     private static final String POST_METHOD = "POST";
     private static final String PUT_METHOD = "PUT";
     private static final String DELETE_METHOD = "DELETE";
+    private static final String AUTHORIZATION = "Basic YWRtaW46aHVudGVyMg==";
     private RouteValidator routeValidator;
+    private Logger logger;
 
-    public ResponseFactory(Request request, FileManager fileManager, DataManager dataManager) {
+    public ResponseFactory(Request request, FileManager fileManager, DataManager dataManager, Logger logger) {
         this.request = request;
         this.fileManager = fileManager;
         this.dataManager = dataManager;
         this.routeValidator = new RouteValidator(request);
+        this.logger = logger;
     }
 
     public Response createResponse() {
@@ -43,6 +47,12 @@ public class ResponseFactory {
             else if (fileManager.doesFileExist() && !fileManager.isFileImage()) {
                     return new ContentResponse(fileManager);
                 }
+            else if (routeValidator.requiresAuthorization()) {
+                if (request.hasAuthorization() && request.getAuthorizationCode().contains(AUTHORIZATION)) {
+                    return new LogsResponse(logger);
+                }
+                return new UnauthorizedResponse();
+            }
             return new GetResponse(fileManager, dataManager);
         }
         else if (request.getMethod().equals(POST_METHOD)) {

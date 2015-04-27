@@ -35,4 +35,15 @@ public class Request {
     public String getRequestLine() {
         return "" + requestMethod + " " + path + " " + "HTTP/1.1";
     }
+
+    public boolean hasAuthorization() {
+        return headers.get("Authorization") != null;
+    }
+
+    public String getAuthorizationCode() {
+        if (hasAuthorization()) {
+            return headers.get("Authorization");
+        }
+        return "";
+    }
 }

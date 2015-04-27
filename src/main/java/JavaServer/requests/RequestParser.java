@@ -11,6 +11,7 @@ public class RequestParser {
     static final String COLON = ": ";
     static final String AFTER_COLON = ":\\s";
     static final String EQUAL_SIGN = "=";
+    static final String AUTHORIZATION = "Authorization";
 
     String request;
     String[] splitFirstLine;
@@ -53,8 +54,14 @@ public class RequestParser {
     private List<String> getMatchingStrings(String stringToMatch) {
         List<String> stringsList = new ArrayList<>();
         for (String string : splitRequest) {
-            if (string.contains(stringToMatch)) {
-                stringsList.add(string);
+            if (stringToMatch.equals(COLON)) {
+                if (string.contains(stringToMatch)) {
+                    stringsList.add(string);
+                }
+            } else if (stringToMatch.equals(EQUAL_SIGN)) {
+                if (string.contains(stringToMatch) && !string.contains(AUTHORIZATION)) {
+                    stringsList.add(string);
+                }
             }
         }
         return stringsList;
@@ -63,10 +70,15 @@ public class RequestParser {
     private HashMap<String, String> createTable(List<String> listOfStrings, String stringToSplitOn) {
         HashMap<String, String> table = new LinkedHashMap<>();
 
-        for (String string : listOfStrings) {
-            String[] splitHeaders = string.split(stringToSplitOn);
 
-            table.put(splitHeaders[FIRST_ELEMENT], splitHeaders[SECOND_ELEMENT]);
+        if (listOfStrings.size() == 0) {
+            return table;
+        } else {
+            for (String string : listOfStrings) {
+                String[] splitHeaders = string.split(stringToSplitOn);
+
+                table.put(splitHeaders[FIRST_ELEMENT], splitHeaders[SECOND_ELEMENT]);
+            }
         }
 
         return table;

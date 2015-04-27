@@ -18,6 +18,7 @@ public class RouteValidator {
         allValidPaths.add("/method_options");
         allValidPaths.add("/redirect");
         allValidPaths.add("/form");
+        allValidPaths.add("/logs");
     }
     
     public boolean isRedirectPath() {
@@ -38,6 +39,10 @@ public class RouteValidator {
 
     public boolean isMethodValid() {
         return getValidMethods().contains(request.getMethod());
+    }
+
+    public boolean requiresAuthorization() {
+        return request.getPath().equals("/logs");
     }
 
     private List<String> getValidMethods() {

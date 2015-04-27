@@ -1,5 +1,6 @@
 package JavaServer.responses;
 
+import JavaServer.requests.Logger;
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
 import JavaServer.responses.methods.ResponseFactory;
@@ -20,6 +21,7 @@ public class ResponseBuilderTest {
     private File path;
     private FileManager fileManager;
     private DataManager dataManager;
+    private Logger logger;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
@@ -41,7 +43,8 @@ public class ResponseBuilderTest {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
-        managerFactory = new ResponseFactory(request, fileManager, dataManager);
+        logger = new Logger();
+        managerFactory = new ResponseFactory(request, fileManager, dataManager, logger);
 
         responseCodeBuilder = new ResponseBuilder(managerFactory.createResponse());
 

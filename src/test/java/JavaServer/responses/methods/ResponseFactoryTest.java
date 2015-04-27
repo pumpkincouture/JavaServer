@@ -1,5 +1,6 @@
 package JavaServer.responses.methods;
 
+import JavaServer.requests.Logger;
 import JavaServer.requests.Request;
 import JavaServer.responses.DataManager;
 import JavaServer.responses.FileManager;
@@ -19,6 +20,7 @@ public class ResponseFactoryTest {
     private FileManager fileManager;
     private File path;
     private DataManager dataManager;
+    private Logger logger;
 
 
     private Request createRequest(String method, String path) {
@@ -39,7 +41,8 @@ public class ResponseFactoryTest {
         path = new File("/Users/test/code/JavaServer/public/");
         fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
-        methodFactory = new ResponseFactory(createRequest("GET", "/"), fileManager, dataManager);
+        logger = new Logger();
+        methodFactory = new ResponseFactory(createRequest("GET", "/"), fileManager, dataManager, logger);
 
         assertTrue(methodFactory.createResponse() instanceof GetResponse);
     }
@@ -49,7 +52,8 @@ public class ResponseFactoryTest {
         path = new File("/Users/test/code/JavaServer/public/");
         fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
-        methodFactory = new ResponseFactory(createRequest("POST", "/"), fileManager, dataManager);
+        logger = new Logger();
+        methodFactory = new ResponseFactory(createRequest("POST", "/"), fileManager, dataManager, logger);
 
         assertTrue(methodFactory.createResponse() instanceof PostResponse);
     }
@@ -59,7 +63,8 @@ public class ResponseFactoryTest {
         path = new File("/Users/test/code/JavaServer/public/");
         fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
-        methodFactory = new ResponseFactory(createRequest("PUT", "/"), fileManager, dataManager);
+        logger = new Logger();
+        methodFactory = new ResponseFactory(createRequest("PUT", "/"), fileManager, dataManager, logger);
 
         assertTrue(methodFactory.createResponse() instanceof PutResponse);
     }
@@ -69,7 +74,8 @@ public class ResponseFactoryTest {
         path = new File("/Users/test/code/JavaServer/public/method_options");
         fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
-        methodFactory = new ResponseFactory(createRequest("OPTIONS", "/method_options"), fileManager, dataManager);
+        logger = new Logger();
+        methodFactory = new ResponseFactory(createRequest("OPTIONS", "/method_options"), fileManager, dataManager, logger);
 
         assertTrue(methodFactory.createResponse() instanceof OptionsResponse);
     }
