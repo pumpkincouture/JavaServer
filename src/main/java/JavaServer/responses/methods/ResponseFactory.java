@@ -35,13 +35,8 @@ public class ResponseFactory {
         }
         else if (request.getMethod().equals(GET_METHOD)) {
             if (routeValidator.isDirectory()) {
-                if (fileManager.isFileImage()) {
-                    //this should handle image sending - make a subclass
-                    return new ImageResponse(fileManager);
-                } else {
-                    return new GetResponse(fileManager, dataManager);
+                return new GetResponse(fileManager, dataManager);
                 }
-            }
             if (fileManager.doesFileExist() && fileManager.isFileImage()) {
                 return new ImageResponse(fileManager);
             }
