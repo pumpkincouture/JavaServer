@@ -4,7 +4,6 @@ import JavaServer.responses.DataManager;
 import org.junit.Test;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,11 +12,11 @@ public class RouterTest {
     private String directory;
     private DataManager dataManager;
 
-    private BufferedReader createFakeInput(String input) throws UnsupportedEncodingException {
-        InputStream mockInputStream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
+    private DataOutputStream createFakeInput(String input) throws UnsupportedEncodingException {
+        ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(mockInputStream));
-        return reader;
+        DataOutputStream out = new DataOutputStream(mockInputStream);
+        return out;
     }
 
     private void createRouter(String request)  {

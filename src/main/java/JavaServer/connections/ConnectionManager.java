@@ -30,7 +30,7 @@ public class ConnectionManager {
                 requestLines += (char) in.read();
             } while (in.ready());
 
-            Router router = new Router(requestLines, directory, in, dataManager);
+            Router router = new Router(requestLines, directory, out, dataManager);
             router.createHandlers();
 
             byte[] bytes = router.getResponse().getBytes(Charset.forName("UTF-8"));

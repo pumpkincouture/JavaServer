@@ -8,6 +8,7 @@ import JavaServer.responses.ResponseBuilder;
 import JavaServer.responses.methods.ResponseFactory;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -19,13 +20,13 @@ public class Router {
     private ResponseBuilder responseBuilder;
     private ResponseFactory responseFactory;
     private FileManager fileManager;
-    private BufferedReader in;
+    private DataOutputStream out;
     private DataManager dataManager;
 
-    public Router(String requestString, String directory, BufferedReader in, DataManager dataManager) {
+    public Router(String requestString, String directory, DataOutputStream out, DataManager dataManager) {
         this.requestString = requestString;
         this.directory = directory;
-        this.in = in;
+        this.out= out;
         this.dataManager = dataManager;
     }
 
