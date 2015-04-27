@@ -36,10 +36,7 @@ public class ResponseFactory {
             if (routeValidator.isDirectory()) {
                 return new GetResponse(fileManager, dataManager);
                 }
-            if (fileManager.doesFileExist() && fileManager.isFileImage()) {
-                return new ImageResponse(fileManager);
-            }
-            else if (fileManager.doesFileExist() && !fileManager.isFileImage()) {
+            if (fileManager.doesFileExist()) {
                     return new ContentResponse(fileManager);
                 }
             else if (routeValidator.requiresAuthorization()) {
