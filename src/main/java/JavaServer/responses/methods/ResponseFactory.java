@@ -10,11 +10,6 @@ public class ResponseFactory {
     private Request request;
     private FileManager fileManager;
     private DataManager dataManager;
-    private static final String GET_METHOD = "GET";
-    private static final String POST_METHOD = "POST";
-    private static final String PUT_METHOD = "PUT";
-    private static final String DELETE_METHOD = "DELETE";
-    private static final String AUTHORIZATION = "Basic YWRtaW46aHVudGVyMg==";
     private RouteValidator routeValidator;
     private Logger logger;
 
@@ -37,7 +32,7 @@ public class ResponseFactory {
         else if (routeValidator.isOptionsPath()) {
             return new OptionsResponse();
         }
-        else if (request.getMethod().equals(GET_METHOD)) {
+        else if (routeValidator.methodEqualsGet()) {
             if (routeValidator.isDirectory()) {
                 return new GetResponse(fileManager, dataManager);
                 }
@@ -48,18 +43,18 @@ public class ResponseFactory {
                     return new ContentResponse(fileManager);
                 }
             else if (routeValidator.requiresAuthorization()) {
-                if (request.hasAuthorization() && request.getAuthorizationCode().contains(AUTHORIZATION)) {
+                if (routeValidator.requestHasCorrectAuthorization()) {
                     return new LogsResponse(logger);
                 }
                 return new UnauthorizedResponse();
             }
             return new GetResponse(fileManager, dataManager);
         }
-        else if (request.getMethod().equals(POST_METHOD)) {
+        else if (routeValidator.methodEqualsPost()) {
             return new PostResponse(dataManager);
-        } else if (request.getMethod().equals(PUT_METHOD)) {
+        } else if (routeValidator.methodEqualsPut()) {
             return new PutResponse(dataManager);
-        } else if (request.getMethod().equals(DELETE_METHOD)) {
+        } else if (routeValidator.methodEqualsDelete()) {
             return new DeleteResponse(dataManager);
         }
         return new FourOhFourResponse();

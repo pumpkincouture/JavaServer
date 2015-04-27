@@ -7,6 +7,11 @@ public class RouteValidator {
     private Request request;
     private List<String> validMethods;
     private List<String> allValidPaths = new ArrayList<>();
+    private static final String AUTHORIZATION = "Basic YWRtaW46aHVudGVyMg==";
+    private static final String GET_METHOD = "GET";
+    private static final String POST_METHOD = "POST";
+    private static final String PUT_METHOD = "PUT";
+    private static final String DELETE_METHOD = "DELETE";
 
     public RouteValidator(Request request) {
         this.request = request;
@@ -20,7 +25,23 @@ public class RouteValidator {
         allValidPaths.add("/form");
         allValidPaths.add("/logs");
     }
-    
+
+    public boolean methodEqualsGet() {
+        return request.getMethod().equals(GET_METHOD);
+    }
+
+    public boolean methodEqualsPost() {
+        return request.getMethod().equals(POST_METHOD);
+    }
+
+    public boolean methodEqualsPut() {
+        return request.getMethod().equals(PUT_METHOD);
+    }
+
+    public boolean methodEqualsDelete() {
+        return request.getMethod().equals(DELETE_METHOD);
+    }
+
     public boolean isRedirectPath() {
         return request.getPath().equals("/redirect");
     }
@@ -43,6 +64,10 @@ public class RouteValidator {
 
     public boolean requiresAuthorization() {
         return request.getPath().equals("/logs");
+    }
+
+    public boolean requestHasCorrectAuthorization() {
+        return request.hasAuthorization() && request.getAuthorizationCode().contains(AUTHORIZATION);
     }
 
     private List<String> getValidMethods() {

@@ -22,6 +22,9 @@ public class ContentResponse extends Response {
 
     @Override
     public String getCorrectBody(Request request) {
+        if (fileManager.isFileImage()) {
+
+        }
         return fileManager.getFileContents();
     }
 }
