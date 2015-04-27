@@ -20,6 +20,7 @@ public abstract class Response {
         codes.put("404", "HTTP/1.1 404 Not Found");
         codes.put("405", "HTTP/1.1 405 Method Not Allowed");
         codes.put("302", "HTTP/1.1 302 Found");
+        codes.put("401", "HTTP/1.1 401 Unauthorized");
         return codes;
     }
 
