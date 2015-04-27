@@ -1,6 +1,7 @@
 package JavaServer.responses;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -68,6 +69,21 @@ public class FileManager {
         }
 
         return fileContent;
+    }
+
+    public void getImageContents() {
+        try {
+            InputStream file = new FileInputStream(filePath.toString());
+
+            byte[] bytes = Files.readAllBytes(filePath.toPath());
+
+            while (file.read( bytes ) > 0) {
+                out.write(bytes);
+            }
+        } catch (IOException e) {
+            System.out.println("Why is there an exception here?");
+            e.printStackTrace();
+        }
     }
 
     public boolean isFileImage() {
