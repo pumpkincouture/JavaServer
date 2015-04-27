@@ -56,14 +56,14 @@ public class FileManager {
         String fileContent = "";
         try {
 
-            BufferedReader br = new BufferedReader(new FileReader(filePath.toString()));
+            BufferedReader reader = new BufferedReader(new FileReader(filePath.toString()));
 
             String endOfLines = null;
 
-            while ((endOfLines = br.readLine()) != null) {
-                fileContent += endOfLines + "\r\n";
+            while ((endOfLines = reader.readLine()) != null) {
+                out.writeBytes(endOfLines);
             }
-            br.close();
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,7 +81,6 @@ public class FileManager {
                 out.write(bytes);
             }
         } catch (IOException e) {
-            System.out.println("Why is there an exception here?");
             e.printStackTrace();
         }
     }
