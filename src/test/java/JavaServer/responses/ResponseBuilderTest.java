@@ -5,7 +5,10 @@ import JavaServer.requests.RequestParser;
 import JavaServer.responses.methods.ResponseFactory;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,8 +21,15 @@ public class ResponseBuilderTest {
     private FileManager fileManager;
     private DataManager dataManager;
 
+    private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
+        ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
+
+        DataOutputStream out = new DataOutputStream(mockInputStream);
+        return out;
+    }
+
     @Test
-    public void parseAndStoreMoreThanOnePostParamAndReturnResponseWithNoHeaders() {
+    public void parseAndStoreMoreThanOnePostParamAndReturnResponseWithNoHeaders() throws UnsupportedEncodingException {
         requestParser = new RequestParser("GET /form\n"+
                                           "Content-Type: application/x-www-form-url-encoded\n"+
                                           "Host: https://sylwiaolak.com\n"+
@@ -29,7 +39,7 @@ public class ResponseBuilderTest {
                                           "age=26");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
         managerFactory = new ResponseFactory(request, fileManager, dataManager);
 

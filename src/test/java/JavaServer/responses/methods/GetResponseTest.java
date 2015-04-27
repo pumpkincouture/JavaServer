@@ -6,7 +6,10 @@ import JavaServer.responses.DataManager;
 import JavaServer.responses.FileManager;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,12 +21,19 @@ public class GetResponseTest {
     private File path;
     private DataManager dataManager;
 
+    private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
+        ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
+
+        DataOutputStream out = new DataOutputStream(mockInputStream);
+        return out;
+    }
+
     @Test
-    public void returns200ResponseIfRequestValid() {
+    public void returns200ResponseIfRequestValid() throws UnsupportedEncodingException {
         requestParser = new RequestParser("GET / HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
 
         requestHandler = new GetResponse(fileManager, dataManager);
@@ -32,11 +42,11 @@ public class GetResponseTest {
     }
 
     @Test
-    public void returnsBlankHeaderIfPathIsNotForMethodOptions() {
+    public void returnsBlankHeaderIfPathIsNotForMethodOptions() throws UnsupportedEncodingException {
         requestParser = new RequestParser("GET / HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
 
         requestHandler = new GetResponse(fileManager, dataManager);

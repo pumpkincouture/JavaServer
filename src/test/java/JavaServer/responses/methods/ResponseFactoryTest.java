@@ -5,7 +5,10 @@ import JavaServer.responses.DataManager;
 import JavaServer.responses.FileManager;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertTrue;
@@ -24,10 +27,17 @@ public class ResponseFactoryTest {
         return request;
     }
 
+    private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
+        ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
+
+        DataOutputStream out = new DataOutputStream(mockInputStream);
+        return out;
+    }
+
     @Test
-    public void returnsGetHandlerIfRequestMethodIsGetAndIsADirectoryPath() {
+    public void returnsGetHandlerIfRequestMethodIsGetAndIsADirectoryPath() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
         methodFactory = new ResponseFactory(createRequest("GET", "/"), fileManager, dataManager);
 
@@ -35,9 +45,9 @@ public class ResponseFactoryTest {
     }
 
     @Test
-    public void returnsPostHandlerIfRequestMethodIsPost() {
+    public void returnsPostHandlerIfRequestMethodIsPost() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
         methodFactory = new ResponseFactory(createRequest("POST", "/"), fileManager, dataManager);
 
@@ -45,9 +55,9 @@ public class ResponseFactoryTest {
     }
 
     @Test
-    public void returnsPutHandlerIfRequestMethodIsPut() {
+    public void returnsPutHandlerIfRequestMethodIsPut() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
         methodFactory = new ResponseFactory(createRequest("PUT", "/"), fileManager, dataManager);
 
@@ -55,9 +65,9 @@ public class ResponseFactoryTest {
     }
 
     @Test
-    public void returnsOptionsHandlerIfRequestMethodIsOptions() {
+    public void returnsOptionsHandlerIfRequestMethodIsOptions() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/method_options");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
         methodFactory = new ResponseFactory(createRequest("OPTIONS", "/method_options"), fileManager, dataManager);
 

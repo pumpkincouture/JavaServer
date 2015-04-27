@@ -2,7 +2,10 @@ package JavaServer.responses;
 
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -12,26 +15,33 @@ public class FileManagerTest {
     private FileManager fileManager;
     private File path;
 
+    private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
+        ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
+
+        DataOutputStream out = new DataOutputStream(mockInputStream);
+        return out;
+    }
+
     @Test
-    public void returnsTrueIfFileExistsInTheSpecifiedDirectory() {
+    public void returnsTrueIfFileExistsInTheSpecifiedDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
 
         assertTrue(fileManager.doesFileExist());
     }
 
     @Test
-    public void returnsFalseIfFileDoesNotExistInTheSpecifiedDirectory() {
+    public void returnsFalseIfFileDoesNotExistInTheSpecifiedDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/best_doge.gif");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
 
         assertFalse(fileManager.doesFileExist());
     }
 
     @Test
-    public void returnsHTMLinksForFilesInDirectory() {
+    public void returnsHTMLinksForFilesInDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
 
         assertEquals("<a href='/file1'>file1</a></br>\r\n" +
                      "<a href='/file2'>file2</a></br>\r\n" +
@@ -45,9 +55,9 @@ public class FileManagerTest {
     }
 
     @Test
-    public void returnsStringArrayWithAllFilesInDirectory() {
+    public void returnsStringArrayWithAllFilesInDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/text-file.txt");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
 
         int lastIndex = fileManager.getDirectoryFiles().size() - 1;
 
@@ -57,9 +67,9 @@ public class FileManagerTest {
     }
 
     @Test
-    public void convertsFilesIntoPaths() {
+    public void convertsFilesIntoPaths() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
         fileManager.convertFilesToPaths();
 
         int lastIndex = fileManager.convertFilesToPaths().size() - 1;
@@ -70,57 +80,57 @@ public class FileManagerTest {
     }
 
     @Test
-    public void returnsTrueIfFileIsGIF() {
+    public void returnsTrueIfFileIsGIF() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
 
         assertTrue(fileManager.isFileImage());
     }
 
     @Test
-    public void returnsTrueIfFileIsPNG() {
+    public void returnsTrueIfFileIsPNG() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.png");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
 
         assertTrue(fileManager.isFileImage());
     }
 
     @Test
-    public void returnsTrueIfFileIsJPEG() {
+    public void returnsTrueIfFileIsJPEG() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.jpeg");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
 
         assertTrue(fileManager.isFileImage());
     }
 
     @Test
-    public void returnsTrueIfFileIsJPG() {
+    public void returnsTrueIfFileIsJPG() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.jpg");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
 
         assertTrue(fileManager.isFileImage());
     }
 
     @Test
-    public void returnsFalseIfFileIsNotImage() {
+    public void returnsFalseIfFileIsNotImage() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.txt");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
 
         assertFalse(fileManager.isFileImage());
     }
 
     @Test
-    public void returnsFalseIfThereIsNoSpecifiedFilePath() {
+    public void returnsFalseIfThereIsNoSpecifiedFilePath() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
 
         assertFalse(fileManager.isFileImage());
     }
 
     @Test
-    public void returnsFalseIfPathIsNotAFileNorIsItAnImage() {
+    public void returnsFalseIfPathIsNotAFileNorIsItAnImage() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/method_options");
-        fileManager = new FileManager(path);
+        fileManager = new FileManager(path, mockDataStream());
 
         assertFalse(fileManager.isFileImage());
         assertFalse(fileManager.doesFileExist());

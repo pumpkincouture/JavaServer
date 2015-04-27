@@ -7,9 +7,11 @@ import java.util.List;
 
 public class FileManager {
     private File filePath;
+    private DataOutputStream out;
 
-    public FileManager(File filePath) {
+    public FileManager(File filePath, DataOutputStream out) {
         this.filePath = filePath;
+        this.out = out;
     }
 
     public boolean doesFileExist() {
