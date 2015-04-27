@@ -12,6 +12,10 @@ public class RouteValidator {
     private static final String POST_METHOD = "POST";
     private static final String PUT_METHOD = "PUT";
     private static final String DELETE_METHOD = "DELETE";
+    private static final String REDIRECT = "/redirect";
+    private static final String LOGS = "/logs";
+    private static final String OPTIONS = "/method_options";
+    private static final String DIRECTORY = "/";
 
     public RouteValidator(Request request) {
         this.request = request;
@@ -19,11 +23,11 @@ public class RouteValidator {
 
     public void addMethodsToValidPaths(List<String> validFilePaths) {
         this.allValidPaths = validFilePaths;
-        allValidPaths.add("/");
-        allValidPaths.add("/method_options");
-        allValidPaths.add("/redirect");
+        allValidPaths.add(DIRECTORY);
+        allValidPaths.add(OPTIONS);
+        allValidPaths.add(REDIRECT);
         allValidPaths.add("/form");
-        allValidPaths.add("/logs");
+        allValidPaths.add(LOGS);
     }
 
     public boolean methodEqualsGet() {
@@ -43,15 +47,15 @@ public class RouteValidator {
     }
 
     public boolean isRedirectPath() {
-        return request.getPath().equals("/redirect");
+        return request.getPath().equals(REDIRECT);
     }
 
     public boolean isOptionsPath() {
-        return request.getPath().equals("/method_options");
+        return request.getPath().equals(OPTIONS);
     }
 
     public boolean isDirectory() {
-        return request.getPath().equals("/");
+        return request.getPath().equals(DIRECTORY);
     }
 
     public boolean isInvalidPath() {
@@ -63,7 +67,7 @@ public class RouteValidator {
     }
 
     public boolean requiresAuthorization() {
-        return request.getPath().equals("/logs");
+        return request.getPath().equals(LOGS);
     }
 
     public boolean requestHasCorrectAuthorization() {
