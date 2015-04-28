@@ -27,10 +27,7 @@ public abstract class Response {
         Hashtable<String, String> headers = new Hashtable<>();
         headers.put("options", "Allow: GET,HEAD,POST,OPTIONS,PUT");
         headers.put("location", "Location: http://localhost:5000/");
-        headers.put("Accept:", "text/plain");
-        headers.put("content", "Content-Type: text/html");
         headers.put("Host:", "http://localhost:5000/");
-        headers.put("Accept-Ranges:", "bytes");
 
         return headers;
     }
