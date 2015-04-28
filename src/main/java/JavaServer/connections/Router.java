@@ -42,10 +42,10 @@ public class Router {
     }
 
     public String getResponse() {
-        return responseBuilder.getResponseHeaders(request);
+        return responseBuilder.getResponseHeaders();
     }
 
     public String getBody() throws IOException {
-        return responseBuilder.getBody(request);
+        return responseBuilder.getBody();
     }
 }

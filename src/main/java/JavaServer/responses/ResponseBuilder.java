@@ -1,6 +1,5 @@
 package JavaServer.responses;
 
-import JavaServer.requests.Request;
 import JavaServer.responses.methods.Response;
 
 import java.io.IOException;
@@ -14,7 +13,7 @@ public class ResponseBuilder {
         this.requestManager = requestManager;
     }
 
-    public String getResponseHeaders(Request request) {
+    public String getResponseHeaders() {
         String responseString = "";
 
         responseString += requestManager.getCorrectStatus() + BLANK_LINE;
@@ -22,7 +21,7 @@ public class ResponseBuilder {
         return responseString;
     }
 
-    public String getBody(Request request) throws IOException {
+    public String getBody() throws IOException {
         return requestManager.getCorrectBody();
     }
 }
