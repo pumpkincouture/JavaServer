@@ -1,11 +1,11 @@
 package JavaServer.requests;
 
+import java.net.URLDecoder;
 import java.util.*;
 
 public class RequestParser {
     static final int FIRST_ELEMENT = 0;
     static final int SECOND_ELEMENT = 1;
-    static final int ELEMENTS_IN_REQUEST_LINE = 3;
     static final String LINE_BREAK = "\\n";
     static final String EMPTY_SPACE = " ";
     static final String COLON = ": ";
@@ -14,16 +14,25 @@ public class RequestParser {
     static final String AUTHORIZATION = "Authorization";
 
     String request;
-    String[] splitFirstLine;
+    String[] splitFirstLineWithParams;
     String[] splitRequest;
 
     public RequestParser(String request) {
         this.request = request;
-        splitFirstLine = request.split(EMPTY_SPACE , ELEMENTS_IN_REQUEST_LINE);
+        splitRequest();
+    }
+
+    public void splitRequest() {
+        if (request.contains("/parameters?")) {
+            splitFirstLineWithParams = request.split(EMPTY_SPACE);
+        } else if (!request.contains("/parameters?")) {
+            splitFirstLineWithParams = request.split(EMPTY_SPACE);
+        }
         splitRequest = request.split((blankLine()));
     }
 
    public String getMethod() {
+//       System.out.println(URLDecoder.decode(request));
 //       System.out.println(request + " the request string");
 //       System.out.println(splitFirstLine.length + " the length of the request string");
        //cannot split the string right away - move splitfirstline to a method that can handle
@@ -32,6 +41,7 @@ public class RequestParser {
    }
 
     public String getPath() {
+        System.out.println(findPath());
         return findPath();
     }
 
@@ -40,15 +50,21 @@ public class RequestParser {
     }
 
     public HashMap<String, String> getData() {
+        if (request.contains("/parameters?")) {
+            decodeParameters(separatePathFromParams(splitFirstLineWithParams[SECOND_ELEMENT]));
+        }
         return createTable(getMatchingStrings(EQUAL_SIGN), EQUAL_SIGN);
     }
 
     private String findMethod() {
-        return splitFirstLine[FIRST_ELEMENT];
+        return splitFirstLineWithParams[FIRST_ELEMENT];
     }
 
     private String findPath() {
-        return splitFirstLine[SECOND_ELEMENT];
+        if (!request.contains("/parameters?")) {
+            return splitFirstLineWithParams[SECOND_ELEMENT];
+        }
+        return extractPath(splitFirstLineWithParams[SECOND_ELEMENT]);
     }
 
     private List<String> getMatchingStrings(String stringToMatch) {
@@ -65,6 +81,31 @@ public class RequestParser {
             }
         }
         return stringsList;
+    }
+
+    private String extractPath(String lineToParse) {
+        String[] getPath = lineToParse.split("\\?");
+
+        return getPath[FIRST_ELEMENT];
+    }
+
+    private String separatePathFromParams(String toSeparate) {
+        String[] getPath = toSeparate.split("\\?");
+
+        return getPath[SECOND_ELEMENT];
+    }
+
+    private String[] decodeParameters(String firstLine) {
+        HashMap<String, String> params = new HashMap<>();
+        String[] splitLine = firstLine.split("&");
+
+        for (String string : splitLine) {
+            String[] split = string.split(EQUAL_SIGN);
+            params.put(split[0], URLDecoder.decode(split[1]));
+        }
+
+        return splitLine;
+
     }
 
     private HashMap<String, String> createTable(List<String> listOfStrings, String stringToSplitOn) {
