@@ -14,7 +14,6 @@ public abstract class Response {
 
     public abstract String getCorrectBody() throws IOException;
 
-
     public Hashtable<String, String> getCodes() {
         Hashtable<String, String> codes = new Hashtable<>();
         codes.put("200", "HTTP/1.1 200 OK");
