@@ -36,7 +36,7 @@ public class GetResponseTest {
         fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
 
-        requestHandler = new GetResponse(fileManager, dataManager);
+        requestHandler = new GetResponse(fileManager, dataManager, request.getPath());
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
     }
@@ -49,7 +49,7 @@ public class GetResponseTest {
         fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
 
-        requestHandler = new GetResponse(fileManager, dataManager);
+        requestHandler = new GetResponse(fileManager, dataManager, request.getPath());
 
         assertEquals("", requestHandler.getCorrectHeaders());
     }

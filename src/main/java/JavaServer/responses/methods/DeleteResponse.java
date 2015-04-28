@@ -4,14 +4,16 @@ import JavaServer.responses.DataManager;
 
 public class DeleteResponse extends Response {
     private DataManager dataManager;
+    private String requestPath;
 
-    public DeleteResponse(DataManager dataManager) {
+    public DeleteResponse(DataManager dataManager, String requestPath) {
         this.dataManager = dataManager;
+        this.requestPath = requestPath;
     }
 
     @Override
     public String getCorrectStatus() {
-        if (request.getPath().equals("/form")) {
+        if (requestPath.equals("/form")) {
             dataManager.resetData();
         }
         return getCodes().get("200");

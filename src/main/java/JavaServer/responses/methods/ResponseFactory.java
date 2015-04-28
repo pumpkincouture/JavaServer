@@ -34,7 +34,7 @@ public class ResponseFactory {
         }
         else if (routeValidator.methodEqualsGet()) {
             if (routeValidator.isDirectory()) {
-                return new GetResponse(fileManager, dataManager);
+                return new GetResponse(fileManager, dataManager, request.getPath());
                 }
             if (fileManager.doesFileExist()) {
                     return new ContentResponse(fileManager);
@@ -45,14 +45,14 @@ public class ResponseFactory {
                 }
                 return new UnauthorizedResponse();
             }
-            return new GetResponse(fileManager, dataManager);
+            return new GetResponse(fileManager, dataManager, request.getPath());
         }
         else if (routeValidator.methodEqualsPost()) {
-            return new PostResponse(dataManager);
+            return new PostResponse(dataManager, request.getPath(), request.getData());
         } else if (routeValidator.methodEqualsPut()) {
-            return new PutResponse(dataManager);
+            return new PutResponse(dataManager, request.getPath(), request.getData());
         } else if (routeValidator.methodEqualsDelete()) {
-            return new DeleteResponse(dataManager);
+            return new DeleteResponse(dataManager, request.getPath());
         }
         return new FourOhFourResponse();
     }

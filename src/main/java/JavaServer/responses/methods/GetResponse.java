@@ -6,10 +6,12 @@ import JavaServer.responses.FileManager;
 public class GetResponse extends Response {
     private FileManager fileManager;
     private DataManager dataManager;
+    private String requestPath;
 
-    public GetResponse(FileManager fileManager, DataManager dataManager) {
+    public GetResponse(FileManager fileManager, DataManager dataManager, String requestPath) {
         this.fileManager = fileManager;
         this.dataManager = dataManager;
+        this.requestPath = requestPath;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class GetResponse extends Response {
     public String getCorrectBody() {
         if (fileManager.doesFileExist()) {
             return fileManager.getDirectoryLinks();
-        } else if (request.getPath().equals("/form")) {
+        } else if (requestPath.equals("/form")) {
             return dataManager.getRequestData();
         }
         return EMPTY_STRING;
