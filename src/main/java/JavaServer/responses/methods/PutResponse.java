@@ -1,6 +1,5 @@
 package JavaServer.responses.methods;
 
-import JavaServer.requests.Request;
 import JavaServer.responses.DataManager;
 
 public class PutResponse extends Response {
@@ -11,7 +10,7 @@ public class PutResponse extends Response {
     }
 
     @Override
-    public String getCorrectStatus(Request request) {
+    public String getCorrectStatus() {
         if (request.getPath().equals("/form")) {
             dataManager.resetData();
             dataManager.updateRequestData(request.getData());
@@ -23,12 +22,12 @@ public class PutResponse extends Response {
     }
 
     @Override
-    public String getCorrectHeaders(Request request) {
+    public String getCorrectHeaders() {
         return EMPTY_STRING;
     }
 
     @Override
-    public String getCorrectBody(Request request) {
+    public String getCorrectBody() {
         return EMPTY_STRING;
     }
 }

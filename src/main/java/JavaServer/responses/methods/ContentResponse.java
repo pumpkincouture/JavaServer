@@ -1,6 +1,5 @@
 package JavaServer.responses.methods;
 
-import JavaServer.requests.Request;
 import JavaServer.responses.FileManager;
 
 public class ContentResponse extends Response {
@@ -11,17 +10,17 @@ public class ContentResponse extends Response {
     }
 
     @Override
-    public String getCorrectStatus(Request request) {
+    public String getCorrectStatus() {
         return getCodes().get("200");
     }
 
     @Override
-    public String getCorrectHeaders(Request request) {
+    public String getCorrectHeaders() {
         return EMPTY_STRING;
     }
 
     @Override
-    public String getCorrectBody(Request request) {
+    public String getCorrectBody() {
         fileManager.getFileContents();
         return EMPTY_STRING;
     }

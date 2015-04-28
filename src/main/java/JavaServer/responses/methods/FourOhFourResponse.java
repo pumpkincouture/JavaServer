@@ -1,23 +1,21 @@
 package JavaServer.responses.methods;
 
-import JavaServer.requests.Request;
-
 import java.io.IOException;
 
 public class FourOhFourResponse extends Response {
 
     @Override
-    public String getCorrectStatus(Request request) {
+    public String getCorrectStatus() {
         return getCodes().get("404");
     }
 
     @Override
-    public String getCorrectHeaders(Request request) {
+    public String getCorrectHeaders() {
         return EMPTY_STRING;
     }
 
     @Override
-    public String getCorrectBody(Request request) throws IOException {
+    public String getCorrectBody() throws IOException {
         return EMPTY_STRING;
     }
 }

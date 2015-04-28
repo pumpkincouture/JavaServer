@@ -1,23 +1,21 @@
 package JavaServer.responses.methods;
 
-import JavaServer.requests.Request;
-
 import java.io.IOException;
 
 public class RedirectResponse extends Response {
 
     @Override
-    public String getCorrectStatus(Request request) {
+    public String getCorrectStatus() {
         return getCodes().get("302");
     }
 
     @Override
-    public String getCorrectHeaders(Request request) {
+    public String getCorrectHeaders() {
         return getHeaders().get("location");
     }
 
     @Override
-    public String getCorrectBody(Request request) throws IOException {
+    public String getCorrectBody() throws IOException {
         return EMPTY_STRING;
     }
 }

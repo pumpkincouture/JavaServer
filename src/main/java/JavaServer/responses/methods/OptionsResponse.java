@@ -1,21 +1,19 @@
 package JavaServer.responses.methods;
 
-import JavaServer.requests.Request;
-
 public class OptionsResponse extends Response {
 
     @Override
-    public String getCorrectStatus(Request request) {
+    public String getCorrectStatus() {
         return getCodes().get("200");
     }
 
     @Override
-    public String getCorrectHeaders(Request request) {
+    public String getCorrectHeaders() {
         return getHeaders().get("options");
     }
 
     @Override
-    public String getCorrectBody(Request request) {
+    public String getCorrectBody() {
         return EMPTY_STRING;
     }
 }

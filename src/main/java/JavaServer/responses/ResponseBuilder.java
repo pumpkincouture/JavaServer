@@ -17,12 +17,12 @@ public class ResponseBuilder {
     public String getResponseHeaders(Request request) {
         String responseString = "";
 
-        responseString += requestManager.getCorrectStatus(request) + BLANK_LINE;
-        responseString += requestManager.getCorrectHeaders(request) + CARRIAGE_RETURN;
+        responseString += requestManager.getCorrectStatus() + BLANK_LINE;
+        responseString += requestManager.getCorrectHeaders() + CARRIAGE_RETURN;
         return responseString;
     }
 
     public String getBody(Request request) throws IOException {
-        return requestManager.getCorrectBody(request);
+        return requestManager.getCorrectBody();
     }
 }

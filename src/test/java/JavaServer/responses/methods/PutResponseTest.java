@@ -24,7 +24,7 @@ public class PutResponseTest {
         dataManager = new DataManager();
         requestHandler= new PutResponse(dataManager);
 
-        assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus(request));
+        assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class PutResponseTest {
         dataManager = new DataManager();
         requestHandler= new PutResponse(dataManager);
 
-        assertEquals("HTTP/1.1 404 Not Found", requestHandler.getCorrectStatus(request));
+        assertEquals("HTTP/1.1 404 Not Found", requestHandler.getCorrectStatus());
     }
 
     @Test
@@ -46,7 +46,7 @@ public class PutResponseTest {
         dataManager = new DataManager();
         requestHandler= new PutResponse(dataManager);
 
-        assertEquals("HTTP/1.1 405 Method Not Allowed", requestHandler.getCorrectStatus(request));
+        assertEquals("HTTP/1.1 405 Method Not Allowed", requestHandler.getCorrectStatus());
     }
 }
 

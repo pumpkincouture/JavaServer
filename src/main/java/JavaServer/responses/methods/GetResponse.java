@@ -1,6 +1,5 @@
 package JavaServer.responses.methods;
 
-import JavaServer.requests.Request;
 import JavaServer.responses.DataManager;
 import JavaServer.responses.FileManager;
 
@@ -14,17 +13,17 @@ public class GetResponse extends Response {
     }
 
     @Override
-    public String getCorrectStatus(Request request) {
+    public String getCorrectStatus() {
         return getCodes().get("200");
     }
 
     @Override
-    public String getCorrectHeaders(Request request) {
+    public String getCorrectHeaders() {
        return EMPTY_STRING;
     }
 
     @Override
-    public String getCorrectBody(Request request) {
+    public String getCorrectBody() {
         if (fileManager.doesFileExist()) {
             return fileManager.getDirectoryLinks();
         } else if (request.getPath().equals("/form")) {

@@ -19,6 +19,6 @@ public class FourOhFourResponseTest {
 
         requestHandler = new FourOhFourResponse();
 
-        assertEquals("HTTP/1.1 404 Not Found", requestHandler.getCorrectStatus(request));
+        assertEquals("HTTP/1.1 404 Not Found", requestHandler.getCorrectStatus());
     }
 }

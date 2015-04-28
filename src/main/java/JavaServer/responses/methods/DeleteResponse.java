@@ -1,6 +1,5 @@
 package JavaServer.responses.methods;
 
-import JavaServer.requests.Request;
 import JavaServer.responses.DataManager;
 
 public class DeleteResponse extends Response {
@@ -11,7 +10,7 @@ public class DeleteResponse extends Response {
     }
 
     @Override
-    public String getCorrectStatus(Request request) {
+    public String getCorrectStatus() {
         if (request.getPath().equals("/form")) {
             dataManager.resetData();
         }
@@ -19,12 +18,12 @@ public class DeleteResponse extends Response {
     }
 
     @Override
-    public String getCorrectHeaders(Request request) {
+    public String getCorrectHeaders() {
         return EMPTY_STRING;
     }
 
     @Override
-    public String getCorrectBody(Request request) {
+    public String getCorrectBody() {
         return EMPTY_STRING;
     }
 }

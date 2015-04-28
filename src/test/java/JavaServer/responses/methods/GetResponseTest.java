@@ -38,7 +38,7 @@ public class GetResponseTest {
 
         requestHandler = new GetResponse(fileManager, dataManager);
 
-        assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus(request));
+        assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
     }
 
     @Test
@@ -51,6 +51,6 @@ public class GetResponseTest {
 
         requestHandler = new GetResponse(fileManager, dataManager);
 
-        assertEquals("", requestHandler.getCorrectHeaders(request));
+        assertEquals("", requestHandler.getCorrectHeaders());
     }
 }

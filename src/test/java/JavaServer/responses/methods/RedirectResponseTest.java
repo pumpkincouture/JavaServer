@@ -18,6 +18,6 @@ public class RedirectResponseTest {
 
         requestHandler = new RedirectResponse();
 
-        assertEquals("HTTP/1.1 302 Found", requestHandler.getCorrectStatus(request));
+        assertEquals("HTTP/1.1 302 Found", requestHandler.getCorrectStatus());
     }
 }

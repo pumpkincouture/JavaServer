@@ -1,18 +1,16 @@
 package JavaServer.responses.methods;
 
-import JavaServer.requests.Request;
-
 import java.io.IOException;
 import java.util.Hashtable;
 
 public abstract class Response {
     public static final String EMPTY_STRING = "";
 
-    public abstract String getCorrectStatus(Request request);
+    public abstract String getCorrectStatus();
 
-    public abstract String getCorrectHeaders(Request request);
+    public abstract String getCorrectHeaders();
 
-    public abstract String getCorrectBody(Request request) throws IOException;
+    public abstract String getCorrectBody() throws IOException;
 
 
     public Hashtable<String, String> getCodes() {
