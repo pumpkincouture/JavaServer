@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RouteValidator {
+    public static final String FORM = "/form";
+    public static final String PARAMETERS = "/parameters";
     private Request request;
     private List<String> validMethods;
     private List<String> allValidPaths = new ArrayList<>();
@@ -26,8 +28,9 @@ public class RouteValidator {
         allValidPaths.add(DIRECTORY);
         allValidPaths.add(OPTIONS);
         allValidPaths.add(REDIRECT);
-        allValidPaths.add("/form");
+        allValidPaths.add(FORM);
         allValidPaths.add(LOGS);
+        allValidPaths.add(PARAMETERS);
     }
 
     public boolean methodEqualsGet() {
@@ -56,6 +59,10 @@ public class RouteValidator {
 
     public boolean isDirectory() {
         return request.getPath().equals(DIRECTORY);
+    }
+
+    public boolean isParameterPath() {
+        return request.getPath().equals(PARAMETERS) && request.getMethod().equals(GET_METHOD);
     }
 
     public boolean isInvalidPath() {

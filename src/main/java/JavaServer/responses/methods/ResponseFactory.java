@@ -32,6 +32,10 @@ public class ResponseFactory {
         else if (routeValidator.isOptionsPath()) {
             return new OptionsResponse();
         }
+        else if (routeValidator.isParameterPath()) {
+            System.out.println("Im here!");
+            return new ParamResponse(dataManager, request.getData());
+        }
         else if (routeValidator.methodEqualsGet()) {
             if (routeValidator.isDirectory()) {
                 return new GetResponse(fileManager, dataManager, request.getPath());
