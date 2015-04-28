@@ -56,15 +56,6 @@ public class FileManager {
         readBytesFromFile();
     }
 
-    public boolean isFileImage() {
-        String fileExtension = getFileExtension(filePath);
-
-        if (validImageExtensions().contains(fileExtension)) {
-            return true;
-        }
-        return false;
-    }
-
     private File getMainDirectory() {
         return filePath.getParentFile();
     }
@@ -80,24 +71,5 @@ public class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private List<String> validImageExtensions() {
-        List<String> imageExtensions = new ArrayList<>();
-
-        imageExtensions.add("jpeg");
-        imageExtensions.add("jpg");
-        imageExtensions.add("gif");
-        imageExtensions.add("png");
-
-        return imageExtensions;
-    }
-
-    private String getFileExtension(File filepath) {
-        String fileName = filepath.getName();
-        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
-            return fileName.substring(fileName.lastIndexOf(".") + 1);
-        }
-        return "";
     }
 }
