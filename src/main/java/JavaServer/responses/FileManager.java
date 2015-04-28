@@ -52,35 +52,8 @@ public class FileManager {
         return directoryFiles;
     }
 
-    public String getFileContents()  {
-        String fileContent = "";
-        try {
-
-            InputStream file = new FileInputStream(filePath.toString());
-            byte[] bytes = Files.readAllBytes(filePath.toPath());
-
-            while (file.read(bytes) > 0) {
-                out.write(bytes);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return fileContent;
-    }
-
-    public void getImageContents() {
-        try {
-            InputStream file = new FileInputStream(filePath.toString());
-
-            byte[] bytes = Files.readAllBytes(filePath.toPath());
-
-            while (file.read( bytes ) > 0) {
-                out.write(bytes);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void getFileContents()  {
+        readBytesFromFile();
     }
 
     public boolean isFileImage() {
@@ -94,6 +67,19 @@ public class FileManager {
 
     private File getMainDirectory() {
         return filePath.getParentFile();
+    }
+
+    private void readBytesFromFile() {
+        try {
+            InputStream file = new FileInputStream(filePath.toString());
+            byte[] bytes = Files.readAllBytes(filePath.toPath());
+
+            while (file.read(bytes) > 0) {
+                out.write(bytes);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private List<String> validImageExtensions() {
