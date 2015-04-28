@@ -56,14 +56,12 @@ public class FileManager {
         String fileContent = "";
         try {
 
-            BufferedReader reader = new BufferedReader(new FileReader(filePath.toString()));
+            InputStream file = new FileInputStream(filePath.toString());
+            byte[] bytes = Files.readAllBytes(filePath.toPath());
 
-            String endOfLines = null;
-
-            while ((endOfLines = reader.readLine()) != null) {
-                out.writeBytes(endOfLines);
+            while (file.read(bytes) > 0) {
+                out.write(bytes);
             }
-            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
