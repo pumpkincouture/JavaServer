@@ -68,9 +68,25 @@ public class RequestParser {
     private void parseAndReturnData() {
         if (request.contains("/parameters?")) {
             data = decodeParameters(separatePathFromParams(splitFirstLineWithParams[SECOND_ELEMENT]));
-        } else if (!request.contains("/parameters?")) {
+        } else if (request.contains("PATCH")) {
+            data = getPatchedData();
+        }
+        else if (!request.contains("/parameters?")) {
             data = createTable(getMatchingStrings(EQUAL_SIGN), EQUAL_SIGN);
         }
+    }
+
+    private HashMap<String, String> getPatchedData() {
+        HashMap<String, String> params = new HashMap<>();
+        for (String string : splitRequest) {
+            if (string.contains("patched") || string.contains("default")) {
+                String[] patchedContent = string.split(EMPTY_SPACE);
+                for (String patchedStrings : patchedContent) {
+                    params.put(patchedStrings, patchedStrings);
+                }
+            }
+        }
+        return params;
     }
 
     private List<String> getMatchingStrings(String stringToMatch) {
@@ -120,7 +136,8 @@ public class RequestParser {
 
         if (listOfStrings.size() == 0) {
             return table;
-        } else {
+        }
+        else {
             for (String string : listOfStrings) {
                 String[] splitHeaders = string.split(stringToSplitOn);
 

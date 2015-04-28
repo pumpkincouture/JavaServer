@@ -42,6 +42,12 @@ public class FileManager {
         return paths;
     }
 
+    public void patchFile(String newData) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath, true)));
+        bw.write(newData);
+        bw.close();
+    }
+
     public List<String> getDirectoryFiles() {
         List<String> directoryFiles;
 

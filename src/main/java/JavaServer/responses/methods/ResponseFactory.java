@@ -56,6 +56,8 @@ public class ResponseFactory {
             return new PutResponse(dataManager, request.getPath(), request.getData());
         } else if (routeValidator.methodEqualsDelete()) {
             return new DeleteResponse(dataManager, request.getPath());
+        } else if (routeValidator.methodEqualsPatch() && request.containsEtagAuthorization()) {
+            return new PatchResponse(dataManager, request.getData(), fileManager);
         }
         return new FourOhFourResponse();
     }

@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RouteValidator {
-    public static final String FORM = "/form";
-    public static final String PARAMETERS = "/parameters";
+    public static final String PATCH_PATH = "/patch-content.txt";
     private Request request;
     private List<String> validMethods;
     private List<String> allValidPaths = new ArrayList<>();
     private static final String AUTHORIZATION = "Basic YWRtaW46aHVudGVyMg==";
-    private static final String GET_METHOD = "GET";
-    private static final String POST_METHOD = "POST";
-    private static final String PUT_METHOD = "PUT";
-    private static final String DELETE_METHOD = "DELETE";
+    public static final String FORM = "/form";
+    public static final String PARAMETERS = "/parameters";
+    public static final String PATCH = "PATCH";
+    private static final String GET = "GET";
+    private static final String POST = "POST";
+    private static final String PUT = "PUT";
+    private static final String DELETE = "DELETE";
     private static final String REDIRECT = "/redirect";
     private static final String LOGS = "/logs";
     private static final String OPTIONS = "/method_options";
@@ -31,22 +33,27 @@ public class RouteValidator {
         allValidPaths.add(FORM);
         allValidPaths.add(LOGS);
         allValidPaths.add(PARAMETERS);
+        allValidPaths.add(PATCH_PATH);
     }
 
     public boolean methodEqualsGet() {
-        return request.getMethod().equals(GET_METHOD);
+        return request.getMethod().equals(GET);
     }
 
     public boolean methodEqualsPost() {
-        return request.getMethod().equals(POST_METHOD);
+        return request.getMethod().equals(POST);
     }
 
     public boolean methodEqualsPut() {
-        return request.getMethod().equals(PUT_METHOD);
+        return request.getMethod().equals(PUT);
     }
 
     public boolean methodEqualsDelete() {
-        return request.getMethod().equals(DELETE_METHOD);
+        return request.getMethod().equals(DELETE);
+    }
+
+    public boolean methodEqualsPatch() {
+        return request.getMethod().equals(PATCH);
     }
 
     public boolean isRedirectPath() {
@@ -61,8 +68,12 @@ public class RouteValidator {
         return request.getPath().equals(DIRECTORY);
     }
 
+    public boolean isPatchPath() {
+        return methodEqualsGet() && request.getPath().equals(PATCH_PATH);
+    }
+
     public boolean isParameterPath() {
-        return request.getPath().equals(PARAMETERS) && request.getMethod().equals(GET_METHOD);
+        return request.getPath().equals(PARAMETERS) && request.getMethod().equals(GET);
     }
 
     public boolean isInvalidPath() {
@@ -90,6 +101,7 @@ public class RouteValidator {
         validMethods.add("POST");
         validMethods.add("PUT");
         validMethods.add("DELETE");
+        validMethods.add("PATCH");
 
         return validMethods;
     }

@@ -32,6 +32,10 @@ public class Request {
         return data;
     }
 
+    public boolean containsEtagAuthorization() {
+        return headers.get("If-Match") != null;
+    }
+
     public String getRequestLine() {
         return "" + requestMethod + " " + path + " " + "HTTP/1.1";
     }
