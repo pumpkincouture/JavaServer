@@ -19,7 +19,7 @@ public class PutResponse extends Response {
     public String getCorrectStatus() {
         if (requestPath.equals("/form")) {
             dataManager.resetData();
-            dataManager.updateRequestData(requestdata);
+            dataManager.updateRequestData(requestdata, EQUAL_SIGN);
             return getCodes().get("200");
         } else if (requestPath.equals("/file1")) {
             return getCodes().get("405");

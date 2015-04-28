@@ -18,7 +18,7 @@ public class PostResponse extends Response {
     @Override
     public String getCorrectStatus() {
         if (requestPath.equals("/form")) {
-            dataManager.updateRequestData(requestData);
+            dataManager.updateRequestData(requestData, EQUAL_SIGN);
             return getCodes().get("200");
         } else if (requestPath.equals("/text-file.txt")) {
             return getCodes().get("405");

@@ -5,6 +5,8 @@ import java.util.Hashtable;
 
 public abstract class Response {
     public static final String EMPTY_STRING = "";
+    public static final String EQUAL_SIGN = "=";
+    public static final String EQUALITY_WITH_SPACES = " = ";
 
     public abstract String getCorrectStatus();
 
@@ -28,7 +30,7 @@ public abstract class Response {
         headers.put("options", "Allow: GET,HEAD,POST,OPTIONS,PUT");
         headers.put("location", "Location: http://localhost:5000/");
         headers.put("Host:", "http://localhost:5000/");
-        
+
         return headers;
     }
 }

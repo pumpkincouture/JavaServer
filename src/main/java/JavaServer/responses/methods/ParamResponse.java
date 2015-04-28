@@ -16,7 +16,7 @@ public class ParamResponse extends Response {
 
     @Override
     public String getCorrectStatus() {
-        return EMPTY_STRING;
+        return getCodes().get("200");
     }
 
     @Override
@@ -26,8 +26,7 @@ public class ParamResponse extends Response {
 
     @Override
     public String getCorrectBody() throws IOException {
-        dataManager.updateRequestData(requestData);
-        System.out.println(dataManager.getRequestData());
+        dataManager.updateRequestData(requestData, EQUALITY_WITH_SPACES);
         return dataManager.getRequestData();
     }
 }

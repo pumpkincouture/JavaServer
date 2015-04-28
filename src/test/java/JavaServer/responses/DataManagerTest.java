@@ -23,7 +23,7 @@ public class DataManagerTest {
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         dataManager = new DataManager();
-        dataManager.updateRequestData(request.getData());
+        dataManager.updateRequestData(request.getData(), "=");
 
         assertEquals("first_name=sylwialast_name=olakage=26", dataManager.getRequestData());
     }
@@ -37,7 +37,7 @@ public class DataManagerTest {
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         dataManager = new DataManager();
-        dataManager.updateRequestData(request.getData());
+        dataManager.updateRequestData(request.getData(), "=");
 
         assertEquals("", dataManager.getRequestData());
     }

@@ -33,7 +33,6 @@ public class ResponseFactory {
             return new OptionsResponse();
         }
         else if (routeValidator.isParameterPath()) {
-            System.out.println("Im here!");
             return new ParamResponse(dataManager, request.getData());
         }
         else if (routeValidator.methodEqualsGet()) {
