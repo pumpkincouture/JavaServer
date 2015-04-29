@@ -88,7 +88,7 @@ public class RequestParserTest {
     }
 
     @Test
-    public void getContentTypeFromHeadersList() {
+    public void contentTypeShouldExistInHeaders() {
         requestParser = new RequestParser("POST /form HTTP/1.1\n"+
                                           "Content-Type: application/x-www-form-url-encoded\n"+
                                           "Host: https://sylwiaolak.com\n"+
@@ -99,7 +99,7 @@ public class RequestParserTest {
     }
 
     @Test
-    public void getHostFromHeadersList() {
+    public void hostShouldExistInHeaders() {
         requestParser = new RequestParser("POST /form HTTP/1.1\n"+
                                           "Content-Type: application/x-www-form-url-encoded\n"+
                                           "Host: https://sylwiaolak.com\n"+
@@ -110,7 +110,7 @@ public class RequestParserTest {
     }
 
     @Test
-    public void getAuthorizationFromList() {
+    public void authorizationShouldExistInHeaders() {
         requestParser = new RequestParser("GET /logs HTTP/1.1\n" +
                                           "Authorization: Basic YWRtaW46aHVudGVyMg==\n" +
                                           "Host: localhost:5000\n" +
