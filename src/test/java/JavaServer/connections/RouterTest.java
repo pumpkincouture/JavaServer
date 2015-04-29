@@ -135,4 +135,12 @@ public class RouterTest {
 
         assertEquals("HTTP/1.1 200 OK\n" + "\r\n", router.getResponse());
     }
+
+    @Test
+    public void returnsUnauthorizedResponseIfMethodIsLogsWithNoAuthorization() throws IOException {
+        createRouter("GET /logs");
+
+        assertEquals("HTTP/1.1 401 Unauthorized\n" + "\r\n", router.getResponse());
+        assertEquals("Authentication required", router.getBody());
+    }
 }
