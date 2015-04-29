@@ -22,6 +22,7 @@ public abstract class Response {
         codes.put("302", "HTTP/1.1 302 Found");
         codes.put("401", "HTTP/1.1 401 Unauthorized");
         codes.put("204", "HTTP/1.1 204 No Content");
+        codes.put("206", "HTTP/1.1 206 Partial Content");
         return codes;
     }
 

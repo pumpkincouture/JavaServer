@@ -39,6 +39,10 @@ public class ResponseFactory {
             if (routeValidator.isDirectory()) {
                 return new GetResponse(fileManager, dataManager, request.getPath());
                 }
+            if (routeValidator.isPartialPath()) {
+                return new PartialResponse(fileManager, "64");
+            }
+
             if (fileManager.doesFileExist()) {
                     return new ContentResponse(fileManager);
                 }

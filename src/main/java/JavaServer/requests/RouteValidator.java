@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RouteValidator {
-    public static final String PATCH_PATH = "/patch-content.txt";
+    public static final String PATCH_CONTENT = "/patch-content.txt";
+    public static final String PARTIAL = "/partial_content.txt";
     private Request request;
     private List<String> validMethods;
     private List<String> allValidPaths = new ArrayList<>();
@@ -33,7 +34,8 @@ public class RouteValidator {
         allValidPaths.add(FORM);
         allValidPaths.add(LOGS);
         allValidPaths.add(PARAMETERS);
-        allValidPaths.add(PATCH_PATH);
+        allValidPaths.add(PATCH_CONTENT);
+        allValidPaths.add(PARTIAL);
     }
 
     public boolean methodEqualsGet() {
@@ -60,6 +62,10 @@ public class RouteValidator {
         return request.getPath().equals(REDIRECT);
     }
 
+    public boolean isPartialPath() {
+        return request.getPath().equals(PARTIAL);
+    }
+
     public boolean isOptionsPath() {
         return request.getPath().equals(OPTIONS);
     }
@@ -69,7 +75,7 @@ public class RouteValidator {
     }
 
     public boolean isPatchPath() {
-        return methodEqualsGet() && request.getPath().equals(PATCH_PATH);
+        return methodEqualsGet() && request.getPath().equals(PATCH_CONTENT);
     }
 
     public boolean isParameterPath() {

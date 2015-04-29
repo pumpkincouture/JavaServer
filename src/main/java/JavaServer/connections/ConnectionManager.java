@@ -32,6 +32,7 @@ public class ConnectionManager {
                 requestLines += (char) in.read();
             } while (in.ready());
 
+            System.out.println(requestLines);
             Router router = new Router(requestLines, directory, out, dataManager, logger);
             router.createHandlers();
 
