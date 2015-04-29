@@ -62,8 +62,8 @@ public class RouteValidator {
         return request.getPath().equals(REDIRECT);
     }
 
-    public boolean isPartialPath() {
-        return request.getPath().equals(PARTIAL);
+    public boolean isPartialPathWithRange() {
+        return request.getPath().equals(PARTIAL) && hasRange();
     }
 
     public boolean isOptionsPath() {
@@ -72,10 +72,6 @@ public class RouteValidator {
 
     public boolean isDirectory() {
         return request.getPath().equals(DIRECTORY);
-    }
-
-    public boolean isPatchPath() {
-        return methodEqualsGet() && request.getPath().equals(PATCH_CONTENT);
     }
 
     public boolean isParameterPath() {
@@ -95,7 +91,26 @@ public class RouteValidator {
     }
 
     public boolean requestHasCorrectAuthorization() {
-        return request.hasAuthorization() && request.getAuthorizationCode().contains(AUTHORIZATION);
+        return hasAuthorization() && getAuthorizationCode().contains(AUTHORIZATION);
+    }
+
+    public boolean containsEtagAuthorization() {
+        return request.getHeaders().get("If-Match") != null;
+    }
+
+    private boolean hasRange() {
+        return request.getHeaders().get("Range") != null;
+    }
+
+    private boolean hasAuthorization() {
+        return request.getHeaders().get("Authorization") != null;
+    }
+
+    private String getAuthorizationCode() {
+        if (hasAuthorization()) {
+            return request.getHeaders().get("Authorization");
+        }
+        return "";
     }
 
     private List<String> getValidMethods() {

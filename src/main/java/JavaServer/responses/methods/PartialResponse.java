@@ -3,14 +3,15 @@ package JavaServer.responses.methods;
 import JavaServer.responses.FileManager;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class PartialResponse extends Response {
     private FileManager fileManager;
-    private String byteRange;
+    private Map<String, String> requestHeaders;
 
-    public PartialResponse(FileManager fileManager, String byteRange) {
+    public PartialResponse(FileManager fileManager, Map<String, String> requestHeaders) {
         this.fileManager = fileManager;
-        this.byteRange = byteRange;
+        this.requestHeaders = requestHeaders;
     }
 
     @Override
@@ -25,6 +26,7 @@ public class PartialResponse extends Response {
 
     @Override
     public String getCorrectBody() throws IOException {
+        fileManager.getPartialFileContents(requestHeaders);
         return EMPTY_STRING;
     }
 }

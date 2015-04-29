@@ -1,5 +1,9 @@
 package JavaServer.connections;
 
+import JavaServer.requests.Logger;
+import JavaServer.responses.DataManager;
+import org.junit.Test;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
@@ -16,4 +20,24 @@ public class ConnectionManagerTest {
         BufferedReader reader = new BufferedReader(new InputStreamReader(mockInputStream));
         return reader;
     }
+
+    private DataOutputStream createDataOutPut() throws UnsupportedEncodingException {
+        ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
+
+        DataOutputStream out = new DataOutputStream(mockInputStream);
+        return out;
+    }
+
+    @Test
+    public void itRespondsToRequest() throws IOException {
+        MockSocket socket = new MockSocket();
+        String input = String.valueOf(socket.createMockInput());
+        String directory = "Users/code/JavaServer/public/";
+        DataManager dataManager = new DataManager();
+        Logger logger = new Logger();
+
+        new ConnectionManager(createFakeInput(input), socket, directory, dataManager, createDataOutPut(), logger);
+        String output = String.valueOf(createDataOutPut());
+    }
+
 }

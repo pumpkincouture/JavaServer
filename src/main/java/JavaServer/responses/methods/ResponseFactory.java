@@ -39,10 +39,9 @@ public class ResponseFactory {
             if (routeValidator.isDirectory()) {
                 return new GetResponse(fileManager, dataManager, request.getPath());
                 }
-            if (routeValidator.isPartialPath()) {
-                return new PartialResponse(fileManager, "64");
+            if (routeValidator.isPartialPathWithRange()) {
+                return new PartialResponse(fileManager, request.getHeaders());
             }
-
             if (fileManager.doesFileExist()) {
                     return new ContentResponse(fileManager);
                 }
@@ -60,7 +59,7 @@ public class ResponseFactory {
             return new PutResponse(dataManager, request.getPath(), request.getData());
         } else if (routeValidator.methodEqualsDelete()) {
             return new DeleteResponse(dataManager, request.getPath());
-        } else if (routeValidator.methodEqualsPatch() && request.containsEtagAuthorization()) {
+        } else if (routeValidator.methodEqualsPatch() && routeValidator.containsEtagAuthorization()) {
             return new PatchResponse(dataManager, request.getData(), fileManager);
         }
         return new FourOhFourResponse();

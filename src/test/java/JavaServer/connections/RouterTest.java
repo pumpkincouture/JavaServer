@@ -14,7 +14,7 @@ public class RouterTest {
     private DataManager dataManager;
     private Logger logger;
 
-    private DataOutputStream createFakeInput(String input) throws UnsupportedEncodingException {
+    private DataOutputStream createFakeInput() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
 
         DataOutputStream out = new DataOutputStream(mockInputStream);
@@ -26,7 +26,7 @@ public class RouterTest {
         dataManager = new DataManager();
         directory = "/Users/test/code/JavaServer/public";
         try {
-            router = new Router(request, directory, createFakeInput(request), dataManager, logger);
+            router = new Router(request, directory, createFakeInput(), dataManager, logger);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

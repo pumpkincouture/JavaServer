@@ -33,11 +33,6 @@ public class RequestParser {
     }
 
    public String getMethod() {
-//       System.out.println(URLDecoder.decode(request));
-//       System.out.println(request + " the request string");
-//       System.out.println(splitFirstLine.length + " the length of the request string");
-       //cannot split the string right away - move splitfirstline to a method that can handle
-//       System.out.println(findMethod() + " the found method");
        return findMethod();
    }
 
@@ -62,12 +57,12 @@ public class RequestParser {
         if (!request.contains("/parameters?")) {
             return splitFirstLineWithParams[SECOND_ELEMENT];
         }
-        return extractPath(splitFirstLineWithParams[SECOND_ELEMENT]);
+        return extractPath(splitFirstLineWithParams[SECOND_ELEMENT], FIRST_ELEMENT);
     }
 
     private void parseAndReturnData() {
         if (request.contains("/parameters?")) {
-            data = decodeParameters(separatePathFromParams(splitFirstLineWithParams[SECOND_ELEMENT]));
+            data = decodeParameters(extractPath(splitFirstLineWithParams[SECOND_ELEMENT], SECOND_ELEMENT));
         } else if (request.contains("PATCH")) {
             data = getPatchedData();
         }
@@ -105,16 +100,10 @@ public class RequestParser {
         return stringsList;
     }
 
-    private String extractPath(String lineToParse) {
-        String[] getPath = lineToParse.split("\\?");
-
-        return getPath[FIRST_ELEMENT];
-    }
-
-    private String separatePathFromParams(String toSeparate) {
+    private String extractPath(String toSeparate, int element) {
         String[] getPath = toSeparate.split("\\?");
 
-        return getPath[SECOND_ELEMENT];
+        return getPath[element];
     }
 
     private HashMap<String, String> decodeParameters(String firstLine) {
@@ -132,7 +121,6 @@ public class RequestParser {
 
     private HashMap<String, String> createTable(List<String> listOfStrings, String stringToSplitOn) {
         HashMap<String, String> table = new LinkedHashMap<>();
-
 
         if (listOfStrings.size() == 0) {
             return table;

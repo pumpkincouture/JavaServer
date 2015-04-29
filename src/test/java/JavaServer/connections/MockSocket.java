@@ -5,21 +5,21 @@ import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-public class MockSocket {
+public class MockSocket extends Socket {
     private InputStream mockIn;
-    private String input;
     private OutputStream mockOut;
 
-    public MockSocket(String input) {
-        this.input = input;
+    public MockSocket() {
         mockIn = createMockInput();
         mockOut = new ByteOutputStream();
     }
 
-    private InputStream createMockInput() {
-        InputStream mockInputStream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
+    public InputStream createMockInput() {
+        String exampleInput = "GET / HTTP/1.1";
+        InputStream mockInputStream = new ByteArrayInputStream(exampleInput.getBytes(StandardCharsets.UTF_8));
 
         return mockInputStream;
     }

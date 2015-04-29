@@ -108,4 +108,15 @@ public class RequestParserTest {
 
         assertEquals("https://sylwiaolak.com", requestParser.getHeaders().get("Host"));
     }
+
+
+    @Test
+    public void getAuthorizationFromList() {
+        requestParser = new RequestParser("GET /logs HTTP/1.1\n" +
+                                          "Authorization: Basic YWRtaW46aHVudGVyMg==\n" +
+                                          "Host: localhost:5000\n" +
+                                          "\n");
+
+        assertEquals("Basic YWRtaW46aHVudGVyMg==", requestParser.getHeaders().get("Authorization"));
+    }
 }
