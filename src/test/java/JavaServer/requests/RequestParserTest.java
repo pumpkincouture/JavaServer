@@ -109,7 +109,6 @@ public class RequestParserTest {
         assertEquals("https://sylwiaolak.com", requestParser.getHeaders().get("Host"));
     }
 
-
     @Test
     public void getAuthorizationFromList() {
         requestParser = new RequestParser("GET /logs HTTP/1.1\n" +
@@ -118,5 +117,15 @@ public class RequestParserTest {
                                           "\n");
 
         assertEquals("Basic YWRtaW46aHVudGVyMg==", requestParser.getHeaders().get("Authorization"));
+    }
+
+    @Test
+    public void parseRequestLineIfAllParamsAreInFirstLine() {
+        requestParser = new RequestParser("GET /parameters?variable_1=Operators%20%3C%2C%20%3E%2C%20%3D%2C%20!%3D%3B%20%2B%2C%20-%2C%20*%2C%20%26%2C%20%40%2C%20%23%2C%20%24%2C%20%5B%2C%20%5D%3A%20%22is%20that%20all%22%3F&variable_2=stuff HTTP/1.1");
+
+        assertEquals("GET", requestParser.getMethod());
+        assertEquals("/parameters", requestParser.getPath());
+        assertEquals("Operators <, >, =, !=; +, -, *, &, @, #, $, [, ]: \"is that all\"?", requestParser.getData().get("variable_1"));
+        assertEquals("stuff", requestParser.getData().get("variable_2"));
     }
 }

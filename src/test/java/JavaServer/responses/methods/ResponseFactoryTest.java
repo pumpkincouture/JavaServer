@@ -135,7 +135,7 @@ public class ResponseFactoryTest {
     }
 
     @Test
-    public void returnsUnAuthorizedResponseIfMethodIsLogsButHasNotAuthorization() throws UnsupportedEncodingException {
+    public void returnsUnAuthorizedResponseIfMethodIsLogsButHasNoAuthorization() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/logs");
         fileManager = new FileManager(path, mockDataStream());
         dataManager = new DataManager();
