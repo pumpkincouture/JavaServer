@@ -7,11 +7,11 @@ public class DataManager {
     private String patchDataString = "";
 
     public void updateRequestData(Map<String, String> updatedData, String typeOfEqualitySign) {
-        this.requestDataString = turnDataIntoString(updatedData, typeOfEqualitySign);
+        turnDataIntoString(updatedData, typeOfEqualitySign);
     }
 
-    public void updatePatchedContent(Map<String, String> patchedData) {
-        this.patchDataString = getPatchString(patchedData);
+    public void updateRequestData(Map<String, String> patchedData) {
+        turnDataIntoString(patchedData);
     }
 
     public String getPatchedData() {
@@ -26,21 +26,15 @@ public class DataManager {
         this.requestDataString = "";
     }
 
-    private String getPatchString(Map<String, String> patchData) {
-        String patchedDataString = "";
-
+    private void turnDataIntoString(Map<String, String> patchData) {
         for (Map.Entry<String, String> entry : patchData.entrySet()) {
-            patchedDataString += entry.getValue() + " ";
+            patchDataString += entry.getValue() + " ";
         }
-        return patchedDataString;
     }
 
-    private String turnDataIntoString(Map<String, String> updatedData, String typeOfEqualitySign) {
-        String dataString = "";
-
+    private void turnDataIntoString(Map<String, String> updatedData, String typeOfEqualitySign) {
         for (Map.Entry<String, String> entry : updatedData.entrySet()) {
-            dataString += entry.getKey() + typeOfEqualitySign + entry.getValue();
+            requestDataString += entry.getKey() + typeOfEqualitySign + entry.getValue();
         }
-        return dataString;
     }
 }

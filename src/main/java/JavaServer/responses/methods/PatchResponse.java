@@ -19,7 +19,7 @@ public class PatchResponse extends Response {
 
     @Override
     public String getCorrectStatus() {
-        dataManager.updatePatchedContent(requestdata);
+        dataManager.updateRequestData(requestdata);
         try {
             fileManager.patchFile(dataManager.getPatchedData());
         } catch (IOException e) {
