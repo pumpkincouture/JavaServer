@@ -2,14 +2,13 @@ package JavaServer.responses;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class FileManager {
     private File filePath;
     private DataOutputStream out;
+    private String start;
+    private String end;
 
     public FileManager(File filePath, DataOutputStream out) {
         this.filePath = filePath;
@@ -64,32 +63,35 @@ public class FileManager {
     }
 
     public void getPartialFileContents(Map<String, String> byteRange) throws IOException {
-        readPartialBytesFromFile(byteRange);
+        readBytesFromFile(byteRange);
     }
 
     private File getMainDirectory() {
         return filePath.getParentFile();
     }
 
-    private void readPartialBytesFromFile(Map<String, String> requestHeaders) throws IOException {
-        if (getRange(requestHeaders).length() > 2) {
-            readBytesFromFile();
-        }
-        readBytesFromFile();
+    private void getRange(Map<String, String> requestHeaders) {
+        String header = requestHeaders.get("Range");
+        String[] rangeValues = header.split("=");
+        String[] values = rangeValues[1].split("-");
+        start = values[0].trim();
+        end = values[1].trim();
     }
 
-    private byte[] getStartOfRange(Map<String, String> requestHeaders, byte[] fileBytes) {
-        return Arrays.copyOfRange(fileBytes, getFirstBoundary(requestHeaders), fileBytes.length);
+    public Integer getStart() {
+        return Integer.parseInt(start);
     }
 
-    private int getFirstBoundary(Map<String, String> requestHeaders) {
-        return Integer.parseInt(getRange(requestHeaders).split("-")[0]);
+    public Integer getEnd() {
+        return Integer.parseInt(end);
     }
 
-    private String getRange(Map<String, String> requestHeaders) {
-//        System.out.println(requestHeaders.get("Range"));
-//        System.out.println(requestHeaders.get("Range").toString().split("=")[1]);
-        return requestHeaders.get("Range").toString().split("=")[1];
+    public boolean hasStart() {
+        return !start.isEmpty();
+    }
+
+    public boolean hasEnd() {
+        return !end.isEmpty();
     }
 
     private void readBytesFromFile() {
@@ -103,5 +105,30 @@ public class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void readBytesFromFile(Map<String, String> requestHeaders) {
+        getRange(requestHeaders);
+        try {
+            InputStream file = new FileInputStream(filePath.toString());
+            byte[] bytes = Files.readAllBytes(filePath.toPath());
+
+            while (file.read(bytes) > 0) {
+                if (!hasStart()) {
+                    out.write(bytes, (getFileLength() - getEnd()), getEnd());
+                } else if (!hasEnd()) {
+                    Integer start = getStart();
+                    out.write(bytes, start, getFileLength() - start);
+                } else {
+                    out.write(bytes, getStart(), getEnd() + 1);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int getFileLength() {
+        return (int) filePath.length();
     }
 }
