@@ -6,7 +6,7 @@ import JavaServer.responses.DataManager;
 import java.io.*;
 import java.net.Socket;
 
-public class ConnectionManager {
+public class ConnectionManager implements Runnable {
     private DataOutputStream out;
     private BufferedReader in;
     private Socket socket;
@@ -23,7 +23,8 @@ public class ConnectionManager {
         this.logger = logger;
     }
 
-    public void executeRequest() throws IOException {
+    @Override
+    public void run() {
         try {
             String requestLines = "";
 
@@ -43,10 +44,8 @@ public class ConnectionManager {
             in.close();
             out.close();
             socket.close();
-        }
-
-        catch (Error err) {
-            System.out.println("Something went wrong!");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

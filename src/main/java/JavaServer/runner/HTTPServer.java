@@ -28,7 +28,8 @@ public class HTTPServer {
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
             ConnectionManager connectionManager = new ConnectionManager(in, clientSocket, directory, dataManager, out, logger);
-            connectionManager.executeRequest();
+            Thread thread = new Thread(connectionManager);
+            thread.start();
         }
     }
 }
