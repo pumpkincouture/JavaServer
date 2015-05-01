@@ -1,6 +1,5 @@
 package JavaServer.connections;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -14,7 +13,6 @@ public class MockSocket extends Socket {
 
     public MockSocket() {
         mockIn = createMockInput();
-        mockOut = new ByteOutputStream();
     }
 
     public InputStream createMockInput() {
