@@ -24,7 +24,6 @@ public class ConnectionManager {
     }
 
     public void executeRequest() throws IOException {
-
         try {
             String requestLines = "";
 

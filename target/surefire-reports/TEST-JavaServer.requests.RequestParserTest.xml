@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="14" failures="0" name="JavaServer.requests.RequestParserTest" time="0.012" errors="0" skipped="0">
+<testsuite tests="14" failures="0" name="JavaServer.requests.RequestParserTest" time="0.006" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib"/>
@@ -61,18 +61,18 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="JavaServer.requests.RequestParserTest" name="returnGETAsMethodInRequestString" time="0.002"/>
-  <testcase classname="JavaServer.requests.RequestParserTest" name="authorizationShouldExistInHeaders" time="0.001"/>
+  <testcase classname="JavaServer.requests.RequestParserTest" name="returnGETAsMethodInRequestString" time="0"/>
+  <testcase classname="JavaServer.requests.RequestParserTest" name="authorizationShouldExistInHeaders" time="0"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="hostShouldExistInHeaders" time="0"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="parseAndStoreMoreThanOnePostParam" time="0"/>
-  <testcase classname="JavaServer.requests.RequestParserTest" name="returnFormAsPathInRequestString" time="0.001"/>
-  <testcase classname="JavaServer.requests.RequestParserTest" name="returnPUTAsMethodInRequestString" time="0.004"/>
-  <testcase classname="JavaServer.requests.RequestParserTest" name="returnOPTIONSAsMethodInRequestString" time="0.001"/>
-  <testcase classname="JavaServer.requests.RequestParserTest" name="parseRequestLineIfAllParamsAreInFirstLine" time="0.003"/>
+  <testcase classname="JavaServer.requests.RequestParserTest" name="returnFormAsPathInRequestString" time="0"/>
+  <testcase classname="JavaServer.requests.RequestParserTest" name="returnPUTAsMethodInRequestString" time="0.001"/>
+  <testcase classname="JavaServer.requests.RequestParserTest" name="returnOPTIONSAsMethodInRequestString" time="0"/>
+  <testcase classname="JavaServer.requests.RequestParserTest" name="parseRequestLineIfAllParamsAreInFirstLine" time="0.004"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="contentTypeShouldExistInHeaders" time="0"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="returnsNullIfThereAreNoValuesInHeadersHashMap" time="0"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="returnMethodOptionsAsPathInRequestString" time="0"/>
-  <testcase classname="JavaServer.requests.RequestParserTest" name="returnPOSTAsMethodInRequestString" time="0"/>
+  <testcase classname="JavaServer.requests.RequestParserTest" name="returnPOSTAsMethodInRequestString" time="0.001"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="returnsNullIfThereAreNoValuesInParamsHashMap" time="0"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="returnRedirectAsPathInRequestString" time="0"/>
 </testsuite>

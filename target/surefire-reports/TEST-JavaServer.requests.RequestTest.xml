@@ -61,9 +61,9 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="JavaServer.requests.RequestTest" name="returnsPathToResource" time="0"/>
-  <testcase classname="JavaServer.requests.RequestTest" name="returnsMethodForRequestIfMethodIsPost" time="0.001"/>
-  <testcase classname="JavaServer.requests.RequestTest" name="returnsMethodForRequest" time="0.001"/>
-  <testcase classname="JavaServer.requests.RequestTest" name="returnsFirstLineOfRequest" time="0"/>
+  <testcase classname="JavaServer.requests.RequestTest" name="returnsPathToResource" time="0.001"/>
+  <testcase classname="JavaServer.requests.RequestTest" name="returnsMethodForRequestIfMethodIsPost" time="0"/>
+  <testcase classname="JavaServer.requests.RequestTest" name="returnsMethodForRequest" time="0"/>
+  <testcase classname="JavaServer.requests.RequestTest" name="returnsFirstLineOfRequest" time="0.001"/>
   <testcase classname="JavaServer.requests.RequestTest" name="returnsDataFromRequest" time="0.001"/>
 </testsuite>
