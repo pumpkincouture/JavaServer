@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="15" failures="0" name="JavaServer.connections.RouterTest" time="0.022" errors="0" skipped="0">
+<testsuite tests="15" failures="0" name="JavaServer.connections.RouterTest" time="0.007" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib"/>
@@ -61,19 +61,19 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="JavaServer.connections.RouterTest" name="returns200AndHandlesDataParamsIfRequestForPostMethod" time="0.016"/>
-  <testcase classname="JavaServer.connections.RouterTest" name="returnsUnauthorizedResponseIfMethodIsLogsWithNoAuthorization" time="0.001"/>
-  <testcase classname="JavaServer.connections.RouterTest" name="returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsGet" time="0.001"/>
+  <testcase classname="JavaServer.connections.RouterTest" name="returns200AndHandlesDataParamsIfRequestForPostMethod" time="0"/>
+  <testcase classname="JavaServer.connections.RouterTest" name="returnsUnauthorizedResponseIfMethodIsLogsWithNoAuthorization" time="0"/>
+  <testcase classname="JavaServer.connections.RouterTest" name="returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsGet" time="0"/>
   <testcase classname="JavaServer.connections.RouterTest" name="returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsPut" time="0"/>
-  <testcase classname="JavaServer.connections.RouterTest" name="returnsAResponseCodeOf404IfThisOptionsPathIsNotValid" time="0.001"/>
-  <testcase classname="JavaServer.connections.RouterTest" name="returns405IfMethodIsPutButPathIsInvalid" time="0.001"/>
+  <testcase classname="JavaServer.connections.RouterTest" name="returnsAResponseCodeOf404IfThisOptionsPathIsNotValid" time="0"/>
+  <testcase classname="JavaServer.connections.RouterTest" name="returns405IfMethodIsPutButPathIsInvalid" time="0"/>
   <testcase classname="JavaServer.connections.RouterTest" name="returns302IfRequestIsForRedirect" time="0"/>
-  <testcase classname="JavaServer.connections.RouterTest" name="returns404ResponseWithNoHeadersIfPathDoesNotExist" time="0"/>
-  <testcase classname="JavaServer.connections.RouterTest" name="returns200AndHandlesDataParamsIfRequestForPutMethod" time="0.001"/>
-  <testcase classname="JavaServer.connections.RouterTest" name="returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsHead" time="0"/>
-  <testcase classname="JavaServer.connections.RouterTest" name="returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsPost" time="0"/>
+  <testcase classname="JavaServer.connections.RouterTest" name="returns404ResponseWithNoHeadersIfPathDoesNotExist" time="0.001"/>
+  <testcase classname="JavaServer.connections.RouterTest" name="returns200AndHandlesDataParamsIfRequestForPutMethod" time="0"/>
+  <testcase classname="JavaServer.connections.RouterTest" name="returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsHead" time="0.001"/>
+  <testcase classname="JavaServer.connections.RouterTest" name="returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsPost" time="0.001"/>
   <testcase classname="JavaServer.connections.RouterTest" name="returnsAResponseCodeOf200IfMethodIsGetAndPathIsValidWithNoHeaders" time="0.001"/>
-  <testcase classname="JavaServer.connections.RouterTest" name="returnsAResponseCodeOf200WithHeadersIfMethodIsOptionsAndPathIsValid" time="0"/>
-  <testcase classname="JavaServer.connections.RouterTest" name="returns405IfMethodIsPostButPathIsInvalid" time="0"/>
+  <testcase classname="JavaServer.connections.RouterTest" name="returnsAResponseCodeOf200WithHeadersIfMethodIsOptionsAndPathIsValid" time="0.001"/>
+  <testcase classname="JavaServer.connections.RouterTest" name="returns405IfMethodIsPostButPathIsInvalid" time="0.002"/>
   <testcase classname="JavaServer.connections.RouterTest" name="returns404IfFileDoesNotExist" time="0"/>
 </testsuite>
