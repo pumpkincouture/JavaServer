@@ -2,6 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.responses.FileManager;
+import JavaServer.responses.RangeFinder;
 
 import java.io.IOException;
 
@@ -30,7 +31,7 @@ public class ContentResponse extends Response {
     @Override
     public String getCorrectBody() throws IOException {
         if (hasRange()) {
-            fileManager.getPartialFileContents(request.getHeaders());
+            fileManager.getPartialFileContents(new RangeFinder(request.getHeaders()));
         } else {
             fileManager.getFileContents();
         }

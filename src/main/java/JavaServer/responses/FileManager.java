@@ -88,46 +88,11 @@ public class FileManager {
     }
 
     public void getDataFileContents() {
-        File path = new File("/Users/test/code/JavaServer/data/dataFile");
-
-        try {
-            InputStream file = new FileInputStream(path);
-            byte[] bytes = Files.readAllBytes(path.toPath());
-
-            while (file.read(bytes) > 0) {
-                out.write(bytes);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        this.readBytesFromFile(new File("/Users/test/code/JavaServer/data/dataFile"));
     }
 
-    public void getPartialFileContents(Map<String, String> byteRange) throws IOException {
-        readBytesFromFile(byteRange);
-    }
-
-    public Integer getStart() {
-        return Integer.parseInt(start);
-    }
-
-    public Integer getEnd() {
-        return Integer.parseInt(end);
-    }
-
-    public boolean hasStart() {
-        return !start.isEmpty();
-    }
-
-    public boolean hasEnd() {
-        return !end.isEmpty();
+    public void getPartialFileContents(RangeFinder rangeFinder) throws IOException {
+        readBytesFromFile(rangeFinder);
     }
 
     private String turnDataIntoString(Map<String, String> updatedData, String typeOfEqualitySign) {
@@ -144,14 +109,6 @@ public class FileManager {
             patchDataString += entry.getValue() + " ";
         }
         return patchDataString;
-    }
-
-    private void getRange(Map<String, String> requestHeaders) {
-        String header = requestHeaders.get("Range");
-        String[] rangeValues = header.split("=");
-        String[] values = rangeValues[1].split("-");
-        start = values[0].trim();
-        end = values[1].trim();
     }
 
     private void readBytesFromFile() {
@@ -175,21 +132,41 @@ public class FileManager {
         }
     }
 
-    private void readBytesFromFile(Map<String, String> requestHeaders) {
-        getRange(requestHeaders);
+    private void readBytesFromFile(RangeFinder rangeFinder) {
         try {
             InputStream file = new FileInputStream(filePath.toString());
             byte[] bytes = Files.readAllBytes(filePath.toPath());
 
             while (file.read(bytes) > 0) {
-                if (!hasStart()) {
-                    out.write(bytes, (getFileLength() - getEnd()), getEnd());
-                } else if (!hasEnd()) {
-                    Integer start = getStart();
+                if (!rangeFinder.hasStart()) {
+                    out.write(bytes, (getFileLength() - rangeFinder.getEnd()), rangeFinder.getEnd());
+                } else if (!rangeFinder.hasEnd()) {
+                    Integer start = rangeFinder.getStart();
                     out.write(bytes, start, getFileLength() - start);
                 } else {
-                    out.write(bytes, getStart(), getEnd() + 1);
+                    out.write(bytes, rangeFinder.getStart(), rangeFinder.getEnd() + 1);
                 }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void readBytesFromFile(File pathToData) {
+        try {
+            InputStream file = new FileInputStream(pathToData);
+            byte[] bytes = Files.readAllBytes(pathToData.toPath());
+
+            while (file.read(bytes) > 0) {
+                out.write(bytes);
             }
         } catch (IOException e) {
             e.printStackTrace();
