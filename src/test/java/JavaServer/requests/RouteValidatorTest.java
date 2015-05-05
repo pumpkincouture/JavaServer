@@ -73,14 +73,4 @@ public class RouteValidatorTest {
 
         assertFalse(routeValidator.requestHasCorrectAuthorization());
     }
-
-    @Test
-    public void returnsTrueIfMethodIsPatrialContentWithRangeValue() {
-        request = createRequestWithParams("GET /partial_content.txt HTTP/1.1\n" +
-                                          "Range: bytes=0-4\n" +
-                                          "\n");
-        routeValidator = new RouteValidator(request);
-
-        assertTrue(routeValidator.isPartialPathWithRange());
-    }
 }

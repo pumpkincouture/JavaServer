@@ -33,7 +33,7 @@ public class GetResponseTest {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         fileManager = new FileManager(path, mockDataStream());
 
-        requestHandler = new GetResponse(fileManager, request.getPath());
+        requestHandler = new GetResponse(fileManager, request);
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
     }
@@ -45,7 +45,7 @@ public class GetResponseTest {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         fileManager = new FileManager(path, mockDataStream());
 
-        requestHandler = new GetResponse(fileManager, request.getPath());
+        requestHandler = new GetResponse(fileManager, request);
 
         assertEquals("", requestHandler.getCorrectHeaders());
     }

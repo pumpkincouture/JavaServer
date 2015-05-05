@@ -1,14 +1,17 @@
 package JavaServer.responses.methods;
 
+import JavaServer.requests.Request;
 import JavaServer.responses.FileManager;
+
+import java.io.IOException;
 
 public class GetResponse extends Response {
     private FileManager fileManager;
-    private String requestPath;
+    private Request request;
 
-    public GetResponse(FileManager fileManager, String requestPath) {
+    public GetResponse(FileManager fileManager, Request request) {
         this.fileManager = fileManager;
-        this.requestPath = requestPath;
+        this.request = request;
     }
 
     @Override
@@ -22,10 +25,10 @@ public class GetResponse extends Response {
     }
 
     @Override
-    public String getCorrectBody() {
+    public String getCorrectBody() throws IOException {
         if (fileManager.doesFileExist()) {
             return fileManager.getDirectoryLinks();
-        } else if (requestPath.equals("/form")) {
+        } else if (request.getPath().equals("/form")) {
             fileManager.getDataFileContents();
         }
         return EMPTY_STRING;

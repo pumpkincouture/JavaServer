@@ -34,13 +34,10 @@ public class ResponseFactory {
         }
         else if (routeValidator.methodEqualsGet()) {
             if (routeValidator.isDirectory()) {
-                return new GetResponse(fileManager, request.getPath());
+                return new GetResponse(fileManager, request);
                 }
-            if (routeValidator.isPartialPathWithRange()) {
-                return new PartialResponse(fileManager, request.getHeaders());
-            }
             if (fileManager.doesFileExist()) {
-                    return new ContentResponse(fileManager);
+                    return new ContentResponse(fileManager, request);
                 }
             else if (routeValidator.requiresAuthorization()) {
                 if (routeValidator.requestHasCorrectAuthorization()) {
@@ -48,7 +45,7 @@ public class ResponseFactory {
                 }
                 return new UnauthorizedResponse();
             }
-            return new GetResponse(fileManager, request.getPath());
+            return new GetResponse(fileManager, request);
         }
         else if (routeValidator.methodEqualsPost()) {
             return new PostResponse(fileManager, request.getPath(), request.getData());

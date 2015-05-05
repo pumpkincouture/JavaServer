@@ -62,10 +62,6 @@ public class RouteValidator {
         return request.getPath().equals(REDIRECT);
     }
 
-    public boolean isPartialPathWithRange() {
-        return request.getPath().equals(PARTIAL) && hasRange();
-    }
-
     public boolean isOptionsPath() {
         return request.getPath().equals(OPTIONS);
     }
@@ -92,10 +88,6 @@ public class RouteValidator {
 
     public boolean requestHasCorrectAuthorization() {
         return hasAuthorization() && getAuthorizationCode().contains(AUTHORIZATION);
-    }
-
-    private boolean hasRange() {
-        return request.getHeaders().get("Range") != null;
     }
 
     private boolean hasAuthorization() {

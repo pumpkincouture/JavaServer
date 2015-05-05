@@ -30,7 +30,7 @@ public class ContentResponseTest {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         fileManager = new FileManager(path, mockDataStream());
 
-        requestHandler = new ContentResponse(fileManager);
+        requestHandler = new ContentResponse(fileManager, request);
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
     }
@@ -42,7 +42,7 @@ public class ContentResponseTest {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         fileManager = new FileManager(path, mockDataStream());
 
-        requestHandler = new ContentResponse(fileManager);
+        requestHandler = new ContentResponse(fileManager, request);
 
         assertEquals("", requestHandler.getCorrectBody());
     }
