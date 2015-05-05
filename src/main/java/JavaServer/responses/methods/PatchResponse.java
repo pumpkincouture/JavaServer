@@ -2,6 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.responses.FileManager;
+import JavaServer.responses.StringMaker;
 
 import java.io.IOException;
 
@@ -18,7 +19,7 @@ public class PatchResponse extends Response {
     public String getCorrectStatus() {
         if (containsEtagAuthorization()) {
             try {
-                fileManager.patchFileWithNewData(fileManager.turnDataIntoString(request.getData()));
+                fileManager.patchFileWithNewData(new StringMaker().turnDataIntoString(request.getData()));
             } catch (IOException e) {
                 e.printStackTrace();
             }

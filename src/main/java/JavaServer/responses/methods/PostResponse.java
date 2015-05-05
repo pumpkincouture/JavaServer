@@ -1,6 +1,7 @@
 package JavaServer.responses.methods;
 
 import JavaServer.responses.FileManager;
+import JavaServer.responses.StringMaker;
 
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public class PostResponse extends Response {
     @Override
     public String getCorrectStatus() {
         if (requestPath.equals("/form")) {
-            fileManager.writeToResource(requestData, EQUAL_SIGN);
+            fileManager.setDataInResource(new StringMaker().turnDataIntoString(requestData, EQUAL_SIGN));
             return getCodes().get("200");
         } else if (requestPath.equals("/text-file.txt")) {
             return getCodes().get("405");

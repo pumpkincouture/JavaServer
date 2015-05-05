@@ -8,8 +8,6 @@ import java.util.*;
 public class FileManager {
     private File filePath;
     private DataOutputStream out;
-    private String start;
-    private String end;
 
     public FileManager(File filePath, DataOutputStream out) {
         this.filePath = filePath;
@@ -43,36 +41,6 @@ public class FileManager {
         return paths;
     }
 
-    public void patchFileWithNewData(String newData) throws IOException {
-        byte[] b = newData.getBytes();
-
-        try {
-            Files.write(Paths.get("/Users/test/code/JavaServer/public/patch-content.txt"), b);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void writeToResource(Map<String, String> requestData, String equalitySign) {
-         byte[] b = turnDataIntoString(requestData, equalitySign).getBytes();
-
-        try {
-            Files.write(Paths.get("/Users/test/code/JavaServer/data/dataFile"), b);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void deleteData() {
-        byte[] b = "".getBytes();
-
-        try {
-            Files.write(Paths.get("/Users/test/code/JavaServer/data/dataFile"), b);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public List<String> getDirectoryFiles() {
         List<String> directoryFiles;
 
@@ -88,27 +56,34 @@ public class FileManager {
     }
 
     public void getDataFileContents() {
-        this.readBytesFromFile(new File("/Users/test/code/JavaServer/data/dataFile"));
+        readBytesFromFile(new File("/Users/test/code/JavaServer/data/dataFile"));
     }
 
     public void getPartialFileContents(RangeFinder rangeFinder) throws IOException {
         readBytesFromFile(rangeFinder);
     }
 
-    private String turnDataIntoString(Map<String, String> updatedData, String typeOfEqualitySign) {
-        String requestDataString = "";
-        for (Map.Entry<String, String> entry : updatedData.entrySet()) {
-            requestDataString += entry.getKey() + typeOfEqualitySign + entry.getValue();
-        }
-        return requestDataString;
+    public void patchFileWithNewData(String newData) throws IOException {
+        byte[] dataBytes = newData.getBytes();
+        writeToResource(dataBytes, "/Users/test/code/JavaServer/public/patch-content.txt");
     }
 
-    public String turnDataIntoString(Map<String, String> patchData) {
-        String patchDataString = "";
-        for (Map.Entry<String, String> entry : patchData.entrySet()) {
-            patchDataString += entry.getValue() + " ";
+    public void setDataInResource(String paramData) {
+        byte[] dataBytes = paramData.getBytes();
+        writeToResource(dataBytes, "/Users/test/code/JavaServer/data/dataFile");
+    }
+
+    public void deleteData() {
+        byte[] dataBytes = "".getBytes();
+        writeToResource(dataBytes, "/Users/test/code/JavaServer/data/dataFile");
+    }
+
+    private void writeToResource(byte[] dataBytes, String resourcePath) {
+        try {
+            Files.write(Paths.get(resourcePath), dataBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return patchDataString;
     }
 
     private void readBytesFromFile() {

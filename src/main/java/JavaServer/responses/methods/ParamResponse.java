@@ -1,6 +1,7 @@
 package JavaServer.responses.methods;
 
 import JavaServer.responses.FileManager;
+import JavaServer.responses.StringMaker;
 
 import java.io.IOException;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class ParamResponse extends Response {
 
     @Override
     public String getCorrectBody() throws IOException {
-        fileManager.writeToResource(requestData, EQUALITY_WITH_SPACES);
+        fileManager.setDataInResource(new StringMaker().turnDataIntoString(requestData, EQUALITY_WITH_SPACES));
         fileManager.getDataFileContents();
         return EMPTY_STRING;
     }
