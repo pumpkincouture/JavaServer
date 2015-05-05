@@ -2,7 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.responses.FileManager;
-import JavaServer.responses.RangeFinder;
+import JavaServer.helpers.RangeFinder;
 
 import java.io.IOException;
 

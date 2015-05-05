@@ -1,4 +1,4 @@
-package JavaServer.responses;
+package JavaServer.helpers;
 
 import java.util.Map;
 

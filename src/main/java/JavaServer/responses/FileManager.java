@@ -1,5 +1,8 @@
 package JavaServer.responses;
 
+import JavaServer.helpers.HTMLBuilder;
+import JavaServer.helpers.RangeFinder;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,16 +22,7 @@ public class FileManager {
     }
 
     public String getDirectoryLinks() {
-        String[] fileList = filePath.list();
-
-        String link = "";
-
-        for (String line : fileList) {
-            link += "<a href='/"+ line + "'" + ">" + line + "</a>" +
-                    "</br>" +
-                    "\r\n";
-        }
-        return link;
+       return new HTMLBuilder(filePath).getDirectoryLinks();
     }
 
     public List<String> convertFilesToPaths() {
@@ -73,7 +67,7 @@ public class FileManager {
         writeToResource(dataBytes, "/Users/test/code/JavaServer/data/dataFile");
     }
 
-    public void deleteData() {
+    public void deleteDataFromResource() {
         byte[] dataBytes = "".getBytes();
         writeToResource(dataBytes, "/Users/test/code/JavaServer/data/dataFile");
     }

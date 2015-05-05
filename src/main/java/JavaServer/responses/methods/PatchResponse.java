@@ -2,7 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.responses.FileManager;
-import JavaServer.responses.StringMaker;
+import JavaServer.helpers.StringMaker;
 
 import java.io.IOException;
 

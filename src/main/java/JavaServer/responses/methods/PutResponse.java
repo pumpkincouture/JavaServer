@@ -1,7 +1,7 @@
 package JavaServer.responses.methods;
 
 import JavaServer.responses.FileManager;
-import JavaServer.responses.StringMaker;
+import JavaServer.helpers.StringMaker;
 
 import java.util.Map;
 
