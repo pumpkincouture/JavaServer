@@ -14,7 +14,7 @@ public class DeleteResponse extends Response {
     @Override
     public String getCorrectStatus() {
         if (requestPath.equals("/form")) {
-            fileManager.deleteFromResource();
+            fileManager.deleteData();
         }
         return getCodes().get("200");
     }

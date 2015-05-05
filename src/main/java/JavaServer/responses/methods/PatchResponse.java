@@ -1,27 +1,30 @@
 package JavaServer.responses.methods;
 
+import JavaServer.requests.Request;
 import JavaServer.responses.FileManager;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class PatchResponse extends Response {
-    private Map<String, String> requestdata;
+    private Request request;
     private FileManager fileManager;
 
-    public PatchResponse(Map<String, String> requestData, FileManager fileManager) {
-        this.requestdata = requestData;
+    public PatchResponse(FileManager fileManager, Request request) {
         this.fileManager = fileManager;
+        this.request = request;
     }
 
     @Override
     public String getCorrectStatus() {
-        try {
-            fileManager.patchFileWithNewData(fileManager.turnDataIntoString(requestdata));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (containsEtagAuthorization()) {
+            try {
+                fileManager.patchFileWithNewData(fileManager.turnDataIntoString(request.getData()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return getCodes().get("204");
         }
-        return getCodes().get("204");
+        return getCodes().get("200");
     }
 
     @Override
@@ -32,5 +35,9 @@ public class PatchResponse extends Response {
     @Override
     public String getCorrectBody() throws IOException {
         return EMPTY_STRING;
+    }
+
+    private boolean containsEtagAuthorization() {
+        return request.getHeaders().get("If-Match") != null;
     }
 }

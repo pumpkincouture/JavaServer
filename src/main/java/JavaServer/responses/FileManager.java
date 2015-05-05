@@ -63,7 +63,7 @@ public class FileManager {
         }
     }
 
-    public void deleteFromResource() {
+    public void deleteData() {
         byte[] b = "".getBytes();
 
         try {

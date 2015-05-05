@@ -94,10 +94,6 @@ public class RouteValidator {
         return hasAuthorization() && getAuthorizationCode().contains(AUTHORIZATION);
     }
 
-    public boolean containsEtagAuthorization() {
-        return request.getHeaders().get("If-Match") != null;
-    }
-
     private boolean hasRange() {
         return request.getHeaders().get("Range") != null;
     }

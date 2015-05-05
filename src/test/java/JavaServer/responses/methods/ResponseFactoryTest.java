@@ -149,14 +149,14 @@ public class ResponseFactoryTest {
     }
 
     @Test
-    public void returnsFourOhFourResponseIfMethodIsPatchButDoesNotContainEtagAuthorization() throws UnsupportedEncodingException {
+    public void returnsPatchResponseIfMethodIsPatchButDoesNotContainEtagAuthorization() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/patch-content.txt");
         fileManager = new FileManager(path, mockDataStream());
         logger = new Logger();
 
         methodFactory = new ResponseFactory(createRequestWithNoParams("PATCH", "/patch-content.txt"), fileManager, logger);
 
-        assertTrue(methodFactory.createResponse() instanceof FourOhFourResponse);
+        assertTrue(methodFactory.createResponse() instanceof PatchResponse);
     }
 
     @Test
