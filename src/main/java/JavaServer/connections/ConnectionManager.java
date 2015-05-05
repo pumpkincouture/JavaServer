@@ -1,26 +1,23 @@
 package JavaServer.connections;
 
 import JavaServer.requests.Logger;
-import JavaServer.responses.DataManager;
-
 import java.io.*;
 import java.net.Socket;
 
 public class ConnectionManager implements Runnable {
-    private DataOutputStream out;
-    private BufferedReader in;
     private Socket socket;
     private String directory;
-    private DataManager dataManager;
     private Logger logger;
+    private BufferedReader bufferedReader;
+    private DataOutputStream dataOutputStream;
 
-    public ConnectionManager(BufferedReader in, Socket socket, String directory, DataManager dataManager, DataOutputStream out, Logger logger) {
-        this.out = out;
-        this.in = in;
+
+    public ConnectionManager(Socket socket, String directory, Logger logger) throws IOException {
         this.socket = socket;
         this.directory = directory;
-        this.dataManager = dataManager;
         this.logger = logger;
+        bufferedReader = getSocketInputStream();
+        dataOutputStream = getSocketOutPutStream();
     }
 
     @Override
@@ -29,23 +26,31 @@ public class ConnectionManager implements Runnable {
             String requestLines = "";
 
             do {
-                requestLines += (char) in.read();
-            } while (in.ready());
+                requestLines += (char) bufferedReader.read();
+            } while (bufferedReader.ready());
 
-            Router router = new Router(requestLines, directory, out, dataManager, logger);
+            Router router = new Router(requestLines, directory, dataOutputStream, logger);
             router.createHandlers();
 
-            out.flush();
-            out.writeBytes(router.getResponse());
-            out.flush();
-            out.writeBytes(router.getBody());
-            out.flush();
+            dataOutputStream.flush();
+            dataOutputStream.writeBytes(router.getResponse());
+            dataOutputStream.flush();
+            dataOutputStream.writeBytes(router.getBody());
+            dataOutputStream.flush();
 
-            in.close();
-            out.close();
+            bufferedReader.close();
+            dataOutputStream.close();
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private BufferedReader getSocketInputStream() throws IOException {
+        return new BufferedReader(new InputStreamReader(socket.getInputStream()));
+    }
+
+    private DataOutputStream getSocketOutPutStream() throws IOException {
+        return new DataOutputStream(socket.getOutputStream());
     }
 }

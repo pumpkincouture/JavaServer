@@ -1,17 +1,17 @@
 package JavaServer.responses.methods;
 
-import JavaServer.responses.DataManager;
+import JavaServer.responses.FileManager;
 
 import java.io.IOException;
 import java.util.Map;
 
 public class ParamResponse extends Response {
-    private DataManager dataManager;
+    private FileManager fileManager;
     private Map<String, String> requestData;
 
-    public ParamResponse(DataManager dataManager, Map<String, String> requestData) {
-        this.dataManager = dataManager;
+    public ParamResponse(Map<String, String> requestData, FileManager fileManager) {
         this.requestData = requestData;
+        this.fileManager = fileManager;
     }
 
     @Override
@@ -26,7 +26,8 @@ public class ParamResponse extends Response {
 
     @Override
     public String getCorrectBody() throws IOException {
-        dataManager.updateRequestData(requestData, EQUALITY_WITH_SPACES);
-        return dataManager.getRequestData();
+        fileManager.writeToResource(requestData, EQUALITY_WITH_SPACES);
+        fileManager.getDataFileContents();
+        return EMPTY_STRING;
     }
 }

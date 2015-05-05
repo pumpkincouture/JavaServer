@@ -1,16 +1,16 @@
 package JavaServer.responses.methods;
 
-import JavaServer.responses.DataManager;
+import JavaServer.responses.FileManager;
 
 import java.util.Map;
 
 public class PostResponse extends Response {
-    private DataManager dataManager;
+    private FileManager fileManager;
     private String requestPath;
     private Map<String, String> requestData;
 
-    public PostResponse(DataManager dataManager, String requestPath, Map<String, String> requestData) {
-        this.dataManager = dataManager;
+    public PostResponse(FileManager fileManager, String requestPath, Map<String, String> requestData) {
+        this.fileManager = fileManager;
         this.requestPath = requestPath;
         this.requestData = requestData;
     }
@@ -18,7 +18,7 @@ public class PostResponse extends Response {
     @Override
     public String getCorrectStatus() {
         if (requestPath.equals("/form")) {
-            dataManager.updateRequestData(requestData, EQUAL_SIGN);
+            fileManager.writeToResource(requestData, EQUAL_SIGN);
             return getCodes().get("200");
         } else if (requestPath.equals("/text-file.txt")) {
             return getCodes().get("405");

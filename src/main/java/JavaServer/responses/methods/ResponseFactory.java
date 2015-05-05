@@ -3,20 +3,17 @@ package JavaServer.responses.methods;
 import JavaServer.requests.Logger;
 import JavaServer.requests.Request;
 import JavaServer.requests.RouteValidator;
-import JavaServer.responses.DataManager;
 import JavaServer.responses.FileManager;
 
 public class ResponseFactory {
     private Request request;
     private FileManager fileManager;
-    private DataManager dataManager;
     private RouteValidator routeValidator;
     private Logger logger;
 
-    public ResponseFactory(Request request, FileManager fileManager, DataManager dataManager, Logger logger) {
+    public ResponseFactory(Request request, FileManager fileManager, Logger logger) {
         this.request = request;
         this.fileManager = fileManager;
-        this.dataManager = dataManager;
         this.routeValidator = new RouteValidator(request);
         this.logger = logger;
     }
@@ -33,11 +30,11 @@ public class ResponseFactory {
             return new OptionsResponse();
         }
         else if (routeValidator.isParameterPath()) {
-            return new ParamResponse(dataManager, request.getData());
+            return new ParamResponse(request.getData(), fileManager);
         }
         else if (routeValidator.methodEqualsGet()) {
             if (routeValidator.isDirectory()) {
-                return new GetResponse(fileManager, dataManager, request.getPath());
+                return new GetResponse(fileManager, request.getPath());
                 }
             if (routeValidator.isPartialPathWithRange()) {
                 return new PartialResponse(fileManager, request.getHeaders());
@@ -51,16 +48,16 @@ public class ResponseFactory {
                 }
                 return new UnauthorizedResponse();
             }
-            return new GetResponse(fileManager, dataManager, request.getPath());
+            return new GetResponse(fileManager, request.getPath());
         }
         else if (routeValidator.methodEqualsPost()) {
-            return new PostResponse(dataManager, request.getPath(), request.getData());
+            return new PostResponse(fileManager, request.getPath(), request.getData());
         } else if (routeValidator.methodEqualsPut()) {
-            return new PutResponse(dataManager, request.getPath(), request.getData());
+            return new PutResponse(fileManager, request.getData(), request.getPath());
         } else if (routeValidator.methodEqualsDelete()) {
-            return new DeleteResponse(dataManager, request.getPath());
+            return new DeleteResponse(fileManager, request.getPath());
         } else if (routeValidator.methodEqualsPatch() && routeValidator.containsEtagAuthorization()) {
-            return new PatchResponse(dataManager, request.getData(), fileManager);
+            return new PatchResponse(request.getData(), fileManager);
         }
         return new FourOhFourResponse();
     }

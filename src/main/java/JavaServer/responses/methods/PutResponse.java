@@ -1,25 +1,24 @@
 package JavaServer.responses.methods;
 
-import JavaServer.responses.DataManager;
+import JavaServer.responses.FileManager;
 
 import java.util.Map;
 
 public class PutResponse extends Response {
-    private DataManager dataManager;
+    private FileManager fileManager;
     private String requestPath;
-    private Map<String, String> requestdata;
+    private Map<String, String> requestData;
 
-    public PutResponse(DataManager dataManager, String requestPath, Map<String, String> requestData) {
-        this.dataManager = dataManager;
+    public PutResponse(FileManager fileManager, Map<String, String> requestData, String requestPath) {
+        this.fileManager = fileManager;
         this.requestPath = requestPath;
-        this.requestdata = requestData;
+        this.requestData = requestData;
     }
 
     @Override
     public String getCorrectStatus() {
         if (requestPath.equals("/form")) {
-            dataManager.resetData();
-            dataManager.updateRequestData(requestdata, EQUAL_SIGN);
+            fileManager.writeToResource(requestData, EQUAL_SIGN);
             return getCodes().get("200");
         } else if (requestPath.equals("/file1")) {
             return getCodes().get("405");

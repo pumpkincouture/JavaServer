@@ -1,27 +1,23 @@
 package JavaServer.responses.methods;
 
-import JavaServer.responses.DataManager;
 import JavaServer.responses.FileManager;
 
 import java.io.IOException;
 import java.util.Map;
 
 public class PatchResponse extends Response {
-    private DataManager dataManager;
     private Map<String, String> requestdata;
     private FileManager fileManager;
 
-    public PatchResponse(DataManager dataManager, Map<String, String> requestData, FileManager fileManager) {
-        this.dataManager = dataManager;
+    public PatchResponse(Map<String, String> requestData, FileManager fileManager) {
         this.requestdata = requestData;
         this.fileManager = fileManager;
     }
 
     @Override
     public String getCorrectStatus() {
-        dataManager.updateRequestData(requestdata);
         try {
-            fileManager.patchFile(dataManager.getPatchedData());
+            fileManager.patchFileWithNewData(fileManager.turnDataIntoString(requestdata));
         } catch (IOException e) {
             e.printStackTrace();
         }

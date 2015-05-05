@@ -2,6 +2,7 @@ package JavaServer.responses;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class FileManager {
@@ -42,10 +43,34 @@ public class FileManager {
         return paths;
     }
 
-    public void patchFile(String newData) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath, true)));
-        bw.write(newData);
-        bw.close();
+    public void patchFileWithNewData(String newData) throws IOException {
+        byte[] b = newData.getBytes();
+
+        try {
+            Files.write(Paths.get("/Users/test/code/JavaServer/public/patch-content.txt"), b);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeToResource(Map<String, String> requestData, String equalitySign) {
+         byte[] b = turnDataIntoString(requestData, equalitySign).getBytes();
+
+        try {
+            Files.write(Paths.get("/Users/test/code/JavaServer/data/dataFile"), b);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteFromResource() {
+        byte[] b = "".getBytes();
+
+        try {
+            Files.write(Paths.get("/Users/test/code/JavaServer/data/dataFile"), b);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<String> getDirectoryFiles() {
@@ -62,20 +87,31 @@ public class FileManager {
         readBytesFromFile();
     }
 
+    public void getDataFileContents() {
+        File path = new File("/Users/test/code/JavaServer/data/dataFile");
+
+        try {
+            InputStream file = new FileInputStream(path);
+            byte[] bytes = Files.readAllBytes(path.toPath());
+
+            while (file.read(bytes) > 0) {
+                out.write(bytes);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void getPartialFileContents(Map<String, String> byteRange) throws IOException {
         readBytesFromFile(byteRange);
-    }
-
-    private File getMainDirectory() {
-        return filePath.getParentFile();
-    }
-
-    private void getRange(Map<String, String> requestHeaders) {
-        String header = requestHeaders.get("Range");
-        String[] rangeValues = header.split("=");
-        String[] values = rangeValues[1].split("-");
-        start = values[0].trim();
-        end = values[1].trim();
     }
 
     public Integer getStart() {
@@ -92,6 +128,30 @@ public class FileManager {
 
     public boolean hasEnd() {
         return !end.isEmpty();
+    }
+
+    private String turnDataIntoString(Map<String, String> updatedData, String typeOfEqualitySign) {
+        String requestDataString = "";
+        for (Map.Entry<String, String> entry : updatedData.entrySet()) {
+            requestDataString += entry.getKey() + typeOfEqualitySign + entry.getValue();
+        }
+        return requestDataString;
+    }
+
+    public String turnDataIntoString(Map<String, String> patchData) {
+        String patchDataString = "";
+        for (Map.Entry<String, String> entry : patchData.entrySet()) {
+            patchDataString += entry.getValue() + " ";
+        }
+        return patchDataString;
+    }
+
+    private void getRange(Map<String, String> requestHeaders) {
+        String header = requestHeaders.get("Range");
+        String[] rangeValues = header.split("=");
+        String[] values = rangeValues[1].split("-");
+        start = values[0].trim();
+        end = values[1].trim();
     }
 
     private void readBytesFromFile() {
@@ -142,6 +202,10 @@ public class FileManager {
                 e.printStackTrace();
             }
         }
+    }
+
+    private File getMainDirectory() {
+        return filePath.getParentFile();
     }
 
     private int getFileLength() {

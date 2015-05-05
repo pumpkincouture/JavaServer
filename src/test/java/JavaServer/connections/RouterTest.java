@@ -1,7 +1,6 @@
 package JavaServer.connections;
 
 import JavaServer.requests.Logger;
-import JavaServer.responses.DataManager;
 import org.junit.Test;
 
 import java.io.*;
@@ -11,7 +10,6 @@ import static org.junit.Assert.assertEquals;
 public class RouterTest {
     private Router router;
     private String directory;
-    private DataManager dataManager;
     private Logger logger;
 
     private DataOutputStream createFakeInput() throws UnsupportedEncodingException {
@@ -23,10 +21,9 @@ public class RouterTest {
 
     private void createRouter(String request)  {
         logger = new Logger();
-        dataManager = new DataManager();
         directory = "/Users/test/code/JavaServer/public";
         try {
-            router = new Router(request, directory, createFakeInput(), dataManager, logger);
+            router = new Router(request, directory, createFakeInput(), logger);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

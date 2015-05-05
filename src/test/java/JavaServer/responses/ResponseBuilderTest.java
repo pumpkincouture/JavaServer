@@ -20,7 +20,6 @@ public class ResponseBuilderTest {
     private ResponseFactory managerFactory;
     private File path;
     private FileManager fileManager;
-    private DataManager dataManager;
     private Logger logger;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
@@ -42,9 +41,8 @@ public class ResponseBuilderTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         fileManager = new FileManager(path, mockDataStream());
-        dataManager = new DataManager();
         logger = new Logger();
-        managerFactory = new ResponseFactory(request, fileManager, dataManager, logger);
+        managerFactory = new ResponseFactory(request, fileManager, logger);
 
         responseCodeBuilder = new ResponseBuilder(managerFactory.createResponse());
 

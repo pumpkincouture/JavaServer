@@ -1,7 +1,6 @@
 package JavaServer.connections;
 
 import JavaServer.requests.Logger;
-import JavaServer.responses.DataManager;
 import org.junit.Test;
 
 import java.io.*;
@@ -33,10 +32,9 @@ public class ConnectionManagerTest {
         MockSocket socket = new MockSocket();
         String input = String.valueOf(socket.createMockInput());
         String directory = "Users/code/JavaServer/public/";
-        DataManager dataManager = new DataManager();
         Logger logger = new Logger();
 
-        new ConnectionManager(createFakeInput(input), socket, directory, dataManager, createDataOutPut(), logger);
+        new ConnectionManager(socket, directory, logger);
         String output = String.valueOf(createDataOutPut());
     }
 
