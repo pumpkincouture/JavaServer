@@ -31,14 +31,6 @@ public class HTTPServerTest {
     }
 
     @Test
-    public void testServerPortAndDirectory() {
-        executorService = Executors.newFixedThreadPool(4);
-        httpServer = new HTTPServer(mockServerSocket, port, directory);
-        assertEquals(5000, port);
-        assertEquals("/Users/test/code/JavaServer/public", directory);
-    }
-
-    @Test
     public void testServerStarting() throws IOException {
         mockServerSocket.isClosed = true;
         httpServer = new HTTPServer(mockServerSocket, port, directory);

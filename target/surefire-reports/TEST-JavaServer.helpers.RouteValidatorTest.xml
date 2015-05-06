@@ -61,11 +61,11 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="JavaServer.helpers.RouteValidatorTest" name="returnsTrueIfRequestContainsParameterPath" time="0.002"/>
+  <testcase classname="JavaServer.helpers.RouteValidatorTest" name="returnsTrueIfRequestContainsParameterPath" time="0.001"/>
   <testcase classname="JavaServer.helpers.RouteValidatorTest" name="returnsFalseIfMethodIsInValid" time="0"/>
-  <testcase classname="JavaServer.helpers.RouteValidatorTest" name="returnsFalseIfThereIsNoAuthorization" time="0.001"/>
-  <testcase classname="JavaServer.helpers.RouteValidatorTest" name="returnsTrueIfPathIsForRedirectionButMethodIsInvalid" time="0"/>
+  <testcase classname="JavaServer.helpers.RouteValidatorTest" name="returnsFalseIfThereIsNoAuthorization" time="0"/>
+  <testcase classname="JavaServer.helpers.RouteValidatorTest" name="returnsTrueIfPathIsForRedirectionButMethodIsInvalid" time="0.001"/>
   <testcase classname="JavaServer.helpers.RouteValidatorTest" name="returnsTrueIfMethodIsValid" time="0"/>
   <testcase classname="JavaServer.helpers.RouteValidatorTest" name="returnsTrueIfThereIsAuthorization" time="0"/>
-  <testcase classname="JavaServer.helpers.RouteValidatorTest" name="returnsTrueIfMethodIsValidButPathIsInvalid" time="0"/>
+  <testcase classname="JavaServer.helpers.RouteValidatorTest" name="returnsTrueIfMethodIsValidButPathIsInvalid" time="0.001"/>
 </testsuite>

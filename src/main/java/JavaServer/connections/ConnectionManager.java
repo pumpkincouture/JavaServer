@@ -30,18 +30,20 @@ public class ConnectionManager implements Runnable {
                 requestLines += (char) bufferedReader.read();
             } while (bufferedReader.ready());
 
-            Router router = new Router(requestLines, directory, dataOutputStream, logger);
-            router.createHandlers();
+            if (requestLines.length() != 1) {
+                Router router = new Router(requestLines, directory, dataOutputStream, logger);
+                router.createHandlers();
 
-            dataOutputStream.flush();
-            dataOutputStream.writeBytes(router.getResponse());
-            dataOutputStream.flush();
-            dataOutputStream.writeBytes(router.getBody());
-            dataOutputStream.flush();
+                dataOutputStream.flush();
+                dataOutputStream.writeBytes(router.getResponse());
+                dataOutputStream.flush();
+                dataOutputStream.writeBytes(router.getBody());
+                dataOutputStream.flush();
 
-            bufferedReader.close();
-            dataOutputStream.close();
-            socket.close();
+                bufferedReader.close();
+                dataOutputStream.close();
+                socket.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
