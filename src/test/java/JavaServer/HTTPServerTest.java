@@ -1,15 +1,22 @@
-package JavaServer.connections;
+package JavaServer;
 
+import JavaServer.connections.ConnectionManager;
+import JavaServer.connections.MockServerSocket;
+import JavaServer.connections.MockSocket;
 import JavaServer.requests.Logger;
+import JavaServer.runner.HTTPServer;
 import org.junit.Test;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-public class ConnectionManagerTest {
-    private ConnectionManager connectionManager;
+public class HTTPServerTest {
+
+    private HTTPServer httpServer;
     private PrintWriter out;
     private BufferedReader in;
 
@@ -29,13 +36,17 @@ public class ConnectionManagerTest {
 
     @Test
     public void itRespondsToRequest() throws IOException {
-        MockSocket socket = new MockSocket();
-        String input = String.valueOf(socket.createMockInput());
+        MockSocket mockSocket = new MockSocket();
+        String input = String.valueOf(mockSocket.createMockInput());
         String directory = "Users/code/JavaServer/public/";
         Logger logger = new Logger();
+        MockServerSocket socket = new MockServerSocket(5000);
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
 
-        new ConnectionManager(socket, directory, logger);
-        String output = String.valueOf(createDataOutPut());
+        httpServer = new HTTPServer(socket, directory, logger, executorService);
+        httpServer.run();
+
+        assertTrue(socket.isBound());
+
     }
-
 }

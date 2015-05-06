@@ -24,7 +24,13 @@ public class MockServerSocket extends ServerSocket{
     }
 
     public Socket accept() {
-        return socket;
+        this.isClosed = false;
+        this.isConnected = true;
+        return this.socket;
+    }
+
+    public void close() {
+        this.isClosed = true;
     }
 
     public boolean isClosed() {

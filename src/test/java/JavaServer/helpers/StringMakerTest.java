@@ -32,7 +32,6 @@ public class StringMakerTest {
         createRequestWithParams("PATCH /form HTTP/1.1\n"+
                                 "\n"+
                                 "patched content");
-        System.out.println(request.getData());
 
         stringMaker = new StringMaker();
 
