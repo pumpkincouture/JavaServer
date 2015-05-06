@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class WireSocket implements ServerSocketService {
+public class WireSocket implements SocketService {
     private Socket socket;
 
     public WireSocket(Socket socket) {
@@ -18,7 +18,7 @@ public class WireSocket implements ServerSocketService {
     }
 
     @Override
-    public OutputStream getOutPutStream() throws IOException {
+    public OutputStream getOutputStream() throws IOException {
         return socket.getOutputStream();
     }
 

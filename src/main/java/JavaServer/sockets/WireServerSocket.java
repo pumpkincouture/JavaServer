@@ -3,7 +3,7 @@ package JavaServer.sockets;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-public class WireServerSocket implements SocketService {
+public class WireServerSocket implements ServerSocketService {
     private ServerSocket serverSocket;
 
     public WireServerSocket(ServerSocket serverSocket) {
@@ -11,7 +11,7 @@ public class WireServerSocket implements SocketService {
     }
 
     @Override
-    public ServerSocketService accept() throws IOException {
+    public SocketService accept() throws IOException {
         return new WireSocket(serverSocket.accept());
     }
 

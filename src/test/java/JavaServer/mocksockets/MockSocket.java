@@ -1,5 +1,7 @@
-package JavaServer.connections;
+package JavaServer.mocksockets;
 
+
+import JavaServer.sockets.SocketService;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -7,9 +9,10 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-public class MockSocket extends Socket {
+public class MockSocket extends Socket implements SocketService {
     private InputStream mockIn;
     private OutputStream mockOut;
+    private boolean closed = false;
 
     public MockSocket() {
         mockIn = createMockInput();
@@ -20,6 +23,26 @@ public class MockSocket extends Socket {
         InputStream mockInputStream = new ByteArrayInputStream(exampleInput.getBytes(StandardCharsets.UTF_8));
 
         return mockInputStream;
+    }
+
+    @Override
+    public void close(){
+        this.closed = true;
+    }
+
+    @Override
+    public boolean isClosed() {
+        return this.closed;
+    }
+
+    @Override
+    public OutputStream getOutputStream() {
+        return mockOut;
+    }
+
+    @Override
+    public InputStream getInputStream() {
+        return mockIn;
     }
 
     public InputStream getMockInput() {

@@ -22,7 +22,7 @@ public class ServerMain {
 
             ExecutorService executorService = Executors.newFixedThreadPool(4);
 
-            HTTPServer server = new HTTPServer(serverSocket, serverConfiguration.getDirectory(), logger, executorService);
+            HTTPServer server = new HTTPServer(serverSocket,serverConfiguration.getDirectory(), logger, executorService);
             server.run();
         } catch (Exception e) {
             System.err.println(e.getMessage());

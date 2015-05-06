@@ -1,11 +1,12 @@
-package JavaServer.connections;
+package JavaServer.mocksockets;
+
+import JavaServer.sockets.ServerSocketService;
+import JavaServer.sockets.SocketService;
 
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 
-public class MockServerSocket extends ServerSocket{
-    private Socket socket;
+public class MockServerSocket implements ServerSocketService {
+    private SocketService socket;
     private int port;
     private boolean isConnected = true;
     private boolean isClosed = false;
@@ -15,6 +16,7 @@ public class MockServerSocket extends ServerSocket{
         this.port = port;
     }
 
+    @Override
     public boolean isConnected() {
         return isConnected;
     }
@@ -23,17 +25,21 @@ public class MockServerSocket extends ServerSocket{
         return port;
     }
 
-    public Socket accept() {
+    @Override
+    public SocketService accept() {
         this.isClosed = false;
         this.isConnected = true;
         return this.socket;
     }
 
-    public void close() {
+
+    @Override
+    public void close() throws IOException {
         this.isClosed = true;
     }
 
-    public boolean isClosed() {
+    @Override
+    public boolean isClosed() throws IOException {
         return isClosed;
     }
 
