@@ -20,11 +20,11 @@ public class RangeFinder {
         end = values[1].trim();
     }
 
-    public Integer getStart() {
+    public int getStart() {
         return Integer.parseInt(start);
     }
 
-    public Integer getEnd() {
+    public int getEnd() {
         return Integer.parseInt(end);
     }
 
