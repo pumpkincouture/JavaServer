@@ -2,7 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
-import JavaServer.responses.FileManager;
+import JavaServer.responses.FileWriter;
 import org.junit.Test;
 
 
@@ -17,7 +17,7 @@ public class DeleteResponseTest {
     private Request request;
     private RequestParser requestParser;
     private Response requestHandler;
-    private FileManager fileManager;
+    private FileWriter fileWriter;
     private File path;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
@@ -32,8 +32,8 @@ public class DeleteResponseTest {
         requestParser = new RequestParser("DELETE /form HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/form");
-        fileManager = new FileManager(path, mockDataStream());
-        requestHandler= new DeleteResponse(fileManager, request.getPath());
+        fileWriter = new FileWriter(path, mockDataStream());
+        requestHandler= new DeleteResponse(fileWriter, request.getPath());
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
     }

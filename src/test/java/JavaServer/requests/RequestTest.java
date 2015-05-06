@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RequestTest {
     private RequestParser requestParser;
@@ -59,5 +60,17 @@ public class RequestTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
         assertEquals("POST /form HTTP/1.1", request.getRequestLine());
+    }
+
+    @Test
+    public void returnsTrueIfRequestHasAuthorization() {
+        requestParser = new RequestParser("GET /logs HTTP/1.1\n" +
+                                          "Authorization: Basic YWRtaW46aHVudGVyMg==\n" +
+                                          "Host: localhost:5000\n" +
+                                          "\n");
+
+        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
+
+        assertTrue(request.hasAuthorization());
     }
 }

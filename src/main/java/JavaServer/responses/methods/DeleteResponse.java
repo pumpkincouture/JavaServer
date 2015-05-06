@@ -1,20 +1,20 @@
 package JavaServer.responses.methods;
 
-import JavaServer.responses.FileManager;
+import JavaServer.responses.FileWriter;
 
 public class DeleteResponse extends Response {
-    private FileManager fileManager;
+    private FileWriter fileWriter;
     private String requestPath;
 
-    public DeleteResponse(FileManager fileManager, String requestPath) {
-        this.fileManager = fileManager;
+    public DeleteResponse(FileWriter fileManager, String requestPath) {
+        this.fileWriter = fileManager;
         this.requestPath = requestPath;
     }
 
     @Override
     public String getCorrectStatus() {
         if (requestPath.equals("/form")) {
-            fileManager.deleteDataFromResource();
+            fileWriter.deleteDataFromResource();
         }
         return getCodes().get("200");
     }

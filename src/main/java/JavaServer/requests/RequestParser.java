@@ -24,9 +24,6 @@ public class RequestParser {
     }
 
     public void splitRequest() {
-        if (request.length() < 3) {
-            System.out.println("Exception");
-        }
         if (request.contains("/parameters?")) {
             splitFirstLineWithParams = request.split(EMPTY_SPACE);
         } else if (!request.contains("/parameters?")) {

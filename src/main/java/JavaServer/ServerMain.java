@@ -2,7 +2,7 @@ package JavaServer;
 import JavaServer.configuration.ServerConfiguration;
 import JavaServer.requests.Logger;
 import JavaServer.runner.HTTPServer;
-import JavaServer.sockets.WireServerSocket;
+import JavaServer.sockets.BaseServerSocket;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -23,7 +23,7 @@ public class ServerMain {
 
             ExecutorService executorService = Executors.newFixedThreadPool(4);
 
-            HTTPServer server = new HTTPServer(new WireServerSocket(serverSocket), serverConfiguration.getDirectory(), logger, executorService);
+            HTTPServer server = new HTTPServer(new BaseServerSocket(serverSocket), serverConfiguration.getDirectory(), logger, executorService);
             server.run();
         } catch (Exception e) {
             System.err.println(e.getMessage());

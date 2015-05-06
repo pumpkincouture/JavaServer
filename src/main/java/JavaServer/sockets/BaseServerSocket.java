@@ -3,16 +3,16 @@ package JavaServer.sockets;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-public class WireServerSocket implements ServerSocketService {
+public class BaseServerSocket implements ServerSocketService {
     private ServerSocket serverSocket;
 
-    public WireServerSocket(ServerSocket serverSocket) {
+    public BaseServerSocket(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
     }
 
     @Override
     public SocketService accept() throws IOException {
-        return new WireSocket(serverSocket.accept());
+        return new BaseSocket(serverSocket.accept());
     }
 
     @Override

@@ -2,7 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
-import JavaServer.responses.FileManager;
+import JavaServer.responses.FileWriter;
 import org.junit.Test;
 
 import java.io.*;
@@ -14,7 +14,7 @@ public class ContentResponseTest {
     private RequestParser requestParser;
     private Response requestHandler;
     private File path;
-    private FileManager fileManager;
+    private FileWriter fileWriter;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
@@ -28,9 +28,9 @@ public class ContentResponseTest {
         requestParser = new RequestParser("GET /image.gif HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileManager = new FileManager(path, mockDataStream());
+        fileWriter = new FileWriter(path, mockDataStream());
 
-        requestHandler = new ContentResponse(fileManager, request);
+        requestHandler = new ContentResponse(fileWriter, request);
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
     }
@@ -40,9 +40,9 @@ public class ContentResponseTest {
         requestParser = new RequestParser("GET /image.gif HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileManager = new FileManager(path, mockDataStream());
+        fileWriter = new FileWriter(path, mockDataStream());
 
-        requestHandler = new ContentResponse(fileManager, request);
+        requestHandler = new ContentResponse(fileWriter, request);
 
         assertEquals("", requestHandler.getCorrectBody());
     }

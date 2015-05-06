@@ -1,17 +1,17 @@
 package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
-import JavaServer.responses.FileManager;
+import JavaServer.responses.FileWriter;
 import JavaServer.helpers.StringMaker;
 
 import java.io.IOException;
 
 public class PatchResponse extends Response {
     private Request request;
-    private FileManager fileManager;
+    private FileWriter fileWriter;
 
-    public PatchResponse(FileManager fileManager, Request request) {
-        this.fileManager = fileManager;
+    public PatchResponse(FileWriter fileWriter, Request request) {
+        this.fileWriter = fileWriter;
         this.request = request;
     }
 
@@ -19,7 +19,7 @@ public class PatchResponse extends Response {
     public String getCorrectStatus() {
         if (containsEtagAuthorization()) {
             try {
-                fileManager.patchFileWithNewData(new StringMaker().turnDataIntoString(request.getData()));
+                fileWriter.patchFileWithNewData(new StringMaker().turnDataIntoString(request.getData()));
             } catch (IOException e) {
                 e.printStackTrace();
             }

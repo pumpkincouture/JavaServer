@@ -2,24 +2,24 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Logger;
 import JavaServer.requests.Request;
-import JavaServer.requests.RouteValidator;
-import JavaServer.responses.FileManager;
+import JavaServer.helpers.RouteValidator;
+import JavaServer.responses.FileWriter;
 
 public class ResponseFactory {
     private Request request;
-    private FileManager fileManager;
+    private FileWriter fileWriter;
     private RouteValidator routeValidator;
     private Logger logger;
 
-    public ResponseFactory(Request request, FileManager fileManager, Logger logger) {
+    public ResponseFactory(Request request, FileWriter fileWriter, Logger logger) {
         this.request = request;
-        this.fileManager = fileManager;
+        this.fileWriter = fileWriter;
         this.logger = logger;
         this.routeValidator = new RouteValidator(request);
     }
 
     public Response createResponse() {
-        routeValidator.addMethodsToValidPaths(fileManager.convertFilesToPaths());
+        routeValidator.addMethodsToValidPaths(fileWriter.convertFilesToPaths());
         if  (routeValidator.isInvalidPath()) {
             return new FourOhFourResponse();
         }
@@ -30,14 +30,14 @@ public class ResponseFactory {
             return new OptionsResponse();
         }
         else if (routeValidator.isParameterPath()) {
-            return new ParamResponse(request.getData(), fileManager);
+            return new ParamResponse(request.getData(), fileWriter);
         }
         else if (routeValidator.methodEqualsGet()) {
             if (routeValidator.isDirectory()) {
-                return new GetResponse(fileManager, request);
+                return new GetResponse(fileWriter, request);
                 }
-            if (fileManager.doesFileExist()) {
-                    return new ContentResponse(fileManager, request);
+            if (fileWriter.doesFileExist()) {
+                    return new ContentResponse(fileWriter, request);
                 }
             else if (routeValidator.requiresAuthorization()) {
                 if (routeValidator.requestHasCorrectAuthorization()) {
@@ -45,16 +45,16 @@ public class ResponseFactory {
                 }
                 return new UnauthorizedResponse();
             }
-            return new GetResponse(fileManager, request);
+            return new GetResponse(fileWriter, request);
         }
         else if (routeValidator.methodEqualsPost()) {
-            return new PostResponse(fileManager, request.getPath(), request.getData());
+            return new PostResponse(fileWriter, request.getPath(), request.getData());
         } else if (routeValidator.methodEqualsPut()) {
-            return new PutResponse(fileManager, request.getData(), request.getPath());
+            return new PutResponse(fileWriter, request.getData(), request.getPath());
         } else if (routeValidator.methodEqualsDelete()) {
-            return new DeleteResponse(fileManager, request.getPath());
+            return new DeleteResponse(fileWriter, request.getPath());
         } else if (routeValidator.methodEqualsPatch()) {
-            return new PatchResponse(fileManager, request);
+            return new PatchResponse(fileWriter, request);
         }
         return new FourOhFourResponse();
     }

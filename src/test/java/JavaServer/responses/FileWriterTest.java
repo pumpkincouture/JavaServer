@@ -11,8 +11,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class FileManagerTest {
-    private FileManager fileManager;
+public class FileWriterTest {
+    private FileWriter fileWriter;
     private File path;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
@@ -25,23 +25,23 @@ public class FileManagerTest {
     @Test
     public void returnsTrueIfFileExistsInTheSpecifiedDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileManager = new FileManager(path, mockDataStream());
+        fileWriter = new FileWriter(path, mockDataStream());
 
-        assertTrue(fileManager.doesFileExist());
+        assertTrue(fileWriter.doesFileExist());
     }
 
     @Test
     public void returnsFalseIfFileDoesNotExistInTheSpecifiedDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/best_doge.gif");
-        fileManager = new FileManager(path, mockDataStream());
+        fileWriter = new FileWriter(path, mockDataStream());
 
-        assertFalse(fileManager.doesFileExist());
+        assertFalse(fileWriter.doesFileExist());
     }
 
     @Test
     public void returnsHTMLinksForFilesInDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/");
-        fileManager = new FileManager(path, mockDataStream());
+        fileWriter = new FileWriter(path, mockDataStream());
 
         assertEquals("<a href='/file1'>file1</a></br>\r\n" +
                      "<a href='/file2'>file2</a></br>\r\n" +
@@ -51,31 +51,31 @@ public class FileManagerTest {
                      "<a href='/partial_content.txt'>partial_content.txt</a></br>\r\n" +
                      "<a href='/patch-content.txt'>patch-content.txt</a></br>\r\n" +
                      "<a href='/text-file.txt'>text-file.txt</a></br>\r\n",
-                     fileManager.getDirectoryLinks());
+                     fileWriter.getDirectoryLinks());
     }
 
     @Test
     public void returnsStringArrayWithAllFilesInDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/text-file.txt");
-        fileManager = new FileManager(path, mockDataStream());
+        fileWriter = new FileWriter(path, mockDataStream());
 
-        int lastIndex = fileManager.getDirectoryFiles().size() - 1;
+        int lastIndex = fileWriter.getDirectoryFiles().size() - 1;
 
-        assertEquals("file1", fileManager.getDirectoryFiles().get(0));
-        assertEquals("text-file.txt", fileManager.getDirectoryFiles().get(lastIndex));
-        assertTrue(fileManager.getDirectoryFiles().contains("file1"));
+        assertEquals("file1", fileWriter.getDirectoryFiles().get(0));
+        assertEquals("text-file.txt", fileWriter.getDirectoryFiles().get(lastIndex));
+        assertTrue(fileWriter.getDirectoryFiles().contains("file1"));
     }
 
     @Test
     public void convertsFilesIntoPaths() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileManager = new FileManager(path, mockDataStream());
-        fileManager.convertFilesToPaths();
+        fileWriter = new FileWriter(path, mockDataStream());
+        fileWriter.convertFilesToPaths();
 
-        int lastIndex = fileManager.convertFilesToPaths().size() - 1;
+        int lastIndex = fileWriter.convertFilesToPaths().size() - 1;
 
-        assertEquals("/file1", fileManager.convertFilesToPaths().get(0));
-        assertEquals("/text-file.txt", fileManager.convertFilesToPaths().get(lastIndex));
-        assertTrue(fileManager.convertFilesToPaths().contains("/file1"));
+        assertEquals("/file1", fileWriter.convertFilesToPaths().get(0));
+        assertEquals("/text-file.txt", fileWriter.convertFilesToPaths().get(lastIndex));
+        assertTrue(fileWriter.convertFilesToPaths().contains("/file1"));
     }
 }

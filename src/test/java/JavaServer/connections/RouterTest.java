@@ -12,7 +12,7 @@ public class RouterTest {
     private String directory;
     private Logger logger;
 
-    private DataOutputStream createFakeInput() throws UnsupportedEncodingException {
+    private DataOutputStream mockOutput() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
 
         DataOutputStream out = new DataOutputStream(mockInputStream);
@@ -23,7 +23,7 @@ public class RouterTest {
         logger = new Logger();
         directory = "/Users/test/code/JavaServer/public";
         try {
-            router = new Router(request, directory, createFakeInput(), logger);
+            router = new Router(request, directory, mockOutput(), logger);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

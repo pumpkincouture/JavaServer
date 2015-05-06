@@ -2,7 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
-import JavaServer.responses.FileManager;
+import JavaServer.responses.FileWriter;
 import org.junit.Test;
 
 import java.io.*;
@@ -14,7 +14,7 @@ public class PutResponseTest {
     private RequestParser requestParser;
     private Response requestHandler;
     private File path;
-    private FileManager fileManager;
+    private FileWriter fileWriter;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
@@ -29,8 +29,8 @@ public class PutResponseTest {
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/form");
-        fileManager = new FileManager(path, mockDataStream());
-        requestHandler= new PutResponse(fileManager, request.getData(), request.getPath());
+        fileWriter = new FileWriter(path, mockDataStream());
+        requestHandler= new PutResponse(fileWriter, request.getData(), request.getPath());
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
     }
@@ -41,8 +41,8 @@ public class PutResponseTest {
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/");
-        fileManager = new FileManager(path, mockDataStream());
-        requestHandler= new PutResponse(fileManager, request.getData(), request.getPath());
+        fileWriter = new FileWriter(path, mockDataStream());
+        requestHandler= new PutResponse(fileWriter, request.getData(), request.getPath());
 
         assertEquals("HTTP/1.1 404 Not Found", requestHandler.getCorrectStatus());
     }
@@ -53,8 +53,8 @@ public class PutResponseTest {
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/file1");
-        fileManager = new FileManager(path, mockDataStream());
-        requestHandler= new PutResponse(fileManager, request.getData(), request.getPath());
+        fileWriter = new FileWriter(path, mockDataStream());
+        requestHandler= new PutResponse(fileWriter, request.getData(), request.getPath());
 
         assertEquals("HTTP/1.1 405 Method Not Allowed", requestHandler.getCorrectStatus());
     }

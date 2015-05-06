@@ -5,10 +5,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class WireSocket implements SocketService {
+public class BaseSocket implements SocketService {
     private Socket socket;
 
-    public WireSocket(Socket socket) {
+    public BaseSocket(Socket socket) {
         this.socket = socket;
 
     }

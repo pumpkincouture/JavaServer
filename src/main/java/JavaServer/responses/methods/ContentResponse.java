@@ -1,17 +1,17 @@
 package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
-import JavaServer.responses.FileManager;
+import JavaServer.responses.FileWriter;
 import JavaServer.helpers.RangeFinder;
 
 import java.io.IOException;
 
 public class ContentResponse extends Response {
-    private FileManager fileManager;
+    private FileWriter fileWriter;
     private Request request;
 
-    public ContentResponse(FileManager fileManager, Request request) {
-        this.fileManager = fileManager;
+    public ContentResponse(FileWriter fileManager, Request request) {
+        this.fileWriter = fileManager;
         this.request = request;
     }
 
@@ -31,9 +31,9 @@ public class ContentResponse extends Response {
     @Override
     public String getCorrectBody() throws IOException {
         if (hasRange()) {
-            fileManager.getPartialFileContents(new RangeFinder(request.getHeaders()));
+            fileWriter.getPartialFileContents(new RangeFinder(request.getHeaders()));
         } else {
-            fileManager.getFileContents();
+            fileWriter.getFileContents();
         }
         return EMPTY_STRING;
     }

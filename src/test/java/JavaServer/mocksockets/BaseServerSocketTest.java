@@ -1,6 +1,6 @@
 package JavaServer.mocksockets;
 
-import JavaServer.sockets.WireServerSocket;
+import JavaServer.sockets.BaseServerSocket;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,8 +10,8 @@ import java.net.ServerSocket;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class WireServerSocketTest {
-    private WireServerSocket wireServerSocket;
+public class BaseServerSocketTest {
+    private BaseServerSocket baseServerSocket;
     private ServerSocket serverSocket;
 
     @Before
@@ -21,11 +21,11 @@ public class WireServerSocketTest {
 
     @Test
     public void testIfPortIsSetCorrectlyAndThenClosed() throws IOException {
-        wireServerSocket = new WireServerSocket(serverSocket);
-        wireServerSocket.close();
-        assertTrue(wireServerSocket.isClosed());
+        baseServerSocket = new BaseServerSocket(serverSocket);
+        baseServerSocket.close();
+        assertTrue(baseServerSocket.isClosed());
         serverSocket.close();
         assertTrue(serverSocket.isClosed());
-        assertEquals(50034, wireServerSocket.getPort());
+        assertEquals(50034, baseServerSocket.getPort());
     }
 }

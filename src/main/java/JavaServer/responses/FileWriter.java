@@ -8,11 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class FileManager {
+public class FileWriter {
     private File filePath;
     private DataOutputStream out;
 
-    public FileManager(File filePath, DataOutputStream out) {
+    public FileWriter(File filePath, DataOutputStream out) {
         this.filePath = filePath;
         this.out = out;
     }

@@ -1,4 +1,6 @@
-package JavaServer.requests;
+package JavaServer.helpers;
+
+import JavaServer.requests.Request;
 
 import java.util.ArrayList;
 import java.util.List;
