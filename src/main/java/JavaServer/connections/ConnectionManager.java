@@ -1,18 +1,19 @@
 package JavaServer.connections;
 
 import JavaServer.requests.Logger;
+import JavaServer.sockets.SocketService;
+
 import java.io.*;
-import java.net.Socket;
 
 public class ConnectionManager implements Runnable {
-    private Socket socket;
     private String directory;
     private Logger logger;
     private BufferedReader bufferedReader;
     private DataOutputStream dataOutputStream;
+    private SocketService socket;
 
 
-    public ConnectionManager(Socket socket, String directory, Logger logger) throws IOException {
+    public ConnectionManager(SocketService socket, String directory, Logger logger) throws IOException {
         this.socket = socket;
         this.directory = directory;
         this.logger = logger;

@@ -9,7 +9,7 @@ public class MockServerSocket implements ServerSocketService {
     private SocketService socket;
     private int port;
     private boolean isConnected = true;
-    private boolean isClosed = false;
+    public boolean isClosed = false;
 
     public MockServerSocket(int port) throws IOException {
         this.socket = new MockSocket();
@@ -31,7 +31,6 @@ public class MockServerSocket implements ServerSocketService {
         this.isConnected = true;
         return this.socket;
     }
-
 
     @Override
     public void close() throws IOException {
