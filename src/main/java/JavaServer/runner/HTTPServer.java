@@ -24,9 +24,10 @@ public class HTTPServer {
         this.executorService = executorService;
     }
 
-    public HTTPServer(ServerSocketService serverSocketService, int port) {
+    public HTTPServer(ServerSocketService serverSocketService, int port, String directory) {
         this.serverSocketService = serverSocketService;
         this.port = port;
+        this.directory = directory;
     }
 
     public void run() throws IOException {
