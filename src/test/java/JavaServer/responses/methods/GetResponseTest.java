@@ -32,7 +32,7 @@ public class GetResponseTest {
     }
 
     @Test
-    public void returns200ResponseCode() throws UnsupportedEncodingException {
+    public void returns200ResponseCode() throws IOException {
         createRequestAndFilePath("GET / HTTP/1.1", "");
 
         assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());

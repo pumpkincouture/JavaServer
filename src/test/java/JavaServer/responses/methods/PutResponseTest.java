@@ -24,7 +24,7 @@ public class PutResponseTest {
     }
 
     @Test
-    public void returns200ResponseIfPathIsRecognized() throws FileNotFoundException, UnsupportedEncodingException {
+    public void returns200ResponseIfPathIsRecognized() throws IOException {
         requestParser = new RequestParser("PUT /form HTTP/1.1");
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
@@ -36,7 +36,7 @@ public class PutResponseTest {
     }
 
     @Test
-    public void returns404ResponseIfPathIsNotRecognized() throws FileNotFoundException, UnsupportedEncodingException {
+    public void returns404ResponseIfPathIsNotRecognized() throws IOException {
         requestParser = new RequestParser("PUT / HTTP/1.1");
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
@@ -48,7 +48,7 @@ public class PutResponseTest {
     }
 
     @Test
-    public void returns405ResponseIfMethodNotAllowed() throws FileNotFoundException, UnsupportedEncodingException {
+    public void returns405ResponseIfMethodNotAllowed() throws IOException {
         requestParser = new RequestParser("PUT /file1 HTTP/1.1");
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());

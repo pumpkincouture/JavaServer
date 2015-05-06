@@ -24,7 +24,7 @@ public class LogsResponseTest {
     }
 
     @Test
-    public void returns200AsStatus() {
+    public void returns200AsStatus() throws IOException {
         createRequestAndResponse("GET /logs HTTP/1.1\n" +
                                  "Authorization: Basic YWRtaW46aHVudGVyMg==\n" +
                                  "Host: localhost:5000\n" +

@@ -20,7 +20,7 @@ public class OptionsResponseTest {
     }
 
     @Test
-    public void returns200ResponseStatus() {
+    public void returns200ResponseStatus() throws IOException {
         createRequestAndResponse("OPTIONS /method_options HTTP/1.1");
 
         assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());

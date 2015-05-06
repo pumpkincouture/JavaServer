@@ -32,14 +32,14 @@ public class ContentResponseTest {
     }
 
     @Test
-    public void returns200Response() throws UnsupportedEncodingException {
+    public void returns200Response() throws IOException {
         createRequestAndFilePath("GET /image.gif HTTP/1.1", "image.gif");
 
         assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());
     }
 
     @Test
-    public void returns206IfRequestHasRange() throws UnsupportedEncodingException {
+    public void returns206IfRequestHasRange() throws IOException {
         createRequestAndFilePath("GET /partial_content.txt HTTP/1.1\n"+
                                  "Range: bytes=-6\n"+
                                  "Host: localhost:5000\n"+

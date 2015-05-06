@@ -25,7 +25,7 @@ public class PostResponseTest {
     }
 
     @Test
-    public void returns200ResponseIfPathIsRecognized() throws FileNotFoundException, UnsupportedEncodingException {
+    public void returns200ResponseIfPathIsRecognized() throws IOException {
         requestParser = new RequestParser("POST /form HTTP/1.1");
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
@@ -37,7 +37,7 @@ public class PostResponseTest {
     }
 
     @Test
-    public void returns404ResponseIfPathIsNotRecognized() throws FileNotFoundException, UnsupportedEncodingException {
+    public void returns404ResponseIfPathIsNotRecognized() throws IOException {
         requestParser = new RequestParser("POST / HTTP/1.1");
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
@@ -49,7 +49,7 @@ public class PostResponseTest {
     }
 
     @Test
-    public void returns405ResponseIfMethodNotAllowed() throws FileNotFoundException, UnsupportedEncodingException {
+    public void returns405ResponseIfMethodNotAllowed() throws IOException {
         requestParser = new RequestParser("POST /text-file.txt HTTP/1.1");
 
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());

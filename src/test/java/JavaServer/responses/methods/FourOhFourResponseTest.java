@@ -21,7 +21,7 @@ public class FourOhFourResponseTest {
     }
 
     @Test
-    public void returns404ResponseIfInvalidPath() {
+    public void returns404ResponseIfInvalidPath() throws IOException {
         createRequestAndResponse("GET /whatever HTTP/1.1");
 
         assertEquals("HTTP/1.1 404 Not Found", response.getCorrectStatus());
@@ -40,4 +40,6 @@ public class FourOhFourResponseTest {
 
         assertEquals("", response.getCorrectBody());
     }
+
+
 }

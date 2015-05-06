@@ -5,12 +5,11 @@ import JavaServer.requests.RequestParser;
 import JavaServer.responses.FileWriter;
 import org.junit.Test;
 
-
 import java.io.*;
 
 import static org.junit.Assert.assertEquals;
 
-public class DeleteResponseTest {
+public class PatchResponseTest {
     private Request request;
     private RequestParser requestParser;
     private Response response;
@@ -29,26 +28,43 @@ public class DeleteResponseTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
         fileWriter = new FileWriter(path, mockDataStream());
-        response = new DeleteResponse(fileWriter, request.getPath());
+        response = new PatchResponse(fileWriter, request);
+    }
+
+    private String readFromFile() throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+        String fileLines = "";
+
+        String line = null;
+        while ((line = bufferedReader.readLine()) != null) {
+            fileLines += line;
+        }
+        bufferedReader.close();
+        return fileLines;
     }
 
     @Test
-    public void returns200Response() throws IOException {
-        createRequestAndFilePath("DELETE /form HTTP/1.1", "form");
+    public void returns204ResponseIfNoEtagPresent() throws IOException {
+        createRequestAndFilePath("PATCH /patch-content.txt HTTP/1.1", "patch-content.txt");
 
-        assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());
+        assertEquals("HTTP/1.1 204 No Content", response.getCorrectStatus());
+        assertEquals("default content ", readFromFile());
     }
 
     @Test
     public void returnsEmptyStringAsHeader() throws UnsupportedEncodingException {
-        createRequestAndFilePath("DELETE /form HTTP/1.1", "form");
+        createRequestAndFilePath("PATCH /patch-content.txt HTTP/1.1", "patch-content.txt");
 
         assertEquals("", response.getCorrectHeaders());
     }
 
     @Test
     public void returnsEmptyStringAsBody() throws IOException {
-        createRequestAndFilePath("DELETE /form HTTP/1.1", "form");
+        createRequestAndFilePath("PATCH /logs HTTP/1.1\n" +
+                                 "If-Match: dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec\n" +
+                                 "Host: localhost:5000\n" +
+                                 "\n" +
+                                 "patched content", "patch-content.txt");
 
         assertEquals("", response.getCorrectBody());
     }

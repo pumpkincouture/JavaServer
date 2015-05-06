@@ -16,16 +16,11 @@ public class PatchResponse extends Response {
     }
 
     @Override
-    public String getCorrectStatus() {
+    public String getCorrectStatus() throws IOException {
         if (containsEtagAuthorization()) {
-            try {
-                fileWriter.patchFileWithNewData(new StringMaker().turnDataIntoString(request.getData()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return getCodes().get("204");
+            patchFile();
         }
-        return getCodes().get("200");
+        return getCodes().get("204");
     }
 
     @Override
@@ -40,5 +35,13 @@ public class PatchResponse extends Response {
 
     private boolean containsEtagAuthorization() {
         return request.getHeaders().get("If-Match") != null;
+    }
+
+    private String getFormattedString() {
+        return new StringMaker().turnDataIntoString(request.getData());
+    }
+
+    private void patchFile() throws IOException {
+        fileWriter.patchFileWithNewData(getFormattedString());
     }
 }

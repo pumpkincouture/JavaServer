@@ -38,7 +38,7 @@ public class Router {
         responseBuilder = new ResponseBuilder(responseFactory.createResponse());
     }
 
-    public String getResponse() {
+    public String getResponse() throws IOException {
         return responseBuilder.getResponseHeaders();
     }
 

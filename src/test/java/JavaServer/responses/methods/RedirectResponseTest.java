@@ -4,6 +4,8 @@ import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 
 public class RedirectResponseTest {
@@ -12,7 +14,7 @@ public class RedirectResponseTest {
     private Response response;
 
     @Test
-    public void returns302IfPathIsRedirect() {
+    public void returns302IfPathIsRedirect() throws IOException {
         requestParser = new RequestParser("GET /redirect HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 

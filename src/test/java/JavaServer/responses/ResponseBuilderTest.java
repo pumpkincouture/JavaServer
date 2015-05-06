@@ -6,10 +6,7 @@ import JavaServer.requests.RequestParser;
 import JavaServer.responses.methods.ResponseFactory;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -30,7 +27,7 @@ public class ResponseBuilderTest {
     }
 
     @Test
-    public void parseAndStoreMoreThanOnePostParamAndReturnResponseWithNoHeaders() throws UnsupportedEncodingException {
+    public void parseAndStoreMoreThanOnePostParamAndReturnResponseWithNoHeaders() throws IOException {
         requestParser = new RequestParser("GET /form\n"+
                                           "Content-Type: application/x-www-form-url-encoded\n"+
                                           "Host: https://sylwiaolak.com\n"+
