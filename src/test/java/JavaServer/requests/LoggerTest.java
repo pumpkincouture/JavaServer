@@ -12,8 +12,6 @@ public class LoggerTest {
         logger = new Logger();
         logger.logRequest("GET /log HTTP/1.1");
 
-        assertEquals("GET /log HTTP1.1\r\n", logger.getLogs());
+        assertEquals("GET /log HTTP/1.1\r\n", logger.getLogs());
     }
-
-
 }
