@@ -117,9 +117,7 @@ public class RequestParser {
             String[] split = string.split(EQUAL_SIGN);
             params.put(split[0], URLDecoder.decode(split[1]));
         }
-
         return params;
-
     }
 
     private HashMap<String, String> createTable(List<String> listOfStrings, String stringToSplitOn) {
@@ -135,7 +133,6 @@ public class RequestParser {
                 table.put(splitHeaders[FIRST_ELEMENT], splitHeaders[SECOND_ELEMENT]);
             }
         }
-
         return table;
     }
 
