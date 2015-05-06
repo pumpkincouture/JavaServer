@@ -6,6 +6,7 @@ import java.util.List;
 public class RouteValidator {
     public static final String PATCH_CONTENT = "/patch-content.txt";
     public static final String PARTIAL = "/partial_content.txt";
+    public static final String HEAD = "HEAD";
     private Request request;
     private List<String> validMethods;
     private List<String> allValidPaths = new ArrayList<>();
@@ -87,15 +88,11 @@ public class RouteValidator {
     }
 
     public boolean requestHasCorrectAuthorization() {
-        return hasAuthorization() && getAuthorizationCode().contains(AUTHORIZATION);
-    }
-
-    private boolean hasAuthorization() {
-        return request.getHeaders().get("Authorization") != null;
+        return request.hasAuthorization() && getAuthorizationCode().contains(AUTHORIZATION);
     }
 
     private String getAuthorizationCode() {
-        if (hasAuthorization()) {
+        if (request.hasAuthorization()) {
             return request.getHeaders().get("Authorization");
         }
         return "";
@@ -104,13 +101,13 @@ public class RouteValidator {
     private List<String> getValidMethods() {
         validMethods = new ArrayList<>();
 
-        validMethods.add("GET");
-        validMethods.add("OPTIONS");
-        validMethods.add("HEAD");
-        validMethods.add("POST");
-        validMethods.add("PUT");
-        validMethods.add("DELETE");
-        validMethods.add("PATCH");
+        validMethods.add(GET);
+        validMethods.add(OPTIONS);
+        validMethods.add(HEAD);
+        validMethods.add(POST);
+        validMethods.add(PUT);
+        validMethods.add(DELETE);
+        validMethods.add(PATCH);
 
         return validMethods;
     }

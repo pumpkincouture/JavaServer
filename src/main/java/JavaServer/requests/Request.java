@@ -32,6 +32,10 @@ public class Request {
         return data;
     }
 
+    public boolean hasAuthorization() {
+        return getHeaders().get("Authorization") != null;
+    }
+
     public String getRequestLine() {
         return "" + requestMethod + " " + path + " " + "HTTP/1.1";
     }

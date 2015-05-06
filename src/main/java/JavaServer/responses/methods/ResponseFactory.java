@@ -14,8 +14,8 @@ public class ResponseFactory {
     public ResponseFactory(Request request, FileManager fileManager, Logger logger) {
         this.request = request;
         this.fileManager = fileManager;
-        this.routeValidator = new RouteValidator(request);
         this.logger = logger;
+        this.routeValidator = new RouteValidator(request);
     }
 
     public Response createResponse() {
