@@ -39,6 +39,5 @@ public class ParamResponseTest {
         requestHandler= new ParamResponse(request.getData(), fileWriter);
 
         assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
-//        assertEquals("variable_1 = Operators <, >, =, !=; +, -, *, &, @, #, $, [, ]: \"is that all\"?variable_2 = stuff", dataOutputStream.toString());
     }
 }

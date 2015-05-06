@@ -1,5 +1,6 @@
 package JavaServer.responses;
 
+import JavaServer.requests.Request;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -14,18 +15,19 @@ import static org.junit.Assert.assertTrue;
 public class FileWriterTest {
     private FileWriter fileWriter;
     private File path;
+    private DataOutputStream dataOutputStream;
 
-    private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
+    private void mockDataStream() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
 
-        DataOutputStream out = new DataOutputStream(mockInputStream);
-        return out;
+        dataOutputStream = new DataOutputStream(mockInputStream);
     }
 
     @Test
     public void returnsTrueIfFileExistsInTheSpecifiedDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileWriter = new FileWriter(path, mockDataStream());
+        mockDataStream();
+        fileWriter = new FileWriter(path, dataOutputStream);
 
         assertTrue(fileWriter.doesFileExist());
     }
@@ -33,7 +35,8 @@ public class FileWriterTest {
     @Test
     public void returnsFalseIfFileDoesNotExistInTheSpecifiedDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/best_doge.gif");
-        fileWriter = new FileWriter(path, mockDataStream());
+        mockDataStream();
+        fileWriter = new FileWriter(path, dataOutputStream);
 
         assertFalse(fileWriter.doesFileExist());
     }
@@ -41,7 +44,8 @@ public class FileWriterTest {
     @Test
     public void returnsHTMLinksForFilesInDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/");
-        fileWriter = new FileWriter(path, mockDataStream());
+        mockDataStream();
+        fileWriter = new FileWriter(path, dataOutputStream);
 
         assertEquals("<a href='/file1'>file1</a></br>\r\n" +
                      "<a href='/file2'>file2</a></br>\r\n" +
@@ -57,7 +61,8 @@ public class FileWriterTest {
     @Test
     public void returnsStringArrayWithAllFilesInDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/text-file.txt");
-        fileWriter = new FileWriter(path, mockDataStream());
+        mockDataStream();
+        fileWriter = new FileWriter(path, dataOutputStream);
 
         int lastIndex = fileWriter.getDirectoryFiles().size() - 1;
 
@@ -69,7 +74,8 @@ public class FileWriterTest {
     @Test
     public void convertsFilesIntoPaths() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileWriter = new FileWriter(path, mockDataStream());
+        mockDataStream();
+        fileWriter = new FileWriter(path, dataOutputStream);
         fileWriter.convertFilesToPaths();
 
         int lastIndex = fileWriter.convertFilesToPaths().size() - 1;
