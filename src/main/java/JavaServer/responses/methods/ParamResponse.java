@@ -27,8 +27,12 @@ public class ParamResponse extends Response {
 
     @Override
     public String getCorrectBody() throws IOException {
-        fileWriter.setDataInResource(new StringMaker().turnDataIntoString(requestData, EQUALITY_WITH_SPACES));
+        fileWriter.setDataInResource(getFormattedString());
         fileWriter.getDataFileContents();
         return EMPTY_STRING;
+    }
+
+    private String getFormattedString() {
+        return new StringMaker().turnDataIntoString(requestData, EQUALITY_WITH_SPACES);
     }
 }
