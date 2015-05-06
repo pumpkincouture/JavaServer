@@ -1,6 +1,5 @@
 package JavaServer.responses;
 
-import JavaServer.requests.Request;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
