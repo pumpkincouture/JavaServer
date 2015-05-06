@@ -21,9 +21,6 @@ public class MockServerSocket implements ServerSocketService {
         return isConnected;
     }
 
-    public int getPortNumber() {
-        return port;
-    }
 
     @Override
     public SocketService accept() {
@@ -40,9 +37,5 @@ public class MockServerSocket implements ServerSocketService {
     @Override
     public boolean isClosed() throws IOException {
         return isClosed;
-    }
-
-    public String getOutPut() throws IOException {
-        return socket.getOutputStream().toString();
     }
 }
