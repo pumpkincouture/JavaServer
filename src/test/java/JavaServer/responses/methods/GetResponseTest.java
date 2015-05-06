@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class GetResponseTest {
     private Request request;
     private RequestParser requestParser;
-    private Response requestHandler;
+    private Response response;
     private FileWriter fileWriter;
     private File path;
 
@@ -33,9 +33,9 @@ public class GetResponseTest {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         fileWriter = new FileWriter(path, mockDataStream());
 
-        requestHandler = new GetResponse(fileWriter, request);
+        response = new GetResponse(fileWriter, request);
 
-        assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
+        assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());
     }
 
     @Test
@@ -45,8 +45,8 @@ public class GetResponseTest {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         fileWriter = new FileWriter(path, mockDataStream());
 
-        requestHandler = new GetResponse(fileWriter, request);
+        response = new GetResponse(fileWriter, request);
 
-        assertEquals("", requestHandler.getCorrectHeaders());
+        assertEquals("", response.getCorrectHeaders());
     }
 }

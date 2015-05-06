@@ -9,14 +9,14 @@ import static org.junit.Assert.assertEquals;
 public class OptionsResponseTest {
     private Request request;
     private RequestParser requestParser;
-    private Response requestHandler;
+    private Response response;
 
     @Test
     public void returns200ResponseIfRequestPathValid() {
         requestParser = new RequestParser("OPTIONS /method_options HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        requestHandler= new OptionsResponse();
+        response = new OptionsResponse();
 
-        assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
+        assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());
     }
 }

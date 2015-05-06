@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class DeleteResponseTest {
     private Request request;
     private RequestParser requestParser;
-    private Response requestHandler;
+    private Response response;
     private FileWriter fileWriter;
     private File path;
 
@@ -29,27 +29,27 @@ public class DeleteResponseTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
         fileWriter = new FileWriter(path, mockDataStream());
-        requestHandler = new DeleteResponse(fileWriter, request.getPath());
+        response = new DeleteResponse(fileWriter, request.getPath());
     }
 
     @Test
     public void returns200Response() throws UnsupportedEncodingException {
         createRequestAndFilePath("DELETE /form HTTP/1.1", "form");
 
-        assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
+        assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());
     }
 
     @Test
     public void returnsEmptyStringAsHeader() throws UnsupportedEncodingException {
         createRequestAndFilePath("DELETE /form HTTP/1.1", "form");
 
-        assertEquals("", requestHandler.getCorrectHeaders());
+        assertEquals("", response.getCorrectHeaders());
     }
 
     @Test
     public void returnsEmptyStringAsBody() throws IOException {
         createRequestAndFilePath("DELETE /form HTTP/1.1", "form");
 
-        assertEquals("", requestHandler.getCorrectBody());
+        assertEquals("", response.getCorrectBody());
     }
 }

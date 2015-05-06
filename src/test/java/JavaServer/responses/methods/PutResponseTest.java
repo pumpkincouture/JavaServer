@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class PutResponseTest {
     private Request request;
     private RequestParser requestParser;
-    private Response requestHandler;
+    private Response response;
     private File path;
     private FileWriter fileWriter;
 
@@ -30,9 +30,9 @@ public class PutResponseTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/form");
         fileWriter = new FileWriter(path, mockDataStream());
-        requestHandler= new PutResponse(fileWriter, request.getData(), request.getPath());
+        response = new PutResponse(fileWriter, request.getData(), request.getPath());
 
-        assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
+        assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());
     }
 
     @Test
@@ -42,9 +42,9 @@ public class PutResponseTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/");
         fileWriter = new FileWriter(path, mockDataStream());
-        requestHandler= new PutResponse(fileWriter, request.getData(), request.getPath());
+        response = new PutResponse(fileWriter, request.getData(), request.getPath());
 
-        assertEquals("HTTP/1.1 404 Not Found", requestHandler.getCorrectStatus());
+        assertEquals("HTTP/1.1 404 Not Found", response.getCorrectStatus());
     }
 
     @Test
@@ -54,9 +54,9 @@ public class PutResponseTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/file1");
         fileWriter = new FileWriter(path, mockDataStream());
-        requestHandler= new PutResponse(fileWriter, request.getData(), request.getPath());
+        response = new PutResponse(fileWriter, request.getData(), request.getPath());
 
-        assertEquals("HTTP/1.1 405 Method Not Allowed", requestHandler.getCorrectStatus());
+        assertEquals("HTTP/1.1 405 Method Not Allowed", response.getCorrectStatus());
     }
 }
 

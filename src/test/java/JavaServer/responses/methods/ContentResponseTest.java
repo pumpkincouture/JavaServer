@@ -6,14 +6,13 @@ import JavaServer.responses.FileWriter;
 import org.junit.Test;
 
 import java.io.*;
-import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
 public class ContentResponseTest {
     private Request request;
     private RequestParser requestParser;
-    private Response requestHandler;
+    private Response response;
     private File path;
     private FileWriter fileWriter;
 
@@ -29,14 +28,14 @@ public class ContentResponseTest {
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
         fileWriter = new FileWriter(path, mockDataStream());
-        requestHandler = new ContentResponse(fileWriter, request);
+        response = new ContentResponse(fileWriter, request);
     }
 
     @Test
     public void returns200Response() throws UnsupportedEncodingException {
         createRequestAndFilePath("GET /image.gif HTTP/1.1", "image.gif");
 
-        assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
+        assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());
     }
 
     @Test
@@ -46,21 +45,21 @@ public class ContentResponseTest {
                                  "Host: localhost:5000\n"+
                                  "\n", "partial_content.txt");
 
-        assertEquals("HTTP/1.1 206 Partial Content", requestHandler.getCorrectStatus());
+        assertEquals("HTTP/1.1 206 Partial Content", response.getCorrectStatus());
     }
 
     @Test
     public void returnsEmptyHeader() throws UnsupportedEncodingException {
         createRequestAndFilePath("GET /text-file.txt HTTP/1.1", "text-file.txt");
 
-        assertEquals("", requestHandler.getCorrectHeaders());
+        assertEquals("", response.getCorrectHeaders());
     }
 
     @Test
     public void callsFileWriterAndReturnsAnEmptyStringIfRequestDoesNotHaveRange() throws IOException {
         createRequestAndFilePath("GET /file1 HTTP/1.1", "file1");
 
-        assertEquals("", requestHandler.getCorrectBody());
+        assertEquals("", response.getCorrectBody());
     }
 
     @Test
@@ -70,6 +69,6 @@ public class ContentResponseTest {
                                  "Host: localhost:5000\n"+
                                  "\n", "partial_content.txt");
 
-        assertEquals("", requestHandler.getCorrectBody());
+        assertEquals("", response.getCorrectBody());
     }
 }

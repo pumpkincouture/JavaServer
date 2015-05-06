@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ParamResponseTest {
     private Request request;
-    private Response requestHandler;
+    private Response response;
     private FileWriter fileWriter;
     private File path;
     DataOutputStream dataOutputStream;
@@ -36,8 +36,8 @@ public class ParamResponseTest {
         path = new File("/Users/test/code/JavaServer/public/parameters");
         mockDataStream();
         fileWriter = new FileWriter(path, dataOutputStream);
-        requestHandler= new ParamResponse(request.getData(), fileWriter);
+        response = new ParamResponse(request.getData(), fileWriter);
 
-        assertEquals("HTTP/1.1 200 OK", requestHandler.getCorrectStatus());
+        assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());
     }
 }

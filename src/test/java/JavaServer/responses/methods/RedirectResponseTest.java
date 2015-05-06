@@ -9,15 +9,15 @@ import static org.junit.Assert.assertEquals;
 public class RedirectResponseTest {
     private Request request;
     private RequestParser requestParser;
-    private Response requestHandler;
+    private Response response;
 
     @Test
     public void returns302IfPathIsRedirect() {
         requestParser = new RequestParser("GET /redirect HTTP/1.1");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
 
-        requestHandler = new RedirectResponse();
+        response = new RedirectResponse();
 
-        assertEquals("HTTP/1.1 302 Found", requestHandler.getCorrectStatus());
+        assertEquals("HTTP/1.1 302 Found", response.getCorrectStatus());
     }
 }
