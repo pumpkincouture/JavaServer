@@ -40,8 +40,9 @@ public class ServerConfigurationTest {
         args[3] = "sizzurp";
 
         serverConfiguration = new ServerConfiguration(args);
+        String directoryResult = System.getProperty("user.dir") + "/public";
 
-        assertEquals("/Users/test/code/JavaServer/public", serverConfiguration.getDirectory());
+        assertEquals(directoryResult, serverConfiguration.getDirectory());
     }
 
     @Test

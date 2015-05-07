@@ -61,10 +61,10 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="JavaServer.responses.FileAdminTest" name="returnsTrueIfFileExistsInTheSpecifiedDirectory" time="0"/>
+  <testcase classname="JavaServer.responses.FileAdminTest" name="returnsTrueIfFileExistsInTheSpecifiedDirectory" time="0.002"/>
   <testcase classname="JavaServer.responses.FileAdminTest" name="returnsStringArrayWithAllFilesInDirectory" time="0"/>
   <testcase classname="JavaServer.responses.FileAdminTest" name="returnsHTMLinksForFilesInDirectory" time="0"/>
-  <testcase classname="JavaServer.responses.FileAdminTest" name="convertsFilesIntoPaths" time="0.001"/>
-  <testcase classname="JavaServer.responses.FileAdminTest" name="patchesFileWithNewData" time="0.004"/>
-  <testcase classname="JavaServer.responses.FileAdminTest" name="returnsFalseIfFileDoesNotExistInTheSpecifiedDirectory" time="0"/>
+  <testcase classname="JavaServer.responses.FileAdminTest" name="convertsFilesIntoPaths" time="0"/>
+  <testcase classname="JavaServer.responses.FileAdminTest" name="patchesFileWithNewData" time="0.002"/>
+  <testcase classname="JavaServer.responses.FileAdminTest" name="returnsFalseIfFileDoesNotExistInTheSpecifiedDirectory" time="0.001"/>
 </testsuite>
