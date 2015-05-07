@@ -21,7 +21,6 @@ public class MockServerSocket implements ServerSocketService {
         return isConnected;
     }
 
-
     @Override
     public SocketService accept() {
         this.isClosed = false;

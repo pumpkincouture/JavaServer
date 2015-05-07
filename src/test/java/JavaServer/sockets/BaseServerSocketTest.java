@@ -13,7 +13,6 @@ import static org.junit.Assert.assertTrue;
 public class BaseServerSocketTest {
     private BaseServerSocket baseServerSocket;
     private ServerSocket serverSocket;
-    private BaseSocket baseSocket;
     private MockSocket mockSocket;
 
     @Test
