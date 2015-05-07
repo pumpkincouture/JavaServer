@@ -52,6 +52,17 @@ public class PatchResponseTest {
     }
 
     @Test
+    public void callsFileWriterToWriteToFileWithPatchedContent() throws IOException {
+        createRequestAndResponse("PATCH /logs HTTP/1.1\n" +
+                                 "If-Match: dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec\n" +
+                                 "Host: localhost:5000\n" +
+                                 "\n" +
+                                 "patched content", "patch-content.txt");
+
+        assertEquals("default content ", readFromFile());
+    }
+
+    @Test
     public void returnsEmptyStringAsHeader() throws UnsupportedEncodingException {
         createRequestAndResponse("PATCH /patch-content.txt HTTP/1.1", "patch-content.txt");
 
@@ -61,10 +72,10 @@ public class PatchResponseTest {
     @Test
     public void returnsEmptyStringAsBody() throws IOException {
         createRequestAndResponse("PATCH /logs HTTP/1.1\n" +
-                "If-Match: dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec\n" +
-                "Host: localhost:5000\n" +
-                "\n" +
-                "patched content", "patch-content.txt");
+                                 "If-Match: dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec\n" +
+                                 "Host: localhost:5000\n" +
+                                 "\n" +
+                                 "patched content", "patch-content.txt");
 
         assertEquals("", response.getCorrectBody());
     }

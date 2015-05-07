@@ -19,7 +19,7 @@ public class PostResponse extends Response {
     @Override
     public String getCorrectStatus() {
         if (requestPath.equals("/form")) {
-            fileWriter.setDataInResource(new StringMaker().turnDataIntoString(requestData, EQUAL_SIGN));
+            fileWriter.setDataInResource(getFormattedString());
             return getCodes().get("200");
         } else if (requestPath.equals("/text-file.txt")) {
             return getCodes().get("405");
@@ -35,5 +35,9 @@ public class PostResponse extends Response {
     @Override
     public String getCorrectBody() {
         return EMPTY_STRING;
+    }
+
+    private String getFormattedString() {
+        return new StringMaker().turnDataIntoString(requestData, EQUAL_SIGN);
     }
 }

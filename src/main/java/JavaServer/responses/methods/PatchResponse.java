@@ -18,7 +18,7 @@ public class PatchResponse extends Response {
     @Override
     public String getCorrectStatus() throws IOException {
         if (containsEtagAuthorization()) {
-            patchFile();
+            fileWriter.patchFileWithNewData(getFormattedString());
         }
         return getCodes().get("204");
     }
@@ -39,9 +39,5 @@ public class PatchResponse extends Response {
 
     private String getFormattedString() {
         return new StringMaker().turnDataIntoString(request.getData());
-    }
-
-    private void patchFile() throws IOException {
-        fileWriter.patchFileWithNewData(getFormattedString());
     }
 }
