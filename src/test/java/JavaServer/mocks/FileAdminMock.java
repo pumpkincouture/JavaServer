@@ -1,6 +1,7 @@
-package JavaServer.responses;
+package JavaServer.mocks;
 
 import JavaServer.helpers.RangeFinder;
+import JavaServer.responses.ResourceAdmin;
 
 import java.io.IOException;
 import java.util.ArrayList;

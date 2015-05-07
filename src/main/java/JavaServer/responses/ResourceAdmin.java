@@ -15,15 +15,15 @@ public interface ResourceAdmin {
 
     public List<String> getDirectoryFiles();
 
-    public void getFileContents();
+    public void getFileContents() throws IOException;
 
-    public void getDataFileContents();
+    public void getDataFileContents() throws IOException;
 
     public void getPartialFileContents(RangeFinder rangeFinder) throws IOException;
 
     public void patchFileWithNewData(String newData) throws IOException;
 
-    public void setDataInResource(String paramData);
+    public void setDataInResource(String paramData) throws IOException;
 
-    public void deleteDataFromResource();
+    public void deleteDataFromResource() throws IOException;
 }

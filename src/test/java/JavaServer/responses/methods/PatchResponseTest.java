@@ -2,7 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
-import JavaServer.responses.FileAdminMock;
+import JavaServer.mocks.FileAdminMock;
 import org.junit.Test;
 
 import java.io.*;

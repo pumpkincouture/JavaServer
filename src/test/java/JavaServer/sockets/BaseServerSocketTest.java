@@ -1,6 +1,5 @@
-package JavaServer.mocksockets;
+package JavaServer.sockets;
 
-import JavaServer.sockets.BaseServerSocket;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,6 +21,7 @@ public class BaseServerSocketTest {
     @Test
     public void testIfPortIsSetCorrectlyAndThenClosed() throws IOException {
         baseServerSocket = new BaseServerSocket(serverSocket);
+        assertTrue(baseServerSocket.isConnected());
         baseServerSocket.close();
         assertTrue(baseServerSocket.isClosed());
         serverSocket.close();

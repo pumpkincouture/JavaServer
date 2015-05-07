@@ -2,6 +2,8 @@ package JavaServer.responses.methods;
 
 import JavaServer.responses.FileAdmin;
 
+import java.io.IOException;
+
 public class DeleteResponse extends Response {
     private FileAdmin fileWriter;
     private String requestPath;
@@ -12,7 +14,7 @@ public class DeleteResponse extends Response {
     }
 
     @Override
-    public String getCorrectStatus() {
+    public String getCorrectStatus() throws IOException {
         if (requestPath.equals("/form")) {
             fileWriter.deleteDataFromResource();
         }

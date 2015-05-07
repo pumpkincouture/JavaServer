@@ -3,6 +3,7 @@ package JavaServer.responses.methods;
 import JavaServer.responses.FileAdmin;
 import JavaServer.helpers.StringMaker;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class PostResponse extends Response {
@@ -17,7 +18,7 @@ public class PostResponse extends Response {
     }
 
     @Override
-    public String getCorrectStatus() {
+    public String getCorrectStatus() throws IOException {
         if (requestPath.equals("/form")) {
             fileWriter.setDataInResource(getFormattedString());
             return getCodes().get("200");

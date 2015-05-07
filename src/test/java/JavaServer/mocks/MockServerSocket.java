@@ -1,4 +1,4 @@
-package JavaServer.mocksockets;
+package JavaServer.mocks;
 
 import JavaServer.sockets.ServerSocketService;
 import JavaServer.sockets.SocketService;

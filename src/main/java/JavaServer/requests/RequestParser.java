@@ -56,8 +56,6 @@ public class RequestParser {
     private String findPath() {
         if (!request.contains("/parameters?")) {
             return splitFirstLineWithParams[SECOND_ELEMENT];
-
-//            return splitFirstLineWithParams[SECOND_ELEMENT];
         }
         return extractPath(splitFirstLineWithParams[SECOND_ELEMENT], FIRST_ELEMENT);
     }

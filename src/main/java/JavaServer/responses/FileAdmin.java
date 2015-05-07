@@ -45,11 +45,11 @@ public class FileAdmin implements ResourceAdmin {
         return directoryFiles;
     }
 
-    public void getFileContents()  {
+    public void getFileContents() throws IOException {
         readBytesFromFile();
     }
 
-    public void getDataFileContents() {
+    public void getDataFileContents() throws IOException {
         readBytesFromFile(new File("/Users/test/code/JavaServer/data/dataFile"));
     }
 
@@ -62,91 +62,51 @@ public class FileAdmin implements ResourceAdmin {
         writeToResource(dataBytes, "/Users/test/code/JavaServer/public/patch-content.txt");
     }
 
-    public void setDataInResource(String paramData) {
+    public void setDataInResource(String paramData) throws IOException {
         byte[] dataBytes = paramData.getBytes();
         writeToResource(dataBytes, "/Users/test/code/JavaServer/data/dataFile");
     }
 
-    public void deleteDataFromResource() {
+    public void deleteDataFromResource() throws IOException {
         byte[] dataBytes = "".getBytes();
         writeToResource(dataBytes, "/Users/test/code/JavaServer/data/dataFile");
     }
 
-    private void writeToResource(byte[] dataBytes, String resourcePath) {
-        try {
-            Files.write(Paths.get(resourcePath), dataBytes);
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void writeToResource(byte[] dataBytes, String resourcePath) throws IOException {
+        Files.write(Paths.get(resourcePath), dataBytes);
+    }
+
+    private void readBytesFromFile() throws IOException {
+        InputStream file = new FileInputStream(filePath.toString());
+        byte[] bytes = Files.readAllBytes(filePath.toPath());
+
+        while (file.read(bytes) > 0) {
+            out.write(bytes);
         }
     }
 
-    private void readBytesFromFile() {
-        try {
-            InputStream file = new FileInputStream(filePath.toString());
-            byte[] bytes = Files.readAllBytes(filePath.toPath());
+    private void readBytesFromFile(RangeFinder rangeFinder) throws IOException {
+        InputStream file = new FileInputStream(filePath.toString());
+        byte[] bytes = Files.readAllBytes(filePath.toPath());
 
-            while (file.read(bytes) > 0) {
-                out.write(bytes);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void readBytesFromFile(RangeFinder rangeFinder) {
-        try {
-            InputStream file = new FileInputStream(filePath.toString());
-            byte[] bytes = Files.readAllBytes(filePath.toPath());
-
-            while (file.read(bytes) > 0) {
-                if (!rangeFinder.hasStart()) {
-                    out.write(bytes, (getFileLength() - rangeFinder.getEnd()), rangeFinder.getEnd());
-                } else if (!rangeFinder.hasEnd()) {
-                    Integer start = rangeFinder.getStart();
-                    out.write(bytes, start, getFileLength() - start);
-                } else {
-                    out.write(bytes, rangeFinder.getStart(), rangeFinder.getEnd() + 1);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+        while (file.read(bytes) > 0) {
+            if (!rangeFinder.hasStart()) {
+                out.write(bytes, (getFileLength() - rangeFinder.getEnd()), rangeFinder.getEnd());
+            } else if (!rangeFinder.hasEnd()) {
+                Integer start = rangeFinder.getStart();
+                out.write(bytes, start, getFileLength() - start);
+            } else {
+                out.write(bytes, rangeFinder.getStart(), rangeFinder.getEnd() + 1);
             }
         }
     }
 
-    private void readBytesFromFile(File pathToData) {
-        try {
-            InputStream file = new FileInputStream(pathToData);
-            byte[] bytes = Files.readAllBytes(pathToData.toPath());
+    private void readBytesFromFile(File pathToData) throws IOException {
+        InputStream file = new FileInputStream(pathToData);
+        byte[] bytes = Files.readAllBytes(pathToData.toPath());
 
-            while (file.read(bytes) > 0) {
-                out.write(bytes);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        while (file.read(bytes) > 0) {
+            out.write(bytes);
         }
     }
 
