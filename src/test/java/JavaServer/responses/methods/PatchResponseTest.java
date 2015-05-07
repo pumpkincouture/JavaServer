@@ -2,7 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
-import JavaServer.responses.FileWriterMock;
+import JavaServer.responses.FileAdminMock;
 import org.junit.Test;
 
 import java.io.*;
@@ -14,12 +14,12 @@ public class PatchResponseTest {
     private Request request;
     private RequestParser requestParser;
     private Response response;
-    private FileWriterMock fileWriterMock;
+    private FileAdminMock fileWriterMock;
 
     private void createRequestAndResponse(String requestLine) throws UnsupportedEncodingException {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        fileWriterMock = new FileWriterMock();
+        fileWriterMock = new FileAdminMock();
         response = new PatchResponse(fileWriterMock, request);
     }
 

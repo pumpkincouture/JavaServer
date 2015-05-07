@@ -1,16 +1,16 @@
 package JavaServer.responses.methods;
 
-import JavaServer.responses.FileWriter;
+import JavaServer.responses.FileAdmin;
 import JavaServer.helpers.StringMaker;
 
 import java.util.Map;
 
 public class PutResponse extends Response {
-    private FileWriter fileWriter;
+    private FileAdmin fileWriter;
     private String requestPath;
     private Map<String, String> requestData;
 
-    public PutResponse(FileWriter fileWriter, Map<String, String> requestData, String requestPath) {
+    public PutResponse(FileAdmin fileWriter, Map<String, String> requestData, String requestPath) {
         this.fileWriter = fileWriter;
         this.requestPath = requestPath;
         this.requestData = requestData;

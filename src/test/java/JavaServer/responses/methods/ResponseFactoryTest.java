@@ -3,7 +3,7 @@ package JavaServer.responses.methods;
 import JavaServer.requests.Logger;
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
-import JavaServer.responses.FileWriter;
+import JavaServer.responses.FileAdmin;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 public class ResponseFactoryTest {
     private ResponseFactory responseFactory;
     private Request request;
-    private FileWriter fileWriter;
+    private FileAdmin fileWriter;
     private File path;
     private Logger logger;
 
@@ -24,7 +24,7 @@ public class ResponseFactoryTest {
         RequestParser parser = new RequestParser(requestLine);
         request = new Request(parser.getMethod(), parser.getPath(), parser.getHeaders(), parser.getData());
         path = new File("/Users/test/code/JavaServer/public" + filePath);
-        fileWriter = new FileWriter(path, mockDataStream());
+        fileWriter = new FileAdmin(path, mockDataStream());
         logger = new Logger();
         responseFactory = new ResponseFactory(request, fileWriter, logger);
     }

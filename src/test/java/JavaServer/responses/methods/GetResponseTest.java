@@ -2,7 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
-import JavaServer.responses.FileWriter;
+import JavaServer.responses.FileAdmin;
 import org.junit.Test;
 
 import java.io.*;
@@ -13,7 +13,7 @@ public class GetResponseTest {
     private Request request;
     private RequestParser requestParser;
     private Response response;
-    private FileWriter fileWriter;
+    private FileAdmin fileWriter;
     private File path;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
@@ -27,7 +27,7 @@ public class GetResponseTest {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
-        fileWriter = new FileWriter(path, mockDataStream());
+        fileWriter = new FileAdmin(path, mockDataStream());
         response = new GetResponse(fileWriter, request);
     }
 

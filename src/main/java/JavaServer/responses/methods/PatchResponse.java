@@ -2,23 +2,23 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.helpers.StringMaker;
-import JavaServer.responses.ResourceWriter;
+import JavaServer.responses.ResourceAdmin;
 
 import java.io.IOException;
 
 public class PatchResponse extends Response {
     private Request request;
-    private ResourceWriter resourceWriter;
+    private ResourceAdmin resourceAdmin;
 
-    public PatchResponse(ResourceWriter resourceWriter, Request request) {
-        this.resourceWriter = resourceWriter;
+    public PatchResponse(ResourceAdmin resourceAdmin, Request request) {
+        this.resourceAdmin = resourceAdmin;
         this.request = request;
     }
 
     @Override
     public String getCorrectStatus() throws IOException {
         if (containsEtagAuthorization()) {
-            resourceWriter.patchFileWithNewData(getFormattedString());
+            resourceAdmin.patchFileWithNewData(getFormattedString());
         }
         return getCodes().get("204");
     }

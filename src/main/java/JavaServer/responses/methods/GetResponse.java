@@ -1,15 +1,15 @@
 package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
-import JavaServer.responses.FileWriter;
+import JavaServer.responses.FileAdmin;
 
 import java.io.IOException;
 
 public class GetResponse extends Response {
-    private FileWriter fileWriter;
+    private FileAdmin fileWriter;
     private Request request;
 
-    public GetResponse(FileWriter fileWriter, Request request) {
+    public GetResponse(FileAdmin fileWriter, Request request) {
         this.fileWriter = fileWriter;
         this.request = request;
     }

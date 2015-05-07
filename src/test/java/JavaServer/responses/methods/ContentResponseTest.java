@@ -2,7 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
-import JavaServer.responses.FileWriter;
+import JavaServer.responses.FileAdmin;
 import org.junit.Test;
 
 import java.io.*;
@@ -14,7 +14,7 @@ public class ContentResponseTest {
     private RequestParser requestParser;
     private Response response;
     private File path;
-    private FileWriter fileWriter;
+    private FileAdmin fileWriter;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
@@ -27,7 +27,7 @@ public class ContentResponseTest {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
-        fileWriter = new FileWriter(path, mockDataStream());
+        fileWriter = new FileAdmin(path, mockDataStream());
         response = new ContentResponse(fileWriter, request);
     }
 

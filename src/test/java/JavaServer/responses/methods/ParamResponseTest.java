@@ -2,7 +2,7 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
-import JavaServer.responses.FileWriter;
+import JavaServer.responses.FileAdmin;
 import org.junit.Test;
 
 import java.io.*;
@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class ParamResponseTest {
     private Request request;
     private Response response;
-    private FileWriter fileWriter;
+    private FileAdmin fileWriter;
     private File path;
     private RequestParser requestParser;
 
@@ -27,7 +27,7 @@ public class ParamResponseTest {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
-        fileWriter = new FileWriter(path, mockDataStream());
+        fileWriter = new FileAdmin(path, mockDataStream());
         response = new ParamResponse(request.getData(), fileWriter);
     }
 

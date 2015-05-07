@@ -1,16 +1,16 @@
 package JavaServer.responses.methods;
 
-import JavaServer.responses.FileWriter;
+import JavaServer.responses.FileAdmin;
 import JavaServer.helpers.StringMaker;
 
 import java.io.IOException;
 import java.util.Map;
 
 public class ParamResponse extends Response {
-    private FileWriter fileWriter;
+    private FileAdmin fileWriter;
     private Map<String, String> requestData;
 
-    public ParamResponse(Map<String, String> requestData, FileWriter fileWriter) {
+    public ParamResponse(Map<String, String> requestData, FileAdmin fileWriter) {
         this.requestData = requestData;
         this.fileWriter = fileWriter;
     }

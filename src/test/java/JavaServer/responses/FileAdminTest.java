@@ -8,8 +8,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class FileWriterTest {
-    private FileWriter fileWriter;
+public class FileAdminTest {
+    private FileAdmin fileWriter;
     private File path;
     private DataOutputStream dataOutputStream;
 
@@ -35,7 +35,7 @@ public class FileWriterTest {
     public void returnsTrueIfFileExistsInTheSpecifiedDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         mockDataStream();
-        fileWriter = new FileWriter(path, dataOutputStream);
+        fileWriter = new FileAdmin(path, dataOutputStream);
 
         assertTrue(fileWriter.doesFileExist());
     }
@@ -44,7 +44,7 @@ public class FileWriterTest {
     public void returnsFalseIfFileDoesNotExistInTheSpecifiedDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/best_doge.gif");
         mockDataStream();
-        fileWriter = new FileWriter(path, dataOutputStream);
+        fileWriter = new FileAdmin(path, dataOutputStream);
 
         assertFalse(fileWriter.doesFileExist());
     }
@@ -53,7 +53,7 @@ public class FileWriterTest {
     public void returnsHTMLinksForFilesInDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/");
         mockDataStream();
-        fileWriter = new FileWriter(path, dataOutputStream);
+        fileWriter = new FileAdmin(path, dataOutputStream);
 
         assertEquals("<a href='/file1'>file1</a></br>\r\n" +
                      "<a href='/file2'>file2</a></br>\r\n" +
@@ -70,7 +70,7 @@ public class FileWriterTest {
     public void returnsStringArrayWithAllFilesInDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/text-file.txt");
         mockDataStream();
-        fileWriter = new FileWriter(path, dataOutputStream);
+        fileWriter = new FileAdmin(path, dataOutputStream);
 
         int lastIndex = fileWriter.getDirectoryFiles().size() - 1;
 
@@ -83,7 +83,7 @@ public class FileWriterTest {
     public void convertsFilesIntoPaths() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
         mockDataStream();
-        fileWriter = new FileWriter(path, dataOutputStream);
+        fileWriter = new FileAdmin(path, dataOutputStream);
         fileWriter.convertFilesToPaths();
 
         int lastIndex = fileWriter.convertFilesToPaths().size() - 1;

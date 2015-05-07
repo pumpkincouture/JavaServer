@@ -8,11 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class FileWriter implements ResourceWriter {
+public class FileAdmin implements ResourceAdmin {
     private File filePath;
     private DataOutputStream out;
 
-    public FileWriter(File filePath, DataOutputStream out) {
+    public FileAdmin(File filePath, DataOutputStream out) {
         this.filePath = filePath;
         this.out = out;
     }

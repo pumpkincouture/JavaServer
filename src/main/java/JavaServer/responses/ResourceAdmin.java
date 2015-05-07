@@ -5,7 +5,7 @@ import JavaServer.helpers.RangeFinder;
 import java.io.IOException;
 import java.util.List;
 
-public interface ResourceWriter {
+public interface ResourceAdmin {
 
     public boolean doesFileExist();
 

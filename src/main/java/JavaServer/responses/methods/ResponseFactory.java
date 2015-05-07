@@ -3,15 +3,15 @@ package JavaServer.responses.methods;
 import JavaServer.requests.Logger;
 import JavaServer.requests.Request;
 import JavaServer.helpers.RouteValidator;
-import JavaServer.responses.FileWriter;
+import JavaServer.responses.FileAdmin;
 
 public class ResponseFactory {
     private Request request;
-    private FileWriter fileWriter;
+    private FileAdmin fileWriter;
     private RouteValidator routeValidator;
     private Logger logger;
 
-    public ResponseFactory(Request request, FileWriter fileWriter, Logger logger) {
+    public ResponseFactory(Request request, FileAdmin fileWriter, Logger logger) {
         this.request = request;
         this.fileWriter = fileWriter;
         this.logger = logger;

@@ -1,12 +1,12 @@
 package JavaServer.responses.methods;
 
-import JavaServer.responses.FileWriter;
+import JavaServer.responses.FileAdmin;
 
 public class DeleteResponse extends Response {
-    private FileWriter fileWriter;
+    private FileAdmin fileWriter;
     private String requestPath;
 
-    public DeleteResponse(FileWriter fileManager, String requestPath) {
+    public DeleteResponse(FileAdmin fileManager, String requestPath) {
         this.fileWriter = fileManager;
         this.requestPath = requestPath;
     }

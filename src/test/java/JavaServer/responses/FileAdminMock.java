@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileWriterMock implements ResourceWriter {
+public class FileAdminMock implements ResourceAdmin {
     private boolean displayDoesFileExist = false;
     private boolean displayGetDirectoryLinks = false;
     private boolean displayConvertFilesToPaths = false;
