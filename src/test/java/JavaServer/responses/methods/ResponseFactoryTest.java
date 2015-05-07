@@ -33,8 +33,7 @@ public class ResponseFactoryTest {
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
 
-        DataOutputStream out = new DataOutputStream(mockInputStream);
-        return out;
+        return new DataOutputStream(mockInputStream);
     }
 
     @Test

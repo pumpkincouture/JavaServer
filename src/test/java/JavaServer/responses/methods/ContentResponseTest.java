@@ -20,8 +20,7 @@ public class ContentResponseTest {
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
 
-        DataOutputStream out = new DataOutputStream(mockInputStream);
-        return out;
+        return new DataOutputStream(mockInputStream);
     }
 
     private void createRequestAndResponse(String requestLine, String filepath) throws UnsupportedEncodingException {

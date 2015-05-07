@@ -63,16 +63,16 @@
   </properties>
   <testcase classname="JavaServer.requests.RequestParserTest" name="returnGETAsMethodInRequestString" time="0"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="authorizationShouldExistInHeaders" time="0.001"/>
-  <testcase classname="JavaServer.requests.RequestParserTest" name="hostShouldExistInHeaders" time="0.007"/>
-  <testcase classname="JavaServer.requests.RequestParserTest" name="parseAndStoreMoreThanOnePostParam" time="0.001"/>
-  <testcase classname="JavaServer.requests.RequestParserTest" name="returnFormAsPathInRequestString" time="0"/>
+  <testcase classname="JavaServer.requests.RequestParserTest" name="hostShouldExistInHeaders" time="0.001"/>
+  <testcase classname="JavaServer.requests.RequestParserTest" name="parseAndStoreMoreThanOnePostParam" time="0.002"/>
+  <testcase classname="JavaServer.requests.RequestParserTest" name="returnFormAsPathInRequestString" time="0.002"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="returnPUTAsMethodInRequestString" time="0"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="returnOPTIONSAsMethodInRequestString" time="0"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="parseRequestLineIfAllParamsAreInFirstLine" time="0.001"/>
-  <testcase classname="JavaServer.requests.RequestParserTest" name="contentTypeShouldExistInHeaders" time="0"/>
-  <testcase classname="JavaServer.requests.RequestParserTest" name="returnsNullIfThereAreNoValuesInHeadersHashMap" time="0"/>
+  <testcase classname="JavaServer.requests.RequestParserTest" name="contentTypeShouldExistInHeaders" time="0.001"/>
+  <testcase classname="JavaServer.requests.RequestParserTest" name="returnsNullIfThereAreNoValuesInHeadersHashMap" time="0.001"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="returnMethodOptionsAsPathInRequestString" time="0"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="returnPOSTAsMethodInRequestString" time="0"/>
   <testcase classname="JavaServer.requests.RequestParserTest" name="returnsNullIfThereAreNoValuesInParamsHashMap" time="0"/>
-  <testcase classname="JavaServer.requests.RequestParserTest" name="returnRedirectAsPathInRequestString" time="0"/>
+  <testcase classname="JavaServer.requests.RequestParserTest" name="returnRedirectAsPathInRequestString" time="0.001"/>
 </testsuite>

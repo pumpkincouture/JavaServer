@@ -2,6 +2,7 @@ package JavaServer.sockets;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class BaseServerSocket implements ServerSocketService {
     private ServerSocket serverSocket;
@@ -13,6 +14,10 @@ public class BaseServerSocket implements ServerSocketService {
     @Override
     public SocketService accept() throws IOException {
         return new BaseSocket(serverSocket.accept());
+    }
+
+    public SocketService accept(SocketService socketService) {
+        return new BaseSocket((Socket) socketService);
     }
 
     @Override
