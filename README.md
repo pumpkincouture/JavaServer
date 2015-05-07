@@ -2,7 +2,7 @@
 Java Server, written in Java version 1.8.0_25.
 
 ## Setting Up
-You will need [Maven](http://maven.apache.org/) 4.0.0 to package all dependencies. To get Maven, make sure you have [Homebrew](http://brew.sh/) installed by typing  ```brew --version```.
+You will need [Maven](http://maven.apache.org/) 3.2.5 to package all dependencies. To get Maven, make sure you have [Homebrew](http://brew.sh/) installed by typing  ```brew --version```.
 Type ```brew install maven```. To check if Maven was installed, type ```mvn -version```. For troubleshooting, please refer to the Homebrew documentation.
 The server requires Java version 1.8 or higher. To check your version, type ```java -version```.
 
