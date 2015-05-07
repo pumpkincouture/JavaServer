@@ -11,15 +11,15 @@ Clone the repository to the desktop. Navigate to the main project directory.
 In command line, type ```java -cp target/solak.com.javaServer-1.0-SNAPSHOT.jar JavaServer.ServerMain``` to start the server. The server will serve from its public directory as the DEFAULT directory.
 
 ## Optional Arguments
-To configure port and files, run the start command with optional -p and -d flag arguments, like below. Note: the Server only supports valid directories.
-- ```java -cp target/solak.com.javaServer-1.0-SNAPSHOT.jar JavaServer.ServerMain -p 1405 -d /Users/test/code/JavaServer/fun```.
+To configure port and directory, run the start command with optional -p and -d flag arguments, like below. Note: the server only supports valid directories and valid ports. ([List of Taken Ports](http://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers))
+- ```java -cp target/solak.com.javaServer-1.0-SNAPSHOT.jar JavaServer.ServerMain -p 1405 -d /Users/test/code/JavaServer/fun```
 
 ## Optional Directory
-The Server supports another directory - to access, please specify the below path in your -d argument:
+The server supports another directory - to access, please specify the below path in your -d argument:
 - ```/Users/test/code/JavaServer/fun```
 
 ## Running the Server From IntelliJ
-Clone the repository to the desktop. Open IntelliJ and import the project as a Maven project. Run ```ServerMain```.
+Clone the repository to the desktop. Open IntelliJ and import the project as a Maven project. Run ```ServerMain```. To stop the server, close the tab running ServerMain or press the stop button.
 
 ## Stopping the Server
 In your terminal, press Ctrl + C to kill the server process (otherwise, the server will persist).
