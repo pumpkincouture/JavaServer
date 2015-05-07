@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.util.Map;
 
 public class ParamResponse extends Response {
-    private FileAdmin fileWriter;
+    private FileAdmin fileAdmin;
     private Map<String, String> requestData;
 
-    public ParamResponse(Map<String, String> requestData, FileAdmin fileWriter) {
+    public ParamResponse(Map<String, String> requestData, FileAdmin fileAdmin) {
         this.requestData = requestData;
-        this.fileWriter = fileWriter;
+        this.fileAdmin = fileAdmin;
     }
 
     @Override
@@ -27,8 +27,8 @@ public class ParamResponse extends Response {
 
     @Override
     public String getCorrectBody() throws IOException {
-        fileWriter.setDataInResource(getFormattedString());
-        fileWriter.getDataFileContents();
+        fileAdmin.setDataInResource(getFormattedString());
+        fileAdmin.getDataFileContents();
         return EMPTY_STRING;
     }
 

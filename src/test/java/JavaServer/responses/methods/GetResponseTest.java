@@ -13,7 +13,7 @@ public class GetResponseTest {
     private Request request;
     private RequestParser requestParser;
     private Response response;
-    private FileAdmin fileWriter;
+    private FileAdmin fileAdmin;
     private File path;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
@@ -27,8 +27,8 @@ public class GetResponseTest {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
-        fileWriter = new FileAdmin(path, mockDataStream());
-        response = new GetResponse(fileWriter, request);
+        fileAdmin = new FileAdmin(path, mockDataStream());
+        response = new GetResponse(fileAdmin, request);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class GetResponseTest {
     }
 
     @Test
-    public void returnsDirecoryLinksIfFileExistsAndIsRoute() throws IOException {
+    public void returnsDirectoryLinksIfFileExistsAndIsRoute() throws IOException {
         createRequestAndResponse("GET / HTTP/1.1", "");
 
         assertEquals("<a href='/file1'>file1</a></br>\r\n" +

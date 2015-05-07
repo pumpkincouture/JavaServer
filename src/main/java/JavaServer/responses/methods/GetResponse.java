@@ -6,11 +6,11 @@ import JavaServer.responses.FileAdmin;
 import java.io.IOException;
 
 public class GetResponse extends Response {
-    private FileAdmin fileWriter;
+    private FileAdmin fileAdmin;
     private Request request;
 
-    public GetResponse(FileAdmin fileWriter, Request request) {
-        this.fileWriter = fileWriter;
+    public GetResponse(FileAdmin fileAdmin, Request request) {
+        this.fileAdmin = fileAdmin;
         this.request = request;
     }
 
@@ -26,10 +26,10 @@ public class GetResponse extends Response {
 
     @Override
     public String getCorrectBody() throws IOException {
-        if (fileWriter.doesFileExist()) {
-            return fileWriter.getDirectoryLinks();
+        if (fileAdmin.doesFileExist()) {
+            return fileAdmin.getDirectoryLinks();
         } else if (request.getPath().equals("/form")) {
-            fileWriter.getDataFileContents();
+            fileAdmin.getDataFileContents();
         }
         return EMPTY_STRING;
     }

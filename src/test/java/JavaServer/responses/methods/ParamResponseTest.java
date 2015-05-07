@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class ParamResponseTest {
     private Request request;
     private Response response;
-    private FileAdmin fileWriter;
+    private FileAdmin fileAdmin;
     private File path;
     private RequestParser requestParser;
 
@@ -27,8 +27,8 @@ public class ParamResponseTest {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
-        fileWriter = new FileAdmin(path, mockDataStream());
-        response = new ParamResponse(request.getData(), fileWriter);
+        fileAdmin = new FileAdmin(path, mockDataStream());
+        response = new ParamResponse(request.getData(), fileAdmin);
     }
 
     @Test

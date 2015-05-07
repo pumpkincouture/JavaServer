@@ -14,7 +14,7 @@ public class DeleteResponseTest {
     private Request request;
     private RequestParser requestParser;
     private Response response;
-    private FileAdmin fileWriter;
+    private FileAdmin fileAdmin;
     private File path;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
@@ -28,8 +28,8 @@ public class DeleteResponseTest {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
-        fileWriter = new FileAdmin(path, mockDataStream());
-        response = new DeleteResponse(fileWriter, request.getPath());
+        fileAdmin = new FileAdmin(path, mockDataStream());
+        response = new DeleteResponse(fileAdmin, request.getPath());
     }
 
     @Test

@@ -12,13 +12,12 @@ public class MockSocket extends Socket implements SocketService {
     private boolean closed = false;
 
     public MockSocket() {
-        createMockInput();
+        createMockInput("GET / HTTP/1.1");
         createMockOutPut();
     }
 
-    private void createMockInput() {
-        String exampleInput = "GET / HTTP/1.1";
-        InputStream mockInputStream = new ByteArrayInputStream(exampleInput.getBytes(StandardCharsets.UTF_8));
+    private void createMockInput(String goodRequest) {
+        InputStream mockInputStream = new ByteArrayInputStream(goodRequest.getBytes(StandardCharsets.UTF_8));
 
         mockIn = mockInputStream;
     }

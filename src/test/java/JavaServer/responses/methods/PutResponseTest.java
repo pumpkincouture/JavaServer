@@ -14,7 +14,7 @@ public class PutResponseTest {
     private RequestParser requestParser;
     private Response response;
     private File path;
-    private FileAdmin fileWriter;
+    private FileAdmin fileAdmin;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
@@ -27,8 +27,8 @@ public class PutResponseTest {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public" + filepath);
-        fileWriter = new FileAdmin(path, mockDataStream());
-        response = new PutResponse(fileWriter, request.getData(), filepath);
+        fileAdmin = new FileAdmin(path, mockDataStream());
+        response = new PutResponse(fileAdmin, request.getData(), filepath);
     }
 
     @Test

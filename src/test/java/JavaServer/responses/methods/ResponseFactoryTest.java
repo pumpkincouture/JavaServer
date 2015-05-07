@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 public class ResponseFactoryTest {
     private ResponseFactory responseFactory;
     private Request request;
-    private FileAdmin fileWriter;
+    private FileAdmin fileAdmin;
     private File path;
     private Logger logger;
 
@@ -24,9 +24,9 @@ public class ResponseFactoryTest {
         RequestParser parser = new RequestParser(requestLine);
         request = new Request(parser.getMethod(), parser.getPath(), parser.getHeaders(), parser.getData());
         path = new File("/Users/test/code/JavaServer/public" + filePath);
-        fileWriter = new FileAdmin(path, mockDataStream());
+        fileAdmin = new FileAdmin(path, mockDataStream());
         logger = new Logger();
-        responseFactory = new ResponseFactory(request, fileWriter, logger);
+        responseFactory = new ResponseFactory(request, fileAdmin, logger);
     }
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {

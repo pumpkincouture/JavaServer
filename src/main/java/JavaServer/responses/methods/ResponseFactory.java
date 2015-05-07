@@ -7,19 +7,19 @@ import JavaServer.responses.FileAdmin;
 
 public class ResponseFactory {
     private Request request;
-    private FileAdmin fileWriter;
+    private FileAdmin fileAdmin;
     private RouteValidator routeValidator;
     private Logger logger;
 
-    public ResponseFactory(Request request, FileAdmin fileWriter, Logger logger) {
+    public ResponseFactory(Request request, FileAdmin fileAdmin, Logger logger) {
         this.request = request;
-        this.fileWriter = fileWriter;
+        this.fileAdmin = fileAdmin;
         this.logger = logger;
         this.routeValidator = new RouteValidator(request);
     }
 
     public Response createResponse() {
-        routeValidator.addMethodsToValidPaths(fileWriter.convertFilesToPaths());
+        routeValidator.addMethodsToValidPaths(fileAdmin.convertFilesToPaths());
         if  (routeValidator.isInvalidPath()) {
             return new FourOhFourResponse();
         }
@@ -30,14 +30,14 @@ public class ResponseFactory {
             return new OptionsResponse();
         }
         else if (routeValidator.isParameterPath()) {
-            return new ParamResponse(request.getData(), fileWriter);
+            return new ParamResponse(request.getData(), fileAdmin);
         }
         else if (routeValidator.methodEqualsGet()) {
             if (routeValidator.isDirectory()) {
-                return new GetResponse(fileWriter, request);
+                return new GetResponse(fileAdmin, request);
                 }
-            if (fileWriter.doesFileExist()) {
-                    return new ContentResponse(fileWriter, request);
+            if (fileAdmin.doesFileExist()) {
+                    return new ContentResponse(fileAdmin, request);
                 }
             else if (routeValidator.requiresAuthorization()) {
                 if (routeValidator.requestHasCorrectAuthorization()) {
@@ -45,16 +45,16 @@ public class ResponseFactory {
                 }
                 return new UnauthorizedResponse();
             }
-            return new GetResponse(fileWriter, request);
+            return new GetResponse(fileAdmin, request);
         }
         else if (routeValidator.methodEqualsPost()) {
-            return new PostResponse(fileWriter, request.getPath(), request.getData());
+            return new PostResponse(fileAdmin, request.getPath(), request.getData());
         } else if (routeValidator.methodEqualsPut()) {
-            return new PutResponse(fileWriter, request.getData(), request.getPath());
+            return new PutResponse(fileAdmin, request.getData(), request.getPath());
         } else if (routeValidator.methodEqualsDelete()) {
-            return new DeleteResponse(fileWriter, request.getPath());
+            return new DeleteResponse(fileAdmin, request.getPath());
         } else if (routeValidator.methodEqualsPatch()) {
-            return new PatchResponse(fileWriter, request);
+            return new PatchResponse(fileAdmin, request);
         }
         return new FourOhFourResponse();
     }

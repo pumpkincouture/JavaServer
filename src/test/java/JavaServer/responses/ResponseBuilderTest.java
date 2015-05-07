@@ -16,7 +16,7 @@ public class ResponseBuilderTest {
     private ResponseBuilder responseCodeBuilder;
     private ResponseFactory managerFactory;
     private File path;
-    private FileAdmin fileWriter;
+    private FileAdmin fileAdmin;
     private Logger logger;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
@@ -37,9 +37,9 @@ public class ResponseBuilderTest {
                                           "age=26");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileWriter = new FileAdmin(path, mockDataStream());
+        fileAdmin = new FileAdmin(path, mockDataStream());
         logger = new Logger();
-        managerFactory = new ResponseFactory(request, fileWriter, logger);
+        managerFactory = new ResponseFactory(request, fileAdmin, logger);
 
         responseCodeBuilder = new ResponseBuilder(managerFactory.createResponse());
 

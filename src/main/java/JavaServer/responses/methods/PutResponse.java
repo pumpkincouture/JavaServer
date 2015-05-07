@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.util.Map;
 
 public class PutResponse extends Response {
-    private FileAdmin fileWriter;
+    private FileAdmin fileAdmin;
     private String requestPath;
     private Map<String, String> requestData;
 
-    public PutResponse(FileAdmin fileWriter, Map<String, String> requestData, String requestPath) {
-        this.fileWriter = fileWriter;
+    public PutResponse(FileAdmin fileAdmin, Map<String, String> requestData, String requestPath) {
+        this.fileAdmin = fileAdmin;
         this.requestPath = requestPath;
         this.requestData = requestData;
     }
@@ -20,7 +20,7 @@ public class PutResponse extends Response {
     @Override
     public String getCorrectStatus() throws IOException {
         if (requestPath.equals("/form")) {
-            fileWriter.setDataInResource(getFormattedString());
+            fileAdmin.setDataInResource(getFormattedString());
             return getCodes().get("200");
         } else if (requestPath.equals("/file1")) {
             return getCodes().get("405");

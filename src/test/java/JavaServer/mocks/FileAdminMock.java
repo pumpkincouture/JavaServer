@@ -12,6 +12,11 @@ public class FileAdminMock implements ResourceAdmin {
     private boolean displayGetDirectoryLinks = false;
     private boolean displayConvertFilesToPaths = false;
     private boolean displayPatchFileWithNewData = false;
+    private boolean displayFileContentsCalled = false;
+    private boolean displayGetDataFileContentsCalled = false;
+    private boolean getPartialFileContentsCalled = false;
+    private boolean setDataInResourceCalled = false;
+    private boolean deleteDataFromResourceCalled = false;
 
     public boolean doesFileExist() {
         displayDoesFileExist = true;
@@ -34,15 +39,15 @@ public class FileAdminMock implements ResourceAdmin {
     }
 
     public void getFileContents() {
-
+        displayFileContentsCalled = true;
     }
 
     public void getDataFileContents() {
-
+        displayGetDataFileContentsCalled = true;
     }
 
     public void getPartialFileContents(RangeFinder rangeFinder) throws IOException {
-
+        getPartialFileContentsCalled = true;
     }
 
     public void patchFileWithNewData(String newData) throws IOException {
@@ -50,10 +55,11 @@ public class FileAdminMock implements ResourceAdmin {
     }
 
     public void setDataInResource(String paramData) {
-
+        setDataInResourceCalled = true;
     }
 
     public void deleteDataFromResource() {
+        deleteDataFromResourceCalled = true;
     }
 
     public boolean isPatchFileWithNewDataMessageCalled() {

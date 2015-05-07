@@ -45,6 +45,7 @@ public class FileAdminTest {
     @Test
     public void returnsTrueIfFileExistsInTheSpecifiedDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
+        mockDataStream();
         fileAdmin = new FileAdmin(path, dataOutputStream);
 
         assertTrue(fileAdmin.doesFileExist());
@@ -53,6 +54,7 @@ public class FileAdminTest {
     @Test
     public void returnsFalseIfFileDoesNotExistInTheSpecifiedDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/best_doge.gif");
+        mockDataStream();
         fileAdmin = new FileAdmin(path, dataOutputStream);
 
         assertFalse(fileAdmin.doesFileExist());
@@ -61,6 +63,7 @@ public class FileAdminTest {
     @Test
     public void returnsHTMLinksForFilesInDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/");
+        mockDataStream();
         fileAdmin = new FileAdmin(path, dataOutputStream);
 
         assertEquals("<a href='/file1'>file1</a></br>\r\n" +
@@ -76,6 +79,7 @@ public class FileAdminTest {
     @Test
     public void returnsStringArrayWithAllFilesInDirectory() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/text-file.txt");
+        mockDataStream();
         fileAdmin = new FileAdmin(path, dataOutputStream);
 
         int lastIndex = fileAdmin.getDirectoryFiles().size() - 1;
@@ -88,6 +92,7 @@ public class FileAdminTest {
     @Test
     public void convertsFilesIntoPaths() throws UnsupportedEncodingException {
         path = new File("/Users/test/code/JavaServer/public/image.gif");
+        mockDataStream();
         fileAdmin = new FileAdmin(path, dataOutputStream);
         fileAdmin.convertFilesToPaths();
 
@@ -101,23 +106,12 @@ public class FileAdminTest {
     @Test
     public void patchesFileWithNewData() throws IOException {
         path = new File("/Users/test/code/JavaServer/public/patch-content.txt");
+        mockDataStream();
         fileAdmin = new FileAdmin(path, dataOutputStream);
         fileAdmin.patchFileWithNewData("patched-content");
 
         assertEquals("patched-content", readFromFile(path));
 
         fileAdmin.patchFileWithNewData("default content");
-    }
-
-    @Test
-    public void writesPartialContentToFileDependingOnRange() throws IOException {
-        path = new File("/Users/test/code/JavaServer/public/patch-content.txt");
-        fileAdmin = new FileAdmin(path, dataOutputStream);
-        rangeFinder = new RangeFinder(createRequestHeaders());
-        mockDataStream();
-        fileAdmin = new FileAdmin(path, dataOutputStream);
-        fileAdmin.getPartialFileContents(rangeFinder);
-
-//        assertEquals("hello", dataOutputStream..trim());
     }
 }

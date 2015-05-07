@@ -5,18 +5,18 @@ import JavaServer.responses.FileAdmin;
 import java.io.IOException;
 
 public class DeleteResponse extends Response {
-    private FileAdmin fileWriter;
+    private FileAdmin fileAdmin;
     private String requestPath;
 
     public DeleteResponse(FileAdmin fileManager, String requestPath) {
-        this.fileWriter = fileManager;
+        this.fileAdmin = fileManager;
         this.requestPath = requestPath;
     }
 
     @Override
     public String getCorrectStatus() throws IOException {
         if (requestPath.equals("/form")) {
-            fileWriter.deleteDataFromResource();
+            fileAdmin.deleteDataFromResource();
         }
         return getCodes().get("200");
     }

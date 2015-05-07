@@ -14,7 +14,7 @@ public class ContentResponseTest {
     private RequestParser requestParser;
     private Response response;
     private File path;
-    private FileAdmin fileWriter;
+    private FileAdmin fileAdmin;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
@@ -27,8 +27,8 @@ public class ContentResponseTest {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
-        fileWriter = new FileAdmin(path, mockDataStream());
-        response = new ContentResponse(fileWriter, request);
+        fileAdmin = new FileAdmin(path, mockDataStream());
+        response = new ContentResponse(fileAdmin, request);
     }
 
     @Test
@@ -41,9 +41,9 @@ public class ContentResponseTest {
     @Test
     public void returns206IfRequestHasRange() throws IOException {
         createRequestAndResponse("GET /partial_content.txt HTTP/1.1\n" +
-                "Range: bytes=-6\n" +
-                "Host: localhost:5000\n" +
-                "\n", "partial_content.txt");
+                                 "Range: bytes=-6\n" +
+                                 "Host: localhost:5000\n" +
+                                 "\n", "partial_content.txt");
 
         assertEquals("HTTP/1.1 206 Partial Content", response.getCorrectStatus());
     }
@@ -65,9 +65,9 @@ public class ContentResponseTest {
     @Test
     public void callsFileWriterAndReturnsAnEmptyStringIfRequestHasRange() throws IOException {
         createRequestAndResponse("GET /partial_content.txt HTTP/1.1\n" +
-                "Range: bytes=0-6\n" +
-                "Host: localhost:5000\n" +
-                "\n", "partial_content.txt");
+                                 "Range: bytes=0-6\n" +
+                                 "Host: localhost:5000\n" +
+                                 "\n", "partial_content.txt");
 
         assertEquals("", response.getCorrectBody());
     }

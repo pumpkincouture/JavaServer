@@ -18,7 +18,7 @@ public class Router {
     private Request request;
     private ResponseBuilder responseBuilder;
     private ResponseFactory responseFactory;
-    private FileAdmin fileWriter;
+    private FileAdmin fileAdmin;
     private DataOutputStream out;
     private Logger logger;
 
@@ -33,8 +33,8 @@ public class Router {
         requestParser = new RequestParser(requestString);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         logger.logRequest(request.getRequestLine());
-        fileWriter = new FileAdmin(new File(directory + request.getPath()), out);
-        responseFactory = new ResponseFactory(request, fileWriter, logger);
+        fileAdmin = new FileAdmin(new File(directory + request.getPath()), out);
+        responseFactory = new ResponseFactory(request, fileAdmin, logger);
         responseBuilder = new ResponseBuilder(responseFactory.createResponse());
     }
 
