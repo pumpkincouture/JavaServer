@@ -14,15 +14,16 @@
 /Users/test/code/JavaServer/src/main/java/JavaServer/responses/methods/Response.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/sockets/BaseServerSocket.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/responses/methods/UnauthorizedResponse.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/responses/ResourceAdmin.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/responses/methods/RedirectResponse.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/responses/methods/ParamResponse.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/helpers/RouteValidator.java
+/Users/test/code/JavaServer/src/main/java/JavaServer/responses/FileAdmin.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/helpers/RangeFinder.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/requests/RequestParser.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/responses/methods/PostResponse.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/responses/methods/GetResponse.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/sockets/ServerSocketService.java
-/Users/test/code/JavaServer/src/main/java/JavaServer/responses/FileWriter.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/responses/ResponseBuilder.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/requests/Logger.java
 /Users/test/code/JavaServer/src/main/java/JavaServer/responses/methods/OptionsResponse.java

@@ -24,9 +24,10 @@ JavaServer/helpers/RouteValidator.class
 JavaServer/responses/methods/ContentResponse.class
 JavaServer/connections/Router.class
 JavaServer/responses/methods/Response.class
-JavaServer/responses/FileWriter.class
 JavaServer/connections/ConnectionManager.class
 JavaServer/requests/Logger.class
+JavaServer/responses/ResourceAdmin.class
+JavaServer/responses/FileAdmin.class
 JavaServer/responses/methods/LogsResponse.class
 JavaServer/responses/methods/RedirectResponse.class
 JavaServer/sockets/SocketService.class
