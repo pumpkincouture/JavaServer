@@ -21,5 +21,5 @@ The server supports another directory - to access, please specify the below rela
 ## Running the Server From IntelliJ
 Clone the repository to the desktop. Open IntelliJ and import the project as a Maven project. Run ```ServerMain```. To stop the server, close the tab running ServerMain or press the stop button.
 
-## Stopping the Server
+## Stopping the Server If In Command Line
 In your terminal, press Ctrl + C to kill the server process (otherwise, the server will persist).

@@ -17,8 +17,6 @@ public class HTTPServerTest {
     private Logger logger;
     private String directory = System.getProperty("user.dir") + "/public";
 
-
-
     @Before
     public void setUp() throws IOException {
         port = 5000;
