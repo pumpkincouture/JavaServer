@@ -59,7 +59,7 @@ public class FileAdmin implements ResourceAdmin {
 
     public void patchFileWithNewData(String newData) throws IOException {
         byte[] dataBytes = newData.getBytes();
-        writeToResource(dataBytes, "/Users/test/code/JavaServer/public/patch-content.txt");
+        writeToResource(dataBytes, filePath.toString());
     }
 
     public void setDataInResource(String paramData) throws IOException {
