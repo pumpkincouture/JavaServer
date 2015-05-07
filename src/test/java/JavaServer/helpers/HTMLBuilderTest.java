@@ -9,10 +9,11 @@ import static org.junit.Assert.assertEquals;
 public class HTMLBuilderTest {
     private HTMLBuilder htmlBuilder;
     private File path;
+    private String directory = System.getProperty("user.dir") + "/public";
 
     @Test
     public void returnFilePathDirectoryAsHTMLString() {
-        path = new File("/Users/test/code/JavaServer/public/");
+        path = new File(directory);
         htmlBuilder = new HTMLBuilder(path);
 
         assertEquals("<a href='/file1'>file1</a></br>\r\n" +

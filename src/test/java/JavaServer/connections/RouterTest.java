@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 
 public class RouterTest {
     private Router router;
-    private String directory;
+    private String directory = System.getProperty("user.dir") + "/public";
     private Logger logger;
 
     private DataOutputStream mockOutput() throws UnsupportedEncodingException {
@@ -21,7 +21,6 @@ public class RouterTest {
 
     private void createRouter(String request)  {
         logger = new Logger();
-        directory = "/Users/test/code/JavaServer/public";
         try {
             router = new Router(request, directory, mockOutput(), logger);
         } catch (UnsupportedEncodingException e) {

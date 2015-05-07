@@ -13,15 +13,15 @@ public class HTTPServerTest {
 
     private HTTPServer httpServer;
     private int port;
-    private String directory;
     private MockServerSocket mockServerSocket;
     private Logger logger;
+    private String directory = System.getProperty("user.dir") + "/public";
+
 
 
     @Before
     public void setUp() throws IOException {
         port = 5000;
-        directory = "/Users/test/code/JavaServer/public";
         mockServerSocket = new MockServerSocket(port);
     }
 

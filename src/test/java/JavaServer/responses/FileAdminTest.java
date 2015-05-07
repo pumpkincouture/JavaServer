@@ -1,11 +1,8 @@
 package JavaServer.responses;
 
-import JavaServer.helpers.RangeFinder;
 import org.junit.Test;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -15,7 +12,7 @@ public class FileAdminTest {
     private FileAdmin fileAdmin;
     private File path;
     private DataOutputStream dataOutputStream;
-    private RangeFinder rangeFinder;
+
 
     private void mockDataStream() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
@@ -35,16 +32,9 @@ public class FileAdminTest {
         return fileLines;
     }
 
-    private Map<String, String> createRequestHeaders() {
-        Map<String, String> params = new HashMap<>();
-
-        params.put("Range", "bytes=0-4");
-        return params;
-    }
-
     @Test
     public void returnsTrueIfFileExistsInTheSpecifiedDirectory() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/image.gif");
+        path = new File("./public/image.gif");
         mockDataStream();
         fileAdmin = new FileAdmin(path, dataOutputStream);
 
@@ -53,7 +43,7 @@ public class FileAdminTest {
 
     @Test
     public void returnsFalseIfFileDoesNotExistInTheSpecifiedDirectory() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/best_doge.gif");
+        path = new File("./public/best_doge.gif");
         mockDataStream();
         fileAdmin = new FileAdmin(path, dataOutputStream);
 
@@ -62,7 +52,7 @@ public class FileAdminTest {
 
     @Test
     public void returnsHTMLinksForFilesInDirectory() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/");
+        path = new File("./public/");
         mockDataStream();
         fileAdmin = new FileAdmin(path, dataOutputStream);
 
@@ -78,7 +68,7 @@ public class FileAdminTest {
 
     @Test
     public void returnsStringArrayWithAllFilesInDirectory() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/text-file.txt");
+        path = new File("./public/text-file.txt");
         mockDataStream();
         fileAdmin = new FileAdmin(path, dataOutputStream);
 
@@ -91,7 +81,7 @@ public class FileAdminTest {
 
     @Test
     public void convertsFilesIntoPaths() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/image.gif");
+        path = new File("./public/image.gif");
         mockDataStream();
         fileAdmin = new FileAdmin(path, dataOutputStream);
         fileAdmin.convertFilesToPaths();
@@ -105,7 +95,7 @@ public class FileAdminTest {
 
     @Test
     public void patchesFileWithNewData() throws IOException {
-        path = new File("/Users/test/code/JavaServer/public/patch-content.txt");
+        path = new File("./public/patch-content.txt");
         mockDataStream();
         fileAdmin = new FileAdmin(path, dataOutputStream);
         fileAdmin.patchFileWithNewData("patched-content");

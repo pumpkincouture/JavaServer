@@ -16,6 +16,8 @@ public class PostResponseTest {
     private Response response;
     private FileAdmin fileAdmin;
     private File path;
+    private String directory = System.getProperty("user.dir") + "/public";
+
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
@@ -27,7 +29,7 @@ public class PostResponseTest {
     private void createRequestAndResponse(String requestLine, String filepath) throws UnsupportedEncodingException {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        path = new File("/Users/test/code/JavaServer/public" + filepath);
+        path = new File(directory + filepath);
         fileAdmin = new FileAdmin(path, mockDataStream());
         response = new PostResponse(fileAdmin, request.getPath(), request.getData());
     }

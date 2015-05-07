@@ -13,13 +13,12 @@ public class ConnectionManagerTest {
 
     private ConnectionManager connectionManager;
     private MockSocket mockSocket;
-    private String directory;
     private Logger logger;
+    private String directory = System.getProperty("user.dir") + "/public";
 
     @Before
     public void setUp() throws IOException {
         mockSocket = new MockSocket();
-        directory = "/Users/test/code/JavaServer/public/";
         logger = new Logger();
         connectionManager = new ConnectionManager(mockSocket, directory, logger);
     }

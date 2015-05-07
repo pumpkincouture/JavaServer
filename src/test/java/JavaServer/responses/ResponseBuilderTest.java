@@ -36,7 +36,7 @@ public class ResponseBuilderTest {
                                           "last_name=olak\n"+
                                           "age=26");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        path = new File("/Users/test/code/JavaServer/public/image.gif");
+        path = new File("./public/image.gif");
         fileAdmin = new FileAdmin(path, mockDataStream());
         logger = new Logger();
         managerFactory = new ResponseFactory(request, fileAdmin, logger);
