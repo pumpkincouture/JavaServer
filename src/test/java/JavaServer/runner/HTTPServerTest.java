@@ -1,4 +1,4 @@
-package JavaServer;
+package JavaServer.runner;
 
 import JavaServer.mocks.MockServerSocket;
 import JavaServer.requests.Logger;
