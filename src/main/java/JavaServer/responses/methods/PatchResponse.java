@@ -1,24 +1,24 @@
 package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
-import JavaServer.responses.FileWriter;
 import JavaServer.helpers.StringMaker;
+import JavaServer.responses.ResourceWriter;
 
 import java.io.IOException;
 
 public class PatchResponse extends Response {
     private Request request;
-    private FileWriter fileWriter;
+    private ResourceWriter resourceWriter;
 
-    public PatchResponse(FileWriter fileWriter, Request request) {
-        this.fileWriter = fileWriter;
+    public PatchResponse(ResourceWriter resourceWriter, Request request) {
+        this.resourceWriter = resourceWriter;
         this.request = request;
     }
 
     @Override
     public String getCorrectStatus() throws IOException {
         if (containsEtagAuthorization()) {
-            fileWriter.patchFileWithNewData(getFormattedString());
+            resourceWriter.patchFileWithNewData(getFormattedString());
         }
         return getCodes().get("204");
     }

@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class FileWriter implements Writer {
+public class FileWriter implements ResourceWriter {
     private File filePath;
     private DataOutputStream out;
 
@@ -17,17 +17,14 @@ public class FileWriter implements Writer {
         this.out = out;
     }
 
-    @Override
     public boolean doesFileExist() {
         return filePath.exists();
     }
 
-    @Override
     public String getDirectoryLinks() {
        return new HTMLBuilder(filePath).getDirectoryLinks();
     }
 
-    @Override
     public List<String> convertFilesToPaths() {
         List<String> paths = new ArrayList<>();
 
@@ -38,7 +35,6 @@ public class FileWriter implements Writer {
         return paths;
     }
 
-    @Override
     public List<String> getDirectoryFiles() {
         List<String> directoryFiles;
 
@@ -49,34 +45,28 @@ public class FileWriter implements Writer {
         return directoryFiles;
     }
 
-    @Override
     public void getFileContents()  {
         readBytesFromFile();
     }
 
-    @Override
     public void getDataFileContents() {
         readBytesFromFile(new File("/Users/test/code/JavaServer/data/dataFile"));
     }
 
-    @Override
     public void getPartialFileContents(RangeFinder rangeFinder) throws IOException {
         readBytesFromFile(rangeFinder);
     }
 
-    @Override
     public void patchFileWithNewData(String newData) throws IOException {
         byte[] dataBytes = newData.getBytes();
         writeToResource(dataBytes, "/Users/test/code/JavaServer/public/patch-content.txt");
     }
 
-    @Override
     public void setDataInResource(String paramData) {
         byte[] dataBytes = paramData.getBytes();
         writeToResource(dataBytes, "/Users/test/code/JavaServer/data/dataFile");
     }
 
-    @Override
     public void deleteDataFromResource() {
         byte[] dataBytes = "".getBytes();
         writeToResource(dataBytes, "/Users/test/code/JavaServer/data/dataFile");

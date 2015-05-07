@@ -2,18 +2,19 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
-import JavaServer.responses.FileWriter;
+import JavaServer.responses.FileWriterMock;
 import org.junit.Test;
 
 import java.io.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PatchResponseTest {
     private Request request;
     private RequestParser requestParser;
     private Response response;
-    private FileWriter fileWriter;
+    private FileWriterMock fileWriterMock;
     private File path;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
@@ -27,8 +28,8 @@ public class PatchResponseTest {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
-        fileWriter = new FileWriter(path, mockDataStream());
-        response = new PatchResponse(fileWriter, request);
+        fileWriterMock = new FileWriterMock();
+        response = new PatchResponse(fileWriterMock, request);
     }
 
     private String readFromFile() throws IOException {
@@ -48,7 +49,6 @@ public class PatchResponseTest {
         createRequestAndResponse("PATCH /patch-content.txt HTTP/1.1", "patch-content.txt");
 
         assertEquals("HTTP/1.1 204 No Content", response.getCorrectStatus());
-        assertEquals("default content ", readFromFile());
     }
 
     @Test
@@ -59,7 +59,9 @@ public class PatchResponseTest {
                                  "\n" +
                                  "patched content", "patch-content.txt");
 
-        assertEquals("default content ", readFromFile());
+        response.getCorrectStatus();
+
+        assertTrue(fileWriterMock.isPatchFileWithNewDataMessageCalled());
     }
 
     @Test
