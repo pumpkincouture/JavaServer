@@ -18,7 +18,6 @@ public class HTTPServerTest {
     private int port;
     private String directory;
     private MockServerSocket mockServerSocket;
-    private ExecutorService executorService;
     private Logger logger;
 
 
