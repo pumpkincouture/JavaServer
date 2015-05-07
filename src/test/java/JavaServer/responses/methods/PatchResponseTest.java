@@ -15,38 +15,17 @@ public class PatchResponseTest {
     private RequestParser requestParser;
     private Response response;
     private FileWriterMock fileWriterMock;
-    private File path;
 
-    private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
-        ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
-
-        DataOutputStream out = new DataOutputStream(mockInputStream);
-        return out;
-    }
-
-    private void createRequestAndResponse(String requestLine, String filepath) throws UnsupportedEncodingException {
+    private void createRequestAndResponse(String requestLine) throws UnsupportedEncodingException {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        path = new File("/Users/test/code/JavaServer/public/" + filepath);
         fileWriterMock = new FileWriterMock();
         response = new PatchResponse(fileWriterMock, request);
     }
 
-    private String readFromFile() throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
-        String fileLines = "";
-
-        String line = null;
-        while ((line = bufferedReader.readLine()) != null) {
-            fileLines += line;
-        }
-        bufferedReader.close();
-        return fileLines;
-    }
-
     @Test
     public void returns204ResponseIfNoEtagPresent() throws IOException {
-        createRequestAndResponse("PATCH /patch-content.txt HTTP/1.1", "patch-content.txt");
+        createRequestAndResponse("PATCH /patch-content.txt HTTP/1.1");
 
         assertEquals("HTTP/1.1 204 No Content", response.getCorrectStatus());
     }
@@ -57,7 +36,7 @@ public class PatchResponseTest {
                                  "If-Match: dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec\n" +
                                  "Host: localhost:5000\n" +
                                  "\n" +
-                                 "patched content", "patch-content.txt");
+                                 "patched content");
 
         response.getCorrectStatus();
 
@@ -66,7 +45,7 @@ public class PatchResponseTest {
 
     @Test
     public void returnsEmptyStringAsHeader() throws UnsupportedEncodingException {
-        createRequestAndResponse("PATCH /patch-content.txt HTTP/1.1", "patch-content.txt");
+        createRequestAndResponse("PATCH /patch-content.txt HTTP/1.1");
 
         assertEquals("", response.getCorrectHeaders());
     }
@@ -77,7 +56,7 @@ public class PatchResponseTest {
                                  "If-Match: dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec\n" +
                                  "Host: localhost:5000\n" +
                                  "\n" +
-                                 "patched content", "patch-content.txt");
+                                 "patched content");
 
         assertEquals("", response.getCorrectBody());
     }

@@ -2,10 +2,7 @@ package JavaServer.responses;
 
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -20,6 +17,18 @@ public class FileWriterTest {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
 
         dataOutputStream = new DataOutputStream(mockInputStream);
+    }
+
+    private String readFromFile() throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+        String fileLines = "";
+
+        String line = null;
+        while ((line = bufferedReader.readLine()) != null) {
+            fileLines += line;
+        }
+        bufferedReader.close();
+        return fileLines;
     }
 
     @Test
