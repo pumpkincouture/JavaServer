@@ -63,6 +63,6 @@
   </properties>
   <testcase classname="JavaServer.responses.methods.PatchResponseTest" name="returnsEmptyStringAsHeader" time="0"/>
   <testcase classname="JavaServer.responses.methods.PatchResponseTest" name="callsFileWriterToWriteToFileWithPatchedContent" time="0.001"/>
-  <testcase classname="JavaServer.responses.methods.PatchResponseTest" name="returns204ResponseIfNoEtagPresent" time="0.001"/>
-  <testcase classname="JavaServer.responses.methods.PatchResponseTest" name="returnsEmptyStringAsBody" time="0.001"/>
+  <testcase classname="JavaServer.responses.methods.PatchResponseTest" name="returns204ResponseIfNoEtagPresent" time="0"/>
+  <testcase classname="JavaServer.responses.methods.PatchResponseTest" name="returnsEmptyStringAsBody" time="0.002"/>
 </testsuite>

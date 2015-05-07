@@ -19,11 +19,12 @@ public class ResponseFactoryTest {
     private FileAdmin fileAdmin;
     private File path;
     private Logger logger;
+    private String userDirectory = System.getProperty("user.dir") + "/public";
 
     private void createResponseFactory(String filePath, String requestLine) throws UnsupportedEncodingException {
         RequestParser parser = new RequestParser(requestLine);
         request = new Request(parser.getMethod(), parser.getPath(), parser.getHeaders(), parser.getData());
-        path = new File("/Users/test/code/JavaServer/public" + filePath);
+        path = new File(userDirectory + filePath);
         fileAdmin = new FileAdmin(path, mockDataStream());
         logger = new Logger();
         responseFactory = new ResponseFactory(request, fileAdmin, logger);

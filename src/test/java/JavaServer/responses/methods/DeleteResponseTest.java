@@ -16,6 +16,7 @@ public class DeleteResponseTest {
     private Response response;
     private FileAdmin fileAdmin;
     private File path;
+    private String userDirectory = System.getProperty("user.dir") + "/public";
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
         ByteArrayOutputStream mockInputStream = new ByteArrayOutputStream();
@@ -27,7 +28,7 @@ public class DeleteResponseTest {
     private void createRequestAndResponse(String requestLine, String filepath) throws UnsupportedEncodingException {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        path = new File("/Users/test/code/JavaServer/public/" + filepath);
+        path = new File(userDirectory + filepath);
         fileAdmin = new FileAdmin(path, mockDataStream());
         response = new DeleteResponse(fileAdmin, request.getPath());
     }
