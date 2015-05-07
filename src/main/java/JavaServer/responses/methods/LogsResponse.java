@@ -2,8 +2,6 @@ package JavaServer.responses.methods;
 
 import JavaServer.requests.Logger;
 
-import java.io.IOException;
-
 public class LogsResponse extends Response {
     private Logger logger;
 
@@ -22,7 +20,7 @@ public class LogsResponse extends Response {
     }
 
     @Override
-    public String getCorrectBody() throws IOException {
+    public String getCorrectBody() {
         return logger.getLogs();
     }
 }

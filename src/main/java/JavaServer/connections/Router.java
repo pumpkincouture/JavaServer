@@ -3,7 +3,7 @@ package JavaServer.connections;
 import JavaServer.requests.Logger;
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
-import JavaServer.responses.FileWriter;
+import JavaServer.responses.FileAdmin;
 import JavaServer.responses.ResponseBuilder;
 import JavaServer.responses.methods.ResponseFactory;
 
@@ -18,7 +18,7 @@ public class Router {
     private Request request;
     private ResponseBuilder responseBuilder;
     private ResponseFactory responseFactory;
-    private FileWriter fileWriter;
+    private FileAdmin fileAdmin;
     private DataOutputStream out;
     private Logger logger;
 
@@ -33,12 +33,12 @@ public class Router {
         requestParser = new RequestParser(requestString);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         logger.logRequest(request.getRequestLine());
-        fileWriter = new FileWriter(new File(directory + request.getPath()), out);
-        responseFactory = new ResponseFactory(request, fileWriter, logger);
+        fileAdmin = new FileAdmin(new File(directory + request.getPath()), out);
+        responseFactory = new ResponseFactory(request, fileAdmin, logger);
         responseBuilder = new ResponseBuilder(responseFactory.createResponse());
     }
 
-    public String getResponse() {
+    public String getResponse() throws IOException {
         return responseBuilder.getResponseHeaders();
     }
 

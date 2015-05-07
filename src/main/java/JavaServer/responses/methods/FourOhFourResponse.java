@@ -1,7 +1,5 @@
 package JavaServer.responses.methods;
 
-import java.io.IOException;
-
 public class FourOhFourResponse extends Response {
 
     @Override
@@ -15,7 +13,7 @@ public class FourOhFourResponse extends Response {
     }
 
     @Override
-    public String getCorrectBody() throws IOException {
+    public String getCorrectBody() {
         return EMPTY_STRING;
     }
 }

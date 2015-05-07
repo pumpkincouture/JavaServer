@@ -1,18 +1,18 @@
 package JavaServer.responses.methods;
 
-import JavaServer.responses.FileWriter;
+import JavaServer.responses.FileAdmin;
 import JavaServer.helpers.StringMaker;
 
 import java.io.IOException;
 import java.util.Map;
 
 public class ParamResponse extends Response {
-    private FileWriter fileWriter;
+    private FileAdmin fileAdmin;
     private Map<String, String> requestData;
 
-    public ParamResponse(Map<String, String> requestData, FileWriter fileWriter) {
+    public ParamResponse(Map<String, String> requestData, FileAdmin fileAdmin) {
         this.requestData = requestData;
-        this.fileWriter = fileWriter;
+        this.fileAdmin = fileAdmin;
     }
 
     @Override
@@ -27,8 +27,12 @@ public class ParamResponse extends Response {
 
     @Override
     public String getCorrectBody() throws IOException {
-        fileWriter.setDataInResource(new StringMaker().turnDataIntoString(requestData, EQUALITY_WITH_SPACES));
-        fileWriter.getDataFileContents();
+        fileAdmin.setDataInResource(getFormattedString());
+        fileAdmin.getDataFileContents();
         return EMPTY_STRING;
+    }
+
+    private String getFormattedString() {
+        return new StringMaker().turnDataIntoString(requestData, EQUALITY_WITH_SPACES);
     }
 }

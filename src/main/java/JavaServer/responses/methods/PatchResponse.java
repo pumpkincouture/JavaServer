@@ -1,31 +1,26 @@
 package JavaServer.responses.methods;
 
 import JavaServer.requests.Request;
-import JavaServer.responses.FileWriter;
 import JavaServer.helpers.StringMaker;
+import JavaServer.responses.ResourceAdmin;
 
 import java.io.IOException;
 
 public class PatchResponse extends Response {
     private Request request;
-    private FileWriter fileWriter;
+    private ResourceAdmin resourceAdmin;
 
-    public PatchResponse(FileWriter fileWriter, Request request) {
-        this.fileWriter = fileWriter;
+    public PatchResponse(ResourceAdmin resourceAdmin, Request request) {
+        this.resourceAdmin = resourceAdmin;
         this.request = request;
     }
 
     @Override
-    public String getCorrectStatus() {
+    public String getCorrectStatus() throws IOException {
         if (containsEtagAuthorization()) {
-            try {
-                fileWriter.patchFileWithNewData(new StringMaker().turnDataIntoString(request.getData()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return getCodes().get("204");
+            resourceAdmin.patchFileWithNewData(getFormattedString());
         }
-        return getCodes().get("200");
+        return getCodes().get("204");
     }
 
     @Override
@@ -40,5 +35,9 @@ public class PatchResponse extends Response {
 
     private boolean containsEtagAuthorization() {
         return request.getHeaders().get("If-Match") != null;
+    }
+
+    private String getFormattedString() {
+        return new StringMaker().turnDataIntoString(request.getData());
     }
 }

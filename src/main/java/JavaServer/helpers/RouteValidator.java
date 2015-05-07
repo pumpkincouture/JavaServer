@@ -93,7 +93,7 @@ public class RouteValidator {
         return request.hasAuthorization() && getAuthorizationCode().contains(AUTHORIZATION);
     }
 
-    private String getAuthorizationCode() {
+    public String getAuthorizationCode() {
         if (request.hasAuthorization()) {
             return request.getHeaders().get("Authorization");
         }

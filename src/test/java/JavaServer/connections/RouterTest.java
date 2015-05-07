@@ -31,84 +31,84 @@ public class RouterTest {
     }
 
     @Test
-    public void returnsAResponseCodeOf200IfMethodIsGetAndPathIsValidWithNoHeaders() {
+    public void returnsAResponseCodeOf200IfMethodIsGetAndPathIsValidWithNoHeaders() throws IOException {
         createRouter("GET / HTTP/1.1");
 
         assertEquals("HTTP/1.1 200 OK\n" + "\r\n", router.getResponse());
     }
 
     @Test
-    public void returnsAResponseCodeOf200WithHeadersIfMethodIsOptionsAndPathIsValid() {
+    public void returnsAResponseCodeOf200WithHeadersIfMethodIsOptionsAndPathIsValid() throws IOException {
         createRouter("OPTIONS /method_options HTTP/1.1");
 
         assertEquals("HTTP/1.1 200 OK\n" + "Allow: GET,HEAD,POST,OPTIONS,PUT\r\n", router.getResponse());
     }
 
     @Test
-    public void returnsAResponseCodeOf404IfThisOptionsPathIsNotValid() {
+    public void returnsAResponseCodeOf404IfThisOptionsPathIsNotValid() throws IOException {
         createRouter("OPTIONS / HTTP/1.1");
 
         assertEquals("HTTP/1.1 404 Not Found\n" + "\r\n", router.getResponse());
     }
 
     @Test
-    public void returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsGet() {
+    public void returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsGet() throws IOException {
         createRouter("GET /method_options HTTP/1.1");
 
         assertEquals("HTTP/1.1 200 OK\n" + "Allow: GET,HEAD,POST,OPTIONS,PUT\r\n", router.getResponse());
     }
 
     @Test
-    public void returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsPut() {
+    public void returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsPut() throws IOException {
         createRouter("PUT /method_options HTTP/1.1");
 
         assertEquals("HTTP/1.1 200 OK\n" + "Allow: GET,HEAD,POST,OPTIONS,PUT\r\n", router.getResponse());
     }
 
     @Test
-    public void returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsPost() {
+    public void returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsPost() throws IOException {
         createRouter("POST /method_options HTTP/1.1");
 
         assertEquals("HTTP/1.1 200 OK\n" + "Allow: GET,HEAD,POST,OPTIONS,PUT\r\n", router.getResponse());
     }
 
     @Test
-    public void returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsHead() {
+    public void returnsAResponseCodeOf200WithOptionsHeadersIfMethodIsHead() throws IOException {
         createRouter("HEAD /method_options");
 
         assertEquals("HTTP/1.1 200 OK\n" + "Allow: GET,HEAD,POST,OPTIONS,PUT\r\n", router.getResponse());
     }
 
     @Test
-    public void returns404ResponseWithNoHeadersIfPathDoesNotExist() {
+    public void returns404ResponseWithNoHeadersIfPathDoesNotExist() throws IOException {
         createRouter("GET /foobar HTTP/1.1");
 
         assertEquals("HTTP/1.1 404 Not Found\n" + "\r\n", router.getResponse());
     }
 
     @Test
-    public void returns404IfFileDoesNotExist() {
+    public void returns404IfFileDoesNotExist() throws IOException {
         createRouter("GET /octopus.jpg HTTP/1.1");
 
         assertEquals("HTTP/1.1 404 Not Found\n" +  "\r\n", router.getResponse());
     }
 
     @Test
-    public void returns405IfMethodIsPutButPathIsInvalid() {
+    public void returns405IfMethodIsPutButPathIsInvalid() throws IOException {
         createRouter("PUT /file1 HTTP/1.1");
 
         assertEquals("HTTP/1.1 405 Method Not Allowed\n" +  "\r\n", router.getResponse());
     }
 
     @Test
-    public void returns405IfMethodIsPostButPathIsInvalid() {
+    public void returns405IfMethodIsPostButPathIsInvalid() throws IOException {
         createRouter("POST /text-file.txt HTTP/1.1");
 
         assertEquals("HTTP/1.1 405 Method Not Allowed\n" + "\r\n", router.getResponse());
     }
 
     @Test
-    public void returns302IfRequestIsForRedirect() {
+    public void returns302IfRequestIsForRedirect() throws IOException {
         createRouter("GET /redirect HTTP/1.1");
 
         assertEquals("HTTP/1.1 302 Found\n" + "Location: http://localhost:5000/\r\n", router.getResponse());
@@ -125,7 +125,7 @@ public class RouterTest {
     }
 
     @Test
-    public void returns200AndHandlesDataParamsIfRequestForPutMethod() {
+    public void returns200AndHandlesDataParamsIfRequestForPutMethod() throws IOException {
         createRouter("PUT /form HTTP/1.1\n"+
                      "\n"+
                      "My=Data");

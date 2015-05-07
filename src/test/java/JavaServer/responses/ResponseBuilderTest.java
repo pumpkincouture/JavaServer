@@ -6,10 +6,7 @@ import JavaServer.requests.RequestParser;
 import JavaServer.responses.methods.ResponseFactory;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,7 +16,7 @@ public class ResponseBuilderTest {
     private ResponseBuilder responseCodeBuilder;
     private ResponseFactory managerFactory;
     private File path;
-    private FileWriter fileWriter;
+    private FileAdmin fileAdmin;
     private Logger logger;
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
@@ -30,7 +27,7 @@ public class ResponseBuilderTest {
     }
 
     @Test
-    public void parseAndStoreMoreThanOnePostParamAndReturnResponseWithNoHeaders() throws UnsupportedEncodingException {
+    public void parseAndStoreMoreThanOnePostParamAndReturnResponseWithNoHeaders() throws IOException {
         requestParser = new RequestParser("GET /form\n"+
                                           "Content-Type: application/x-www-form-url-encoded\n"+
                                           "Host: https://sylwiaolak.com\n"+
@@ -40,9 +37,9 @@ public class ResponseBuilderTest {
                                           "age=26");
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileWriter = new FileWriter(path, mockDataStream());
+        fileAdmin = new FileAdmin(path, mockDataStream());
         logger = new Logger();
-        managerFactory = new ResponseFactory(request, fileWriter, logger);
+        managerFactory = new ResponseFactory(request, fileAdmin, logger);
 
         responseCodeBuilder = new ResponseBuilder(managerFactory.createResponse());
 

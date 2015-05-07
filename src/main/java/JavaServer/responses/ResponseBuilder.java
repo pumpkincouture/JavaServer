@@ -13,7 +13,7 @@ public class ResponseBuilder {
         this.requestManager = requestManager;
     }
 
-    public String getResponseHeaders() {
+    public String getResponseHeaders() throws IOException {
         String responseString = "";
 
         responseString += requestManager.getCorrectStatus() + BLANK_LINE;

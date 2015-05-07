@@ -1,12 +1,12 @@
 package JavaServer.helpers;
 
-import JavaServer.helpers.RouteValidator;
 import JavaServer.requests.Request;
 import JavaServer.requests.RequestParser;
 import org.junit.Test;
 
 import java.util.HashMap;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -57,13 +57,21 @@ public class RouteValidatorTest {
     }
 
     @Test
+    public void returnTrueIfMethodIsOptions() {
+        routeValidator = new RouteValidator(createRequestWithNoParams("OPTIONS", "/method_options"));
+
+        assertTrue(routeValidator.isOptionsPath());
+    }
+
+    @Test
     public void returnsTrueIfThereIsAuthorization() {
-        request = createRequestWithParams("POST /form HTTP/1.1\n" +
+        request = createRequestWithParams("GET /logs HTTP/1.1\n" +
                                           "Authorization: Basic YWRtaW46aHVudGVyMg==\n" +
                                           "Host: https://sylwiaolak.com\n" +
                                           "\n");
         routeValidator = new RouteValidator(request);
 
+        assertTrue(routeValidator.requiresAuthorization());
         assertTrue(routeValidator.requestHasCorrectAuthorization());
     }
 
@@ -74,7 +82,9 @@ public class RouteValidatorTest {
                                           "\n");
         routeValidator = new RouteValidator(request);
 
+        assertTrue(routeValidator.requiresAuthorization());
         assertFalse(routeValidator.requestHasCorrectAuthorization());
+        assertEquals("", routeValidator.getAuthorizationCode());
     }
 
     @Test
@@ -84,6 +94,4 @@ public class RouteValidatorTest {
 
         assertTrue(routeValidator.isParameterPath());
     }
-
-
 }

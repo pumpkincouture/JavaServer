@@ -8,7 +8,7 @@ public abstract class Response {
     public static final String EQUAL_SIGN = "=";
     public static final String EQUALITY_WITH_SPACES = " = ";
 
-    public abstract String getCorrectStatus();
+    public abstract String getCorrectStatus() throws IOException;
 
     public abstract String getCorrectHeaders();
 
