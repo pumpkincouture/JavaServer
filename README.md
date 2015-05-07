@@ -8,15 +8,15 @@ The server requires Java version 1.8 or higher. To check your version, type ```j
 
 ## Running the Server From Command Line
 Clone the repository to the desktop. Navigate to the main project directory.
-In command line, type ```java -cp target/solak.com.javaServer-1.0-SNAPSHOT.jar JavaServer.ServerMain``` to start the server. The server will serve from its public directory.
+In command line, type ```java -cp target/solak.com.javaServer-1.0-SNAPSHOT.jar JavaServer.ServerMain``` to start the server. The server will serve from its public directory as the DEFAULT directory.
 
 ## Optional Arguments
-The Server supports two directories :
-- ```/Users/test/code/JavaServer/fun```
-- ```/Users/test/code/JavaServer/public```.
-You may point it to a valid directory if you wish. To configure port and files, run the above command with optional -p and -d flag arguments, like so :
+To configure port and files, run the start command with optional -p and -d flag arguments, like below. Note: the Server only supports valid directories.
 - ```java -cp target/solak.com.javaServer-1.0-SNAPSHOT.jar JavaServer.ServerMain -p 1405 -d /Users/test/code/JavaServer/fun```.
 
+## Optional Directory
+The Server supports another directory - to access, please specify the below path in your -d argument:
+- ```/Users/test/code/JavaServer/fun```
 
 ## Running the Server From IntelliJ
 Clone the repository to the desktop. Open IntelliJ and import the project as a Maven project. Run ```ServerMain```.
