@@ -61,7 +61,7 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="JavaServer.responses.methods.ParamResponseTest" name="returnsEmptyStringAsHeader" time="0.001"/>
+  <testcase classname="JavaServer.responses.methods.ParamResponseTest" name="returnsEmptyStringAsHeader" time="0"/>
   <testcase classname="JavaServer.responses.methods.ParamResponseTest" name="returns200Response" time="0"/>
-  <testcase classname="JavaServer.responses.methods.ParamResponseTest" name="returnsEmptyStringAsBody" time="0.001"/>
+  <testcase classname="JavaServer.responses.methods.ParamResponseTest" name="returnsEmptyStringAsBody" time="0.002"/>
 </testsuite>

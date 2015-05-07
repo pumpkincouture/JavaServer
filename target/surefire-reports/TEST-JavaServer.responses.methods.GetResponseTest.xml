@@ -61,8 +61,8 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="JavaServer.responses.methods.GetResponseTest" name="returnsDirectoryLinksIfFileExistsAndIsRoute" time="0.001"/>
+  <testcase classname="JavaServer.responses.methods.GetResponseTest" name="returnsDirectoryLinksIfFileExistsAndIsRoute" time="0.003"/>
   <testcase classname="JavaServer.responses.methods.GetResponseTest" name="returnsEmptyStringAsHeader" time="0"/>
-  <testcase classname="JavaServer.responses.methods.GetResponseTest" name="callsFileManagerToSendOutFileContentsAndReturnsAnEmptyString" time="0.003"/>
+  <testcase classname="JavaServer.responses.methods.GetResponseTest" name="callsFileManagerToSendOutFileContentsAndReturnsAnEmptyString" time="0.001"/>
   <testcase classname="JavaServer.responses.methods.GetResponseTest" name="returns200ResponseCode" time="0"/>
 </testsuite>

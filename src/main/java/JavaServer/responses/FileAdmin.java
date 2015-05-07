@@ -50,7 +50,7 @@ public class FileAdmin implements ResourceAdmin {
     }
 
     public void getDataFileContents() throws IOException {
-        readBytesFromFile(new File("/Users/test/code/JavaServer/data/dataFile"));
+        readBytesFromFile(new File("./data/dataFile"));
     }
 
     public void getPartialFileContents(RangeFinder rangeFinder) throws IOException {
@@ -64,12 +64,12 @@ public class FileAdmin implements ResourceAdmin {
 
     public void setDataInResource(String paramData) throws IOException {
         byte[] dataBytes = paramData.getBytes();
-        writeToResource(dataBytes, "/Users/test/code/JavaServer/data/dataFile");
+        writeToResource(dataBytes, "./data/dataFile");
     }
 
     public void deleteDataFromResource() throws IOException {
         byte[] dataBytes = "".getBytes();
-        writeToResource(dataBytes, "/Users/test/code/JavaServer/data/dataFile");
+        writeToResource(dataBytes, "./data/dataFile");
     }
 
     private void writeToResource(byte[] dataBytes, String resourcePath) throws IOException {
