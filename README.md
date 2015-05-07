@@ -12,11 +12,11 @@ In command line, type ```java -cp target/solak.com.javaServer-1.0-SNAPSHOT.jar J
 
 ## Optional Arguments
 To configure port and directory, run the start command with optional -p and -d flag arguments, like below. Note: the server only supports valid directories and valid ports. ([List of Taken Ports](http://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers))
-- ```java -cp target/solak.com.javaServer-1.0-SNAPSHOT.jar JavaServer.ServerMain -p 1405 -d /fun```
+- ```java -cp target/solak.com.javaServer-1.0-SNAPSHOT.jar JavaServer.ServerMain -p 1405 -d ./fun```
 
 ## Optional Directory
 The server supports another directory - to access, please specify the below relative path in your -d argument:
-- ```/fun```
+- ```./fun```
 
 ## Running the Server From IntelliJ
 Clone the repository to the desktop. Open IntelliJ and import the project as a Maven project. Run ```ServerMain```. To stop the server, close the tab running ServerMain or press the stop button.
