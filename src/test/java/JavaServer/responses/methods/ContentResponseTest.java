@@ -23,7 +23,7 @@ public class ContentResponseTest {
         return out;
     }
 
-    private void createRequestAndFilePath(String requestLine, String filepath) throws UnsupportedEncodingException {
+    private void createRequestAndResponse(String requestLine, String filepath) throws UnsupportedEncodingException {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
@@ -33,41 +33,41 @@ public class ContentResponseTest {
 
     @Test
     public void returns200Response() throws IOException {
-        createRequestAndFilePath("GET /image.gif HTTP/1.1", "image.gif");
+        createRequestAndResponse("GET /image.gif HTTP/1.1", "image.gif");
 
         assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());
     }
 
     @Test
     public void returns206IfRequestHasRange() throws IOException {
-        createRequestAndFilePath("GET /partial_content.txt HTTP/1.1\n"+
-                                 "Range: bytes=-6\n"+
-                                 "Host: localhost:5000\n"+
-                                 "\n", "partial_content.txt");
+        createRequestAndResponse("GET /partial_content.txt HTTP/1.1\n" +
+                "Range: bytes=-6\n" +
+                "Host: localhost:5000\n" +
+                "\n", "partial_content.txt");
 
         assertEquals("HTTP/1.1 206 Partial Content", response.getCorrectStatus());
     }
 
     @Test
     public void returnsEmptyHeader() throws UnsupportedEncodingException {
-        createRequestAndFilePath("GET /text-file.txt HTTP/1.1", "text-file.txt");
+        createRequestAndResponse("GET /text-file.txt HTTP/1.1", "text-file.txt");
 
         assertEquals("", response.getCorrectHeaders());
     }
 
     @Test
     public void callsFileWriterAndReturnsAnEmptyStringIfRequestDoesNotHaveRange() throws IOException {
-        createRequestAndFilePath("GET /file1 HTTP/1.1", "file1");
+        createRequestAndResponse("GET /file1 HTTP/1.1", "file1");
 
         assertEquals("", response.getCorrectBody());
     }
 
     @Test
     public void callsFileWriterAndReturnsAnEmptyStringIfRequestHasRange() throws IOException {
-        createRequestAndFilePath("GET /partial_content.txt HTTP/1.1\n"+
-                                 "Range: bytes=0-6\n"+
-                                 "Host: localhost:5000\n"+
-                                 "\n", "partial_content.txt");
+        createRequestAndResponse("GET /partial_content.txt HTTP/1.1\n" +
+                "Range: bytes=0-6\n" +
+                "Host: localhost:5000\n" +
+                "\n", "partial_content.txt");
 
         assertEquals("", response.getCorrectBody());
     }

@@ -23,7 +23,7 @@ public class GetResponseTest {
         return out;
     }
 
-    private void createRequestAndFilePath(String requestLine, String filepath) throws UnsupportedEncodingException {
+    private void createRequestAndResponse(String requestLine, String filepath) throws UnsupportedEncodingException {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
@@ -33,21 +33,21 @@ public class GetResponseTest {
 
     @Test
     public void returns200ResponseCode() throws IOException {
-        createRequestAndFilePath("GET / HTTP/1.1", "");
+        createRequestAndResponse("GET / HTTP/1.1", "");
 
         assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());
     }
 
     @Test
     public void returnsEmptyStringAsHeader() throws UnsupportedEncodingException {
-        createRequestAndFilePath("GET / HTTP/1.1", "");
+        createRequestAndResponse("GET / HTTP/1.1", "");
 
         assertEquals("", response.getCorrectHeaders());
     }
 
     @Test
     public void returnsDirecoryLinksIfFileExistsAndIsRoute() throws IOException {
-        createRequestAndFilePath("GET / HTTP/1.1", "");
+        createRequestAndResponse("GET / HTTP/1.1", "");
 
         assertEquals("<a href='/file1'>file1</a></br>\r\n" +
                      "<a href='/file2'>file2</a></br>\r\n" +
@@ -61,7 +61,7 @@ public class GetResponseTest {
 
     @Test
     public void callsFileManagerToSendOutFileContentsAndReturnsAnEmptyString() throws IOException {
-        createRequestAndFilePath("GET /form HTTP/1.1", "form");
+        createRequestAndResponse("GET /form HTTP/1.1", "form");
 
         assertEquals("", response.getCorrectBody());
     }

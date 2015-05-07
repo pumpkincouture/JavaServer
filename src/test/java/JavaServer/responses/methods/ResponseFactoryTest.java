@@ -10,30 +10,23 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 
 import static org.junit.Assert.assertTrue;
 
 public class ResponseFactoryTest {
-    private ResponseFactory methodFactory;
+    private ResponseFactory responseFactory;
     private Request request;
     private FileWriter fileWriter;
     private File path;
     private Logger logger;
 
-
-    private Request createRequestWithNoParams(String method, String path) {
-        request = new Request(method, path, new HashMap<>(), new HashMap<>());
-
-        return request;
-    }
-
-    private Request createRequestWithParams(String requestString) {
-        RequestParser parser = new RequestParser(requestString);
-
+    private void createResponseFactory(String filePath, String requestLine) throws UnsupportedEncodingException {
+        RequestParser parser = new RequestParser(requestLine);
         request = new Request(parser.getMethod(), parser.getPath(), parser.getHeaders(), parser.getData());
-
-        return request;
+        path = new File("/Users/test/code/JavaServer/public" + filePath);
+        fileWriter = new FileWriter(path, mockDataStream());
+        logger = new Logger();
+        responseFactory = new ResponseFactory(request, fileWriter, logger);
     }
 
     private DataOutputStream mockDataStream() throws UnsupportedEncodingException {
@@ -45,141 +38,112 @@ public class ResponseFactoryTest {
 
     @Test
     public void returnsGetResponseIfRequestMethodIsGetAndIsADirectoryPath() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/");
-        fileWriter = new FileWriter(path, mockDataStream());
-        logger = new Logger();
-        methodFactory = new ResponseFactory(createRequestWithNoParams("GET", "/"), fileWriter, logger);
+        createResponseFactory("/", "GET / HTTP/1.1");
 
-        assertTrue(methodFactory.createResponse() instanceof GetResponse);
+        assertTrue(responseFactory.createResponse() instanceof GetResponse);
     }
 
     @Test
     public void returnsPostResponseIfRequestMethodIsPost() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/");
-        fileWriter = new FileWriter(path, mockDataStream());
-        logger = new Logger();
-        methodFactory = new ResponseFactory(createRequestWithNoParams("POST", "/"), fileWriter, logger);
+        createResponseFactory("/form", "POST /form HTTP/1.1\n"+
+                                       "Content-Type: application/x-www-form-url-encoded\n"+
+                                       "Host: https://sylwiaolak.com\n"+
+                                       "\n"+
+                                       "data=example");
 
-        assertTrue(methodFactory.createResponse() instanceof PostResponse);
+        assertTrue(responseFactory.createResponse() instanceof PostResponse);
     }
 
     @Test
     public void returnsPutResponseIfRequestMethodIsPut() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/");
-        fileWriter = new FileWriter(path, mockDataStream());
-        logger = new Logger();
-        methodFactory = new ResponseFactory(createRequestWithNoParams("PUT", "/"), fileWriter, logger);
+        createResponseFactory("/form", "PUT /form HTTP/1.1\n"+
+                                       "Content-Type: application/x-www-form-url-encoded\n"+
+                                       "\n"+
+                                       "data=updated");
 
-        assertTrue(methodFactory.createResponse() instanceof PutResponse);
+        assertTrue(responseFactory.createResponse() instanceof PutResponse);
     }
 
     @Test
     public void returnsOptionsResponseIfRequestMethodIsOptions() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/method_options");
-        fileWriter = new FileWriter(path, mockDataStream());
-        logger = new Logger();
-        methodFactory = new ResponseFactory(createRequestWithNoParams("OPTIONS", "/method_options"), fileWriter, logger);
+        createResponseFactory("/method_options", "OPTIONS /method_options HTTP/1.1");
 
-        assertTrue(methodFactory.createResponse() instanceof OptionsResponse);
+        assertTrue(responseFactory.createResponse() instanceof OptionsResponse);
     }
 
     @Test
     public void returnsDeleteResponseIfRequestMethodIsDelete() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/form");
-        fileWriter = new FileWriter(path, mockDataStream());
-        logger = new Logger();
-        methodFactory = new ResponseFactory(createRequestWithNoParams("DELETE", "/form"), fileWriter, logger);
+        createResponseFactory("/form", "DELETE /form HTTP/1.1");
 
-        assertTrue(methodFactory.createResponse() instanceof DeleteResponse);
+        assertTrue(responseFactory.createResponse() instanceof DeleteResponse);
     }
 
     @Test
     public void returnsContentResponseIfPathIsToAnExistingFile() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/image.gif");
-        fileWriter = new FileWriter(path, mockDataStream());
-        logger = new Logger();
-        methodFactory = new ResponseFactory(createRequestWithNoParams("GET", "/image.gif"), fileWriter, logger);
+        createResponseFactory("/image.gif", "GET /image.gif HTTP/1.1");
 
-        assertTrue(methodFactory.createResponse() instanceof ContentResponse);
+        assertTrue(responseFactory.createResponse() instanceof ContentResponse);
     }
 
     @Test
     public void returnsFourOhFourResponseIfMethodIsNotRecognized() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/patch-content.txt");
-        fileWriter = new FileWriter(path, mockDataStream());
-        logger = new Logger();
-        methodFactory = new ResponseFactory(createRequestWithNoParams("STREAM", "/patch-content.txt"), fileWriter, logger);
+        createResponseFactory("/patch-content.txt", "STREAM /patch-content.txt HTTP/1.1");
 
-        assertTrue(methodFactory.createResponse() instanceof FourOhFourResponse);
+        assertTrue(responseFactory.createResponse() instanceof FourOhFourResponse);
     }
 
     @Test
     public void returnsRedirectResponseIfMethodIsRedirect() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/redirect");
-        fileWriter = new FileWriter(path, mockDataStream());
-        logger = new Logger();
-        methodFactory = new ResponseFactory(createRequestWithNoParams("GET", "/redirect"), fileWriter, logger);
+        createResponseFactory("/redirect", "GET /redirect HTTP/1.1");
 
-        assertTrue(methodFactory.createResponse() instanceof RedirectResponse);
+        assertTrue(responseFactory.createResponse() instanceof RedirectResponse);
     }
 
     @Test
     public void returnsUnAuthorizedResponseIfMethodIsLogsButHasNoAuthorization() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/logs");
-        fileWriter = new FileWriter(path, mockDataStream());
-        logger = new Logger();
-        methodFactory = new ResponseFactory(createRequestWithNoParams("GET", "/logs"), fileWriter, logger);
+        createResponseFactory("/logs", "GET /logs HTTP/1.1");
 
-        assertTrue(methodFactory.createResponse() instanceof UnauthorizedResponse);
+        assertTrue(responseFactory.createResponse() instanceof UnauthorizedResponse);
     }
 
     @Test
     public void returnsLogsResponseIfMethodIsLogsAndHasAuthorization() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/logs");
-        fileWriter = new FileWriter(path, mockDataStream());
-        logger = new Logger();
+        createResponseFactory("/logs", "GET /logs HTTP/1.1\n" +
+                                       "Authorization: Basic YWRtaW46aHVudGVyMg==\n" +
+                                       "Host: localhost:5000\n" +
+                                       "\n");
 
-        methodFactory = new ResponseFactory(createRequestWithParams("GET /logs HTTP/1.1\n" +
-                                                                    "Authorization: Basic YWRtaW46aHVudGVyMg==\n" +
-                                                                    "Host: localhost:5000\n" +
-                                                                    "\n"), fileWriter, logger);
-
-        assertTrue(methodFactory.createResponse() instanceof LogsResponse);
+        assertTrue(responseFactory.createResponse() instanceof LogsResponse);
     }
 
     @Test
     public void returnsPatchResponseIfMethodIsPatchButDoesNotContainEtagAuthorization() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/patch-content.txt");
-        fileWriter = new FileWriter(path, mockDataStream());
-        logger = new Logger();
+        createResponseFactory("/patch-content.txt", "PATCH /patch-content.txt HTTP/1.1");
 
-        methodFactory = new ResponseFactory(createRequestWithNoParams("PATCH", "/patch-content.txt"), fileWriter, logger);
-
-        assertTrue(methodFactory.createResponse() instanceof PatchResponse);
+        assertTrue(responseFactory.createResponse() instanceof PatchResponse);
     }
 
     @Test
     public void returnsPatchResponseIfMethodIsPatchAndContainsEtagAuthorization() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/patch-content.txt");
-        fileWriter = new FileWriter(path, mockDataStream());
-        logger = new Logger();
+        createResponseFactory("/patch-content.txt", "PATCH /logs HTTP/1.1\n" +
+                                                    "If-Match: dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec\n" +
+                                                    "Host: localhost:5000\n" +
+                                                    "\n");
 
-        methodFactory = new ResponseFactory(createRequestWithParams("PATCH /logs HTTP/1.1\n" +
-                                                                    "If-Match: dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec\n" +
-                                                                    "Host: localhost:5000\n" +
-                                                                    "\n"), fileWriter, logger);
-
-        assertTrue(methodFactory.createResponse() instanceof PatchResponse);
+        assertTrue(responseFactory.createResponse() instanceof PatchResponse);
     }
 
     @Test
     public void returnsParamResponseIfPathIsParameters() throws UnsupportedEncodingException {
-        path = new File("/Users/test/code/JavaServer/public/parameters");
-        fileWriter = new FileWriter(path, mockDataStream());
-        logger = new Logger();
+        createResponseFactory("/parameters", "GET /parameters?variable_1=Operators%20%3C%2C%20%3E%2C%20%3D%2C%20!%3D%3B%20%2B%2C%20-%2C%20*%2C%20%26%2C%20%40%2C%20%23%2C%20%24%2C%20%5B%2C%20%5D%3A%20%22is%20that%20all%22%3F&variable_2=stuff HTTP/1.1");
 
-        methodFactory = new ResponseFactory(createRequestWithParams("GET /parameters?variable_1=Operators%20%3C%2C%20%3E%2C%20%3D%2C%20!%3D%3B%20%2B%2C%20-%2C%20*%2C%20%26%2C%20%40%2C%20%23%2C%20%24%2C%20%5B%2C%20%5D%3A%20%22is%20that%20all%22%3F&variable_2=stuff HTTP/1.1"), fileWriter, logger);
+        assertTrue(responseFactory.createResponse() instanceof ParamResponse);
+    }
 
-        assertTrue(methodFactory.createResponse() instanceof ParamResponse);
+    @Test
+    public void returnsGetResponseIfPathIsForm() throws UnsupportedEncodingException {
+        createResponseFactory("/form", "GET /form HTTP/1.1");
+
+        assertTrue(responseFactory.createResponse() instanceof GetResponse);
     }
 }

@@ -40,6 +40,4 @@ public class FourOhFourResponseTest {
 
         assertEquals("", response.getCorrectBody());
     }
-
-
 }

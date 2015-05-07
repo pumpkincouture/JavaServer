@@ -24,7 +24,7 @@ public class DeleteResponseTest {
         return out;
     }
 
-    private void createRequestAndFilePath(String requestLine, String filepath) throws UnsupportedEncodingException {
+    private void createRequestAndResponse(String requestLine, String filepath) throws UnsupportedEncodingException {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public/" + filepath);
@@ -34,21 +34,21 @@ public class DeleteResponseTest {
 
     @Test
     public void returns200Response() throws IOException {
-        createRequestAndFilePath("DELETE /form HTTP/1.1", "form");
+        createRequestAndResponse("DELETE /form HTTP/1.1", "form");
 
         assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());
     }
 
     @Test
     public void returnsEmptyStringAsHeader() throws UnsupportedEncodingException {
-        createRequestAndFilePath("DELETE /form HTTP/1.1", "form");
+        createRequestAndResponse("DELETE /form HTTP/1.1", "form");
 
         assertEquals("", response.getCorrectHeaders());
     }
 
     @Test
     public void returnsEmptyStringAsBody() throws IOException {
-        createRequestAndFilePath("DELETE /form HTTP/1.1", "form");
+        createRequestAndResponse("DELETE /form HTTP/1.1", "form");
 
         assertEquals("", response.getCorrectBody());
     }

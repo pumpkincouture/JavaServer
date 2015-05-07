@@ -24,38 +24,31 @@ public class PostResponseTest {
         return out;
     }
 
-    @Test
-    public void returns200ResponseIfPathIsRecognized() throws IOException {
-        requestParser = new RequestParser("POST /form HTTP/1.1");
-
+    private void createRequestAndResponse(String requestLine, String filepath) throws UnsupportedEncodingException {
+        requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        path = new File("/Users/test/code/JavaServer/public/form");
+        path = new File("/Users/test/code/JavaServer/public" + filepath);
         fileWriter = new FileWriter(path, mockDataStream());
         response = new PostResponse(fileWriter, request.getPath(), request.getData());
+    }
+
+    @Test
+    public void returns200ResponseIfPathIsRecognized() throws IOException {
+        createRequestAndResponse("POST /form HTTP/1.1", "/form");
 
         assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());
     }
 
     @Test
     public void returns404ResponseIfPathIsNotRecognized() throws IOException {
-        requestParser = new RequestParser("POST / HTTP/1.1");
-
-        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        path = new File("/Users/test/code/JavaServer/public/form");
-        fileWriter = new FileWriter(path, mockDataStream());
-        response = new PostResponse(fileWriter, request.getPath(), request.getData());
+        createRequestAndResponse("POST / HTTP/1.1", "/form");
 
         assertEquals("HTTP/1.1 404 Not Found", response.getCorrectStatus());
     }
 
     @Test
     public void returns405ResponseIfMethodNotAllowed() throws IOException {
-        requestParser = new RequestParser("POST /text-file.txt HTTP/1.1");
-
-        request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
-        path = new File("/Users/test/code/JavaServer/public/form");
-        fileWriter = new FileWriter(path, mockDataStream());
-        response = new PostResponse(fileWriter, request.getPath(), request.getData());
+        createRequestAndResponse("POST /text-file.txt HTTP/1.1", "/text-file.txt");
 
         assertEquals("HTTP/1.1 405 Method Not Allowed", response.getCorrectStatus());
     }

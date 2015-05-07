@@ -23,7 +23,7 @@ public class PutResponseTest {
         return out;
     }
 
-    private void createRequestAndFilePath(String requestLine, String filepath) throws UnsupportedEncodingException {
+    private void createRequestAndResponse(String requestLine, String filepath) throws UnsupportedEncodingException {
         requestParser = new RequestParser(requestLine);
         request = new Request(requestParser.getMethod(), requestParser.getPath(), requestParser.getHeaders(), requestParser.getData());
         path = new File("/Users/test/code/JavaServer/public" + filepath);
@@ -33,35 +33,35 @@ public class PutResponseTest {
 
     @Test
     public void returns200ResponseIfPathIsRecognized() throws IOException {
-        createRequestAndFilePath("PUT /form HTTP/1.1", "/form");
+        createRequestAndResponse("PUT /form HTTP/1.1", "/form");
 
         assertEquals("HTTP/1.1 200 OK", response.getCorrectStatus());
     }
 
     @Test
     public void returns404ResponseIfPathIsNotRecognized() throws IOException {
-        createRequestAndFilePath("PUT / HTTP/1.1", "/");
+        createRequestAndResponse("PUT / HTTP/1.1", "/");
 
         assertEquals("HTTP/1.1 404 Not Found", response.getCorrectStatus());
     }
 
     @Test
     public void returns405ResponseIfMethodNotAllowed() throws IOException {
-        createRequestAndFilePath("PUT /file1 HTTP/1.1", "/file1");
+        createRequestAndResponse("PUT /file1 HTTP/1.1", "/file1");
 
         assertEquals("HTTP/1.1 405 Method Not Allowed", response.getCorrectStatus());
     }
 
     @Test
     public void returnEmptyStringAsHeader() throws UnsupportedEncodingException {
-        createRequestAndFilePath("PUT /form HTTP/1.1", "/form");
+        createRequestAndResponse("PUT /form HTTP/1.1", "/form");
 
         assertEquals("", response.getCorrectHeaders());
     }
 
     @Test
     public void returnEmptyStringAsBody() throws IOException {
-        createRequestAndFilePath("PUT /form HTTP/1.1", "/form");
+        createRequestAndResponse("PUT /form HTTP/1.1", "/form");
 
         assertEquals("", response.getCorrectBody());
     }
